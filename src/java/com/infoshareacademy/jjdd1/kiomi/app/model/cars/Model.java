@@ -2,6 +2,7 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 /**
  * example data:
+ * "dataname": "FORD",
  * "id": "7pz",
  * "name": "5000-Serie",
  * "end_year": "1993",
