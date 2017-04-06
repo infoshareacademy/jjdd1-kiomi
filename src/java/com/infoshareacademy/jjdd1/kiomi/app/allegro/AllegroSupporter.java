@@ -3,21 +3,19 @@ package com.infoshareacademy.jjdd1.kiomi.app.allegro;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Part;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.PartCategory;
 
-/**
- * Created by arkadiuszzielazny on 05.04.17.
- */
+
 public class AllegroSupporter {
-
-    public String generateQuery(Part) {
-
+String test;//do usunięcia
+    public String generateQuery(Part part) {
+return String.valueOf(part);
     }
-    public String genereteQueryFind(Part) {
-
+    public String genereteQueryFind(Part part) {
+        return String.valueOf(part);
     }
-    public Set<String> findCategories(Part, PartCategory) {
-
+    public String findCategories(Part part, PartCategory partCategory) {
+        return test;
     }
-    public Set<String> getQueriesWithCategories(Part, PartCategory) {
-
+    public String getQueriesWithCategories(Part part, PartCategory partCategory) {
+        return test;
     }
 }
