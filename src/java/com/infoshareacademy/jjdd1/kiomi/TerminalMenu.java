@@ -1,5 +1,11 @@
 package com.infoshareacademy.jjdd1.kiomi;
 
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Model;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.PartCategory;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Type;
+import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,8 +31,23 @@ public class TerminalMenu {
         setListOfCarBrands();
 
         //Strona powitalna aplikacji konsolowej Autoparts KIOMI
-        System.out.print("Welcome to 'Autoparts KIOMI'. ");
+        System.out.println("Welcome to 'Autoparts KIOMI'. ");
 
+        //load Data
+        List<Model> x= CarsDataLoader.loadDataBrandFile("FORD".toLowerCase());
+        System.out.println(x);
+//        System.out.println(x);
+        //pobieram index z listy i z niego ID
+        String modelID=x.get(1).getId();
+        System.out.println(modelID);
+        //wybieram model
+        List<Type> y= CarsDataLoader.loadDataTypeFile("72o");
+        System.out.println(y);
+        String typeID=y.get(1).getId();
+        System.out.println(typeID);
+        //wybieram typ
+//        List<PartCategory> z= CarsDataLoader.loadDataPartCategoryFile("2b91");
+//        System.out.println(z);
         scanner = new Scanner(System.in);
 
         clientBrandCar();
