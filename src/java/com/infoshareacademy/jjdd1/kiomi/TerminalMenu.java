@@ -1,5 +1,10 @@
 package com.infoshareacademy.jjdd1.kiomi;
 
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Brand;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Model;
+import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,13 +25,21 @@ public class TerminalMenu {
     static String brandOfCarFromDatabase;
     static Scanner scanner;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         setListOfCarBrands();
 
         //Strona powitalna aplikacji konsolowej Autoparts KIOMI
-        System.out.print("Welcome to 'Autoparts KIOMI'. ");
+        System.out.println("Welcome to 'Autoparts KIOMI'. ");
 
+        //loadDATA
+        List<Model> x = null;
+            x = CarsDataLoader.loadDataBrandsFile("FORD".toLowerCase());
+
+
+            CarsDataLoader.loadBrand("8ro");
+
+        System.out.println(x);
         scanner = new Scanner(System.in);
 
         clientBrandCar();
@@ -36,6 +49,9 @@ public class TerminalMenu {
         clientModelCar();
 
         scanner.close();
+
+
+
     }
 
     static String clientBrandCar() {
