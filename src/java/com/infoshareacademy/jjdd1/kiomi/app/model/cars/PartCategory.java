@@ -6,20 +6,20 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
  * "link": "\/api\/v2\/find\/ey\/72o\/2b91\/7sy"
  */
 public class PartCategory {
-    private long id;
+    private String id;
     private String name;
     private boolean has_children;
     private String link;
 
-    public PartCategory(long id) {
+    public PartCategory(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,11 +49,7 @@ public class PartCategory {
 
     @Override
     public String toString() {
-        return "PartCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", has_children=" + has_children +
-                ", link='" + link + '\'' +
-                '}';
+        return "(" + id +
+                ") " + name;
     }
 }

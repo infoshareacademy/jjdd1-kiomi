@@ -64,6 +64,6 @@ public Brand(String name_clear) {
 
     @Override
     public String toString() {
-        return "Brand:" + name +"(" +id + ")";
+        return name +"(" +id + ")";
     }
 }

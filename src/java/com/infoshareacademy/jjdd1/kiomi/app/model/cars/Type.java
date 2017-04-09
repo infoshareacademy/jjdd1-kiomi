@@ -34,7 +34,7 @@ public class Type {
     private int ccm;
     private int kw;
     private int cylinders;
-    private int engine;
+    private String engine;
     private String engine_txt;
     private String fuel;
     private String body;
@@ -126,11 +126,11 @@ public class Type {
         this.cylinders = cylinders;
     }
 
-    public int getEngine() {
+    public String getEngine() {
         return engine;
     }
 
-    public void setEngine(int engine) {
+    public void setEngine(String engine) {
         this.engine = engine;
     }
 
@@ -184,24 +184,7 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type{" +
-                "id='" + id + '\'' +
-                ", model_id='" + model_id + '\'' +
-                ", brand_id='" + brand_id + '\'' +
-                ", name='" + name + '\'' +
-                ", end_year=" + end_year +
-                ", end_month='" + end_month + '\'' +
-                ", start_month='" + start_month + '\'' +
-                ", ccm=" + ccm +
-                ", kw=" + kw +
-                ", cylinders=" + cylinders +
-                ", engine=" + engine +
-                ", engine_txt='" + engine_txt + '\'' +
-                ", fuel='" + fuel + '\'' +
-                ", body='" + body + '\'' +
-                ", axle='" + axle + '\'' +
-                ", max_weight='" + max_weight + '\'' +
-                ", link='" + link + '\'' +
-                '}';
+        return "(" +id +
+                ") " +  name ;
     }
 }
