@@ -31,19 +31,20 @@ public class TerminalMenu {
 
         //Strona powitalna aplikacji konsolowej Autoparts KIOMI
         System.out.println("Welcome to 'Autoparts KIOMI'. ");
+        System.out.println("To test it, please choose: Brand:'Ford' | Model: '6000-Serie'");
 
         //load Data
-        List<Model> x= CarsDataLoader.loadDataBrandFile("FORD".toLowerCase());
-        System.out.println(x);
+//        List<Model> x= CarsDataLoader.loadDataBrandFile("FORD".toLowerCase());
+//        System.out.println(x);
 
         //pobieram index z listy i z niego ID
-        String modelID=x.get(1).getId();
-        System.out.println(modelID);
+//        String modelID=x.get(1).getId();
+//        System.out.println(modelID);
         //wybieram model
-        List<Type> y= CarsDataLoader.loadDataTypeFile("72o");
-        System.out.println(y);
-        String typeID=y.get(1).getId();
-        System.out.println(typeID);
+//        List<Type> y= CarsDataLoader.loadDataTypeFile("72o");
+//        System.out.println(y);
+//        String typeID=y.get(1).getId();
+//        System.out.println(typeID);
         //wybieram typ
 //        List<PartCategory> z= CarsDataLoader.loadDataPartCategoryFile("2b91");
 //        System.out.println(z);
@@ -54,6 +55,8 @@ public class TerminalMenu {
         setListOfCarModels();
 
         clientModelCar();
+
+        resultOfClientsChoice();
 
         scanner.close();
     }
@@ -79,7 +82,7 @@ public class TerminalMenu {
 
         originalClientsCarModel = scanner.nextLine();
 
-        clientsCarModel = originalClientsCarModel;
+        clientsCarModel = originalClientsCarModel.toLowerCase();
 
         System.out.print("You have choosen model of the car: '" + originalClientsCarModel + "'");
 
@@ -133,7 +136,7 @@ public class TerminalMenu {
 
     private static boolean isChoosenCarModelOnOurList() {
         for (Model value : listOfCarModels) {
-            if (value.getName().equals(clientsCarModel)) {
+            if (value.getName().toLowerCase().equals(clientsCarModel)) {
                 isCarModelOnOurList = true;
                 break;
             } else {
@@ -143,6 +146,22 @@ public class TerminalMenu {
         return isCarModelOnOurList;
     }
 
+    private static void resultOfClientsChoice() {
+
+        for(Model value: CarsDataLoader.loadDataBrandFile(clientsCarBrand)){
+            if(value.getName().toLowerCase().equals(clientsCarModel)){
+                System.out.println("ID: "+ value.getId());
+                System.out.println("Model: "+ value.getName());
+                System.out.println("Start month: "+ value.getStart_month());
+                System.out.println("Start year: "+ value.getStart_year());
+                System.out.println("End month: "+ value.getEnd_month());
+                System.out.println("End year: "+ value.getEnd_year());
+                System.out.println("Vehicle group: "+ value.getVehicle_group());
+                System.out.println("Link: "+ value.getLink());
+            }
+        }
+    }
+
     static void setListOfCarBrands() {
         listOfCarBrands=new HashSet();
         listOfCarBrands=CarsDataLoader.getListOfCarBrands();
@@ -150,8 +169,8 @@ public class TerminalMenu {
 
     public static void setListOfCarModels() {
         listOfCarModels = new HashSet();
+        // for now the list contains only brand-"Ford" | models "models of Ford cars"
         listOfCarModels = CarsDataLoader.getListOfCarModels();
-        System.out.println();
     }
 
 }
