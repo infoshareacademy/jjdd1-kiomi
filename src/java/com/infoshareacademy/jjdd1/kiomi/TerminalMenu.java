@@ -1,14 +1,13 @@
 package com.infoshareacademy.jjdd1.kiomi;
 
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Brand;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Model;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.PartCategory;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Type;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by arkadiuszzielazny on 31.03.17.
@@ -19,8 +18,8 @@ public class TerminalMenu {
     static String clientsCarModel;
     static String originalClientsCarBrand;
     static String originalClientsCarModel;
-    static private List<String> listOfCarBrands;
-    static private List<String> listOfCarModels;
+    static private Set<Brand> listOfCarBrands;
+    static private Set<Model> listOfCarModels;
     static boolean isCarBrandOnOurList;
     static boolean isCarModelOnOurList;
     static String brandOfCarFromDatabase;
@@ -36,7 +35,7 @@ public class TerminalMenu {
         //load Data
         List<Model> x= CarsDataLoader.loadDataBrandFile("FORD".toLowerCase());
         System.out.println(x);
-//        System.out.println(x);
+
         //pobieram index z listy i z niego ID
         String modelID=x.get(1).getId();
         System.out.println(modelID);
@@ -61,13 +60,9 @@ public class TerminalMenu {
 
     static String clientBrandCar() {
 
-        System.out.println("Choose a brand of the car from the list:");
+        System.out.println("Choose a brand of the car:");
 
-        for (String value : listOfCarBrands) {
-            System.out.println(" - " + value);
-        }
-
-        originalClientsCarBrand = scanner.next();
+        originalClientsCarBrand = scanner.nextLine();
 
         clientsCarBrand = originalClientsCarBrand.toLowerCase();
 
@@ -76,6 +71,21 @@ public class TerminalMenu {
         validationOfClientsCarBrand();
 
         return clientsCarBrand;
+    }
+
+    static String clientModelCar() {
+
+        System.out.println("Choose a model of the car:");
+
+        originalClientsCarModel = scanner.nextLine();
+
+        clientsCarModel = originalClientsCarModel;
+
+        System.out.print("You have choosen model of the car: '" + originalClientsCarModel + "'");
+
+        validationOfClientsCarModel();
+
+        return clientsCarModel;
     }
 
     static void validationOfClientsCarBrand() {
@@ -109,23 +119,21 @@ public class TerminalMenu {
     }
 
     private static boolean isChoosenCarBrandOnOurList() {
-        for (String value : listOfCarBrands) {
+        for (Brand value : listOfCarBrands) {
 
-            if (value.equals(clientsCarBrand)) {
+            if (value.getName_clear().equals(clientsCarBrand)) {
                 isCarBrandOnOurList = true;
                 break;
             } else {
                 isCarBrandOnOurList = false;
             }
         }
-
         return isCarBrandOnOurList;
     }
 
     private static boolean isChoosenCarModelOnOurList() {
-        for (String value : listOfCarModels) {
-
-            if (value.equals(clientsCarModel)) {
+        for (Model value : listOfCarModels) {
+            if (value.getName().equals(clientsCarModel)) {
                 isCarModelOnOurList = true;
                 break;
             } else {
@@ -135,54 +143,15 @@ public class TerminalMenu {
         return isCarModelOnOurList;
     }
 
-    static String clientModelCar() {
-
-        System.out.println("Choose a model of the car from the list:");
-
-        for (String value : listOfCarModels) {
-            System.out.println(" - " + value);
-        }
-
-        originalClientsCarModel = scanner.next();
-
-        clientsCarModel = originalClientsCarModel.toLowerCase();
-
-        System.out.print("You have choosen model of the car: '" + originalClientsCarModel + "'");
-
-        validationOfClientsCarModel();
-
-        return clientsCarModel;
-    }
-
-
     static void setListOfCarBrands() {
-        listOfCarBrands = new ArrayList<String>();
-        listOfCarBrands.add("ford");
-        listOfCarBrands.add("kia");
+        listOfCarBrands=new HashSet();
+        listOfCarBrands=CarsDataLoader.getListOfCarBrands();
     }
 
     public static void setListOfCarModels() {
-        listOfCarModels = new ArrayList<String>();
-
-        if( clientsCarBrand.equals("ford")){
-
-            listOfCarModels.add("BANTAM");
-            listOfCarModels.add("CONSUL");
-            listOfCarModels.add("CORTINA");
-            listOfCarModels.add("focus");
-            listOfCarModels.add("GRANADA");
-            listOfCarModels.add("SCORPIO");
-        }
-
-        else if(clientsCarBrand.equals("kia")){
-            listOfCarModels.add("AMANTI (GH)");
-            listOfCarModels.add("AVELLA");
-            listOfCarModels.add("BESTA Autobus");
-            listOfCarModels.add("JOICE");
-            listOfCarModels.add("MAGENTIS");
-            listOfCarModels.add("PICANTO");
-            listOfCarModels.add("rio");
-        }
+        listOfCarModels = new HashSet();
+        listOfCarModels = CarsDataLoader.getListOfCarModels();
+        System.out.println();
     }
 
 }

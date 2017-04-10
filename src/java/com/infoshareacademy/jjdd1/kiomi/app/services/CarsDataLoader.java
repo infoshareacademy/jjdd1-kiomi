@@ -124,7 +124,41 @@ public class CarsDataLoader {
         return null;
     }
 
+    public static Set<Brand> getListOfCarBrands(){
+        try {
+            Gson gson = new Gson();
+            FileReader fileReader = new FileReader(BRANDS_URI);
 
+            JsonObject response = gson.fromJson(fileReader, JsonObject.class);
+            JsonElement data = response.get(JSON_DATA_TAG);
+
+            java.lang.reflect.Type type = new TypeToken<Set<Brand>>() {
+            }.getType();
+            brand = gson.fromJson(data, type);
+            }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return brand;
+    }
+
+    public static Set<Model> getListOfCarModels() {
+        try {
+            Gson gson = new Gson();
+            FileReader fileReader = new FileReader(MODELS_URI);
+
+            JsonObject response = gson.fromJson(fileReader, JsonObject.class);
+            JsonElement data = response.get(JSON_DATA_TAG);
+
+            java.lang.reflect.Type type = new TypeToken<Set<Model>>() {
+            }.getType();
+            model = gson.fromJson(data, type);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
 }
 
 
