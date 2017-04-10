@@ -159,6 +159,22 @@ public class CarsDataLoader {
         }
         return model;
     }
+    public static Set<Type> getListOfCarTypes() {
+        try {
+            Gson gson = new Gson();
+            FileReader fileReader = new FileReader(TYPES_URI);
+
+            JsonObject response = gson.fromJson(fileReader, JsonObject.class);
+            JsonElement data = response.get(JSON_DATA_TAG);
+
+            java.lang.reflect.Type type = new TypeToken<Set<Type>>() {
+            }.getType();
+            carType = gson.fromJson(data, type);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return carType;
+    }
 }
 
 

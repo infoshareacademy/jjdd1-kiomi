@@ -14,14 +14,21 @@ import java.util.*;
  */
 public class TerminalMenu {
 
+    static private String clientsCarBrandId;
     static String clientsCarBrand;
+    static private String clientsCarModelId;
     static String clientsCarModel;
+    static private String clientsCarTypeId;
+    static String clientsCarType;
     static String originalClientsCarBrand;
     static String originalClientsCarModel;
+    static String originalClientsCarType;
     static private Set<Brand> listOfCarBrands;
     static private Set<Model> listOfCarModels;
+    static private Set<Type> listOfCarTypes;
     static boolean isCarBrandOnOurList;
     static boolean isCarModelOnOurList;
+    static boolean isCarTypeOnOurList;
     static String brandOfCarFromDatabase;
     static Scanner scanner;
 
@@ -31,23 +38,8 @@ public class TerminalMenu {
 
         //Strona powitalna aplikacji konsolowej Autoparts KIOMI
         System.out.println("Welcome to 'Autoparts KIOMI'. ");
-        System.out.println("To test it, please choose: Brand:'Ford' | Model: '6000-Serie'");
+        System.out.println("To test it, please choose: Brand:'Ford' | Model: 'FOCUS III' | Type: '1.0 EcoBoost'");
 
-        //load Data
-//        List<Model> x= CarsDataLoader.loadDataBrandFile("FORD".toLowerCase());
-//        System.out.println(x);
-
-        //pobieram index z listy i z niego ID
-//        String modelID=x.get(1).getId();
-//        System.out.println(modelID);
-        //wybieram model
-//        List<Type> y= CarsDataLoader.loadDataTypeFile("72o");
-//        System.out.println(y);
-//        String typeID=y.get(1).getId();
-//        System.out.println(typeID);
-        //wybieram typ
-//        List<PartCategory> z= CarsDataLoader.loadDataPartCategoryFile("2b91");
-//        System.out.println(z);
         scanner = new Scanner(System.in);
 
         clientBrandCar();
@@ -55,6 +47,10 @@ public class TerminalMenu {
         setListOfCarModels();
 
         clientModelCar();
+
+        setListOfCarTypes();
+
+        clientTypeCar();
 
         resultOfClientsChoice();
 
@@ -91,6 +87,20 @@ public class TerminalMenu {
         return clientsCarModel;
     }
 
+    static String clientTypeCar(){
+        System.out.println("Choose a type of the car:");
+
+        originalClientsCarType = scanner.nextLine();
+
+        clientsCarType = originalClientsCarType.toLowerCase();
+
+        System.out.print("You have choosen type of the car: '" + originalClientsCarType + "'");
+
+        validationOfClientsCarType();
+
+        return clientsCarType;
+    }
+
     static void validationOfClientsCarBrand() {
 
         isChoosenCarBrandOnOurList();
@@ -121,10 +131,25 @@ public class TerminalMenu {
         }
     }
 
+    static void validationOfClientsCarType(){
+        isChoosenCarTypeOnOurList();
+
+        if (isCarTypeOnOurList == false) {
+            System.out.println(" | Attention: '" + originalClientsCarType + "' is not on our list");
+            clientModelCar();
+        }
+        else if (isCarTypeOnOurList == true) {
+            System.out.println(" | Success: '" + originalClientsCarType + "' is on our list");
+            System.out.println("--------------------------------------------------");
+            System.out.println("Your current choise is: Brand: '" + clientsCarBrand+ "' | Model: '" + clientsCarModel+ "' | Type: "+ clientsCarType+ "' | ");
+        }
+    }
+
     private static boolean isChoosenCarBrandOnOurList() {
         for (Brand value : listOfCarBrands) {
 
             if (value.getName_clear().equals(clientsCarBrand)) {
+                setClientsCarBrandId(value.getId());
                 isCarBrandOnOurList = true;
                 break;
             } else {
@@ -137,6 +162,7 @@ public class TerminalMenu {
     private static boolean isChoosenCarModelOnOurList() {
         for (Model value : listOfCarModels) {
             if (value.getName().toLowerCase().equals(clientsCarModel)) {
+                setClientsCarModelId(value.getId());
                 isCarModelOnOurList = true;
                 break;
             } else {
@@ -146,18 +172,57 @@ public class TerminalMenu {
         return isCarModelOnOurList;
     }
 
+    private static boolean isChoosenCarTypeOnOurList() {
+        for (Type value : listOfCarTypes) {
+            if (value.getName().toLowerCase().equals(clientsCarType)) {
+                setClientsCarTypeId(value.getId());
+                isCarTypeOnOurList = true;
+                break;
+            } else {
+                isCarTypeOnOurList = false;
+            }
+        }
+        return isCarTypeOnOurList;
+    }
+
     private static void resultOfClientsChoice() {
 
         for(Model value: CarsDataLoader.loadDataBrandFile(clientsCarBrand)){
             if(value.getName().toLowerCase().equals(clientsCarModel)){
-                System.out.println("ID: "+ value.getId());
-                System.out.println("Model: "+ value.getName());
-                System.out.println("Start month: "+ value.getStart_month());
-                System.out.println("Start year: "+ value.getStart_year());
-                System.out.println("End month: "+ value.getEnd_month());
-                System.out.println("End year: "+ value.getEnd_year());
-                System.out.println("Vehicle group: "+ value.getVehicle_group());
-                System.out.println("Link: "+ value.getLink());
+                System.out.println("Brand ID: "+ getClientsCarBrandId());
+                System.out.println("Brand Name: "+ clientsCarBrand);
+
+                System.out.println("Model ID: "+ value.getId());
+                System.out.println("Model Name: "+ value.getName());
+                System.out.println("Model Start Month: "+ value.getStart_month());
+                System.out.println("Model Start Year: "+ value.getStart_year());
+                System.out.println("Model End Month: "+ value.getEnd_month());
+                System.out.println("Model End Year: "+ value.getEnd_year());
+                System.out.println("Model Vehicle Group: "+ value.getVehicle_group());
+                System.out.println("Model Link: "+ value.getLink());
+
+                for( Type type: listOfCarTypes){
+                    if(type.getId().equals(getClientsCarTypeId())){
+                        System.out.println("Type ID: "+ getClientsCarTypeId());
+                        System.out.println("Type Name: "+ type.getName());
+                        System.out.println("Type Start Month: "+ type.getStart_month());
+                        System.out.println("Type Start Year: "+ type.getStart_year());
+                        System.out.println("Type End Month: "+ type.getEnd_month());
+                        System.out.println("Type End Year: "+ type.getEnd_year());
+                        System.out.println("Type Ccm: "+ type.getCcm());
+
+                        System.out.println("Type Kw: "+ type.getKw());
+                        System.out.println("Type Hp: "+ type.getHp());
+                        System.out.println("Type Cylinders: "+ type.getCylinders());
+                        System.out.println("Type Engine: "+ type.getEngine());
+                        System.out.println("Type Engine txt: "+ type.getEngine_txt());
+                        System.out.println("Type Fuel: "+ type.getFuel());
+                        System.out.println("Type Body: "+ type.getBody());
+                        System.out.println("Type Axle: "+ type.getAxle());
+                        System.out.println("Type Max weight: "+ type.getMax_weight());
+                        System.out.println("Type Link: "+ type.getLink());
+                    }
+                }
             }
         }
     }
@@ -173,4 +238,32 @@ public class TerminalMenu {
         listOfCarModels = CarsDataLoader.getListOfCarModels();
     }
 
+    public static void setListOfCarTypes() {
+        listOfCarTypes = new HashSet();
+        listOfCarTypes = CarsDataLoader.getListOfCarTypes();
+    }
+
+    public static String getClientsCarBrandId() {
+        return clientsCarBrandId;
+    }
+
+    public static void setClientsCarBrandId(String clientsCarBrandId) {
+        TerminalMenu.clientsCarBrandId = clientsCarBrandId;
+    }
+
+    public static String getClientsCarModelId() {
+        return clientsCarModelId;
+    }
+
+    public static void setClientsCarModelId(String clientsCarModelId) {
+        TerminalMenu.clientsCarModelId = clientsCarModelId;
+    }
+
+    public static String getClientsCarTypeId() {
+        return clientsCarTypeId;
+    }
+
+    public static void setClientsCarTypeId(String clientsCarTypeId) {
+        TerminalMenu.clientsCarTypeId = clientsCarTypeId;
+    }
 }

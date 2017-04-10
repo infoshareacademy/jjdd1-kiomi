@@ -31,8 +31,10 @@ public class Type {
     private int end_year;
     private String end_month;
     private String start_month;
+    private String start_year;
     private int ccm;
     private int kw;
+    private int hp;
     private int cylinders;
     private String engine;
     private String engine_txt;
@@ -118,6 +120,10 @@ public class Type {
         this.kw = kw;
     }
 
+    public int getHp() {return hp;}
+
+    public void setHp(int hp) {this.hp = hp;}
+
     public int getCylinders() {
         return cylinders;
     }
@@ -181,6 +187,10 @@ public class Type {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public String getStart_year() {return start_year;}
+
+    public void setStart_year(String start_year) {this.start_year = start_year;}
 
     @Override
     public String toString() {
