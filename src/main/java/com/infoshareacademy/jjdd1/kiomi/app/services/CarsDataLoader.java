@@ -17,22 +17,22 @@ czy lepiej zapisać pliki od razu, czy przy zapytaniach
 hashset bez diamentu
  */
 public class CarsDataLoader {
-    private static final String BRANDS_URI = "src/Resources/brands.json";
-    private static final String MODELS_URI = "src/Resources/FORD - modele.json";
-    private static final String PART_URI = "src/Resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci - hamulce - tarczowe.json";
-    private static final String PARTCATEGORY_URI = "src/Resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci.json";
-    private static final String PARTSUBCATEGORY_URI = "src/Resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci - hamulce.json";
-    private static final String TYPES_URI = "src/Resources/FORD FOCUS III - typy.json";
+    private static final String BRANDS_URI = "src/resources/brands.json";
+    private static final String MODELS_URI = "src/resources/FORD - modele.json";
+    private static final String PART_URI = "src/resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci - hamulce - tarczowe.json";
+    private static final String PARTCATEGORY_URI = "src/resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci.json";
+    private static final String PARTSUBCATEGORY_URI = "src/resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci - hamulce.json";
+    private static final String TYPES_URI = "src/resources/FORD FOCUS III - typy.json";
 
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
 
-    static Set<Brand> brand = new HashSet();
-    static Set<Model> model = new HashSet();
-    static Set<Type> carType = new HashSet();
-    static Set<PartCategory> partCategory = new HashSet();
-    static Set<Part> part = new HashSet();
-    static List<Breadcrumbs> breadcrumbs = new ArrayList();
+    static List<Brand> brand = new ArrayList();
+    static List<Model> model = new ArrayList();
+    static List<Type> carType = new ArrayList();
+    static List<PartCategory> partCategory = new ArrayList();
+    static List<Part> part = new ArrayList();
+    static List<BreadcrumbsBuilder> breadcrumbs = new ArrayList();
 
     static <T> T JSONLoader(T c, String file) {
         try {
@@ -44,24 +44,22 @@ public class CarsDataLoader {
 
             if (c != brand) {
                 JsonElement bread = response.get(JSON_BREADCRUMBS_TAG);
-                breadcrumbs = gson.fromJson(bread, new TypeToken<List<Breadcrumbs>>() {
+                breadcrumbs = gson.fromJson(bread, new TypeToken<List<BreadcrumbsBuilder>>() {
                 }.getType());
             }
 
             if (c == brand) {
-                return gson.fromJson(data, new TypeToken<Set<Brand>>() {
-                }.getType());
+                return gson.fromJson(data, new TypeToken<List<Brand>>(){}.getType());
             } else if (c == model) {
-                return gson.fromJson(data, new TypeToken<Set<Model>>() {
-                }.getType());
+                return gson.fromJson(data, new TypeToken<List<Model>>() {}.getType());
             } else if (c == carType) {
-                return gson.fromJson(data, new TypeToken<Set<Type>>() {
+                return gson.fromJson(data, new TypeToken<List<Type>>() {
                 }.getType());
             } else if (c == partCategory) {
-                return gson.fromJson(data, new TypeToken<Set<PartCategory>>() {
+                return gson.fromJson(data, new TypeToken<List<PartCategory>>() {
                 }.getType());
             } else if (c == part) {
-                return gson.fromJson(data, new TypeToken<Set<Part>>() {
+                return gson.fromJson(data, new TypeToken<List<Part>>() {
                 }.getType());
             }
 
@@ -71,27 +69,27 @@ public class CarsDataLoader {
         return null;
     }
 
-    public static Set<Brand> getBrandsList() {
+    public static List<Brand> getBrandsList() {
         return JSONLoader(brand, BRANDS_URI);
     }
 
-    public static Set<Model> getModelsList() {
+    public static List<Model> getModelsList() {
         return JSONLoader(model, MODELS_URI);
     }
 
-    public static Set<Type> getCarTypesList() {
+    public static List<Type> getCarTypesList() {
         return JSONLoader(carType, TYPES_URI);
     }
 
-    public static Set<PartCategory> getPartCategoryList() {
+    public static List<PartCategory> getPartCategoryList() {
         return JSONLoader(partCategory, PARTCATEGORY_URI);
     }
 
-    public static Set<PartCategory> getPartSubCategoryList() {
+    public static List<PartCategory> getPartSubCategoryList() {
         return JSONLoader(partCategory, PARTSUBCATEGORY_URI);
     }
 
-    public static Set<Part> getPartList() {
+    public static List<Part> getPartList() {
         return JSONLoader(part, PART_URI);
     }
 
@@ -101,10 +99,10 @@ public class CarsDataLoader {
         return links[links.length - 1];
     }
 
-    public static Set<Model> getModelsListById(String id) {
+    public static List<Model> getModelsListById(String id) {
         model = getModelsList();
 
-        Set<Model> temporaryModel = new HashSet<Model>();
+        List<Model> temporaryModel = new ArrayList<Model>();
         for (Model x : model) {
             String[] links = x.getLink().split("/");
 
@@ -116,11 +114,11 @@ public class CarsDataLoader {
         return temporaryModel;
     }
 
-    public static Set<Type> getTypesListById(String id) {
+    public static List<Type> getTypesListById(String id) {
         carType = getCarTypesList();
 
 
-        Set<Type> temporaryType = new HashSet<Type>();
+        List<Type> temporaryType = new ArrayList<Type>();
 
         for (Type x : carType) {
             String[] links = x.getLink().split("/");
@@ -133,11 +131,10 @@ public class CarsDataLoader {
 
     }
 
-    public static Set<PartCategory> getPartCategoryListById(String id) {
-
+    public static List<PartCategory> getPartCategoryListById(String id) {
         partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
 
-        Set<PartCategory> temporaryPartCategory = new HashSet<PartCategory>();
+        List<PartCategory> temporaryPartCategory = new ArrayList<PartCategory>();
 
         for (PartCategory x : partCategory) {
 
@@ -149,11 +146,11 @@ public class CarsDataLoader {
         return temporaryPartCategory;
     }
 
-    public static Set<Part> getPartListById(String id) {
+    public static List<Part> getPartListById(String id) {
         part = getPartList();
 
 
-        Set<Part> temporaryPart = new HashSet<Part>();
+        List<Part> temporaryPart = new ArrayList<Part>();
 
         for (Part x : part) {
             if (getDataFromBreadcrumbs().equals(id)) {

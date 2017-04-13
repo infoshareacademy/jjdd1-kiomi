@@ -81,7 +81,7 @@ public class Part {
     @Override
     public String toString() {
         return name+ "(Marka: "+brand+")"+
-                "\n     numer: "+number+
+                "\n     Kod Wew.: "+number+
                 "     status: "+status;
     }
 }

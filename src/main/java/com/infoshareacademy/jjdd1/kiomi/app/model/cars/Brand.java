@@ -17,8 +17,8 @@ public class Brand {
     private String link;
 
 
-public Brand(String name_clear) {
-        this.name_clear = name_clear;
+public Brand(String id) {
+        this.id = id;
 
     }
 
