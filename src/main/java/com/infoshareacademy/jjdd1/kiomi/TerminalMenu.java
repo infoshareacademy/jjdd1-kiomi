@@ -13,22 +13,21 @@ public class TerminalMenu {
 
 
     static Scanner scanner;
-
-    private static List<Brand> brands = CarsDataLoader.getBrandsList();
-    private static List<Model> models = CarsDataLoader.getModelsList();
-    private static List<Type> carTypes = CarsDataLoader.getCarTypesList();
-    private static List<PartCategory> partCategory = CarsDataLoader.getPartCategoryList();
-    private static List<Part> part = CarsDataLoader.getPartList();
+    private static CarsDataLoader carsDataLoader = new CarsDataLoader();
+    private static List<Brand> brands = new ArrayList();
+    private static List<Model> models = new ArrayList();
+    private static List<Type> carTypes = new ArrayList();
+    private static List<PartCategory> partCategory = new ArrayList();
+    private static List<Part> part = new ArrayList();
+private static List<?> referenceForTypeLists;
 
     public static void main(String[] args) {
-
-
         startMenu();
     }
 
     private static String[] titleForListByData = {"Lista maerek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
     private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Zamówienie złożysz telefonicznie pod numerem 55555555 podając kod wewnętrzny(KOD WEW)\nWybierz części podając ich numery z wyszukiwarki.\nWybierz część:"};
-    private static List<?>[] objToMenu = {brands, models, carTypes, partCategory, part};
+//    private static List<?>[] objToMenu = {brands, models, carTypes, partCategory, part};
     private static List<String> searchResults = new ArrayList();
     private static int lastSearchedNumberOnTheList;
     private static String partCategoryId = "";
@@ -43,11 +42,13 @@ public class TerminalMenu {
 
     //druk listy
     public static void printListByData() {
+
         int i = 0;
         while (i <= 5) {
             System.out.println(titleForListByData[i]);
 //lista
-            listByDataType(i);
+            listByDataType();
+            printListByDataType(referenceForTypeLists);
             System.out.println("Jeśli lista jest za długa wpisz pierwszą literę wyszukiwanej frazy".toUpperCase());
 
             //submenu
@@ -59,47 +60,81 @@ public class TerminalMenu {
         scanner.close();
     }
 
-    public static void listByDataType(int element) {
-        switch (element) {
-            case 0:
-                brands = CarsDataLoader.getBrandsList();
-                printListByDataType(brands);
-                break;
-            case 1:
-                String brandId = brands.get(lastSearchedNumberOnTheList).getId();
-                models = CarsDataLoader.getModelsListById(brandId);
-                printListByDataType(models);
-                break;
-            case 2:
-                String modelId = models.get(lastSearchedNumberOnTheList).getId();
-                carTypes = CarsDataLoader.getTypesListById(modelId);
-                printListByDataType(carTypes);
-                break;
-            case 3:
-                String carTypeId;
-                if (partCategoryId == "") {
-                    carTypeId = carTypes.get(lastSearchedNumberOnTheList).getId();
-                    partCategoryId = "-";
-                } else {
-                    carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
-                }
-                partCategoryId = carTypeId;
-                partCategory = CarsDataLoader.getPartCategoryListById(carTypeId);
-                printListByDataType(partCategory);
-                break;
-            case 4:
+    public static void listByDataType() {
+        if (brands.size() == 0) {
+            brands = carsDataLoader.getBrandsList();
+//            printListByDataType(brands);
+            referenceForTypeLists =brands;
 
-//                partCategoryId = partCategory.get(lastSearchedNumberOnTheList).getId();
-                part = CarsDataLoader.getPartListById(partCategoryId);
-                printListByDataType(part);
-                break;
+        } else if (models.size() == 0) {
+            String brandId = brands.get(lastSearchedNumberOnTheList).getId();
+            models = carsDataLoader.getModelsListById(brandId);
+//            printListByDataType(models);
+            referenceForTypeLists =models;
+        } else if (carTypes.size() == 0) {
+            String modelId = models.get(lastSearchedNumberOnTheList).getId();
+            carTypes = carsDataLoader.getTypesListById(modelId);
+//            printListByDataType(carTypes);
+            referenceForTypeLists =carTypes;
+        } else if (partCategory.size() == 0) {
+            String carTypeId;
+            if (partCategoryId == "") {
+                carTypeId = carTypes.get(lastSearchedNumberOnTheList).getId();
+                partCategoryId = "-";
+            } else {
+                carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
+            }
+            partCategoryId = carTypeId;
+            partCategory = CarsDataLoader.getPartCategoryListById(carTypeId);
+//            printListByDataType(partCategory);
+            referenceForTypeLists =partCategory;
+            part = CarsDataLoader.getPartListById(partCategoryId);
+            printListByDataType(part);
         }
 
+
     }
+//    public static void listByDataType(int element) {
+//        switch (element) {
+//            case 0:
+//                brands = carsDataLoader.getBrandsList();
+//                printListByDataType(brands);
+//                break;
+//            case 1:
+//                String brandId = brands.get(lastSearchedNumberOnTheList).getId();
+//                models = CarsDataLoader.getModelsListById(brandId);
+//                printListByDataType(models);
+//                break;
+//            case 2:
+//                String modelId = models.get(lastSearchedNumberOnTheList).getId();
+//                carTypes = CarsDataLoader.getTypesListById(modelId);
+//                printListByDataType(carTypes);
+//                break;
+//            case 3:
+//                String carTypeId;
+//                if (partCategoryId == "") {
+//                    carTypeId = carTypes.get(lastSearchedNumberOnTheList).getId();
+//                    partCategoryId = "-";
+//                } else {
+//                    carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
+//                }
+//                partCategoryId = carTypeId;
+//                partCategory = CarsDataLoader.getPartCategoryListById(carTypeId);
+//                printListByDataType(partCategory);
+//                break;
+//            case 4:
+//
+////                partCategoryId = partCategory.get(lastSearchedNumberOnTheList).getId();
+//                part = CarsDataLoader.getPartListById(partCategoryId);
+//                printListByDataType(part);
+//                break;
+//        }
+//
+//    }
 
     public static void printListByDataType(List c) {
         int i = 1;
-        if(lastRequestFromUser.matches("[a-z]")) {
+        if (lastRequestFromUser.matches("[a-z]")) {
             //print tylko litery
         } else {
             for (Object element : c) {
@@ -119,6 +154,7 @@ public class TerminalMenu {
             System.out.println("GORA   :: Wpisz 'GORA', aby wyjść do wyższego poziomu menu");
             System.out.println("MODEL  :: Wpisz 'MODEL', aby wyświetlić info o modelu");
             System.out.println("SILNIK :: Wpisz 'SILNIK', aby wyświetlić info o silniku");
+            System.out.println("RESET  :: Wpisz 'RESET', aby wyszukiwać od nowa");
             System.out.println("KONIEC :: Wpisz 'KONIEC', aby wyjść z programu");
             reportForMenu();
         }
@@ -140,7 +176,7 @@ public class TerminalMenu {
         String request = scanner.nextLine();
 
         request = request.toLowerCase().trim();
-        lastRequestFromUser=request;
+        lastRequestFromUser = request;
         if (requestToSubmenu(request) == 5) {
             return 5;
         }
@@ -198,10 +234,11 @@ public class TerminalMenu {
         }
         try {
             int numberInPrintedList = Integer.parseInt(request) - 1;
-            if (numberInPrintedList <= objToMenu[searchResults.size()].size()) {
+        System.out.println(numberInPrintedList +"::::"+ referenceForTypeLists.size());
+            if (numberInPrintedList <= referenceForTypeLists.size()) {
                 lastSearchedNumberOnTheList = numberInPrintedList;
 //jeśli jest kategoria to nie pobieraj z produktu tylko z kategorii!!!! Jest błąd w wydruku
-                setSearchResults(objToMenu[searchResults.size()].get(numberInPrintedList).toString());
+                setSearchResults(referenceForTypeLists.get(numberInPrintedList).toString());
             } else {
 //to do raportu gdzie indziej. Drukuje info przed listą
                 System.out.println("Nie ma takiego elementu w bazie.");

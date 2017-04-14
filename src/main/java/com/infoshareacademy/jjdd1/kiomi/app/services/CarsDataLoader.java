@@ -49,9 +49,11 @@ public class CarsDataLoader {
             }
 
             if (c == brand) {
-                return gson.fromJson(data, new TypeToken<List<Brand>>(){}.getType());
+                return gson.fromJson(data, new TypeToken<List<Brand>>() {
+                }.getType());
             } else if (c == model) {
-                return gson.fromJson(data, new TypeToken<List<Model>>() {}.getType());
+                return gson.fromJson(data, new TypeToken<List<Model>>() {
+                }.getType());
             } else if (c == carType) {
                 return gson.fromJson(data, new TypeToken<List<Type>>() {
                 }.getType());
@@ -69,7 +71,7 @@ public class CarsDataLoader {
         return null;
     }
 
-    public static List<Brand> getBrandsList() {
+    public List<Brand> getBrandsList() {
         return JSONLoader(brand, BRANDS_URI);
     }
 
@@ -99,7 +101,7 @@ public class CarsDataLoader {
         return links[links.length - 1];
     }
 
-    public static List<Model> getModelsListById(String id) {
+    public List<Model> getModelsListById(String id) {
         model = getModelsList();
 
         List<Model> temporaryModel = new ArrayList<Model>();
@@ -161,26 +163,6 @@ public class CarsDataLoader {
         return temporaryPart;
 
     }
-
-
-//    public static Set<Part> getPartListById(String id) {
-//
-//        part = getPartList();
-//
-//        Set<PartCategory> temporaryPartCategory = new HashSet<PartCategory>();
-//
-//        for (PartCategory x : partCategory) {
-//            String[] links = x.getLink().split("/");
-//
-//            if (links[6].equals(id)) {
-//                temporaryPartCategory.add(x);
-//            }
-//
-//        }
-//        return temporaryPartCategory;
-//    }
-
-
 
 
 }
