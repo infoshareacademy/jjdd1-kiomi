@@ -1,0 +1,16 @@
+com\infoshareacademy\jjdd1\kiomi\app\model\cars\Model.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$5.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$6.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$4.class
+com\infoshareacademy\jjdd1\kiomi\app\model\cars\PartCategory.class
+com\infoshareacademy\jjdd1\kiomi\app\services\AllegroLoader.class
+com\infoshareacademy\jjdd1\kiomi\app\model\cars\Type.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$2.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$3.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$1.class
+com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader.class
+com\infoshareacademy\jjdd1\kiomi\app\model\cars\Brand.class
+com\infoshareacademy\jjdd1\kiomi\app\services\BreadcrumbsBuilder.class
+com\infoshareacademy\jjdd1\kiomi\TerminalMenu.class
+com\infoshareacademy\jjdd1\kiomi\app\model\cars\Part.class
+com\infoshareacademy\jjdd1\kiomi\app\allegro\AllegroSupporter.class
