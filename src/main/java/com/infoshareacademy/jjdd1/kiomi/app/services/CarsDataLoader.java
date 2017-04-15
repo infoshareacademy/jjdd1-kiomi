@@ -47,7 +47,6 @@ public class CarsDataLoader {
                 breadcrumbs = gson.fromJson(bread, new TypeToken<List<BreadcrumbsBuilder>>() {
                 }.getType());
             }
-
             if (c == brand) {
                 return gson.fromJson(data, new TypeToken<List<Brand>>() {
                 }.getType());
@@ -116,7 +115,7 @@ public class CarsDataLoader {
         return temporaryModel;
     }
 
-    public static List<Type> getTypesListById(String id) {
+    public List<Type> getTypesListById(String id) {
         carType = getCarTypesList();
 
 
@@ -133,7 +132,7 @@ public class CarsDataLoader {
 
     }
 
-    public static List<PartCategory> getPartCategoryListById(String id) {
+    public List<PartCategory> getPartCategoryListById(String id) {
         partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
 
         List<PartCategory> temporaryPartCategory = new ArrayList<PartCategory>();
@@ -148,7 +147,7 @@ public class CarsDataLoader {
         return temporaryPartCategory;
     }
 
-    public static List<Part> getPartListById(String id) {
+    public List<Part> getPartListById(String id) {
         part = getPartList();
 
 

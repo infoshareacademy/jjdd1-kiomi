@@ -19,7 +19,7 @@ public class TerminalMenu {
     private static List<Type> carTypes = new ArrayList();
     private static List<PartCategory> partCategory = new ArrayList();
     private static List<Part> part = new ArrayList();
-private static List<?> referenceForTypeLists;
+    private static List<?> referenceForTypeLists;
 
     public static void main(String[] args) {
         startMenu();
@@ -27,7 +27,7 @@ private static List<?> referenceForTypeLists;
 
     private static String[] titleForListByData = {"Lista maerek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
     private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Zamówienie złożysz telefonicznie pod numerem 55555555 podając kod wewnętrzny(KOD WEW)\nWybierz części podając ich numery z wyszukiwarki.\nWybierz część:"};
-//    private static List<?>[] objToMenu = {brands, models, carTypes, partCategory, part};
+    //    private static List<?>[] objToMenu = {brands, models, carTypes, partCategory, part};
     private static List<String> searchResults = new ArrayList();
     private static int lastSearchedNumberOnTheList;
     private static String partCategoryId = "";
@@ -64,18 +64,17 @@ private static List<?> referenceForTypeLists;
         if (brands.size() == 0) {
             brands = carsDataLoader.getBrandsList();
 //            printListByDataType(brands);
-            referenceForTypeLists =brands;
-
+            referenceForTypeLists = brands;
         } else if (models.size() == 0) {
             String brandId = brands.get(lastSearchedNumberOnTheList).getId();
             models = carsDataLoader.getModelsListById(brandId);
 //            printListByDataType(models);
-            referenceForTypeLists =models;
+            referenceForTypeLists = models;
         } else if (carTypes.size() == 0) {
             String modelId = models.get(lastSearchedNumberOnTheList).getId();
             carTypes = carsDataLoader.getTypesListById(modelId);
 //            printListByDataType(carTypes);
-            referenceForTypeLists =carTypes;
+            referenceForTypeLists = carTypes;
         } else if (partCategory.size() == 0) {
             String carTypeId;
             if (partCategoryId == "") {
@@ -85,52 +84,16 @@ private static List<?> referenceForTypeLists;
                 carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
             }
             partCategoryId = carTypeId;
-            partCategory = CarsDataLoader.getPartCategoryListById(carTypeId);
+            System.out.println(carTypeId);
+            partCategory = carsDataLoader.getPartCategoryListById(carTypeId);
 //            printListByDataType(partCategory);
-            referenceForTypeLists =partCategory;
-            part = CarsDataLoader.getPartListById(partCategoryId);
+            referenceForTypeLists = partCategory;
+            part = carsDataLoader.getPartListById(partCategoryId);
             printListByDataType(part);
         }
 
 
     }
-//    public static void listByDataType(int element) {
-//        switch (element) {
-//            case 0:
-//                brands = carsDataLoader.getBrandsList();
-//                printListByDataType(brands);
-//                break;
-//            case 1:
-//                String brandId = brands.get(lastSearchedNumberOnTheList).getId();
-//                models = CarsDataLoader.getModelsListById(brandId);
-//                printListByDataType(models);
-//                break;
-//            case 2:
-//                String modelId = models.get(lastSearchedNumberOnTheList).getId();
-//                carTypes = CarsDataLoader.getTypesListById(modelId);
-//                printListByDataType(carTypes);
-//                break;
-//            case 3:
-//                String carTypeId;
-//                if (partCategoryId == "") {
-//                    carTypeId = carTypes.get(lastSearchedNumberOnTheList).getId();
-//                    partCategoryId = "-";
-//                } else {
-//                    carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
-//                }
-//                partCategoryId = carTypeId;
-//                partCategory = CarsDataLoader.getPartCategoryListById(carTypeId);
-//                printListByDataType(partCategory);
-//                break;
-//            case 4:
-//
-////                partCategoryId = partCategory.get(lastSearchedNumberOnTheList).getId();
-//                part = CarsDataLoader.getPartListById(partCategoryId);
-//                printListByDataType(part);
-//                break;
-//        }
-//
-//    }
 
     public static void printListByDataType(List c) {
         int i = 1;
@@ -234,11 +197,23 @@ private static List<?> referenceForTypeLists;
         }
         try {
             int numberInPrintedList = Integer.parseInt(request) - 1;
-        System.out.println(numberInPrintedList +"::::"+ referenceForTypeLists.size());
+//            System.out.println(brands.get(numberInPrintedList).size()+"llllllll");
+
             if (numberInPrintedList <= referenceForTypeLists.size()) {
                 lastSearchedNumberOnTheList = numberInPrintedList;
 //jeśli jest kategoria to nie pobieraj z produktu tylko z kategorii!!!! Jest błąd w wydruku
-                setSearchResults(referenceForTypeLists.get(numberInPrintedList).toString());
+                System.out.println(referenceForTypeLists.get(numberInPrintedList));
+                if (referenceForTypeLists == brands) {
+                    setSearchResults(brands.get(numberInPrintedList).getId());
+                }else if (referenceForTypeLists == models) {
+                    setSearchResults(models.get(numberInPrintedList).getId());
+                }else if (referenceForTypeLists == carTypes) {
+                    setSearchResults(carTypes.get(numberInPrintedList).getId());
+                }else if (referenceForTypeLists == partCategory) {
+                    setSearchResults(partCategory.get(numberInPrintedList).getId());
+                }else if (referenceForTypeLists == part) {
+                    setSearchResults(part.get(numberInPrintedList).getNumber());
+                }
             } else {
 //to do raportu gdzie indziej. Drukuje info przed listą
                 System.out.println("Nie ma takiego elementu w bazie.");
@@ -257,6 +232,17 @@ private static List<?> referenceForTypeLists;
 
     public static void getSearchResults() {
         for (String name : searchResults) {
+//            if (referenceForTypeLists == brands) {
+//                setSearchResults(brands.get(numberInPrintedList).getId());
+//            }else if (referenceForTypeLists == models) {
+//                setSearchResults(models.get(numberInPrintedList).getId());
+//            }else if (referenceForTypeLists == carTypes) {
+//                setSearchResults(carTypes.get(numberInPrintedList).getId());
+//            }else if (referenceForTypeLists == partCategory) {
+//                setSearchResults(partCategory.get(numberInPrintedList).getId());
+//            }else if (referenceForTypeLists == part) {
+//                setSearchResults(part.get(numberInPrintedList).getNumber());
+//            }
             System.out.println("- " + name);
         }
     }
