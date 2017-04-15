@@ -191,6 +191,11 @@ public class TerminalMenu {
     }
 
     public static void requestFromSubmenu(String request) {
+        if(searchResults.size()==0) {
+            System.out.println("Submenu możesz używać mając wybraną markę");
+            requestFromUser();
+            operationsOnRequestFromTheUser();
+        }else
         if (request.length() == 1) {
             printListByDataType(referenceForTypeLists);
             requestFromUser();
@@ -270,7 +275,11 @@ public class TerminalMenu {
 
     public static void printPartsList() {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
-        printListByDataType(part);
+        if(part.size()>0) {
+            printListByDataType(part);
+        } else {
+            System.out.println("Lista części dla tej kategorii jest pusta");
+        }
         referenceForTypeLists = part;
         setLevelMenu(4);
     }
