@@ -17,7 +17,7 @@ public class Brand {
     private String link;
 
 
-public Brand(String id) {
+    public Brand(String id) {
         this.id = id;
 
     }
@@ -64,6 +64,6 @@ public Brand(String id) {
 
     @Override
     public String toString() {
-        return name +"(" +id + ")";
+        return name + " (" + id + ")";
     }
 }

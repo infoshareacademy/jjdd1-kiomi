@@ -5,12 +5,7 @@ import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 
 import java.util.*;
 
-
-/**
- * Created by arkadiuszzielazny on 31.03.17.
- */
 public class TerminalMenu {
-
 
     static Scanner scanner;
     private static CarsDataLoader carsDataLoader = new CarsDataLoader();
@@ -26,86 +21,110 @@ public class TerminalMenu {
     }
 
     private static String[] titleForListByData = {"Lista maerek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
-    private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Zamówienie złożysz telefonicznie pod numerem 55555555 podając kod wewnętrzny(KOD WEW)\nWybierz części podając ich numery z wyszukiwarki.\nWybierz część:"};
-    //    private static List<?>[] objToMenu = {brands, models, carTypes, partCategory, part};
+    private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Oto lista części pasujących do wyszukiwania."};
     private static List<String> searchResults = new ArrayList();
+    private static List<String> searchResultsAsStrings = new ArrayList();
     private static int lastSearchedNumberOnTheList;
-    private static String partCategoryId = "";
     private static String lastRequestFromUser = "";
+    private static int levelMenu = 0;
 
-    //powitanie
     public static void startMenu() {
         System.out.println("Witaj w hurtownii części samochodowych");
         System.out.println("---------------------------------------");
         printListByData();
     }
 
-    //druk listy
     public static void printListByData() {
 
-        int i = 0;
-        while (i <= 5) {
-            System.out.println(titleForListByData[i]);
-//lista
+        System.out.println(titleForListByData[getLevelMenu()]);
+
+        if (getLevelMenu() < 4) {
+            //lista
             listByDataType();
-            printListByDataType(referenceForTypeLists);
-            System.out.println("Jeśli lista jest za długa wpisz pierwszą literę wyszukiwanej frazy".toUpperCase());
-
-            //submenu
-            submenuForStartMenu();
-            //pobierz info od usera
-            i = requestFromUser(i);
-
+            if (referenceForTypeLists.size() > 0) {
+                printListByDataType(referenceForTypeLists);
+            } else {
+                setLevelMenu(4);
+            }
         }
+        if (getLevelMenu() == 4) {
+            printPartsList();
+        }
+
+        reportForMenu();
+        System.out.println("Jeśli lista jest za długa wpisz pierwszą literę wyszukiwanej frazy".toUpperCase());
+
+        //submenu
+        submenuForStartMenu();
+
+        //pobierz info od usera
+        requestFromUser();
+
+        //operacje
+        operationsOnRequestFromTheUser();
+
+        //pętla
+        printListByData();
+
         scanner.close();
+    }
+
+    public static int getLevelMenu() {
+        return levelMenu;
+    }
+
+    public static void setLevelMenu(int level) {
+        levelMenu = level;
     }
 
     public static void listByDataType() {
         if (brands.size() == 0) {
             brands = carsDataLoader.getBrandsList();
-//            printListByDataType(brands);
             referenceForTypeLists = brands;
+            setLevelMenu(0);
         } else if (models.size() == 0) {
             String brandId = brands.get(lastSearchedNumberOnTheList).getId();
             models = carsDataLoader.getModelsListById(brandId);
-//            printListByDataType(models);
             referenceForTypeLists = models;
+            setLevelMenu(1);
         } else if (carTypes.size() == 0) {
             String modelId = models.get(lastSearchedNumberOnTheList).getId();
             carTypes = carsDataLoader.getTypesListById(modelId);
-//            printListByDataType(carTypes);
             referenceForTypeLists = carTypes;
-        } else if (partCategory.size() == 0) {
+            setLevelMenu(2);
+        } else {
             String carTypeId;
-            if (partCategoryId == "") {
+            if (partCategory.size() == 0) {
                 carTypeId = carTypes.get(lastSearchedNumberOnTheList).getId();
-                partCategoryId = "-";
             } else {
                 carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
             }
-            partCategoryId = carTypeId;
-            System.out.println(carTypeId);
+//            if(partCategory.get(lastSearchedNumberOnTheList).isHas_children()==true) {}
             partCategory = carsDataLoader.getPartCategoryListById(carTypeId);
-//            printListByDataType(partCategory);
             referenceForTypeLists = partCategory;
-            part = carsDataLoader.getPartListById(partCategoryId);
-            printListByDataType(part);
+            setLevelMenu(3);
         }
 
 
     }
 
-    public static void printListByDataType(List c) {
+    public static void printListByDataType(List data) {
         int i = 1;
-        if (lastRequestFromUser.matches("[a-z]")) {
+        if (lastRequestFromUser.toString().matches("[a-z]")) {
             //print tylko litery
+            for (Object element : data) {
+                if (element.toString().substring(0, 1).toLowerCase().equals(lastRequestFromUser)) {
+                    System.out.println(i + " - " + element);
+                }
+                i++;
+            }
         } else {
-            for (Object element : c) {
-
+            for (Object element : data) {
                 System.out.println(i + " - " + element);
                 i++;
             }
         }
+
     }
 
     public static void submenuForStartMenu() {
@@ -114,138 +133,161 @@ public class TerminalMenu {
         System.out.println("[0-9]  :: Wpisz numer kategorii, aby ją wybrać");
         if (searchResults.size() > 0) {
             System.out.println("CZESC  :: Wpisz 'CZESC', aby wyświetlić listę części dla danego etapu wyszukiwania");
-            System.out.println("GORA   :: Wpisz 'GORA', aby wyjść do wyższego poziomu menu");
             System.out.println("MODEL  :: Wpisz 'MODEL', aby wyświetlić info o modelu");
             System.out.println("SILNIK :: Wpisz 'SILNIK', aby wyświetlić info o silniku");
             System.out.println("RESET  :: Wpisz 'RESET', aby wyszukiwać od nowa");
             System.out.println("KONIEC :: Wpisz 'KONIEC', aby wyjść z programu");
-            reportForMenu();
         }
 
     }
 
     public static void reportForMenu() {
-        System.out.println("---------------------------------------");
-        System.out.println("Do tej pory wybrałeś: ");
-        getSearchResults();
-        System.out.println("---------------------------------------");
+        if (searchResults.size() > 0) {
+            System.out.println("---------------------------------------");
+            System.out.println("Do tej pory wybrałeś: ");
+            getSearchResults();
+            System.out.println("---------------------------------------");
+        }
     }
 
-
-    private static int requestFromUser(int i) {
-        System.out.print(QuestionsToTheMenu[i]);
+    private static void requestFromUser() {
+        System.out.print(QuestionsToTheMenu[getLevelMenu()]);
 
         scanner = new Scanner(System.in);
         String request = scanner.nextLine();
 
         request = request.toLowerCase().trim();
+
+        validateRequest(request);
+
         lastRequestFromUser = request;
-        if (requestToSubmenu(request) == 5) {
-            return 5;
-        }
-
-        if (i > 2 && (request.toLowerCase()).replace(" ", "").equals("p")) {
-            return 4;
-        }
-        if (validateRequest(request) && i < 3) {
-            i++;
-        }
-
-        return i;
     }
 
-    /**
-     * funkcje do submenu
-     * listowanie tylko litery
-     * wywalenie while
-     * walidacja do góry przed  submenu
-     * printowanie czesci, a nie kategorii
-     *
-     * @param request
-     */
-    public static int requestToSubmenu(String request) {
-        if (request.equals("koniec")) {
-            System.out.println("Dziękujemy za skorzystanie z wyszukiwarki");
-            System.exit(0);
-        } else if (request.equals("model")) {
-            System.out.println("Model to:");
-            System.out.println(searchResults.get(1));
-            System.exit(0);
-        } else if (request.equals("gora")) {
-//remove last el from searchres. oraz lastid i -1 lub false
-        } else if (request.equals("silnik")) {
-//remove last el from searchres. oraz lastid i -1 lub false
-        } else if (request.equals("czesc")) {
-//remove last el from searchres. oraz lastid i -1 lub false
-        }
-        return 0;
-    }
-
-    public static boolean validateRequest(String request) {
+    public static void validateRequest(String request) {
 
         //czy string alfanum
         if (!request.matches("[a-z0-9]*")) {
             System.out.println("Podałeś nieprawidłowe dane. Spróbój ponownie");
-            requestFromUser(searchResults.size());
-            return false;
+            requestFromUser();
         }
-        if (request.matches("[a-z]")) {
-            System.out.println("FUNKCJA OGRANICZANIA WYNIKÓW WYSZUKIWANIA. PRINT LITERA ALFABETU(pominięcie liter z argumentu) I ZWROT FALSE");
-//            requestFromUser(searchResults.size());
-            //zamiennik dla funkcji requestFromUser(searchResults.size());
-            return false;
-        }
+    }
+
+    public static void operationsOnRequestFromTheUser() {
         try {
-            int numberInPrintedList = Integer.parseInt(request) - 1;
-//            System.out.println(brands.get(numberInPrintedList).size()+"llllllll");
+            int numberFromPrintedList = Integer.parseInt(lastRequestFromUser) - 1;
 
-            if (numberInPrintedList <= referenceForTypeLists.size()) {
-                lastSearchedNumberOnTheList = numberInPrintedList;
-//jeśli jest kategoria to nie pobieraj z produktu tylko z kategorii!!!! Jest błąd w wydruku
-                System.out.println(referenceForTypeLists.get(numberInPrintedList));
-                if (referenceForTypeLists == brands) {
-                    setSearchResults(brands.get(numberInPrintedList).getId());
-                }else if (referenceForTypeLists == models) {
-                    setSearchResults(models.get(numberInPrintedList).getId());
-                }else if (referenceForTypeLists == carTypes) {
-                    setSearchResults(carTypes.get(numberInPrintedList).getId());
-                }else if (referenceForTypeLists == partCategory) {
-                    setSearchResults(partCategory.get(numberInPrintedList).getId());
-                }else if (referenceForTypeLists == part) {
-                    setSearchResults(part.get(numberInPrintedList).getNumber());
-                }
+            if (numberFromPrintedList <= referenceForTypeLists.size()) {
+                lastSearchedNumberOnTheList = numberFromPrintedList;
+                setSearchResults(numberFromPrintedList);
+                searchResultsAsStrings.add(referenceForTypeLists.get(numberFromPrintedList).toString());
             } else {
-//to do raportu gdzie indziej. Drukuje info przed listą
                 System.out.println("Nie ma takiego elementu w bazie.");
-                requestFromUser(searchResults.size());
+                requestFromUser();
             }
-            return true;
         } catch (NumberFormatException e) {
-            return false;
+            requestFromSubmenu(lastRequestFromUser);
+        }
+
+
+    }
+
+    public static void setSearchResults(int element) {
+        if (referenceForTypeLists == brands) {
+            searchResults.add(brands.get(element).getId());
+        } else if (referenceForTypeLists == models) {
+            searchResults.add(models.get(element).getId());
+        } else if (referenceForTypeLists == carTypes) {
+            searchResults.add(carTypes.get(element).getId());
+        } else if (referenceForTypeLists == partCategory) {
+            searchResults.add(partCategory.get(element).getId());
+        } else if (referenceForTypeLists == part) {
+            searchResults.add(part.get(element).getNumber());
         }
     }
 
+    public static void requestFromSubmenu(String request) {
+        if (request.length() == 1) {
+            printListByDataType(referenceForTypeLists);
+            requestFromUser();
+            operationsOnRequestFromTheUser();
+        } else if (request.equals("koniec")) {
+            System.out.println("Dziękujemy za skorzystanie z wyszukiwarki");
+            System.exit(0);
+        } else if (request.equals("model")) {
+            System.out.println("Dane modelu:");
+            modelsMetrics();
+            requestFromUser();
+            operationsOnRequestFromTheUser();
+        } else if (request.equals("silnik")) {
+            System.out.println("Dane typu samochodu:");
+            engineMetrics();
+            requestFromUser();
+            operationsOnRequestFromTheUser();
+        } else if (request.equals("czesc")) {
+            lastRequestFromUser = "czesc";
+            setLevelMenu(4);
+        } else if (request.equals("reset")) {
+            searchResults.clear();
+            brands.clear();
+            models.clear();
+            carTypes.clear();
+            partCategory.clear();
+            part.clear();
+            setLevelMenu(0);
+            lastSearchedNumberOnTheList = 0;
+            lastRequestFromUser = "";
+            printListByData();
+        } else {
+            System.out.println("Polecenie nieobsługiwane przez system");
+            requestFromUser();
+            operationsOnRequestFromTheUser();
+        }
 
-    public static void setSearchResults(String element) {
-        searchResults.add(element);
     }
+
+    public static void modelsMetrics() {
+        if (getLevelMenu() > 1) {
+            for (Model m : models) {
+                if (m.getId() == searchResults.get(1)) {
+                    System.out.println(m.getName());
+                    System.out.println("Produkowany: " + m.getStart_month() + "/" + m.getStart_year() + " - " + m.getEnd_month() + "/" + m.getEnd_year());
+                    System.out.println(m.getVehicle_group());
+                }
+            }
+        } else {
+            System.out.println("Nie wybrałeś jeszcze modelu");
+        }
+    }
+
+    public static void engineMetrics() {
+        if (getLevelMenu() > 2) {
+            for (Type c : carTypes) {
+                if (c.getId() == searchResults.get(2)) {
+                    System.out.println(c.getName());
+                    System.out.println(c.getBody());
+                    System.out.println(c.getAxle());
+                    System.out.println(c.getCcm());
+                    System.out.println(c.getCylinders());
+                    System.out.println(c.getFuel());
+                    System.out.println(c.getEngine());
+                    System.out.println(c.getKw());
+                }
+            }
+        } else {
+            System.out.println("Nie wybrałeś jeszcze typu silnika");
+        }
+    }
+
 
     public static void getSearchResults() {
-        for (String name : searchResults) {
-//            if (referenceForTypeLists == brands) {
-//                setSearchResults(brands.get(numberInPrintedList).getId());
-//            }else if (referenceForTypeLists == models) {
-//                setSearchResults(models.get(numberInPrintedList).getId());
-//            }else if (referenceForTypeLists == carTypes) {
-//                setSearchResults(carTypes.get(numberInPrintedList).getId());
-//            }else if (referenceForTypeLists == partCategory) {
-//                setSearchResults(partCategory.get(numberInPrintedList).getId());
-//            }else if (referenceForTypeLists == part) {
-//                setSearchResults(part.get(numberInPrintedList).getNumber());
-//            }
-            System.out.println("- " + name);
+        for (String name : searchResultsAsStrings) {
+            System.out.println("- " + name.toString());
         }
     }
 
+    public static void printPartsList() {
+        part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
+        printListByDataType(part);
 
+    }
 }

@@ -184,7 +184,7 @@ public class Type {
 
     @Override
     public String toString() {
-        return "(" +id +
-                ") " +  name ;
+        return   name +" (" +id +
+                ") ";
     }
 }
