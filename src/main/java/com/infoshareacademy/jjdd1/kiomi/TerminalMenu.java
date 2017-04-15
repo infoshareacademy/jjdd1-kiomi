@@ -39,7 +39,6 @@ public class TerminalMenu {
         System.out.println(titleForListByData[getLevelMenu()]);
 
         if (getLevelMenu() < 4) {
-            //lista
             listByDataType();
             if (referenceForTypeLists.size() > 0) {
                 printListByDataType(referenceForTypeLists);
@@ -54,16 +53,12 @@ public class TerminalMenu {
         reportForMenu();
         System.out.println("Jeśli lista jest za długa wpisz pierwszą literę wyszukiwanej frazy".toUpperCase());
 
-        //submenu
         submenuForStartMenu();
 
-        //pobierz info od usera
         requestFromUser();
 
-        //operacje
         operationsOnRequestFromTheUser();
 
-        //pętla
         printListByData();
 
         scanner.close();
@@ -99,19 +94,15 @@ public class TerminalMenu {
             } else {
                 carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
             }
-//            if(partCategory.get(lastSearchedNumberOnTheList).isHas_children()==true) {}
             partCategory = carsDataLoader.getPartCategoryListById(carTypeId);
             referenceForTypeLists = partCategory;
             setLevelMenu(3);
         }
-
-
     }
 
     public static void printListByDataType(List data) {
         int i = 1;
         if (lastRequestFromUser.toString().matches("[a-z]")) {
-            //print tylko litery
             for (Object element : data) {
                 if (element.toString().substring(0, 1).toLowerCase().equals(lastRequestFromUser)) {
                     System.out.println(i + " - " + element);
@@ -124,7 +115,6 @@ public class TerminalMenu {
                 i++;
             }
         }
-
     }
 
     public static void submenuForStartMenu() {
@@ -138,7 +128,6 @@ public class TerminalMenu {
             System.out.println("RESET  :: Wpisz 'RESET', aby wyszukiwać od nowa");
             System.out.println("KONIEC :: Wpisz 'KONIEC', aby wyjść z programu");
         }
-
     }
 
     public static void reportForMenu() {
@@ -164,8 +153,6 @@ public class TerminalMenu {
     }
 
     public static void validateRequest(String request) {
-
-        //czy string alfanum
         if (!request.matches("[a-z0-9]*")) {
             System.out.println("Podałeś nieprawidłowe dane. Spróbój ponownie");
             requestFromUser();
@@ -187,8 +174,6 @@ public class TerminalMenu {
         } catch (NumberFormatException e) {
             requestFromSubmenu(lastRequestFromUser);
         }
-
-
     }
 
     public static void setSearchResults(int element) {
@@ -242,7 +227,6 @@ public class TerminalMenu {
             requestFromUser();
             operationsOnRequestFromTheUser();
         }
-
     }
 
     public static void modelsMetrics() {
@@ -278,7 +262,6 @@ public class TerminalMenu {
         }
     }
 
-
     public static void getSearchResults() {
         for (String name : searchResultsAsStrings) {
             System.out.println("- " + name.toString());
@@ -288,6 +271,7 @@ public class TerminalMenu {
     public static void printPartsList() {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
         printListByDataType(part);
-
+        referenceForTypeLists = part;
+        setLevelMenu(4);
     }
 }
