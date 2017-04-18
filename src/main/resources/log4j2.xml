@@ -5,8 +5,18 @@
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <RollingFile name="GeneralErrors" fileName="logs/generalErrors.log"
-                     filePattern="logs/$${date:yyyy-MM-dd}/monitoring-%i.log">
+        <RollingFile name="Errors" fileName="logs/generalErrors.log"
+                     filePattern="logs/$${date:yyyy-MM-dd}/errors-%i.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{1.} - %enc{%msg}%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="15" />
+        </RollingFile>
+
+        <RollingFile name="Debug" fileName="logs/debug.log"
+                     filePattern="logs/$${date:yyyy-MM-dd}/debug-%i.log">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{1.} - %enc{%msg}%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -17,7 +27,8 @@
     </Appenders>
     <Loggers>
         <Root level="trace">
-            <AppenderRef ref="GeneralErrors"/>
+            <AppenderRef ref="Errors"/>
+            <AppenderRef ref="Debug"/>
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
