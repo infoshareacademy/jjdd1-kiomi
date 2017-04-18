@@ -7,22 +7,26 @@ import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 
 
+import javax.enterprise.context.ApplicationScoped;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
-/*
-Refaktoryzacja
-czy lepiej zapisać pliki od razu, czy przy zapytaniach
-hashset bez diamentu
- */
+@ApplicationScoped
 public class CarsDataLoader {
-    private static final String BRANDS_URI = "src/resources/brands.json";
-    private static final String MODELS_URI = "src/resources/FORD - modele.json";
-    private static final String PART_URI = "src/resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci - hamulce - tarczowe.json";
-    private static final String PARTCATEGORY_URI = "src/resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci.json";
-    private static final String PARTSUBCATEGORY_URI = "src/resources/FORD FOCUS III 1.5 TDCi XXDA - czйШci - hamulce.json";
-    private static final String TYPES_URI = "src/resources/FORD FOCUS III - typy.json";
+    private static final String BRANDS_URI = "brands.json";
+    private static final String MODELS_URI = "FORD - modele.json";
+    private static final String PART_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce - tarczowe.json";
+    private static final String PARTCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci.json";
+    private static final String PARTSUBCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce.json";
+    private static final String TYPES_URI = "FORD FOCUS III - typy.json";
+    private static final String RESOURCES_DIR = "kiomi";
 
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
@@ -34,12 +38,16 @@ public class CarsDataLoader {
     static List<Part> part = new ArrayList();
     static List<BreadcrumbsBuilder> breadcrumbs = new ArrayList();
 
-    static <T> T JSONLoader(T c, String file) {
-        try {
+    static <T> T JSONLoader(T c, String file) throws IOException {
+//        try {
             Gson gson = new Gson();
-            FileReader fileReader = new FileReader(file);
 
-            JsonObject response = gson.fromJson(fileReader, JsonObject.class);
+            Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(RESOURCES_DIR);
+//            System.out.println(root);
+            byte[] bytes = Files.readAllBytes(root.resolve(file));
+            BufferedReader bufferedReader = Files.newBufferedReader(root.resolve(file));
+
+            JsonObject response = gson.fromJson(bufferedReader, JsonObject.class);
             JsonElement data = response.get(JSON_DATA_TAG);
 
             if (c != brand) {
@@ -64,33 +72,33 @@ public class CarsDataLoader {
                 }.getType());
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return c;
     }
 
-    public List<Brand> getBrandsList() {
+    public List<Brand> getBrandsList() throws IOException {
         return JSONLoader(brand, BRANDS_URI);
     }
 
-    public static List<Model> getModelsList() {
+    public static List<Model> getModelsList() throws IOException {
         return JSONLoader(model, MODELS_URI);
     }
 
-    public static List<Type> getCarTypesList() {
+    public static List<Type> getCarTypesList() throws IOException {
         return JSONLoader(carType, TYPES_URI);
     }
 
-    public static List<PartCategory> getPartCategoryList() {
+    public static List<PartCategory> getPartCategoryList() throws IOException {
         return JSONLoader(partCategory, PARTCATEGORY_URI);
     }
 
-    public static List<PartCategory> getPartSubCategoryList() {
+    public static List<PartCategory> getPartSubCategoryList() throws IOException {
         return JSONLoader(partCategory, PARTSUBCATEGORY_URI);
     }
 
-    public static List<Part> getPartList() {
+    public static List<Part> getPartList() throws IOException {
         return JSONLoader(part, PART_URI);
     }
 
@@ -100,7 +108,7 @@ public class CarsDataLoader {
         return links[links.length - 1];
     }
 
-    public List<Model> getModelsListById(String id) {
+    public List<Model> getModelsListById(String id) throws IOException {
         model = getModelsList();
 
         List<Model> temporaryModel = new ArrayList<Model>();
@@ -115,7 +123,7 @@ public class CarsDataLoader {
         return temporaryModel;
     }
 
-    public List<Type> getTypesListById(String id) {
+    public List<Type> getTypesListById(String id) throws IOException {
         carType = getCarTypesList();
 
 
@@ -132,12 +140,12 @@ public class CarsDataLoader {
 
     }
 
-    public List<PartCategory> getPartCategoryListById(String id) {
-//        partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
-partCategory = getPartCategoryList();
-if(partCategory.size()==0) {
-}
-        partCategory=getPartSubCategoryList();
+    public List<PartCategory> getPartCategoryListById(String id) throws IOException {
+      partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
+//        partCategory = getPartCategoryList();
+//        if (partCategory.size() == 0) {
+//        }
+//        partCategory = getPartSubCategoryList();
         List<PartCategory> temporaryPartCategory = new ArrayList<PartCategory>();
 
         for (PartCategory x : partCategory) {
@@ -150,7 +158,7 @@ if(partCategory.size()==0) {
         return temporaryPartCategory;
     }
 
-    public List<Part> getPartListById(String id) {
+    public List<Part> getPartListById(String id) throws IOException {
         part = getPartList();
 
 

@@ -26,30 +26,6 @@ public class WebApp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        String word = req.getParameter("word");
-//
-//        if (Objects.isNull(word)) {
-//            resp.sendError(400, "Brak parametru `word`");
-//        }
-//
-//        List<Word> wordList = service.translate(word);
-//
-//        req.setAttribute("word", word);
-//        req.setAttribute("wordList", wordList);
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
-//        dispatcher.forward(req, resp);
-
-
-        //wyświetlenie strony z wynikami
-//        PrintWriter writer = resp.getWriter();
-//        writer.append("<b>hay</b>");
-//        writer.flush();
-//        String word = req.getParameter("word");
-
-//        if (Objects.isNull(word)) {
-//            resp.sendError(400, "Brak parametru `word`");
-//        }
-//        String[] nazwa= new String[]{"2222", "3333", "4444"};
         CarsDataLoader carsDataLoader = new CarsDataLoader();
 
         Map<String, String[]> parameters = req.getParameterMap();
@@ -60,22 +36,28 @@ public class WebApp extends HttpServlet {
 //            System.out.println("Key " + (String)key + "   :   " + Arrays.toString(value));
 //        }
 
-//        String[] val = parameters.get("type");
-//        System.out.println("qqq"+val[0]);
 
-        List<Brand> brands = carsDataLoader.getBrandsList();
-        req.setAttribute("brandList", brands);
+//        List<Brand> brands = Optional.ofNullable(carsDataLoader.getBrandsList()).orElse(new ArrayList<>());
+        try {
+            List<Brand> brands = carsDataLoader.getBrandsList();
+            req.setAttribute("brandList", brands);
+            System.out.println(brands.size());
+
         String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});
         String[] m = Optional.ofNullable(parameters.get("model")).orElse(new String[]{""});
         String[] c = Optional.ofNullable(parameters.get("cat")).orElse(new String[]{""});
         String[] t = Optional.ofNullable(parameters.get("type")).orElse(new String[]{""});
+
+
+
+
         List<Model> models = carsDataLoader.getModelsListById(b[0]);
         List<Type> carType = carsDataLoader.getTypesListById(m[0]);
         List<PartCategory> partCategories = carsDataLoader.getPartCategoryListById((c[0].equals(""))?t[0]:c[0]);
         List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
         String url = req.getRequestURL().toString() + "?" + req.getQueryString();
 
-        System.out.println(c.toString());
+//        System.out.println(c.toString());
 //        String[] b = new String[brands.size()];
 
 //        for (int i = 0; i < brands.size(); i++){
@@ -95,7 +77,12 @@ public class WebApp extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
-
+    } catch (IOException e) {
+        System.out.println("Nie ma pliku na serwerze: "+e.getMessage());
+            PrintWriter writer = resp.getWriter();
+            writer.append("<b>Nie ma pliku na serwerze<br>"+e.getMessage()+"</b>");
+            writer.flush();
+    }
 
     }
 }
