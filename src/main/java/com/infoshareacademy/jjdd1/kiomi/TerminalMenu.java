@@ -3,6 +3,7 @@ package com.infoshareacademy.jjdd1.kiomi;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 
+import java.io.IOException;
 import java.util.*;
 
 public class TerminalMenu {
@@ -16,11 +17,12 @@ public class TerminalMenu {
     private static List<Part> part = new ArrayList();
     private static List<?> referenceForTypeLists;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
         startMenu();
     }
 
-    private static String[] titleForListByData = {"Lista maerek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
+    private static String[] titleForListByData = {"Lista marek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
     private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Oto lista części pasujących do wyszukiwania."};
     private static List<String> searchResults = new ArrayList();
     private static List<String> searchResultsAsStrings = new ArrayList();
@@ -28,13 +30,13 @@ public class TerminalMenu {
     private static String lastRequestFromUser = "";
     private static int levelMenu = 0;
 
-    public static void startMenu() {
+    public static void startMenu() throws IOException {
         System.out.println("Witaj w hurtownii części samochodowych");
         System.out.println("---------------------------------------");
         printListByData();
     }
 
-    public static void printListByData() {
+    public static void printListByData() throws IOException {
 
         System.out.println(titleForListByData[getLevelMenu()]);
 
@@ -72,7 +74,7 @@ public class TerminalMenu {
         levelMenu = level;
     }
 
-    public static void listByDataType() {
+    public static void listByDataType() throws IOException {
         if (brands.size() == 0) {
             brands = carsDataLoader.getBrandsList();
             referenceForTypeLists = brands;
@@ -117,7 +119,7 @@ public class TerminalMenu {
         }
     }
 
-    public static void submenuForStartMenu() {
+    public static void submenuForStartMenu() { 
         System.out.println("---------------------------------------");
         System.out.println("SUBMENU:");
         System.out.println("[0-9]  :: Wpisz numer kategorii, aby ją wybrać");
@@ -159,7 +161,7 @@ public class TerminalMenu {
         }
     }
 
-    public static void operationsOnRequestFromTheUser() {
+    public static void operationsOnRequestFromTheUser() throws IOException {
         try {
             int numberFromPrintedList = Integer.parseInt(lastRequestFromUser) - 1;
 
@@ -190,12 +192,8 @@ public class TerminalMenu {
         }
     }
 
-    public static void requestFromSubmenu(String request) {
-        if(searchResults.size()==0) {
-            System.out.println("Submenu możesz używać mając wybraną markę");
-            requestFromUser();
-            operationsOnRequestFromTheUser();
-        }else
+    public static void requestFromSubmenu(String request) throws IOException {
+
         if (request.length() == 1) {
             printListByDataType(referenceForTypeLists);
             requestFromUser();
@@ -214,6 +212,11 @@ public class TerminalMenu {
             requestFromUser();
             operationsOnRequestFromTheUser();
         } else if (request.equals("czesc")) {
+            if(searchResults.size()==0) {
+            System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
+            requestFromUser();
+            operationsOnRequestFromTheUser();
+        }
             lastRequestFromUser = "czesc";
             setLevelMenu(4);
         } else if (request.equals("reset")) {
@@ -273,7 +276,7 @@ public class TerminalMenu {
         }
     }
 
-    public static void printPartsList() {
+    public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
         if(part.size()>0) {
             printListByDataType(part);
