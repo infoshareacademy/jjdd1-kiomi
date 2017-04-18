@@ -119,7 +119,7 @@ public class TerminalMenu {
         }
     }
 
-    public static void submenuForStartMenu() { 
+    public static void submenuForStartMenu() {
         System.out.println("---------------------------------------");
         System.out.println("SUBMENU:");
         System.out.println("[0-9]  :: Wpisz numer kategorii, aby ją wybrać");

@@ -5,8 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-
-
 import javax.enterprise.context.ApplicationScoped;
 import java.io.BufferedReader;
 import java.io.FileReader;
