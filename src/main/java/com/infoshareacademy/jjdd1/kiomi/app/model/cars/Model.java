@@ -93,15 +93,7 @@ public class Model {
 
     @Override
     public String toString() {
-        return "Model{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", end_year='" + end_year + '\'' +
-                ", end_month='" + end_month + '\'' +
-                ", start_year='" + start_year + '\'' +
-                ", start_month='" + start_month + '\'' +
-                ", vehicle_group='" + vehicle_group + '\'' +
-                ", link='" + link + '\'' +
-                '}';
+        return name
+                + "(" + id + ") ";
     }
 }

@@ -80,14 +80,8 @@ public class Part {
 
     @Override
     public String toString() {
-        return "Part{" +
-                "brand='" + brand + '\'' +
-                ", brand_clear='" + brand_clear + '\'' +
-                ", number='" + number + '\'' +
-                ", number_clear='" + number_clear + '\'' +
-                ", name='" + name + '\'' +
-                ", status='" + status + '\'' +
-                ", link='" + link + '\'' +
-                '}';
+        return name+ "(Marka: "+brand+")"+
+                "\n     Kod Wew.: "+number+
+                "     status: "+status;
     }
 }

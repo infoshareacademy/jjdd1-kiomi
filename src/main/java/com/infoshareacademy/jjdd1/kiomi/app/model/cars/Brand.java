@@ -16,6 +16,7 @@ public class Brand {
     private Boolean has_image;
     private String link;
 
+
     public Brand(String id) {
         this.id = id;
 
@@ -63,6 +64,6 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "Brand:" + name +"(" +id + ")";
+        return name + " (" + id + ")";
     }
 }
