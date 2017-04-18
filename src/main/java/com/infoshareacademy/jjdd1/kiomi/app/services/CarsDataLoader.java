@@ -133,8 +133,11 @@ public class CarsDataLoader {
     }
 
     public List<PartCategory> getPartCategoryListById(String id) {
-        partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
-
+//        partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
+partCategory = getPartCategoryList();
+if(partCategory.size()==0) {
+}
+        partCategory=getPartSubCategoryList();
         List<PartCategory> temporaryPartCategory = new ArrayList<PartCategory>();
 
         for (PartCategory x : partCategory) {
