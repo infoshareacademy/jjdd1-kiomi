@@ -131,9 +131,25 @@
 </header>
 <div class="main">
     <div class="menu">
-        <c:forEach items="${menuList}" var="element">
-            <li><a href="${url}&cat=${element.id}">${element.name}</a></li>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${not empty menuList}">
+                <ul>
+                    <c:forEach items="${menuList}" var="element">
+                        <li><a href="${url}&cat=${element.id}">${element.name}</a></li>
+                    </c:forEach>
+                </ul>
+            </c:when>
+            <c:otherwise>
+
+                <c:if test="${not empty param.type}">
+                    <p>
+                        Nie ma kategorii.
+                    </p>
+
+                </c:if>
+
+            </c:otherwise>
+        </c:choose>
     </div>
     <div class="partList">
 
