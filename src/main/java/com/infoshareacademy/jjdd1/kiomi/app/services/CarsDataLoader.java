@@ -4,7 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import javax.enterprise.context.ApplicationScoped;
@@ -37,6 +40,7 @@ public class CarsDataLoader {
     static List<PartCategory> partCategory = new ArrayList();
     static List<Part> part = new ArrayList();
     static List<BreadcrumbsBuilder> breadcrumbs = new ArrayList();
+    private static final Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
 
     static <T> T JSONLoader(T c, String file) throws IOException {
 //        try {
