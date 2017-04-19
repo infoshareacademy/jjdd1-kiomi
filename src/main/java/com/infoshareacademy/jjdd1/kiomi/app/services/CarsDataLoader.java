@@ -139,13 +139,22 @@ public class CarsDataLoader {
         return temporaryType;
 
     }
+    public List<PartCategory> getPartCategoryListByIdFromPartCategory(String id) throws IOException {
+        partCategory = getPartSubCategoryList();
+        return getPartCategoryListById(id);
+    }
+    public List<PartCategory> getPartCategoryListByIdFromCarType(String id) throws IOException {
+        partCategory = getPartCategoryList();
+        return getPartCategoryListById(id);
+    }
+     public List<PartCategory> getPartCategoryListByIdForTerminal(String id) throws IOException {
+         partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
+        return getPartCategoryListById(id);
+    }
+
 
     public List<PartCategory> getPartCategoryListById(String id) throws IOException {
-      partCategory = (breadcrumbs.size() < 3) ? getPartCategoryList() : getPartSubCategoryList();
-//        partCategory = getPartCategoryList();
-//        if (partCategory.size() == 0) {
-//        }
-//        partCategory = getPartSubCategoryList();
+
         List<PartCategory> temporaryPartCategory = new ArrayList<PartCategory>();
 
         for (PartCategory x : partCategory) {

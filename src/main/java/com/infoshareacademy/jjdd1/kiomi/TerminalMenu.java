@@ -18,8 +18,12 @@ public class TerminalMenu {
     private static List<?> referenceForTypeLists;
 
     public static void main(String[] args) throws IOException {
+        try {
+            startMenu();
+        } catch (IOException e) {
+            System.out.println("Nie ma pliku na serwerze: " + e.getMessage());
+        }
 
-        startMenu();
     }
 
     private static String[] titleForListByData = {"Lista marek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
@@ -96,7 +100,7 @@ public class TerminalMenu {
             } else {
                 carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
             }
-            partCategory = carsDataLoader.getPartCategoryListById(carTypeId);
+            partCategory = carsDataLoader.getPartCategoryListByIdForTerminal(carTypeId);
             referenceForTypeLists = partCategory;
             setLevelMenu(3);
         }
@@ -119,7 +123,7 @@ public class TerminalMenu {
         }
     }
 
-    public static void submenuForStartMenu() { 
+    public static void submenuForStartMenu() {
         System.out.println("---------------------------------------");
         System.out.println("SUBMENU:");
         System.out.println("[0-9]  :: Wpisz numer kategorii, aby ją wybrać");
@@ -212,11 +216,11 @@ public class TerminalMenu {
             requestFromUser();
             operationsOnRequestFromTheUser();
         } else if (request.equals("czesc")) {
-            if(searchResults.size()==0) {
-            System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
-            requestFromUser();
-            operationsOnRequestFromTheUser();
-        }
+            if (searchResults.size() == 0) {
+                System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
+                requestFromUser();
+                operationsOnRequestFromTheUser();
+            }
             lastRequestFromUser = "czesc";
             setLevelMenu(4);
         } else if (request.equals("reset")) {
@@ -278,7 +282,7 @@ public class TerminalMenu {
 
     public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
-        if(part.size()>0) {
+        if (part.size() > 0) {
             printListByDataType(part);
         } else {
             System.out.println("Lista części dla tej kategorii jest pusta");
