@@ -1,3 +1,4 @@
+
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
 import java.io.IOException;
@@ -10,12 +11,18 @@ import java.util.Scanner;
 public class PromotedBrandsLoader {
 
     private static List<String> promotedBrandsList;
-    private static Path promotedBrandsPath = Paths.get("src/main/resources/promotedBrands.txt");
+    private static Path promotedBrandsPath = Paths.get("promotedBrands.txt");
     private static Scanner clientBrandsPicker;
 
-    public void promotedBrandsReader () throws IOException {
-        promotedBrandsList = Files.readAllLines(promotedBrandsPath);
-        System.out.println(promotedBrandsList);
-    }
+    public static List<String> promotedBrandsReader() {
+        try {
+            Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(CarsDataLoader.RESOURCES_DIR);
+            System.out.println(root);
+            promotedBrandsList = Files.readAllLines(root.resolve(promotedBrandsPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        return promotedBrandsList;
+    }
 }

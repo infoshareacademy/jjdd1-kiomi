@@ -7,10 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import javax.enterprise.context.ApplicationScoped;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +21,7 @@ public class CarsDataLoader {
     private static final String PARTCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci.json";
     private static final String PARTSUBCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce.json";
     private static final String TYPES_URI = "FORD FOCUS III - typy.json";
-    private static final String RESOURCES_DIR = "kiomi";
+    static final String RESOURCES_DIR = "kiomi";
 
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
@@ -171,7 +168,6 @@ public class CarsDataLoader {
         return temporaryPart;
 
     }
-
 
 }
 

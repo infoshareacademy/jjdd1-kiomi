@@ -2,9 +2,13 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import com.sun.org.apache.xalan.internal.xsltc.dom.SortingIterator;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.*;
+
+import static com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader.promotedBrandsReader;
 
 public class TerminalMenu {
 
@@ -33,6 +37,7 @@ public class TerminalMenu {
     public static void startMenu() throws IOException {
         System.out.println("Witaj w hurtownii części samochodowych");
         System.out.println("---------------------------------------");
+        System.out.println(promotedBrandsReader());
         printListByData();
     }
 
@@ -212,11 +217,11 @@ public class TerminalMenu {
             requestFromUser();
             operationsOnRequestFromTheUser();
         } else if (request.equals("czesc")) {
-            if(searchResults.size()==0) {
-            System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
-            requestFromUser();
-            operationsOnRequestFromTheUser();
-        }
+            if (searchResults.size() == 0) {
+                System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
+                requestFromUser();
+                operationsOnRequestFromTheUser();
+            }
             lastRequestFromUser = "czesc";
             setLevelMenu(4);
         } else if (request.equals("reset")) {
@@ -283,7 +288,27 @@ public class TerminalMenu {
         } else {
             System.out.println("Lista części dla tej kategorii jest pusta");
         }
+        System.out.println(part.get(2));
         referenceForTypeLists = part;
         setLevelMenu(4);
     }
-}
+
+//    public static void printPartsList() throws IOException {
+//        part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
+//        if (part.size() > 0) {
+//            printListByDataType(part);
+//        } else {
+//            System.out.println("Lista części dla tej kategorii jest pusta");
+//        }
+//
+//        List<String> sortedBrandList = part;
+//
+//        for (String m : promotedBrandsReader()) {
+//            for (Object n : part) {
+//                part.removeIf(m == n);
+//            }
+//
+//            setLevelMenu(4);
+//        }
+
+    }
