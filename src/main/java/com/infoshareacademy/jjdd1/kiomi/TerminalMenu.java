@@ -222,7 +222,7 @@ public class TerminalMenu {
             operationsOnRequestFromTheUser();
         } else if (request.equals("czesc")) {
             if (searchResults.size() == 0) {
-                System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
+                System.out.println("Listę części możesz wyświetlić tylko mając wybraną markę.");
                 requestFromUser();
                 operationsOnRequestFromTheUser();
             }

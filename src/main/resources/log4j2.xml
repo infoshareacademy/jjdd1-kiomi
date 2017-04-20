@@ -26,15 +26,15 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <!--<Root level="error">-->
-            <!--<AppenderRef ref="Errors"/>-->
-            <!--<AppenderRef ref="Console"/>-->
-        <!--</Root>-->
-        <!--<Root level="trace">-->
-            <!--<AppenderRef ref="Debug"/>-->
-        <!--</Root>-->
-        <Root level="trace">
+        <Root level="error">
+            <AppenderRef ref="Errors"/>
             <AppenderRef ref="Console"/>
         </Root>
+        <Root level="trace">
+            <AppenderRef ref="Debug"/>
+        </Root>
+        <!--<Root level="trace">-->
+            <!--<AppenderRef ref="Console"/>-->
+        <!--</Root>-->
     </Loggers>
 </Configuration>

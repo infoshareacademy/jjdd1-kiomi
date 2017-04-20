@@ -30,6 +30,7 @@ public class CarsDataLoader {
     private static final String PARTSUBCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce.json";
     private static final String TYPES_URI = "FORD FOCUS III - typy.json";
     private static final String RESOURCES_DIR = "kiomi";
+    private static final int FIRST_ELEMENT = 0;
 
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
@@ -47,7 +48,7 @@ public class CarsDataLoader {
             Gson gson = new Gson();
 
             Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(RESOURCES_DIR);
-            LOGGER.debug("Lokalizacja plików źródłowych :"+root);
+            LOGGER.debug("Odczyt plików json z bazy danych.");
             byte[] bytes = Files.readAllBytes(root.resolve(file));
             BufferedReader bufferedReader = Files.newBufferedReader(root.resolve(file));
 
@@ -114,8 +115,9 @@ public class CarsDataLoader {
 
     public List<Model> getModelsListById(String id) throws IOException {
         model = getModelsList();
-        LOGGER.debug("Załadowana lista modeli: "+model.size());
-        List<Model> temporaryModel = new ArrayList<Model>();
+        LOGGER.debug("Liczba wczytanych modeli samochodów: "+model.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wczytanych modeli %s", model.get(FIRST_ELEMENT)));
+        List<Model> temporaryModel = new ArrayList<>();
         for (Model x : model) {
             String[] links = x.getLink().split("/");
 
@@ -124,16 +126,19 @@ public class CarsDataLoader {
             }
 
         }
-        LOGGER.debug("Wynik wyszukiwania modeli wg id (ilość): "+temporaryModel.size());
+        LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
         return temporaryModel;
     }
 
     public List<Type> getTypesListById(String id) throws IOException {
         carType = getCarTypesList();
-        LOGGER.debug("Ilość wyników wyszukiwania po modelu silnika(ilość): "+carType.size());
+        LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: "+carType.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wyszukiwania po typie samochodu %s", carType.get(FIRST_ELEMENT)));
 
 
-        List<Type> temporaryType = new ArrayList<Type>();
+
+        List<Type> temporaryType = new ArrayList<>();
 
         for (Type x : carType) {
             String[] links = x.getLink().split("/");
@@ -142,6 +147,8 @@ public class CarsDataLoader {
             }
 
         }
+        LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: "+temporaryType.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
         return temporaryType;
 
     }
