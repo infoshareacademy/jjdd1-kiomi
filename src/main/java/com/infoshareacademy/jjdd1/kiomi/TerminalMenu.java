@@ -3,14 +3,17 @@ package com.infoshareacademy.jjdd1.kiomi;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
+import com.sun.deploy.util.SyncFileAccess;
 import com.sun.org.apache.xalan.internal.xsltc.dom.SortingIterator;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 import static com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader.promotedBrandsReader;
 import static com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader.rewritedPartListSorter;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class TerminalMenu {
 
@@ -39,7 +42,8 @@ public class TerminalMenu {
     public static void startMenu() throws IOException {
         System.out.println("Witaj w hurtownii części samochodowych");
         System.out.println("---------------------------------------");
-        System.out.println(promotedBrandsReader());
+        System.out.println("Lista promowanych marek: " + promotedBrandsReader());
+//        Files.copy("C:\\Users\\okrasa\\AppData\\Local\\Temp\\kiomi", "C:\\Users\\okrasa\\AppData\\Local\\Temp\\kiomi");
         printListByData();
     }
 
@@ -296,9 +300,9 @@ public class TerminalMenu {
 //    }
 
         public static void printPartsList() throws IOException {
-        part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
-        part = PromotedBrandsLoader.rewritedPartListSorter(part);
-        if(part.size()>0) {
+            part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
+            part = PromotedBrandsLoader.rewritedPartListSorter(part);
+            if(part.size()>0) {
             printListByDataType(part);
         } else {
             System.out.println("Lista części dla tej kategorii jest pusta");

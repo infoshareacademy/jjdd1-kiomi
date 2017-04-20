@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PromotedBrandsLoader {
 
     private static List<String> promotedBrandsList;
     private static Path promotedBrandsPath = Paths.get("promotedBrands.txt");
-    private static List<Part> rewritedPartList;
+    static List<Part> rewritedPartList = new ArrayList();
 
     public static List<String> promotedBrandsReader() {
-
         try {
             Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(CarsDataLoader.RESOURCES_DIR);
             System.out.println(root);
@@ -28,7 +28,7 @@ public class PromotedBrandsLoader {
         return promotedBrandsList;
     }
 
-    public static List<Part> rewritedPartListSorter(List<Part> originalPartList) {
+    public static List<Part> rewritedPartListSorter (List<Part> originalPartList) {
 
         for (String promotedBrand : promotedBrandsList)
             for (Part originalPartFromList : originalPartList)
