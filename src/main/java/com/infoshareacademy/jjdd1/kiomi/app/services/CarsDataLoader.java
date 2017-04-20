@@ -47,7 +47,7 @@ public class CarsDataLoader {
             Gson gson = new Gson();
 
             Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(RESOURCES_DIR);
-//            System.out.println(root);
+            LOGGER.debug("Lokalizacja plików źródłowych :"+root);
             byte[] bytes = Files.readAllBytes(root.resolve(file));
             BufferedReader bufferedReader = Files.newBufferedReader(root.resolve(file));
 
@@ -114,7 +114,7 @@ public class CarsDataLoader {
 
     public List<Model> getModelsListById(String id) throws IOException {
         model = getModelsList();
-
+        LOGGER.debug("Załadowana lista modeli: "+model.size());
         List<Model> temporaryModel = new ArrayList<Model>();
         for (Model x : model) {
             String[] links = x.getLink().split("/");
@@ -124,11 +124,13 @@ public class CarsDataLoader {
             }
 
         }
+        LOGGER.debug("Wynik wyszukiwania modeli wg id (ilość): "+temporaryModel.size());
         return temporaryModel;
     }
 
     public List<Type> getTypesListById(String id) throws IOException {
         carType = getCarTypesList();
+        LOGGER.debug("Ilość wyników wyszukiwania po modelu silnika(ilość): "+carType.size());
 
 
         List<Type> temporaryType = new ArrayList<Type>();
@@ -146,7 +148,9 @@ public class CarsDataLoader {
     public List<PartCategory> getPartCategoryListByIdFromPartCategory(String id) throws IOException {
         partCategory = getPartSubCategoryList();
         return getPartCategoryListById(id);
+
     }
+
     public List<PartCategory> getPartCategoryListByIdFromCarType(String id) throws IOException {
         partCategory = getPartCategoryList();
         return getPartCategoryListById(id);
