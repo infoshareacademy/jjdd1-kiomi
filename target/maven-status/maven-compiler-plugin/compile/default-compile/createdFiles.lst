@@ -4,6 +4,7 @@ com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$6.class
 com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$4.class
 com\infoshareacademy\jjdd1\kiomi\app\model\cars\PartCategory.class
 com\infoshareacademy\jjdd1\kiomi\app\services\AllegroLoader.class
+com\infoshareacademy\jjdd1\kiomi\ServletKiomi.class
 com\infoshareacademy\jjdd1\kiomi\app\model\cars\Type.class
 com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$2.class
 com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader$3.class

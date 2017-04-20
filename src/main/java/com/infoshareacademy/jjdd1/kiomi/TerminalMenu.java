@@ -191,11 +191,11 @@ public class TerminalMenu {
     }
 
     public static void requestFromSubmenu(String request) {
-        if(searchResults.size()==0) {
-            System.out.println("Submenu możesz używać mając wybraną markę");
-            requestFromUser();
-            operationsOnRequestFromTheUser();
-        }else
+//        if(searchResults.size()==0) {
+//            System.out.println("Submenu możesz używać mając wybraną markę");
+//            requestFromUser();
+//            operationsOnRequestFromTheUser();
+//        }else
         if (request.length() == 1) {
             printListByDataType(referenceForTypeLists);
             requestFromUser();

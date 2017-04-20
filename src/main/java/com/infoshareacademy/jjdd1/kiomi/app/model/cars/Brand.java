@@ -16,6 +16,8 @@ public class Brand {
     private Boolean has_image;
     private String link;
 
+    public Brand() {
+    }
 
     public Brand(String id) {
         this.id = id;
