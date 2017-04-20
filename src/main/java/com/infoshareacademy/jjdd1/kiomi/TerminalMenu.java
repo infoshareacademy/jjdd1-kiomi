@@ -282,9 +282,11 @@ public class TerminalMenu {
 
     public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
+
         if (part.size() > 0) {
             printListByDataType(part);
         } else {
+
             System.out.println("Lista części dla tej kategorii jest pusta");
         }
         referenceForTypeLists = part;

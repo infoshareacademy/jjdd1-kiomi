@@ -24,7 +24,7 @@ public class WebApp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        CarsDataLoader carsDataLoader = new CarsDataLoader();
+//        CarsDataLoader carsDataLoader = new CarsDataLoader();
 
         Map<String, String[]> parameters = req.getParameterMap();
 
@@ -44,7 +44,7 @@ public class WebApp extends HttpServlet {
             List<PartCategory> partCategories = (c[0].equals("")) ? carsDataLoader.getPartCategoryListByIdFromCarType(t[0]) : carsDataLoader.getPartCategoryListByIdFromPartCategory(c[c.length - 1]);
             List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
             String url = req.getRequestURL().toString() + "?" + req.getQueryString();
-            System.out.println(c[0] + "---" + c[c.length - 1]);
+
 
 
             req.setAttribute("modelList", models);

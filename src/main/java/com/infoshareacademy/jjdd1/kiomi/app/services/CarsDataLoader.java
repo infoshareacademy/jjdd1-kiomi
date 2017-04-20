@@ -21,12 +21,17 @@ import java.util.*;
 @ApplicationScoped
 public class CarsDataLoader {
     private static final String BRANDS_URI = "brands.json";
+//    private static final String MODELS_URI = "KIA - modele.json";
+//    private static final String PART_URI = "KIA RIO 1.4 CVVT G4FA - czesci - filtry - oleju.json";
+//    private static final String PARTCATEGORY_URI = "KIA RIO 1.4 CVVT G4FA - czesci.json";
+//    private static final String PARTSUBCATEGORY_URI = "KIA RIO 1.4 CVVT G4FA - czesci - filtry.json";
+//    private static final String TYPES_URI = "KIA typy.json";
+    private static final String RESOURCES_DIR = "kiomi";
     private static final String MODELS_URI = "FORD - modele.json";
     private static final String PART_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce - tarczowe.json";
     private static final String PARTCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci.json";
     private static final String PARTSUBCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce.json";
     private static final String TYPES_URI = "FORD FOCUS III - typy.json";
-    private static final String RESOURCES_DIR = "kiomi";
 
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
@@ -38,7 +43,7 @@ public class CarsDataLoader {
     static List<Part> part = new ArrayList();
     static List<BreadcrumbsBuilder> breadcrumbs = new ArrayList();
 
-    static <T> T JSONLoader(T c, String file) throws IOException {
+    static <T> T jsonLoader(T c, String file) throws IOException {
 //        try {
             Gson gson = new Gson();
 
@@ -79,33 +84,34 @@ public class CarsDataLoader {
     }
 
     public List<Brand> getBrandsList() throws IOException {
-        return JSONLoader(brand, BRANDS_URI);
+        return jsonLoader(brand, BRANDS_URI);
+
     }
 
     public static List<Model> getModelsList() throws IOException {
-        return JSONLoader(model, MODELS_URI);
+        return jsonLoader(model, MODELS_URI);
     }
 
     public static List<Type> getCarTypesList() throws IOException {
-        return JSONLoader(carType, TYPES_URI);
+        return jsonLoader(carType, TYPES_URI);
     }
 
     public static List<PartCategory> getPartCategoryList() throws IOException {
-        return JSONLoader(partCategory, PARTCATEGORY_URI);
+        return jsonLoader(partCategory, PARTCATEGORY_URI);
     }
 
     public static List<PartCategory> getPartSubCategoryList() throws IOException {
-        return JSONLoader(partCategory, PARTSUBCATEGORY_URI);
+        return jsonLoader(partCategory, PARTSUBCATEGORY_URI);
     }
 
     public static List<Part> getPartList() throws IOException {
-        return JSONLoader(part, PART_URI);
+        return jsonLoader(part, PART_URI);
     }
 
     public static String getDataFromBreadcrumbs() {
         String[] links = breadcrumbs.get(breadcrumbs.size() - 1).getLink().split("/");
 
-        return links[links.length - 1];
+        return (links[links.length - 1].equals("stock"))?links[links.length - 2]:links[links.length - 1];
     }
 
     public List<Model> getModelsListById(String id) throws IOException {
@@ -179,6 +185,7 @@ public class CarsDataLoader {
             }
 
         }
+
         return temporaryPart;
 
     }
