@@ -1,0 +1,90 @@
+{
+  "breadcrumbs": [
+    {
+      "link": "api\/v2\/find\/ey\/",
+      "title": "FORD Autoparts"
+    },
+    {
+      "link": "api\/v2\/find\/ey\/72o\/",
+      "title": "FOCUS III (2010-present)"
+    },
+    {
+      "link": "api\/v2\/find\/ey\/72o\/2b91\/",
+      "title": "1.5 TDCi (XXDA) 95hp"
+    },
+    {
+      "link": "api\/v2\/find\/ey\/72o\/2b91\/7t3",
+      "title": "Uk\u0142ad hamulcowy"
+    }
+  ],
+  "dataname": "FORD \/ FOCUS III (2010-present) \/ 1.5 TDCi XXDA \/ Uk\u0142ad hamulcowy",
+  "datatype": "tree",
+  "data": [
+    {
+      "id": "7tn",
+      "name": "Pompa hamulcowa",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/7tn\/stock"
+    },
+    {
+      "id": "7to",
+      "name": "Zacisk hamulcowy",
+      "has_children": true,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/7to"
+    },
+    {
+      "id": "7tp",
+      "name": "Cylinderek hamulcowy ko\u0142a",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/7tp\/stock"
+    },
+    {
+      "id": "7tw",
+      "name": "Przewody hamulcowe elastyczne",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/7tw\/stock"
+    },
+    {
+      "id": "7tz",
+      "name": "ESP - dynamiczna regulacja toru jazdy",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/7tz\/stock"
+    },
+    {
+      "id": "8ab",
+      "name": "Hamulce tarczowe",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/8ab"
+    },
+    {
+      "id": "8ac",
+      "name": "Hamulce bebnowe",
+      "has_children": true,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/8ac"
+    },
+    {
+      "id": "8ak",
+      "name": "Dzwignia \/ linka \/ ciegna",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/8ak\/stock"
+    },
+    {
+      "id": "9i9",
+      "name": "P\u0142yn hamulcowy",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/9i9\/stock"
+    },
+    {
+      "id": "9ip",
+      "name": "Hamulce o wysokiej skuteczno\u017cci",
+      "has_children": true,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/9ip"
+    },
+    {
+      "id": "9jd",
+      "name": "W\u0142\u0105cznik \u017cwiate\u0142 STOP",
+      "has_children": false,
+      "link": "\/api\/v2\/find\/ey\/72o\/2b91\/9jd\/stock"
+    }
+  ]
+}

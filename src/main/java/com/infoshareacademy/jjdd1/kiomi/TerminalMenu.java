@@ -2,6 +2,8 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -16,12 +18,13 @@ public class TerminalMenu {
     private static List<PartCategory> partCategory = new ArrayList();
     private static List<Part> part = new ArrayList();
     private static List<?> referenceForTypeLists;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TerminalMenu.class);
 
     public static void main(String[] args) throws IOException {
         try {
             startMenu();
         } catch (IOException e) {
-            System.out.println("Nie ma pliku na serwerze: " + e.getMessage());
+            LOGGER.error("Brak pliku na serwerze!");
         }
 
     }

@@ -1,5 +1,9 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
+import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * "brand": "TRW",
  * "brand_clear": "trw",
@@ -17,6 +21,7 @@ public class Part {
     private String name;
     private String status;
     private String link;
+    private static final Logger LOGGER = LoggerFactory.getLogger(Part.class);
 
     public Part(String brand) {
         this.brand = brand;
