@@ -8,23 +8,21 @@
 </head>
 <body>
 
-Welcome to KIOMI parts market</br></br>
+Welcome to <strong>KIOMI parts market</strong></br></br>
 
 
 <form action ="servlet" method="GET">
 
-    Brand of the car/part: <input type="text" name="brand"/>
+    Choose Brand of the car/part: <input type="text" name="userBrandName"/>
     <input type="submit" value="search"/>
 
 </form>
 
-<c:forEach var="brand" items="${listOFBrands}">
-    id:  ${brand.getId()} <br/>
-    name:  ${brand.getName()}<br/>
-    clear name: ${brand.getName_clear()}<br/>
-    has image: ${brand.getHas_image()}<br/>
-    link: ${brand.getLink()}<br/>
-    ------------- <br/>
+List of Brand <strong>'<%=request.getParameter("userBrandName")%></strong>': <br/><br/>
+
+<c:forEach var="brand" items="${listOfBrands}">
+    id:  ${brand.getId()}  | name:  ${brand.getName()} | clear name: ${brand.getName_clear()}
+    | has image: ${brand.getHas_image()} | link: ${brand.getLink()}<br/>
 </c:forEach>
 
 </hr>
@@ -33,7 +31,7 @@ Welcome to KIOMI parts market</br></br>
 
 
 
-witeczka <%= new java.util.Date() %>
+Date: <%= new java.util.Date() %>
 
 
 

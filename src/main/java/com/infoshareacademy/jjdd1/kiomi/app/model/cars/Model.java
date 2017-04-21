@@ -22,6 +22,8 @@ public class Model {
     private String vehicle_group;
     private String link;
 
+    public Model() {
+    }
 
     public Model(String id) {
         this.id = id;

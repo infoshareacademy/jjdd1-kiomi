@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Brand;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Model;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,107 +37,107 @@ import org.json.JSONObject;
 public class ServletKiomi extends HttpServlet {
 
     Brand brand;
+    String userBrandName;
+    Model model;
 
-    List<Brand> listOfBrandObjects=new ArrayList<>();
+    List<Brand> listOfAllBrandObjects=new ArrayList<>();
+    List<Model> listOfModelObjectsChosenByUserByBrand=new ArrayList<>();
+
+    public ServletKiomi() throws IOException {
+        listOfAllBrandObjects=getListOfAllBrandObjectsFromUrl();
+    }
 
     @Inject
 //    Greeter greeter;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("------------------");
 
-        getListOfAllBrandObjectsFromUrl();
+        userBrandName=request.getParameter("userBrandName").toLowerCase();
 
-        request.setAttribute("listOFBrands",listOfBrandObjects);
+        getListOfModelObjectsChosenByUserByBrand();
+        request.setAttribute("listOfBrands",listOfAllBrandObjects);
+        request.setAttribute("listOfModels",listOfModelObjectsChosenByUserByBrand);
 
-        RequestDispatcher dispatcher=request.getRequestDispatcher("/index.jsp");
-
-
-
-
-
-
-
-
-
-//------- start ------------- na sztywno KIA ------------------
-
-
-//------- end ------------- na sztywno KIA ------------------
+        RequestDispatcher dispatcher=request.getRequestDispatcher("/model.jsp");
 
         System.out.println("----------------EXIT----------------");
 
-
-
 dispatcher.forward(request,response);
 
+    }
 
+    private List<Model> getListOfModelObjectsChosenByUserByBrand() throws IOException {
 
-//
-//        ServletContext context=getServletContext();
-//
-//        String max=context.getInitParameter("maxinfo");
-//
-//        System.out.println("max: "+max);
-//
-//        // analiza danych wejściowych
-//        String name = request.getParameter("name");
-//
-//        //wywołanie komponentów
-////        String response = greeter.sayHello(name);
-//
-//        //wyświetlenie strony z wynikami
-//
-//
-//
-//
-//        response.setContentType("text/html");
-//
-//        PrintWriter writer = response.getWriter();
-//        writer.append("SiemNADER");
-//
-//        writer.println(request.getParameter("brand"));
-//
-//        writer.append("<b>" + name + "</b>");
-//        writer.flush();
+        listOfModelObjectsChosenByUserByBrand.clear();
 
+        System.out.println("User Brand name: "+userBrandName);
 
+        for(int i=0;i<listOfAllBrandObjects.size();i++){
+            Brand tempBrand=new Brand();
 
+            if(userBrandName.equals(listOfAllBrandObjects.get(i).getName_clear())){
+
+                tempBrand.setId(listOfAllBrandObjects.get(i).getId());
+                tempBrand.setLink(listOfAllBrandObjects.get(i).getLink());
+                if(tempBrand.getId()!=null && tempBrand.getId().equals(listOfAllBrandObjects.get(i).getId())){
+                    System.out.println(tempBrand.getLink());
+
+                    JSONObject jsonObject = readJsonFromUrl("http://infoshareacademycom.2find.ru"+tempBrand.getLink());
+
+                    JSONArray arr= (JSONArray) jsonObject.get("data");
+
+                    for (int j = 0; j < arr.length(); j++) {
+
+                        model=new Model();
+
+                        model.setId(arr.getJSONObject(j).get("id").toString());
+                        model.setName(arr.getJSONObject(j).get("name").toString());
+                        model.setStart_month(arr.getJSONObject(j).get("start_month").toString());
+                        model.setStart_year(arr.getJSONObject(j).get("start_year").toString());
+                        model.setEnd_month( arr.getJSONObject(j).get("end_month").toString());
+                        model.setEnd_year( arr.getJSONObject(j).get("end_year").toString());
+                        model.setVehicle_group( arr.getJSONObject(j).get("vehicle_group").toString());
+                        model.setLink( arr.getJSONObject(j).get("link").toString());
+
+                        listOfModelObjectsChosenByUserByBrand.add(model);
+                    }
+                }
+
+            }
+        }
+        return listOfModelObjectsChosenByUserByBrand;
     }
 
     private  List<Brand> getListOfAllBrandObjectsFromUrl() throws IOException {
 
         JSONObject jsonObject = readJsonFromUrl("http://infoshareacademycom.2find.ru/api/v2?lang=polish");
 
-//        System.out.println("datatype: "+jsonObject.get("datatype"));
-//        System.out.println("data: "+jsonObject.get("data"));
-
         JSONArray arr= (JSONArray) jsonObject.get("data");
 
         for (int i = 0; i < arr.length(); i++) {
-//            System.out.println(arr.getJSONObject(i).getClass()+"= "+arr.getJSONObject(i).get("id"));
+
             brand=new Brand();
+
             brand.setId(arr.getJSONObject(i).get("id").toString());
             brand.setName(arr.getJSONObject(i).get("name").toString());
             brand.setName_clear(arr.getJSONObject(i).get("name_clear").toString());
             brand.setHas_image((Boolean) arr.getJSONObject(i).get("has_image"));
             brand.setLink( arr.getJSONObject(i).get("link").toString());
-//            brand.setHas_image(arr.getJSONObject(i).get("has_image"));
-            listOfBrandObjects.add(brand);
 
+            listOfAllBrandObjects.add(brand);
         }
 
-        for(Brand value:listOfBrandObjects ){
-            System.out.println("id:  "+value.getId());
-            System.out.println("name:  "+value.getName());
-            System.out.println("clear name: "+value.getName_clear());
-            System.out.println("has image: "+value.getHas_image());
-            System.out.println("link: "+value.getLink());
-            System.out.println("===========");
-        }
+//        for(Brand value:listOfAllBrandObjects ){
+//            System.out.println("id:  "+value.getId());
+//            System.out.println("name:  "+value.getName());
+//            System.out.println("clear name: "+value.getName_clear());
+//            System.out.println("has image: "+value.getHas_image());
+//            System.out.println("link: "+value.getLink());
+//            System.out.println("===========");
+//        }
 
-        return listOfBrandObjects;
+        return listOfAllBrandObjects;
     }
 
 
