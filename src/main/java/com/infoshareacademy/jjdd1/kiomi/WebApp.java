@@ -2,6 +2,7 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -43,46 +44,36 @@ public class WebApp extends HttpServlet {
             req.setAttribute("brandList", brands);
             System.out.println(brands.size());
 
-        String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});
-        String[] m = Optional.ofNullable(parameters.get("model")).orElse(new String[]{""});
-        String[] c = Optional.ofNullable(parameters.get("cat")).orElse(new String[]{""});
-        String[] t = Optional.ofNullable(parameters.get("type")).orElse(new String[]{""});
+            String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});
+            String[] m = Optional.ofNullable(parameters.get("model")).orElse(new String[]{""});
+            String[] c = Optional.ofNullable(parameters.get("cat")).orElse(new String[]{""});
+            String[] t = Optional.ofNullable(parameters.get("type")).orElse(new String[]{""});
 
+            List<Model> models = carsDataLoader.getModelsListById(b[0]);
+            List<Type> carType = carsDataLoader.getTypesListById(m[0]);
+            List<PartCategory> partCategories = carsDataLoader.getPartCategoryListById((c[0].equals("")) ? t[0] : c[0]);
 
+            List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
+            String url = req.getRequestURL().toString() + "?" + req.getQueryString();
 
+            if (part.size() > 0) {
+                part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
+            }
 
-        List<Model> models = carsDataLoader.getModelsListById(b[0]);
-        List<Type> carType = carsDataLoader.getTypesListById(m[0]);
-        List<PartCategory> partCategories = carsDataLoader.getPartCategoryListById((c[0].equals(""))?t[0]:c[0]);
-        List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
-        String url = req.getRequestURL().toString() + "?" + req.getQueryString();
+            req.setAttribute("modelList", models);
+            req.setAttribute("typeList", carType);
+            req.setAttribute("menuList", partCategories);
+            req.setAttribute("partList", part);
+            req.setAttribute("url", url);
 
-//        System.out.println(c.toString());
-//        String[] b = new String[brands.size()];
-
-//        for (int i = 0; i < brands.size(); i++){
-//            b[i] = brands.get(i).getName();
-//    }
-//        String[] m = new String[models.size()];
-//
-//        for (int i = 0; i < brands.size(); i++){
-//            b[i] = brands.get(i).getName();
-//        }
-
-        req.setAttribute("modelList", models);
-        req.setAttribute("typeList", carType);
-        req.setAttribute("menuList", partCategories);
-        req.setAttribute("partList", part);
-        req.setAttribute("url", url);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
-        dispatcher.forward(req, resp);
-    } catch (IOException e) {
-        System.out.println("Nie ma pliku na serwerze: "+e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
+        } catch (IOException e) {
+            System.out.println("Nie ma pliku na serwerze: " + e.getMessage());
             PrintWriter writer = resp.getWriter();
-            writer.append("<b>Nie ma pliku na serwerze<br>"+e.getMessage()+"</b>");
+            writer.append("<b>Nie ma pliku na serwerze<br>" + e.getMessage() + "</b>");
             writer.flush();
-    }
+        }
 
     }
 }
