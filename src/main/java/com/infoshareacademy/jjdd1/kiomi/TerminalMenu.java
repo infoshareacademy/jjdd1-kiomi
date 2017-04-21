@@ -4,6 +4,7 @@ import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
 import java.io.IOException;
 import java.util.*;
@@ -290,6 +291,8 @@ public class TerminalMenu {
 
     public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
+        part = PromotedBrandsLoader.rewritedPartListSorter(part);
+
         if (part.size() > 0) {
             printListByDataType(part);
         } else {
