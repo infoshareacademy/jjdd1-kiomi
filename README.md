@@ -9,4 +9,4 @@
 * Maciej Okraszewski
 
 #### Product owner:
-* Wojciech Makurat
+* Wojciech Makurat który jeszcze nie zapłacił za projekt:)
