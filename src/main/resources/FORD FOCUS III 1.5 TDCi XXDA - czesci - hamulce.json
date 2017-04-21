@@ -53,7 +53,7 @@
     {
       "id": "8ab",
       "name": "Hamulce tarczowe",
-      "has_children": false,
+      "has_children": true,
       "link": "\/api\/v2\/find\/ey\/72o\/2b91\/8ab"
     },
     {

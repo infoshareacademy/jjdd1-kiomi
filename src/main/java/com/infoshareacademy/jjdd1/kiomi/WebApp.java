@@ -2,6 +2,7 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -14,7 +15,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-
+/**
+ * Created by arek50 on 2017-04-15.
+ */
 @WebServlet(urlPatterns = "/index")
 public class WebApp extends HttpServlet {
 
@@ -46,6 +49,9 @@ public class WebApp extends HttpServlet {
             String url = req.getRequestURL().toString() + "?" + req.getQueryString();
             System.out.println(c[0] + "---" + c[c.length - 1]);
 
+            if (part.size() > 0) {
+                part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
+            }
 
             req.setAttribute("modelList", models);
             req.setAttribute("typeList", carType);
