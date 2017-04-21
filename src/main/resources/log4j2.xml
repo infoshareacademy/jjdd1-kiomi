@@ -26,15 +26,18 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="error">
+        <Logger name="com.infoshareacademy.jjdd1.kiomi" level="error">
             <AppenderRef ref="Errors"/>
-            <AppenderRef ref="Console"/>
-        </Root>
+        </Logger>
+
         <Root level="trace">
             <AppenderRef ref="Debug"/>
+            <AppenderRef ref="Console"/>
         </Root>
-        <!--<Root level="trace">-->
-            <!--<AppenderRef ref="Console"/>-->
-        <!--</Root>-->
     </Loggers>
 </Configuration>
+
+        <!--<Root level="error">-->
+        <!--<AppenderRef ref="Errors"/>-->
+        <!--<AppenderRef ref="Console"/>-->
+        <!--</Root>-->
