@@ -28,12 +28,14 @@ public class CarsDataLoader {
 //    private static final String PARTCATEGORY_URI = "KIA RIO 1.4 CVVT G4FA - czesci.json";
 //    private static final String PARTSUBCATEGORY_URI = "KIA RIO 1.4 CVVT G4FA - czesci - filtry.json";
 //    private static final String TYPES_URI = "KIA typy.json";
-    private static final String RESOURCES_DIR = "kiomi";
+    static final String RESOURCES_DIR = "kiomi";
     private static final String MODELS_URI = "FORD - modele.json";
     private static final String PART_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce - tarczowe.json";
     private static final String PARTCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci.json";
     private static final String PARTSUBCATEGORY_URI = "FORD FOCUS III 1.5 TDCi XXDA - czesci - hamulce.json";
     private static final String TYPES_URI = "FORD FOCUS III - typy.json";
+
+    private static final int FIRST_ELEMENT = 0;
 
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
@@ -129,11 +131,19 @@ public class CarsDataLoader {
             }
 
         }
+        LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
+        if(!temporaryModel.isEmpty()) {
+            LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
+        }
+
         return temporaryModel;
     }
 
     public List<Type> getTypesListById(String id) throws IOException {
         carType = getCarTypesList();
+
+        LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: "+carType.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wyszukiwania po typie samochodu %s", carType.get(FIRST_ELEMENT)));
 
 
         List<Type> temporaryType = new ArrayList<Type>();
@@ -145,6 +155,9 @@ public class CarsDataLoader {
             }
 
         }
+
+        LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: "+temporaryType.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
         return temporaryType;
 
     }
