@@ -30,15 +30,7 @@ public class WebApp extends HttpServlet {
         CarsDataLoader carsDataLoader = new CarsDataLoader();
 
         Map<String, String[]> parameters = req.getParameterMap();
-//        for (Object key: parameters.keySet())
-//        {
-//            String keyStr = (String)key;
-//            String[] value = (String[])parameters.get(keyStr);
-//            System.out.println("Key " + (String)key + "   :   " + Arrays.toString(value));
-//        }
 
-
-//        List<Brand> brands = Optional.ofNullable(carsDataLoader.getBrandsList()).orElse(new ArrayList<>());
         try {
             List<Brand> brands = carsDataLoader.getBrandsList();
             req.setAttribute("brandList", brands);
@@ -49,12 +41,13 @@ public class WebApp extends HttpServlet {
             String[] c = Optional.ofNullable(parameters.get("cat")).orElse(new String[]{""});
             String[] t = Optional.ofNullable(parameters.get("type")).orElse(new String[]{""});
 
+
             List<Model> models = carsDataLoader.getModelsListById(b[0]);
             List<Type> carType = carsDataLoader.getTypesListById(m[0]);
-            List<PartCategory> partCategories = carsDataLoader.getPartCategoryListById((c[0].equals("")) ? t[0] : c[0]);
-
+            List<PartCategory> partCategories = (c[0].equals("")) ? carsDataLoader.getPartCategoryListByIdFromCarType(t[0]) : carsDataLoader.getPartCategoryListByIdFromPartCategory(c[c.length - 1]);
             List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
             String url = req.getRequestURL().toString() + "?" + req.getQueryString();
+            System.out.println(c[0] + "---" + c[c.length - 1]);
 
             if (part.size() > 0) {
                 part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());

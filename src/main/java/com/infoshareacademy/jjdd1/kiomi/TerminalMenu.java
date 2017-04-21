@@ -2,12 +2,12 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
 import java.io.IOException;
 import java.util.*;
-
-
 
 public class TerminalMenu {
 
@@ -19,10 +19,15 @@ public class TerminalMenu {
     private static List<PartCategory> partCategory = new ArrayList();
     private static List<Part> part = new ArrayList();
     private static List<?> referenceForTypeLists;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TerminalMenu.class);
 
     public static void main(String[] args) throws IOException {
+        try {
+            startMenu();
+        } catch (IOException e) {
+            LOGGER.error("Brak pliku na serwerze!");
+        }
 
-        startMenu();
     }
 
     private static String[] titleForListByData = {"Lista marek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
@@ -99,7 +104,7 @@ public class TerminalMenu {
             } else {
                 carTypeId = partCategory.get(lastSearchedNumberOnTheList).getId();
             }
-            partCategory = carsDataLoader.getPartCategoryListById(carTypeId);
+            partCategory = carsDataLoader.getPartCategoryListByIdForTerminal(carTypeId);
             referenceForTypeLists = partCategory;
             setLevelMenu(3);
         }
@@ -282,14 +287,13 @@ public class TerminalMenu {
     public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
         part = PromotedBrandsLoader.rewritedPartListSorter(part);
+
         if (part.size() > 0) {
             printListByDataType(part);
         } else {
             System.out.println("Lista części dla tej kategorii jest pusta");
         }
-
         referenceForTypeLists = part;
         setLevelMenu(4);
     }
-
 }
