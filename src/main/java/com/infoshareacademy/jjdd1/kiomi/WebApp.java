@@ -15,11 +15,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
+
 /**
  * Created by arek50 on 2017-04-15.
  */
 @WebServlet(urlPatterns = "/index")
 public class WebApp extends HttpServlet {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebApp.class);
 
     @Inject
     CarsDataLoader carsDataLoader;
@@ -62,6 +67,7 @@ public class WebApp extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
         } catch (IOException e) {
+            LOGGER.error("Brak pliku na serwerze", e);
             System.out.println("Nie ma pliku na serwerze: " + e.getMessage());
             PrintWriter writer = resp.getWriter();
             writer.append("<b>Nie ma pliku na serwerze<br>" + e.getMessage() + "</b>");

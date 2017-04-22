@@ -133,8 +133,8 @@ public class CarsDataLoader {
             }
 
         }
-        LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
-        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
+//        LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
+//        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
         return temporaryModel;
     }
 
