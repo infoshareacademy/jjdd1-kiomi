@@ -10,19 +10,17 @@
 
 Welcome to <strong>KIOMI parts market</strong></br></br>
 
+<form action ="servletBrand" method="GET">
 
-<form action ="servletModel" method="GET">
-
-    Choose Model ID of the car/part: <input type="text" name="userModelId"/>
-    <input type="hidden"  name="userBrandName" value=<%=request.getParameter("userBrandName")%>>
+    Choose Type ID of the car/part: <input type="text" name="userBrandName"/>
     <input type="submit" value="search"/>
 
 </form>
 
-List of Models of Brand <strong>'<%=request.getParameter("userBrandName")%></strong>': <br/><br/>
+List of Parts <strong>'<%=request.getParameter("userBrandName")%></strong>': <br/><br/>
 <table border="1">
     <tr>
-        <th>Model Id</th>
+        <th>ID</th>
         <th>Name</th>
         <th>Start_month</th>
         <th>Start_month</th>
@@ -30,7 +28,6 @@ List of Models of Brand <strong>'<%=request.getParameter("userBrandName")%></str
         <th>End year</th>
         <th>Vehicle_group</th>
         <th>Link</th>
-        <th>Choose</th>
     </tr>
     <c:forEach var="model" items="${listOfModels}">
         <tr>
@@ -42,22 +39,11 @@ List of Models of Brand <strong>'<%=request.getParameter("userBrandName")%></str
             <td>${model.getEnd_year()}</td>
             <td>${model.getVehicle_group()}</td>
             <td>${model.getLink()}</td>
-            <td></td>
         </tr>
     </c:forEach>
 </table>
 
-
-
-</hr>
-
-
-
-
-
-Date: <%= new java.util.Date() %>
-
-
+</br> Date: <%= new java.util.Date() %>
 
 </body>
 </html>

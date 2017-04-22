@@ -10,15 +10,14 @@
 
 Welcome to <strong>KIOMI parts market</strong></br></br>
 
-
-<form action ="servlet" method="GET">
+<form action ="servletBrand" method="GET">
 
     Choose Brand of the car/part: <input type="text" name="userBrandName"/>
     <input type="submit" value="search"/>
 
 </form>
 
-List of Brand <strong>'<%=request.getParameter("userBrandName")%></strong>': <br/><br/>
+<%--List of Brand <strong>'<%=request.getParameter("userBrandName")%></strong>': <br/><br/>--%>
 
 <c:forEach var="brand" items="${listOfBrands}">
     id:  ${brand.getId()}  | name:  ${brand.getName()} | clear name: ${brand.getName_clear()}
@@ -27,13 +26,8 @@ List of Brand <strong>'<%=request.getParameter("userBrandName")%></strong>': <br
 
 </hr>
 
-
-
-
-
+</br>
 Date: <%= new java.util.Date() %>
-
-
 
 </body>
 </html>

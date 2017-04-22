@@ -28,7 +28,7 @@ public class Type {
     private String model_id;
     private String brand_id;
     private String name;
-    private int end_year;
+    private String end_year;
     private String end_month;
     private String start_month;
     private int ccm;
@@ -41,6 +41,9 @@ public class Type {
     private String axle;
     private String max_weight;
     private String link;
+
+    public Type() {
+    }
 
     public Type(String id) {
         this.id = id;
@@ -78,11 +81,11 @@ public class Type {
         this.name = name;
     }
 
-    public int getEnd_year() {
+    public String getEnd_year() {
         return end_year;
     }
 
-    public void setEnd_year(int end_year) {
+    public void setEnd_year(String end_year) {
         this.end_year = end_year;
     }
 

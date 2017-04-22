@@ -1,11 +1,13 @@
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\model\cars\Type.java
-C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\ServletKiomi.java
-C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\TerminalMenu.java
-C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\model\cars\Part.java
-C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\services\BreadcrumbsBuilder.java
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\services\AllegroLoader.java
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\model\cars\Brand.java
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\model\cars\PartCategory.java
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\allegro\AllegroSupporter.java
+C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\ServletBrand.java
+C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\TerminalMenu.java
+C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\model\cars\Part.java
+C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\services\BreadcrumbsBuilder.java
+C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoaderUrl.java
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\services\CarsDataLoader.java
 C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\app\model\cars\Model.java
+C:\JavaData\jjdd1-kiomi\src\main\java\com\infoshareacademy\jjdd1\kiomi\ServletModel.java
