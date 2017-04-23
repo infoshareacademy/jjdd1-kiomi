@@ -8,7 +8,6 @@
     <artifactId>autoparts</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
     <name>autoparts</name>
     <url>http://maven.apache.org</url>
 
@@ -20,15 +19,15 @@
         <log4j.version>2.8.1</log4j.version>
         <slf4j.version>1.7.24</slf4j.version>
 
-        <!-- mysql -->
+         <!--mysql-->
         <!--<version.mysql>5.1.41</version.mysql>-->
         <!--<jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>-->
         <!--<mysql.connection.url>jdbc:mysql://localhost:3306/test??useUnicode=yes&amp;characterEncoding=UTF-8-->
         <!--</mysql.connection.url>-->
         <!--<mysql.username>root</mysql.username>-->
-        <!--<mysql.password>root</mysql.password>-->
+        <!--<mysql.password>pass</mysql.password>-->
 
-        <!-- wildfly admin -->
+         <!--wildfly admin-->
         <wildfly.adminUsername>admin</wildfly.adminUsername>
         <wildfly.adminPassword>admin123</wildfly.adminPassword>
         <wildfly.add-user>${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false
@@ -37,6 +36,12 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.37</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -82,6 +87,12 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>${log4j.version}</version>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>org.slf4j</groupId>-->

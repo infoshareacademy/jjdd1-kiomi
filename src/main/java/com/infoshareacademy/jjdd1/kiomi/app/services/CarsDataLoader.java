@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -122,7 +119,7 @@ public class CarsDataLoader {
 
     public List<Model> getModelsListById(String id) throws IOException {
         model = getModelsList();
-        LOGGER.debug("Liczba wczytanych modeli samochodów: "+model.size());
+        LOGGER.debug("Liczba wczytanych modeli samochodów: " + model.size());
         LOGGER.debug(String.format("Pierwszy element z listy wczytanych modeli %s", model.get(FIRST_ELEMENT)));
         List<Model> temporaryModel = new ArrayList<>();
         for (Model x : model) {
@@ -133,8 +130,11 @@ public class CarsDataLoader {
             }
 
         }
-//        LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
-//        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
+
+        if (!temporaryModel.isEmpty()) {
+            LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
+            LOGGER.debug("Liczba wyników wyszukiwania po id: " + temporaryModel.size());
+        }
         return temporaryModel;
     }
 
@@ -154,8 +154,11 @@ public class CarsDataLoader {
             }
 
         }
-        LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: "+temporaryType.size());
-        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
+
+        if(!temporaryType.isEmpty()) {
+            LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: " + temporaryType.size());
+            LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
+        }
         return temporaryType;
 
     }
