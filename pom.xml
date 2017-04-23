@@ -31,6 +31,7 @@
         <!-- wildfly admin -->
         <wildfly.adminUsername>admin</wildfly.adminUsername>
         <wildfly.adminPassword>admin123</wildfly.adminPassword>
+        <wildfly.startupTimeout>120</wildfly.startupTimeout>
         <wildfly.add-user>${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false
         </wildfly.add-user>
     </properties>
@@ -109,6 +110,13 @@
             <!--<artifactId>slf4j-ext</artifactId>-->
             <!--<version>${slf4j.version}</version>-->
         <!--</dependency>-->
+
+        <dependency>
+        <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+         </dependency>
+
     </dependencies>
     <build>
         <finalName>ROOT</finalName>

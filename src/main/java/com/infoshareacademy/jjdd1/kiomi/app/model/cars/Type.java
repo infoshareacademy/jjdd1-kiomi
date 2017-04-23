@@ -51,6 +51,9 @@ public class Type {
         this.id = id;
     }
 
+    public Type() {
+    }
+
     public String getId() {
         return id;
     }
