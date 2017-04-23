@@ -4,7 +4,7 @@
 
 #### Development team:
 * Arkadiusz Zielazny
-* Marcin Płonak
+* Marcin Płonka
 * Karol Kolańczak
 * Maciej Okraszewski
 
