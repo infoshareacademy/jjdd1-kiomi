@@ -130,9 +130,11 @@ public class CarsDataLoader {
         }
         LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
 
+
         if(!temporaryModel.isEmpty()) {
             LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
         }
+
         return temporaryModel;
     }
 
@@ -143,8 +145,6 @@ public class CarsDataLoader {
 
         LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: "+carType.size());
         LOGGER.debug(String.format("Pierwszy element z listy wyszukiwania po typie samochodu %s", carType.get(FIRST_ELEMENT)));
-
-
 
         List<Type> temporaryType = new ArrayList<>();
 
@@ -157,7 +157,7 @@ public class CarsDataLoader {
         }
       
         LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: "+temporaryType.size());
-        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
+//        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
         return temporaryType;
 
     }
@@ -192,6 +192,8 @@ public class CarsDataLoader {
     }
 
     public List<Part> getPartListById(String id) throws IOException {
+
+
         part = getPartList();
 
 

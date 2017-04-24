@@ -27,11 +27,15 @@ public class TerminalMenu {
         } catch (IOException e) {
             LOGGER.error("Brak pliku na serwerze!", e);
         }
-
     }
 
     private static String[] titleForListByData = {"Lista marek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
     private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Oto lista części pasujących do wyszukiwania."};
+
+    public static List<String> getSearchResultsAsStrings() {
+        return searchResultsAsStrings;
+    }
+
     private static List<String> searchResults = new ArrayList();
     private static List<String> searchResultsAsStrings = new ArrayList();
     private static int lastSearchedNumberOnTheList;
@@ -72,6 +76,7 @@ public class TerminalMenu {
         printListByData();
 
         scanner.close();
+
     }
 
     public static int getLevelMenu() {
@@ -298,7 +303,10 @@ public class TerminalMenu {
         } else {
             System.out.println("Lista części dla tej kategorii jest pusta");
         }
+
         referenceForTypeLists = part;
         setLevelMenu(4);
+
     }
+
 }

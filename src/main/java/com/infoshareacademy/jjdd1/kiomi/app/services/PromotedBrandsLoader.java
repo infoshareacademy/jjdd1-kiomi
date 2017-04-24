@@ -16,19 +16,21 @@ public class PromotedBrandsLoader {
     private static Path promotedBrandsPath = Paths.get("promotedBrands.txt");
     static List<Part> rewritedPartList = new ArrayList();
 
-    public static List<String> promotedBrandsReader() throws IOException {
-
+    public static List<String> promotedBrandsReader() {
+        try {
             Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(CarsDataLoader.RESOURCES_DIR);
             System.out.println(root);
             promotedBrandsList = Files.readAllLines(root.resolve(promotedBrandsPath));
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return promotedBrandsList;
     }
 
-    public static List<Part> rewritedPartListSorter (List<Part> originalPartList) throws IOException {
+    public static List<Part> rewritedPartListSorter(List<Part> originalPartList) {
 
-        promotedBrandsList=promotedBrandsReader();
+        promotedBrandsList = promotedBrandsReader();
         for (String promotedBrand : promotedBrandsList)
             for (Part originalPartFromList : originalPartList)
                 if (promotedBrand.equals(originalPartFromList.getBrand_clear()))
@@ -41,5 +43,4 @@ public class PromotedBrandsLoader {
 
         return rewritedPartList;
     }
-
 }
