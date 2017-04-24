@@ -1,6 +1,7 @@
 .idea
 *.iml
 target
+logs
 
 ### Java template
 # Compiled class file

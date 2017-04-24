@@ -23,16 +23,21 @@ public class WebApp extends HttpServlet {
 
     @Inject
     CarsDataLoader carsDataLoader;
+    @Inject
+    BrandsCache brandsCache;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        CarsDataLoader carsDataLoader = new CarsDataLoader();
+//        CarsDataLoader carsDataLoader = new CarsDataLoader();
 
         Map<String, String[]> parameters = req.getParameterMap();
 
         try {
-            List<Brand> brands = carsDataLoader.getBrandsList();
+
+            List<Brand> brands = Optional.ofNullable(brandsCache.getBrandsList()).orElse(new ArrayList<>());
+//            System.out.println(brands.size());
             req.setAttribute("brandList", brands);
 
 
