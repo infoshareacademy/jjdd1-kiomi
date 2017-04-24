@@ -34,7 +34,7 @@ public class WebApp extends HttpServlet {
         try {
             List<Brand> brands = carsDataLoader.getBrandsList();
             req.setAttribute("brandList", brands);
-            System.out.println(brands.size());
+
 
             String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});
             String[] m = Optional.ofNullable(parameters.get("model")).orElse(new String[]{""});
@@ -47,7 +47,7 @@ public class WebApp extends HttpServlet {
             List<PartCategory> partCategories = (c[0].equals("")) ? carsDataLoader.getPartCategoryListByIdFromCarType(t[0]) : carsDataLoader.getPartCategoryListByIdFromPartCategory(c[c.length - 1]);
             List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
             String url = req.getRequestURL().toString() + "?" + req.getQueryString();
-            System.out.println(c[0] + "---" + c[c.length - 1]);
+
 
             if (part.size() > 0) {
                 part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
