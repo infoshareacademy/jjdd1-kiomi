@@ -49,8 +49,29 @@ public class WebApp extends HttpServlet {
 
             List<Model> models = carsDataLoader.getModelsListById(b[0]);
             List<Type> carType = carsDataLoader.getTypesListById(m[0]);
-            List<PartCategory> partCategories = (c[0].equals("")) ? carsDataLoader.getPartCategoryListByIdFromCarType(t[0]) : carsDataLoader.getPartCategoryListByIdFromPartCategory(c[c.length - 1]);
+
+
+            List<Part> categoryForParts=new ArrayList<>();
+            List<PartCategory> partCategories = new ArrayList<>();
+            for (int i=0;i<=c.length-1;i++) {
+                if(i==0) {
+                    partCategories = carsDataLoader.getPartCategoryListByIdFromCarType(t[0]);
+                } else {
+                    partCategories = carsDataLoader.getPartCategoryListByIdFromPartCategory(c[i-1]);
+                    System.out.println(i+"::"+c[i]+"::"+partCategories.toString()+"55555");
+
+                }
+            }
+
+//            List<PartCategory> partCategories = (c[0].equals("")) ? carsDataLoader.getPartCategoryListByIdFromCarType(t[0]) : carsDataLoader.getPartCategoryListByIdFromPartCategory(c[c.length - 1]);
+
+//            List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
+//            System.out.println("XXXXXXXXXXXXXXX"+partCategories.get(0).getLink());
+//            List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
+//            System.out.println("partCategories = " + partCategories.get(0).getLink());
+
             List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
+
             String url = req.getRequestURL().toString() + "?" + req.getQueryString();
 
 

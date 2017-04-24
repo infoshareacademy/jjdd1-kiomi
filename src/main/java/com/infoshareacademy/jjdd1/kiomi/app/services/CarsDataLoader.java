@@ -46,8 +46,8 @@ public class CarsDataLoader {
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
 
-//    @Inject
-//    BrandsCache brandsCache;
+    @Inject
+    BrandsCache brandsCache;
 
     static List<Brand> brand = new ArrayList();
     static List<Model> model = new ArrayList();
@@ -132,14 +132,25 @@ public class CarsDataLoader {
         return (links[links.length - 1].equals("stock")) ? links[links.length - 2] : links[links.length - 1];
     }
 
-    public List<Model> getModelsListById(String id) throws IOException {
-BrandsCache brandsCache=new BrandsCache();
-        brand = brandsCache.getBrandsList();
+    public List<Model> getModelsListByIdForTerminal(String id) throws IOException {
+        brand = getBrandsList();
         List<Brand> element = brand.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
-        if(element.isEmpty()) {
+        if (element.isEmpty()) {
             return new ArrayList<>();
         }
-        String link=Optional.ofNullable(element.get(0).getLink()).orElse("");
+        String link = element.get(0).getLink();
+        String url = "http://infoshareacademycom.2find.ru" + link + "?lang=polish";
+        model = getModelsList(url);
+        return model;
+    }
+
+    public List<Model> getModelsListById(String id) throws IOException {
+        brand = brandsCache.getBrandsList();
+        List<Brand> element = brand.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
+        if (element.isEmpty()) {
+            return new ArrayList<>();
+        }
+        String link = element.get(0).getLink();
         String url = "http://infoshareacademycom.2find.ru" + link + "?lang=polish";
         model = getModelsList(url);
 
@@ -162,7 +173,7 @@ BrandsCache brandsCache=new BrandsCache();
 
     public List<Type> getTypesListById(String id) throws IOException {
         List<Model> element = model.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
-        if(element.isEmpty()) {
+        if (element.isEmpty()) {
             return new ArrayList<>();
         }
         String url = "http://infoshareacademycom.2find.ru" + element.get(0).getLink() + "?lang=polish";
@@ -190,21 +201,27 @@ BrandsCache brandsCache=new BrandsCache();
 
     public List<PartCategory> getPartCategoryListByIdFromPartCategory(String id) throws IOException {
         List<PartCategory> element = partCategory.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
-        if(element.isEmpty()) {
+
+        System.out.println(id+"111111"+partCategory.size());
+        if (element.isEmpty()) {
             return new ArrayList<>();
         }
         String url = "http://infoshareacademycom.2find.ru" + element.get(0).getLink() + "?lang=polish";
         partCategory = getPartSubCategoryList(url);
+        System.out.println("111111"+partCategory.size());
         return getPartCategoryListById(id);
     }
 
     public List<PartCategory> getPartCategoryListByIdFromCarType(String id) throws IOException {
         List<Type> element = carType.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
-        if(element.isEmpty()) {
+
+        System.out.println("222111"+element.size());
+        if (element.isEmpty()) {
             return new ArrayList<>();
         }
         String url = "http://infoshareacademycom.2find.ru" + element.get(0).getLink() + "?lang=polish";
         partCategory = getPartCategoryList(url);
+        System.out.println("222111"+partCategory.size());
         return getPartCategoryListById(id);
     }
 
@@ -236,14 +253,13 @@ BrandsCache brandsCache=new BrandsCache();
             }
 
         }
-        return temporaryPartCategory;
+        return partCategory;
     }
 
     public List<Part> getPartListById(String id) throws IOException {
 
-        System.out.println(id);
-        List<PartCategory> element = partCategory.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
-        if(element.isEmpty()) {
+         List<PartCategory> element = partCategory.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
+        if (element.isEmpty()) {
             return new ArrayList<>();
         }
         String url = "http://infoshareacademycom.2find.ru" + element.get(0).getLink() + "/stock?lang=polish";

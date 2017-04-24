@@ -29,7 +29,6 @@ public class BrandsCache {
 
         try {
             brandsList = jsonParser.getBrandsList();
-            System.out.println(brandsList.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
