@@ -25,7 +25,7 @@ public class TerminalMenu {
         try {
             startMenu();
         } catch (IOException e) {
-            LOGGER.error("Brak pliku na serwerze!");
+            LOGGER.error("Brak pliku na serwerze!", e);
         }
 
     }
@@ -160,11 +160,13 @@ public class TerminalMenu {
         validateRequest(request);
 
         lastRequestFromUser = request;
+        LOGGER.debug("Dane wprowadzone przez użytkownika: "+request);
     }
 
     public static void validateRequest(String request) {
         if (!request.matches("[a-z0-9]*")) {
             System.out.println("Podałeś nieprawidłowe dane. Spróbój ponownie");
+            LOGGER.warn("Nieprawidłowy format danych wprowadzony przez użytkownika.");
             requestFromUser();
         }
     }
@@ -221,7 +223,7 @@ public class TerminalMenu {
             operationsOnRequestFromTheUser();
         } else if (request.equals("czesc")) {
             if (searchResults.size() == 0) {
-                System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
+                System.out.println("Listę części możesz wyświetlić tylko mając wybraną markę.");
                 requestFromUser();
                 operationsOnRequestFromTheUser();
             }
@@ -279,9 +281,12 @@ public class TerminalMenu {
     }
 
     public static void getSearchResults() {
+        String searchResult = "";
         for (String name : searchResultsAsStrings) {
-            System.out.println("- " + name.toString());
+            searchResult +=name.toString();
         }
+        LOGGER.debug("Wynik wyszukiwania: "+searchResult);
+
     }
 
     public static void printPartsList() throws IOException {
