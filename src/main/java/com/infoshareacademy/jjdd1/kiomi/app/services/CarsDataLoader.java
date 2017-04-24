@@ -37,7 +37,6 @@ public class CarsDataLoader {
 
     private static final int FIRST_ELEMENT = 0;
 
-
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
 
@@ -50,7 +49,6 @@ public class CarsDataLoader {
     private static final Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
 
     static <T> T jsonLoader(T c, String file) throws IOException {
-//        try {
             Gson gson = new Gson();
 
             Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(RESOURCES_DIR);
@@ -83,9 +81,6 @@ public class CarsDataLoader {
                 }.getType());
             }
 
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         return c;
     }
 
@@ -134,7 +129,12 @@ public class CarsDataLoader {
 
         }
         LOGGER.debug("Liczba wyników wyszukiwania po id: "+temporaryModel.size());
-//        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
+
+
+        if(!temporaryModel.isEmpty()) {
+            LOGGER.debug(String.format("Pierwszy element z listy wyszukanych modeli samochodów po id %s", temporaryModel.get(FIRST_ELEMENT)));
+        }
+
         return temporaryModel;
     }
 
@@ -143,7 +143,8 @@ public class CarsDataLoader {
         LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: "+carType.size());
         LOGGER.debug(String.format("Pierwszy element z listy wyszukiwania po typie samochodu %s", carType.get(FIRST_ELEMENT)));
 
-
+        LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: "+carType.size());
+        LOGGER.debug(String.format("Pierwszy element z listy wyszukiwania po typie samochodu %s", carType.get(FIRST_ELEMENT)));
 
         List<Type> temporaryType = new ArrayList<>();
 
@@ -154,6 +155,7 @@ public class CarsDataLoader {
             }
 
         }
+      
         LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: "+temporaryType.size());
 //        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", temporaryType.get(FIRST_ELEMENT)));
         return temporaryType;
