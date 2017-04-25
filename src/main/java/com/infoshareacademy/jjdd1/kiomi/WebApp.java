@@ -5,6 +5,8 @@ import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +33,9 @@ public class WebApp extends HttpServlet {
 
 
 
+
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -43,7 +48,6 @@ public class WebApp extends HttpServlet {
         try {
             List<Brand> brands = carsDataLoader.getBrandsList();
             req.setAttribute("brandList", brands);
-            LOGGER.error("Przetwarzam listę marek samochodów.");
             System.out.println(brands.size());
 
             String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});

@@ -11,7 +11,6 @@ public class BreadcrumbsBuilder {
     private String link;
     private String title;
     private static final Logger LOGGER = LoggerFactory.getLogger(BreadcrumbsBuilder.class);
-
     public String getLink() {
         return link;
     }
