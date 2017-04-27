@@ -7,7 +7,6 @@ import com.infoshareacademy.jjdd1.kiomi.app.model.cars.CarIdentityFromAztec;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,8 +54,8 @@ public class SearchEngineByAztecCode extends HttpServlet {
             req.setAttribute("brands", brandsCache.getBrandsList());
             req.setAttribute("errorMessage", errorMessage);
             LOGGER.info("Brand ma rozmiar: {}", brandsCache.getBrandsList().size());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingBrand.jsp");
-            dispatcher.forward(req, resp);
+//            RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingBrand.jsp");
+//            dispatcher.forward(req, resp);
         }
         /*else if (carFromAztec.getCarsModel() == null) {
 //            String errorMessage = ("Nie znaleziono modelu samochodu.");
