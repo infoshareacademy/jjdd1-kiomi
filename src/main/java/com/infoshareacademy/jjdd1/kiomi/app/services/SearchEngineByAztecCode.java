@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * Created by arek50 on 2017-04-27.
  */
-@WebServlet(urlPatterns = "/SearchByAztec")
+@WebServlet(urlPatterns = "/searchbyaztecs")
 public class SearchEngineByAztecCode extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
     @Inject
@@ -30,12 +30,12 @@ public class SearchEngineByAztecCode extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOGGER.error("dfdfdfdfdf");
+        System.out.println("433333333333");
         req.setCharacterEncoding("UTF-8");
 
 //        GetJsonFromFile getJsonFromFile=new GetJsonFromFile();
         CarIdentityFromAztec carIdentityFromAztec=new CarIdentityFromAztec();
-        LOGGER.error("dfdfdfdfdf");
-        System.out.println("433333333333");
         CarFromAztecJson aztecCodeFromFile=getJsonFromFile.getJsonFile();//plik w url lub postem
         CarFromAztecJson aztecCode = getCarFromAztec(aztecCodeFromFile);//do wywalenia razem z funkcją
         Car carFromAztec = new Car();
