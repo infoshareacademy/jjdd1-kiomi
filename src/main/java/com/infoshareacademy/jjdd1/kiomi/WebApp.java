@@ -2,6 +2,7 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import java.util.*;
 public class WebApp extends HttpServlet {
 
     @Inject
-    CarsDataLoader carsDataLoader;
+    CarsDataLoader2 carsDataLoader2;
     @Inject
     BrandsCache brandsCache;
 
@@ -30,7 +31,7 @@ public class WebApp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        CarsDataLoader carsDataLoader = new CarsDataLoader();
+//        CarsDataLoader2 carsDataLoader2 = new CarsDataLoader2();
 
         Map<String, String[]> parameters = req.getParameterMap();
 
@@ -40,50 +41,54 @@ public class WebApp extends HttpServlet {
 //            System.out.println(brands.size());
             req.setAttribute("brandList", brands);
 
+            String url = "http://infoshareacademycom.2find.ru/api/v2/find/";
 
             String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});
+            List<Model> models = new ArrayList<>();
+            if (!b[0].equals("")) {
+                url += "/" + b[0];
+                models = carsDataLoader2.getModelsListBylink(url);
+            }
+
             String[] m = Optional.ofNullable(parameters.get("model")).orElse(new String[]{""});
-            String[] c = Optional.ofNullable(parameters.get("cat")).orElse(new String[]{""});
+            List<Type> carType = new ArrayList<>();
+            if (!m[0].equals("")) {
+                url += "/" + m[0];
+                carType = carsDataLoader2.getTypesListByLink(url);
+            }
+
             String[] t = Optional.ofNullable(parameters.get("type")).orElse(new String[]{""});
+            url += (!m[0].equals("")) ? "/" + t[0] : "";
+            String[] c = Optional.ofNullable(parameters.get("cat")).orElse(new String[]{""});
 
-
-            List<Model> models = carsDataLoader.getModelsListById(b[0]);
-            List<Type> carType = carsDataLoader.getTypesListById(m[0]);
-
-
-            List<Part> categoryForParts=new ArrayList<>();
             List<PartCategory> partCategories = new ArrayList<>();
-            for (int i=0;i<=c.length-1;i++) {
-                if(i==0) {
-                    partCategories = carsDataLoader.getPartCategoryListByIdFromCarType(t[0]);
-                } else {
-                    partCategories = carsDataLoader.getPartCategoryListByIdFromPartCategory(c[i-1]);
-                    System.out.println(i+"::"+c[i]+"::"+partCategories.toString()+"55555");
+            List<Part> part = new ArrayList<>();
+            if (c[0].equals("")) {
+                if (!t[0].equals("")) {
+                    partCategories = carsDataLoader2.getPartCategoryListByLink(url);
+                }
+            } else {
+                url += "/" + c[c.length - 1];
 
+                part = carsDataLoader2.getPartListByLink(url + "/stock");
+                String[] s = Optional.ofNullable(parameters.get("stock")).orElse(new String[]{""});
+                if (s[0].equals("")) {
+                    partCategories = carsDataLoader2.getPartCategoryListByLink(url);
                 }
             }
 
-//            List<PartCategory> partCategories = (c[0].equals("")) ? carsDataLoader.getPartCategoryListByIdFromCarType(t[0]) : carsDataLoader.getPartCategoryListByIdFromPartCategory(c[c.length - 1]);
-
-//            List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
-//            System.out.println("XXXXXXXXXXXXXXX"+partCategories.get(0).getLink());
-//            List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
-//            System.out.println("partCategories = " + partCategories.get(0).getLink());
-
-            List<Part> part = carsDataLoader.getPartListById(c[c.length - 1]);
-
-            String url = req.getRequestURL().toString() + "?" + req.getQueryString();
+            String uri = req.getRequestURL().toString() + "?" + req.getQueryString();
 
 
-            if (part.size() > 0) {
-                part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
-            }
+//            if (part.size() > 0) {
+//                part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
+//            }
 
             req.setAttribute("modelList", models);
             req.setAttribute("typeList", carType);
             req.setAttribute("menuList", partCategories);
             req.setAttribute("partList", part);
-            req.setAttribute("url", url);
+            req.setAttribute("url", uri);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
