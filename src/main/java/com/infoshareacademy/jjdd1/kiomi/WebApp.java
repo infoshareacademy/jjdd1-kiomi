@@ -30,7 +30,7 @@ public class WebApp extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("UTF-8");
 //        CarsDataLoader2 carsDataLoader2 = new CarsDataLoader2();
 
         Map<String, String[]> parameters = req.getParameterMap();
@@ -42,19 +42,20 @@ public class WebApp extends HttpServlet {
             req.setAttribute("brandList", brands);
 
             String url = "http://infoshareacademycom.2find.ru/api/v2/find/";
+            String url2="?lang=polish";
 
             String[] b = Optional.ofNullable(parameters.get("brand")).orElse(new String[]{""});
             List<Model> models = new ArrayList<>();
             if (!b[0].equals("")) {
                 url += "/" + b[0];
-                models = carsDataLoader2.getModelsListBylink(url);
+                models = carsDataLoader2.getModelsListBylink(url+url2);
             }
 
             String[] m = Optional.ofNullable(parameters.get("model")).orElse(new String[]{""});
             List<Type> carType = new ArrayList<>();
             if (!m[0].equals("")) {
                 url += "/" + m[0];
-                carType = carsDataLoader2.getTypesListByLink(url);
+                carType = carsDataLoader2.getTypesListByLink(url+url2);
             }
 
             String[] t = Optional.ofNullable(parameters.get("type")).orElse(new String[]{""});
@@ -65,15 +66,15 @@ public class WebApp extends HttpServlet {
             List<Part> part = new ArrayList<>();
             if (c[0].equals("")) {
                 if (!t[0].equals("")) {
-                    partCategories = carsDataLoader2.getPartCategoryListByLink(url);
+                    partCategories = carsDataLoader2.getPartCategoryListByLink(url+url2);
                 }
             } else {
                 url += "/" + c[c.length - 1];
 
-                part = carsDataLoader2.getPartListByLink(url + "/stock");
+                part = carsDataLoader2.getPartListByLink(url + "/stock"+url2);
                 String[] s = Optional.ofNullable(parameters.get("stock")).orElse(new String[]{""});
                 if (s[0].equals("")) {
-                    partCategories = carsDataLoader2.getPartCategoryListByLink(url);
+                    partCategories = carsDataLoader2.getPartCategoryListByLink(url+url2);
                 }
             }
 
