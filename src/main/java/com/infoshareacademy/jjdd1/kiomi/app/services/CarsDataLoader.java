@@ -91,7 +91,7 @@ public class CarsDataLoader {
     }
 
     public List<Model> getModelsListByIdForTerminal(String id) throws IOException {
-        brand = brandsCache.getBrandsList();
+        brand = getBrandsList();
         List<Brand> element = brand.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
         if (element.isEmpty()) {
             return new ArrayList<>();
@@ -182,7 +182,7 @@ public class CarsDataLoader {
     private List<PartCategory> getElementFromList(String id) {
         return partCategory.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
     }
-//    private <T> T getElementFromList(T el, String id) {
+//    private <T> T getElementFromList(List<T implements filtrablebyid > el, String id) {
 //        return el.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
 //    }
 }

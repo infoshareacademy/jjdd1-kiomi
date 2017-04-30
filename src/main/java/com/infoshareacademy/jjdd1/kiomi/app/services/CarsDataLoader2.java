@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 @Stateless
 public class CarsDataLoader2 {
     final String DEFAULT_URL = "http://infoshareacademycom.2find.ru/api/v2?lang=polish";
-    static final String RESOURCES_DIR = "kiomi";
     private static final int FIRST_ELEMENT = 0;
     private static String JSON_DATA_TAG = "data";
 

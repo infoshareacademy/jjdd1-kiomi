@@ -1,6 +1,5 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
-import javax.enterprise.context.SessionScoped;
 
 /**
  * Created by arek50 on 2017-04-22.

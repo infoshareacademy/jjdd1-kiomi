@@ -1,7 +1,6 @@
-package com.infoshareacademy.jjdd1.kiomi;
+package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
@@ -31,7 +30,6 @@ public class WebApp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-//        CarsDataLoader2 carsDataLoader2 = new CarsDataLoader2();
 
         Map<String, String[]> parameters = req.getParameterMap();
 
@@ -80,10 +78,10 @@ public class WebApp extends HttpServlet {
 
             String uri = req.getRequestURL().toString() + "?" + req.getQueryString();
 
-
-//            if (part.size() > 0) {
-//                part = Optional.ofNullable(PromotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
-//            }
+            PromotedBrandsLoader promotedBrandsLoader=new PromotedBrandsLoader();
+            if (part.size() > 0) {
+                part = Optional.ofNullable(promotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
+            }
 
             req.setAttribute("modelList", models);
             req.setAttribute("typeList", carType);

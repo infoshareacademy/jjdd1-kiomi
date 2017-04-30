@@ -16,20 +16,20 @@ import com.google.gson.annotations.SerializedName;
  * Created by arek50 on 2017-04-27.
  */
 public class CarFromAztecJson {
-    @SerializedName("D1")
+    @SerializedName("D1")//@SerializedName(value = "fullName", alternate = "username")
     private String brand;
 
     @SerializedName("D5")
     private String model;
 
     @SerializedName("P.1")
-    private String engineCapacity;
+    private String carCapacity;
 
     @SerializedName("P.2")
-    private String enginePower;
+    private String carPower;
 
     @SerializedName("P.3")
-    private String fuelType;
+    private String carFuelType;
 
     @SerializedName("Rok_produkcji")
     private String productionYear;
@@ -57,16 +57,16 @@ public class CarFromAztecJson {
         return brand;
     }
 
-    public String getFuelType() {
-        return fuelType;
+    public String getCarFuelType() {
+        return carFuelType;
     }
 
-    public String getEngineCapacity() {
-        return engineCapacity;
+    public String getCarCapacity() {
+        return carCapacity;
     }
 
-    public String getEnginePower() {
-        return enginePower;
+    public String getCarPower() {
+        return carPower;
     }
 
     public void setModel(String model) {
@@ -81,16 +81,16 @@ public class CarFromAztecJson {
         this.brand = brand;
     }
 
-    public void setEngineCapacity(String engineCapacity) {
-        this.engineCapacity = engineCapacity;
+    public void setCarCapacity(String carCapacity) {
+        this.carCapacity = carCapacity;
     }
 
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
+    public void setCarFuelType(String carFuelType) {
+        this.carFuelType = carFuelType;
     }
 
-    public void setEnginePower(String enginePower) {
-        this.enginePower = enginePower;
+    public void setCarPower(String carPower) {
+        this.carPower = carPower;
     }
 
     @Override
@@ -98,9 +98,9 @@ public class CarFromAztecJson {
         return "CarFromAztecJson{" +
                 "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
-                ", engineCapacity='" + engineCapacity + '\'' +
-                ", enginePower='" + enginePower + '\'' +
-                ", fuelType='" + fuelType + '\'' +
+                ", carCapacity='" + carCapacity + '\'' +
+                ", carPower='" + carPower + '\'' +
+                ", carFuelType='" + carFuelType + '\'' +
                 ", productionYear='" + productionYear + '\'' +
                 '}';
     }

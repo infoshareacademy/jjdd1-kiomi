@@ -1,21 +1,25 @@
-package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
+package com.infoshareacademy.jjdd1.kiomi.app.services;
 
-import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
-import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
+
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by arek50 on 2017-04-22.
  */
+@Stateless
 public class CarIdentityFromAztec {
 
     @Inject
     BrandsCache brandsCache;
+
+    public CarIdentityFromAztec() {
+    }
 
     public Car FindingCarByAztecCode(CarFromAztecJson aztecCode) throws IOException {
         Car myCar = new Car();
@@ -30,10 +34,12 @@ public class CarIdentityFromAztec {
 
     private Brand findBrand(String brandFromAztec) {
 
-        List<Brand> brandsList = brandsCache.getBrandsList();
-
-        for (Brand brand : brandsList) {
-            if (brand.getName().contains(brandFromAztec)){
+//brandsCache=new BrandsCache();
+        List<Brand> brands = brandsCache.getBrandsList();
+        //LOGGER:
+        System.out.println(brandsCache.getBrandsList());
+        for (Brand brand : brands) {
+            if (brand.getName().contains(brandFromAztec)) {
                 return brand;
             }
         }
@@ -42,10 +48,9 @@ public class CarIdentityFromAztec {
 
     private Model findModel(String link, String modelFromAztec, String yearProduction) throws IOException {
         CarsDataLoader2 jsonParser = new CarsDataLoader2();
-
+        //logger:
         String url = "http://infoshareacademycom.2find.ru" + link + "?lang=polish";
         List<Model> modelsList = jsonParser.getModelsListBylink(url);
-
 
         Integer startYear;
         Integer endYear;
@@ -55,9 +60,7 @@ public class CarIdentityFromAztec {
             endYear = (model.getEnd_year() == null) ?
                     LocalDateTime.now().getYear() : Integer.valueOf(model.getEnd_year());
 
-            if (model.getName().toUpperCase().contains(modelFromAztec.toUpperCase().toString())
-                    && startYear <= productionYear
-                    && endYear >= productionYear){
+            if (model.getName().toUpperCase().contains(modelFromAztec.toUpperCase().toString()) && startYear <= productionYear && endYear >= productionYear) {
                 //Loger mam model xxx
                 return model;
             }

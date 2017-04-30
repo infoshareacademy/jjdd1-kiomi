@@ -287,7 +287,8 @@ public class TerminalMenu {
 
     public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
-        part = PromotedBrandsLoader.rewritedPartListSorter(part);
+        PromotedBrandsLoader promotedBrandsLoader=new PromotedBrandsLoader();
+        part = promotedBrandsLoader.rewritedPartListSorter(part);
 
         if (part.size() > 0) {
             printListByDataType(part);

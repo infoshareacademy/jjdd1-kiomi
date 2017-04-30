@@ -1,6 +1,7 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
+import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
@@ -20,7 +21,7 @@ public class BrandsCache {
     private List<Brand> brandsList = new ArrayList<>();
 
     @Inject
-    CarsDataLoader jsonParser;
+    CarsDataLoader2 jsonParser;
 
 
     @Schedule(minute = "*", hour = "1")
@@ -29,6 +30,7 @@ public class BrandsCache {
 
         try {
             brandsList = jsonParser.getBrandsList();
+            System.out.println(brandsList.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
