@@ -27,6 +27,5 @@ public class GetJsonFromFile {
         return gson.fromJson(data, new TypeToken<CarFromAztecJson>() {
         }.getType());
 
-//        return null;
     }
 }

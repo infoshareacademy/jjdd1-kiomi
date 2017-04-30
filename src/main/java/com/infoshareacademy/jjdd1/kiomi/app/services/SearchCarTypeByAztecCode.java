@@ -26,7 +26,6 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
     BrandsCache brandsCache;
     @Inject
     CarIdentityFromAztec carIdentityFromAztec;
-//    GetJsonFromFile getJsonFromFile;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +33,6 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
-//        CarIdentityFromAztec carIdentityFromAztec = new CarIdentityFromAztec();
         CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile();//plik w url lub postem
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
@@ -45,7 +43,6 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         if (aztecCodeFromFile != null) {//obiekt z json
 
             carFromAztec = carIdentityFromAztec.FindingCarByAztecCode(aztecCodeFromFile);
-            System.out.println("-----" + carFromAztec);
         }
 
 //        if (carFromAztec.getBrand() == null) {

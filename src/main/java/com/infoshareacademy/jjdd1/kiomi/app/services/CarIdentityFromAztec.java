@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by arek50 on 2017-04-22.
@@ -67,5 +68,25 @@ public class CarIdentityFromAztec {
         }
 //Loger modelu brak
         return null;
+    }
+
+
+    public List<Type> findCarType(String url, CarFromAztecJson dataFromAztec) throws IOException {
+
+        CarsDataLoader2 jsonParser = new CarsDataLoader2();
+        //logger:
+        List<Type> carTypesList = jsonParser.getTypesListByLink(url);
+
+        return searchCarTypeByFields(carTypesList, dataFromAztec.getCarCapacity(), dataFromAztec.getCarFuelType(),  dataFromAztec.getCarPower());
+    }
+
+    public List<Type> searchCarTypeByFields(
+            List<Type> carTypesList, String carCapacity, String carFuelType,  String carPower) {
+
+        int carCapacityAsInt = Integer.parseInt(carCapacity.substring(0, carCapacity.length() - 6));
+        int powerAsInt = Integer.parseInt(carPower.substring(0, carCapacity.length() - 5));
+
+
+
     }
 }
