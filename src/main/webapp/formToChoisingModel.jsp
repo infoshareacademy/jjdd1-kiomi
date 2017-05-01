@@ -9,21 +9,24 @@
 </head>
 <body>
 <div>
-<p>
-    wybór brandu
-</p>
+    <p>
+        wybór brandu
+    </p>
 </div>
 <div>
     ${errorMessage}<br>
-    <br></div>
+    ${brand}
+    <br>
+</div>
 <div class="formField">
-    <label>Marka</label>
+    <label>Model</label>
     <select name="brand">
-        <c:forEach items="${brandList}" var="element">
+        <c:forEach items="${modelList}" var="element">
             <option value="${element.id}" <c:if
                     test="${element.id == param.brand}"> selected</c:if>>${element.name} ${element.id}</option>
         </c:forEach>
     </select>
 </div>
+
 </body>
 </html>

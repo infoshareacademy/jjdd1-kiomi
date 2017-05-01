@@ -32,6 +32,10 @@ public class Model {
         this.id = id;
     }
 
+    public Model() {
+
+    }
+
     public String getId() {
         return id;
     }

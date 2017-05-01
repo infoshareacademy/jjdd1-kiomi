@@ -27,6 +27,10 @@ public class Brand {
 
     }
 
+    public Brand() {
+
+    }
+
     public String getId() {
         return id;
     }
