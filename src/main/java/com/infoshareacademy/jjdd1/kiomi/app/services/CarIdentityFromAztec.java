@@ -26,6 +26,7 @@ public class CarIdentityFromAztec {
         Car myCar = new Car();
         try {
             Brand brand = findBrand(aztecCode.getBrand());
+
             Model model=findModel(brand.getLink(), aztecCode.getModel(), aztecCode.getProductionYear());
             myCar.setBrand(brand);
             myCar.setModel(model);
@@ -77,7 +78,6 @@ public class CarIdentityFromAztec {
         CarsDataLoader2 jsonParser = new CarsDataLoader2();
         //logger:
         List<Type> carTypesList = jsonParser.getTypesListByLink(url);
-        System.out.println(url);
         return searchCarTypeByFields(carTypesList, dataFromAztec.getCarCapacity(), dataFromAztec.getCarFuelType(), dataFromAztec.getCarPower());
     }
 

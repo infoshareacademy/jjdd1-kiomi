@@ -12,7 +12,7 @@
 </head>
 <body>
 <form action="/searchbyaztec" method="POST">
-    <input type="hidden" value="AztecCodeResult">
+    <input type="hidden" name="aztec" value="AztecCodeResult.json">
     <input type="submit" value="Sprawdź Kod Aztec">
 </form>
 </body>

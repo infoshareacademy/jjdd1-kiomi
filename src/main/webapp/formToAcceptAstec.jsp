@@ -11,6 +11,6 @@
 ${errorMessage}<br>
 ${brand} - ${model}
 <br>
-Zatwierdź
+<a href="#">Zatwierdź Wybór I Wejdź!</a>
 </body>
 </html>

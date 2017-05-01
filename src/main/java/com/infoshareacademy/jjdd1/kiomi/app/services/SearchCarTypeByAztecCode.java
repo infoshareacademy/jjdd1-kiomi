@@ -27,19 +27,18 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
     CarIdentityFromAztec carIdentityFromAztec;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
-        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile();//plik w url lub postem
+        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(req.getParameter("aztec"));
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
         carFromAztec.setModel(null);
         carFromAztec.setCarType(null);
 
-        System.out.println(aztecCodeFromFile + "--" + aztecCodeFromFile.getBrand());
-        if (aztecCodeFromFile != null) {//obiekt z json
+        if (aztecCodeFromFile != null) {
             carFromAztec = carIdentityFromAztec.FindingCarByAztecCode(aztecCodeFromFile);
         }
 
