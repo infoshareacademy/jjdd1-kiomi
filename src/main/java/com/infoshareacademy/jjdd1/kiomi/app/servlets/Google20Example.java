@@ -15,10 +15,6 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
-//        import org.scribe.builder.ServiceBuilder;
-//import org.scribe.builder.api.GoogleApi;
-//import org.scribe.model.*;
-//import org.scribe.oauth.OAuthService;
 
 public class Google20Example {
 
