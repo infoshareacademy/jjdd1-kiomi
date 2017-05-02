@@ -3,6 +3,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -20,6 +22,7 @@ import java.util.*;
  */
 @WebServlet(urlPatterns = "/index")
 public class WebApp extends HttpServlet {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebApp.class);
 
     @Inject
     CarsDataLoader2 carsDataLoader2;
@@ -92,9 +95,9 @@ public class WebApp extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
         } catch (IOException e) {
-            System.out.println("Nie ma pliku na serwerze: " + e.getMessage());
+            LOGGER.error("Brak pliku na serwerze: " + e.getMessage());
             PrintWriter writer = resp.getWriter();
-            writer.append("<b>Nie ma pliku na serwerze<br>" + e.getMessage() + "</b>");
+            writer.append("<b>Brak pliku na serwerze<br>" + e.getMessage() + "</b>");
             writer.flush();
         }
 

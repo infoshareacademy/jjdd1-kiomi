@@ -2,6 +2,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
@@ -18,6 +20,7 @@ import java.util.List;
 @Startup
 @Singleton
 public class BrandsCache {
+    private final Logger LOGGER = (Logger) LoggerFactory.getLogger(BrandsCache.class);
     private List<Brand> brandsList = new ArrayList<>();
 
     @Inject
@@ -30,11 +33,11 @@ public class BrandsCache {
 
         try {
             brandsList = jsonParser.getBrandsList();
-            System.out.println(brandsList.size());
+            LOGGER.info("Number of brandList elements: "+brandsList.size());
+
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Error occurred while loading brandList.", e.getMessage());
         }
-        //chyba jakiś loger o stanie cache
     }
 
     public List<Brand> getBrandsList() {
