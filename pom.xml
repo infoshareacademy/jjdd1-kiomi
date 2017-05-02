@@ -115,6 +115,16 @@
             <artifactId>slf4j-ext</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-apis</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>ROOT</finalName>
