@@ -34,11 +34,13 @@ public class PromotedBrandsLoader {
             promotedBrandsList = Files.readAllLines((Path) bufferedReader);
         } catch (Exception e) {
 
+
         }
         return promotedBrandsList;
     }
 
     public List<Part> rewritedPartListSorter(List<Part> originalPartList) throws IOException {
+
 
         rewritedPartList.clear();
         promotedBrandsList = promotedBrandsReader();
@@ -61,5 +63,4 @@ public class PromotedBrandsLoader {
         }
         return originalPartList;
     }
-
 }

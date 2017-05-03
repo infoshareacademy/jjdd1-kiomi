@@ -4,9 +4,12 @@
 
 #### Development team:
 * Arkadiusz Zielazny
-* Marcin Płonak
+* Marcin Płonka
 * Karol Kolańczak
 * Maciej Okraszewski
 
 #### Product owner:
-* Wojciech Makurat który jeszcze nie zapłacił za projekt:)
+* Wojciech Makurat
+
+
+cos
