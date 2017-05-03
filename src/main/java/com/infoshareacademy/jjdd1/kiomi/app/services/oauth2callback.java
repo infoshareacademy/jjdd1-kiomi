@@ -8,8 +8,10 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import com.google.gson.Gson;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.AdministratorEmails;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.GoogleUser;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +28,8 @@ import java.util.concurrent.ExecutionException;
  */
 @WebServlet(urlPatterns = "/oauth2callback")
 public class oauth2callback extends HttpServlet {
+    @Inject
+    SessionData sessionData;
 
     final String CLIENT_ID = "474401942226-bqn8a5k7hojtujm2l6v9ie3m2a6ob2qo.apps.googleusercontent.com";
     final String CLIENT_SECRET = "ShKL7hQ1gJCYI_Eq9Sj9rH-y";
@@ -74,19 +78,30 @@ public class oauth2callback extends HttpServlet {
             }
 
             if (response.getCode() != 200) {
-                req.setAttribute("oauth.error", "Brak połączenia z api google");
+                req.setAttribute("error", "Brak połączenia z api google");
             } else {
                 String googleJson = response.getBody();
                 Gson gson = new Gson();
                 GoogleUser googleUser = gson.fromJson(googleJson, GoogleUser.class);
-                req.setAttribute("oauth", googleUser);
+
+                AdministratorEmails administratorEmails=new AdministratorEmails();
+                if(administratorEmails.isAdministrator(googleUser.getEmail())==1) {
+                    sessionData.logUser(googleUser.getGiven_name(), googleUser.getFamily_name(), googleUser.getPicture(), googleUser.getEmail());
+                    resp.sendRedirect("http://localhost:8080/oauth2callback");
+                } else {
+                    req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
+                }
             }
-            //tu zapisac pobrane dane do sesji. Potem przekierować, aby ukryć link
-//            resp.sendRedirect("http://localhost:8080/oauth2callback");
         }
+        Map<String, String> sessionUser = new HashMap<>();
+        sessionUser.put("given_name", sessionData.getFirstname());
+        sessionUser.put("family_name", sessionData.getLastname());
+        sessionUser.put("picture", sessionData.getPicture());
+        sessionUser.put("email", sessionData.getEmail());
+        req.setAttribute("oauth", sessionUser);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/oauth2callback.jsp");
         dispatcher.forward(req, resp);
-
     }
 
     @Override
@@ -97,7 +112,7 @@ public class oauth2callback extends HttpServlet {
             additionalParams.put("access_type", "offline");
             additionalParams.put("prompt", "consent");
             resp.sendRedirect(service.getAuthorizationUrl(additionalParams));
-            req.setAttribute("oauth",  "wysyłam żądanie do google...");
+            req.setAttribute("oauth", "wysyłam żądanie do google...");
             RequestDispatcher dispatcher = req.getRequestDispatcher("/oauth2callback.jsp");
             dispatcher.forward(req, resp);
         }

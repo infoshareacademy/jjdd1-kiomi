@@ -56,9 +56,14 @@
                 </c:when>
                 <c:otherwise>
                     <a href="#" class="btn btn-login btn-lg">WEJDŹ</a>
-                    <a href="#" class="logout-link">Zmień konto</a>
+                    <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
                 </c:otherwise>
             </c:choose>
+            <c:if test="${not empty error}">
+                <div class="errorbox">
+                        ${error}
+                </div>
+            </c:if>
         </div>
     </div>
     <div class="col-xs-1 col-sm-3 col-md-4 col-lg-4"></div>

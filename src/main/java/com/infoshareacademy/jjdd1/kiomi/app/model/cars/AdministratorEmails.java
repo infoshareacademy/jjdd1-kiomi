@@ -14,7 +14,7 @@ public class AdministratorEmails {
         }
     };
 
-    public static int getIsAdministrator(String email) {
+    public static int isAdministrator(String email) {
         return emailsList.contains(email) ? 1 : 0;
     }
 }
