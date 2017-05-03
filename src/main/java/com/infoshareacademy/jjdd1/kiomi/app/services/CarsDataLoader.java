@@ -35,6 +35,7 @@ public class CarsDataLoader {
     private static final Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
 
     static <T> T jsonLoader(T c, String file) throws IOException {
+
         Gson gson = new Gson();
         InputStream is = new URL(file).openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
@@ -63,6 +64,7 @@ public class CarsDataLoader {
             return gson.fromJson(data, new TypeToken<List<Part>>() {
             }.getType());
         }
+
         return c;
     }
 
@@ -103,10 +105,12 @@ public class CarsDataLoader {
     }
 
     public List<Model> getModelsListById(String id) throws IOException {
+
         brand = brandsCache.getBrandsList();
         List<Brand> element = brand.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
         if (element.isEmpty()) {
             return new ArrayList<>();
+
         }
         String link = element.get(0).getLink();
         String url = "http://infoshareacademycom.2find.ru" + link + "?lang=polish";
@@ -120,6 +124,7 @@ public class CarsDataLoader {
     }
 
     public List<Type> getTypesListById(String id) throws IOException {
+
         List<Model> element = model.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
         if (element.isEmpty()) {
             return new ArrayList<>();
@@ -134,9 +139,11 @@ public class CarsDataLoader {
         LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", carType.get(FIRST_ELEMENT)));
         return carType;
 
+
     }
 
     public List<PartCategory> getPartCategoryListByIdFromPartCategory(String id) throws IOException {
+
         List<PartCategory> element = getElementFromList(id);
         if (element.isEmpty()) {
             return new ArrayList<>();
@@ -144,6 +151,7 @@ public class CarsDataLoader {
         String url = "http://infoshareacademycom.2find.ru" + element.get(0).getLink() + "?lang=polish";
         partCategory = getPartSubCategoryList(url);
         return partCategory;
+
     }
 
     public List<PartCategory> getPartCategoryListByIdFromCarType(String id) throws IOException {
@@ -170,9 +178,11 @@ public class CarsDataLoader {
     }
 
     public List<Part> getPartListById(String id) throws IOException {
+
         List<PartCategory> element = getElementFromList(id);
         if (element.isEmpty()) {
             return new ArrayList<>();
+
         }
         String url = "http://infoshareacademycom.2find.ru" + element.get(0).getLink() + "/stock?lang=polish";
         part = getPartList(url);
