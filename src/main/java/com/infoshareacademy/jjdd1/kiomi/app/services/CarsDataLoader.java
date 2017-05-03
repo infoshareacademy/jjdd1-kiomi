@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.*;
@@ -22,6 +22,7 @@ public class CarsDataLoader {
     private static final int FIRST_ELEMENT = 0;
     private static String JSON_DATA_TAG = "data";
     private static String JSON_BREADCRUMBS_TAG = "breadcrumbs";
+    private static final Logger LOGGER = LogManager.getLogger(CarsDataLoader.class);
 
     @Inject
     BrandsCache brandsCache;
@@ -32,7 +33,7 @@ public class CarsDataLoader {
     static List<PartCategory> partCategory = new ArrayList();
     static List<Part> part = new ArrayList();
     static List<BreadcrumbsBuilder> breadcrumbs = new ArrayList();
-    private static final Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
+
 
     static <T> T jsonLoader(T c, String file) throws IOException {
         Gson gson = new Gson();

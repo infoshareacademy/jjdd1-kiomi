@@ -3,8 +3,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -22,7 +22,7 @@ import java.util.*;
  */
 @WebServlet(urlPatterns = "/index")
 public class WebApp extends HttpServlet {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebApp.class);
+    private static final Logger LOGGER = LogManager.getLogger(WebApp.class);
 
     @Inject
     CarsDataLoader2 carsDataLoader2;

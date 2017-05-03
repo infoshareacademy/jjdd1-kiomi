@@ -2,7 +2,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.services;
 
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Stateless
 public class CarIdentityFromAztec {
+    private static final Logger LOGGER = LogManager.getLogger(CarIdentityFromAztec.class);
 
     @Inject
     BrandsCache brandsCache;

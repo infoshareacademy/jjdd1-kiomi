@@ -3,7 +3,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.services;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.BrandsCache;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Car;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.CarFromAztecJson;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +20,7 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = "/searchbyaztecs")
 public class SearchCarTypeByAztecCode extends HttpServlet {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
+    private static final Logger LOGGER = LogManager.getLogger(CarsDataLoader.class);
     @Inject
     CarsDataLoader2 carsDataLoader2;
     @Inject
