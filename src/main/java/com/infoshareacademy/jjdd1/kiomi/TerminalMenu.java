@@ -22,6 +22,7 @@ public class TerminalMenu {
     private static final Logger LOGGER = LoggerFactory.getLogger(TerminalMenu.class);
 
     public static void main(String[] args) throws IOException {
+
         try {
             startMenu();
         } catch (IOException e) {
@@ -94,7 +95,7 @@ public class TerminalMenu {
             setLevelMenu(0);
         } else if (models.size() == 0) {
             String brandId = brands.get(lastSearchedNumberOnTheList).getId();
-            models = carsDataLoader.getModelsListById(brandId);
+            models = carsDataLoader.getModelsListByIdForTerminal(brandId);
             referenceForTypeLists = models;
             setLevelMenu(1);
         } else if (carTypes.size() == 0) {
@@ -296,7 +297,8 @@ public class TerminalMenu {
 
     public static void printPartsList() throws IOException {
         part = carsDataLoader.getPartListById(searchResults.get(searchResults.size() - 1));
-        part = PromotedBrandsLoader.rewritedPartListSorter(part);
+        PromotedBrandsLoader promotedBrandsLoader=new PromotedBrandsLoader();
+        part = promotedBrandsLoader.rewritedPartListSorter(part);
 
         if (part.size() > 0) {
             printListByDataType(part);

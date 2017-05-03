@@ -135,7 +135,16 @@
             <c:when test="${not empty menuList}">
                 <ul>
                     <c:forEach items="${menuList}" var="element">
-                        <li><a href="${url}&cat=${element.id}">${element.name}</a></li>
+                        <c:choose>
+                            <c:when test="${element.has_children==true}">
+                                <li><a href="${url}&cat=${element.id}">${element.name}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <%--<li>${element.name}</li>--%>
+                                <li><a href="${url}&cat=${element.id}&stock=1">${element.name}</a></li>
+
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </ul>
             </c:when>
