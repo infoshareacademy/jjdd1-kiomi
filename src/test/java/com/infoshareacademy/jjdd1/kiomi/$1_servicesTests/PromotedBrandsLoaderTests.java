@@ -13,7 +13,7 @@ public class PromotedBrandsLoaderTests {
     PromotedBrandsLoader classUT = new PromotedBrandsLoader();
 
     @Test
-    public void doesPromotedBrandListContainBrands () {
+    public void doesPromotedBrandListContainBrands () throws IOException {
         // when
         List<String> promotedListUT = classUT.promotedBrandsReader();
 
@@ -22,7 +22,7 @@ public class PromotedBrandsLoaderTests {
     }
 
     @Test
-    public void isPromotedBrandShownFirstInBrandsList () {
+    public void isPromotedBrandShownFirstInBrandsList () throws IOException {
         // given
         CarsDataLoader dataLoaderUT = new CarsDataLoader();
         String brandIdUT = "8ab";

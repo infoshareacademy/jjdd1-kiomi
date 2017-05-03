@@ -14,26 +14,23 @@ import java.util.List;
 
 
 public class PromotedBrandsLoader {
-    private static final Logger LOGGER = LogManager.getLogger(PromotedBrandsLoader.class);
     private static List<String> promotedBrandsList = new ArrayList<>();
-    private static String promotedBrandsPath = "promotedBrands.txt";
-    static final String RESOURCES_DIR = "kiomi";
-
+    private static String promotedBrandsPath = "/promotedBrands.txt";
     static List<Part> rewritedPartList = new ArrayList();
 
-    public static List<String> getPromotedBrandsList() {
-        return promotedBrandsList;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(PromotedBrandsLoader.class);
 
-    public List<String> promotedBrandsReader() throws IOException {
+    public List<String> promotedBrandsReader() {
         try {
 
 //            Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(CarsDataLoader.RESOURCES_DIR);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream("/" + promotedBrandsPath)));
             promotedBrandsList = Files.readAllLines((Path) bufferedReader);
-        } catch (Exception e) {
 
+        } catch (IOException e) {
+
+        e.printStackTrace();
 
         }
         return promotedBrandsList;

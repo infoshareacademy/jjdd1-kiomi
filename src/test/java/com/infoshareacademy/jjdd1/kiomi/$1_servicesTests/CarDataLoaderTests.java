@@ -1,5 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.$1_servicesTests;
 
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Model;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Part;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import org.junit.Test;
@@ -10,13 +11,13 @@ import static org.junit.Assert.*;
 public class CarDataLoaderTests {
 
     @Test
-    public void isCarDataLoaderWritingToPartsListWithSpecificID () throws IOException {
+    public void isCarDataLoaderWritingToModelsListWithSpecificID () throws IOException {
         // given
         CarsDataLoader dataLoaderUT = new CarsDataLoader();
-        String givenIdUT = "8ab";
+        String givenIdUT = "ey";
 
         // when
-        List<Part> listComposedInCarsDataLoader = dataLoaderUT.getPartListById(givenIdUT);
+        List<Model> listComposedInCarsDataLoader = dataLoaderUT.getModelsListByIdForTerminal(givenIdUT);
 
         // then
         assertFalse("CarDataLoader write PartsList correctly.", listComposedInCarsDataLoader.isEmpty());
