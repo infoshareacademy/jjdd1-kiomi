@@ -2,9 +2,10 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.util.*;
@@ -19,9 +20,11 @@ public class TerminalMenu {
     private static List<PartCategory> partCategory = new ArrayList();
     private static List<Part> part = new ArrayList();
     private static List<?> referenceForTypeLists;
-    private static final Logger LOGGER = LoggerFactory.getLogger(TerminalMenu.class);
+    private static final Logger LOGGER = LogManager.getLogger(TerminalMenu.class);
 
     public static void main(String[] args) throws IOException {
+        StatisticDataBuilder.buildEntryToDatabase();
+
 
         try {
             startMenu();
@@ -47,6 +50,8 @@ public class TerminalMenu {
         System.out.println("Witaj w hurtownii części samochodowych");
         System.out.println("---------------------------------------");
         printListByData();
+
+
     }
 
     public static void printListByData() throws IOException {

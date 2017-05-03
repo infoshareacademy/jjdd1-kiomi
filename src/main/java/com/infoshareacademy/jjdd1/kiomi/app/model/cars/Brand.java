@@ -1,8 +1,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * example data:
@@ -19,11 +19,15 @@ public class Brand {
     private String name_clear;
     private Boolean has_image;
     private String link;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Brand.class);
+    private static final Logger LOGGER = LogManager.getLogger(Brand.class);
 
 
     public Brand(String id) {
         this.id = id;
+
+    }
+
+    public Brand() {
 
     }
 

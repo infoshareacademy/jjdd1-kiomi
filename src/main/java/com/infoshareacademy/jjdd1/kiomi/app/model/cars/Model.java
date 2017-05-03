@@ -1,8 +1,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * example data:
@@ -25,11 +25,15 @@ public class Model {
     private String start_month;
     private String vehicle_group;
     private String link;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Model.class);
+    private static final Logger LOGGER = LogManager.getLogger(Model.class);
 
 
     public Model(String id) {
         this.id = id;
+    }
+
+    public Model() {
+
     }
 
     public String getId() {
