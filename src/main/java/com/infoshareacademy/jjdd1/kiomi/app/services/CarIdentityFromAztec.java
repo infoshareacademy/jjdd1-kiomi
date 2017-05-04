@@ -101,8 +101,8 @@ public class CarIdentityFromAztec {
         }
 
         return carTypesList.stream()
-                .filter(t -> Math.abs(t.getCcm() - carCapacityAsInt) <= 15)
-                .filter(t -> Math.abs(t.getKw() - powerAsInt) <= 15)
+                .filter(t -> Math.abs(t.getCcm() - carCapacityAsInt) <= 350)
+                .filter(t -> Math.abs(t.getKw() - powerAsInt) <= 350)
                 .filter(t -> t.getFuel().equals(fuelTypeAsText))
                 .collect(Collectors.toList());
 
