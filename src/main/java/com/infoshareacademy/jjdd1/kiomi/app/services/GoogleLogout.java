@@ -19,7 +19,7 @@ public class GoogleLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         sessionData.logout();
-        resp.sendRedirect("/oauth2callback");
+        resp.sendRedirect("/googlelogin");
 
     }
 }

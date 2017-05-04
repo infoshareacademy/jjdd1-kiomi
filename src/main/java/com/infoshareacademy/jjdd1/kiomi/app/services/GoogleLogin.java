@@ -26,8 +26,8 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by arek50 on 2017-05-02.
  */
-@WebServlet(urlPatterns = "/oauth2callback")
-public class oauth2callback extends HttpServlet {
+@WebServlet(urlPatterns = "/googlelogin")
+public class GoogleLogin extends HttpServlet {
     @Inject
     SessionData sessionData;
 
@@ -40,7 +40,7 @@ public class oauth2callback extends HttpServlet {
             .apiSecret(CLIENT_SECRET)
             .scope("profile")
             .scope("email")
-            .callback("http://localhost:8080/oauth2callback")
+            .callback("http://localhost:8080/googlelogin")
             .build(GoogleApi20.instance());
 
     @Override
@@ -87,7 +87,7 @@ public class oauth2callback extends HttpServlet {
                 AdministratorEmails administratorEmails=new AdministratorEmails();
                 if(administratorEmails.isAdministrator(googleUser.getEmail())==1) {
                     sessionData.logUser(googleUser.getGiven_name(), googleUser.getFamily_name(), googleUser.getPicture(), googleUser.getEmail());
-                    resp.sendRedirect("http://localhost:8080/oauth2callback");
+                    resp.sendRedirect("http://localhost:8080/googlelogin");
                 } else {
                     req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
                 }
@@ -100,7 +100,7 @@ public class oauth2callback extends HttpServlet {
         sessionUser.put("email", sessionData.getEmail());
         req.setAttribute("oauth", sessionUser);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/oauth2callback.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/GoogleLogin.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -113,7 +113,7 @@ public class oauth2callback extends HttpServlet {
             additionalParams.put("prompt", "consent");
             resp.sendRedirect(service.getAuthorizationUrl(additionalParams));
             req.setAttribute("oauth", "wysyłam żądanie do google...");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/oauth2callback.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/GoogleLogin.jsp");
             dispatcher.forward(req, resp);
         }
     }

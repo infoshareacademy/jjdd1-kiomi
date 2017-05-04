@@ -12,13 +12,13 @@ body {
 .lightbox {
     background: rgba(118, 180, 229, 0.3);
     border: 1px solid #76b4e5;
-    padding: 15px;
+    padding: 1em;
 }
 .errorbox {
     background: rgba(255, 0, 0, 0.8);
     border: 3px solid rgb(118, 180, 229);
-    padding: 10px;
-    margin: 30px 0px;
+    padding: 0.625em;
+    margin: 1.875em 0em;
     font-weight: 700;
 }
 
@@ -26,8 +26,8 @@ body {
 @import url(http://fonts.googleapis.com/css?family=Arvo:700);
 @import url(http://fonts.googleapis.com/css?family=Seaweed+Script);
 .plate {
-    max-width: 410px;
-    margin: 0px auto 40px;
+    max-width: 25.625em;
+    margin: 0em auto 2.5em;
     margin-top:20%;
 }
 
@@ -48,9 +48,9 @@ body {
     font-family: "Seaweed Script";
     color: #fff;
     text-align: center;
-    font-size: 40px;
+    font-size: 2.5em;
     position: relative;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .script span {
@@ -69,7 +69,7 @@ body {
 }
 
 .text3 {
-    font-size: 60px;
+    font-size: 3.7em;
 }
 .product-owner {
     text-align: right;
@@ -79,23 +79,23 @@ body {
 /*logo end*/
 
 .avatar {
-    background: #fff url("http://icons.iconarchive.com/icons/reclusekc/kulo/128/Skull-3-icon.png") top center no-repeat;
-    width: 140px;
-    height: 140px;
-    border-radius: 70px;
-    margin: 0 auto 15px;
-    border: 3px solid #76b4e5;
+    background: #fff url("/img/Skull-3-icon.png") top center no-repeat;
+    width: 10em;
+    height: 10em;
+    border-radius: 5em;
+    margin: 0 auto 1em;
+    border: 0.215em solid #76b4e5;
 overflow: hidden;
 }
 .avatar img{
-    width: 140px;
+    width: 10em;
 }
 
 .btn-login {
     text-align: center;
     background: #76b4e5;
     color: #fff;
-    width: 200px;
+    width: 12.5em;
     margin: 0 auto;
     display: block;
     font-weight: 700;
@@ -103,11 +103,12 @@ overflow: hidden;
 .status {
     font-size: 1.2em;
     text-align: center;
-    margin: 20px 0;
+    margin: 1.25em 0;
 }
 .logout-link {
     text-align: center;
     color: #fff;
     display: block;
     text-decoration: none;
+    padding: 0.625em;
 }
