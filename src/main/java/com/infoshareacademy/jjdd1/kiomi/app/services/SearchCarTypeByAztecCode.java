@@ -25,11 +25,21 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
     BrandsCache brandsCache;
     @Inject
     CarIdentityFromAztec carIdentityFromAztec;
+    @Inject
+    SessionData sessionData;
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("http://localhost:8080/googlelogin");
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
+        if(sessionData.isLogged()==false) {
+            req.setAttribute("errorMessage", "Nie ma takiego użytkownika. Dostęp zabroniony.");
+            resp.sendRedirect("http://localhost:8080/googlelogin");
+        }
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
         CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(req.getParameter("aztec"));
@@ -43,7 +53,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         }
 
         if (carFromAztec.getBrand() == null) {
-            String errorMessage = ("Nie znaleziono marki samochodu.");
+            String errorMessage = ("Nie znaleziono marki samochodu. Wybierz z listy.");
 
             req.setAttribute("brandList", brandsCache.getBrandsList());
             req.setAttribute("errorMessage", errorMessage);
@@ -51,7 +61,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingBrand.jsp");
             dispatcher.forward(req, resp);
         } else if (carFromAztec.getModel() == null) {
-            String errorMessage = ("Nie znaleziono modelu samochodu.");
+            String errorMessage = ("Nie znaleziono modelu samochodu. Wybierz z listy.");
 
             String brandName = carFromAztec.getBrand().getName();
             String brandLink = carFromAztec.getBrand().getLink();
@@ -74,10 +84,12 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
 
             List<Type> carTypeList = carIdentityFromAztec.findCarType(url, aztecCodeFromFile);
             if (carTypeList.size() >1) {
+                String errorMessage = "Znaleziono kilka typów silnika dla tego modelu. Wybierz jeden.";
                 req.setAttribute("model", carFromAztec.getModel());
                 req.setAttribute("brand", carFromAztec.getBrand());
 
                 req.setAttribute("typeList", carTypeList);
+                req.setAttribute("errorMessage", errorMessage);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");
                 dispatcher.forward(req, resp);
             }
@@ -87,11 +99,11 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
                 req.setAttribute("typeList", carTypeList);
 
                 carFromAztec.setCarType(carTypeList.get(0));
-                RequestDispatcher dispatcher = req.getRequestDispatcher("formToAcceptAstec.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");
                 dispatcher.forward(req, resp);
             }
             else {
-                String errorMessage = "Nie znaleziono typu samochodu.";
+                String errorMessage = "Nie znaleziono typu samochodu. Wybierz z listy.";
                 req.setAttribute("model", carFromAztec.getModel());
                 req.setAttribute("brand", carFromAztec.getBrand());
                 List<Type> test=carsDataLoader2.getTypesListByLink(url);

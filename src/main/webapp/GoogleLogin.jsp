@@ -56,7 +56,7 @@
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <a href="#" class="btn btn-login btn-lg">WEJDŹ</a>
+                    <a href="caridentitymethod" class="btn btn-login btn-lg">WEJDŹ</a>
                     <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
                 </c:otherwise>
             </c:choose>

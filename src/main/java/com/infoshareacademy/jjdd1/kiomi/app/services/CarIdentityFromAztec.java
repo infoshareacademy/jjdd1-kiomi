@@ -25,10 +25,18 @@ public class CarIdentityFromAztec {
     public Car FindingCarByAztecCode(CarFromAztecJson aztecCode) throws IOException {
         Car myCar = new Car();
         try {
+            if(aztecCode.getBrand().equals("")) {
+                return myCar;
+            }
             Brand brand = findBrand(aztecCode.getBrand());
-
+            if(brand==null) {
+                return myCar;
+            }
             Model model=findModel(brand.getLink(), aztecCode.getModel(), aztecCode.getProductionYear());
             myCar.setBrand(brand);
+            if(model==null) {
+                return myCar;
+            }
             myCar.setModel(model);
             return myCar;
         } catch (NumberFormatException e) {
@@ -101,8 +109,8 @@ public class CarIdentityFromAztec {
         }
 
         return carTypesList.stream()
-                .filter(t -> Math.abs(t.getCcm() - carCapacityAsInt) <= 350)
-                .filter(t -> Math.abs(t.getKw() - powerAsInt) <= 350)
+                .filter(t -> Math.abs(t.getCcm() - carCapacityAsInt) <= 15)
+                .filter(t -> Math.abs(t.getKw() - powerAsInt) <= 15)
                 .filter(t -> t.getFuel().equals(fuelTypeAsText))
                 .collect(Collectors.toList());
 
