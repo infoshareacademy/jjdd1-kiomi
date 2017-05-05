@@ -51,7 +51,7 @@
                     <li class="header-progress-item todo">Typ silnika</li>
                 </ol>
             </div>
-            <form method="get" action="choisingmodel">
+            <form method="post" action="${action}">
                 <div class="lightbox text-center">
                     <p class="title">Wybierz markę samochodu</p>
                     <p class="btn-margin">

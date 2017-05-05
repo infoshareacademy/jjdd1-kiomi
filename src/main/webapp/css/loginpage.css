@@ -206,3 +206,7 @@ overflow: hidden;
     background-color: #76b4e5;
 }
 /*progresbar end*/
+
+h1.errorAlert {
+    font-size: 130px;
+}

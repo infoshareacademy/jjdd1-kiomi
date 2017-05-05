@@ -52,6 +52,7 @@
                     <li class="header-progress-item done">Typ silnika</li>
                 </ol>
             </div>
+            <form method="post" action="#">
             <div class="lightbox text-center">
                 <p class="title">Wybierz typ silnika samochodu</p>
                 <p class="btn-margin">
@@ -60,10 +61,10 @@
                 <p class="btn-margin">
                 <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${model}</div>
                 </p>
+
                 <p class="btn-margin">
                     <c:choose>
                     <c:when test="${typeList.size()>1}">
-                <form>
                     <select name="type" class="form-control">
                         <c:forEach items="${typeList}" var="element">
                             <option value="${element.id}"
@@ -73,7 +74,7 @@
                             >${element.name} ${element.id}</option>
                         </c:forEach>
                     </select>
-                </form>
+
                 </c:when>
                 <c:otherwise>
                     <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${typeList.get(0).name}</div>
@@ -81,11 +82,14 @@
                 </c:choose>
                 </p>
                 <p class="btn-margin">
-                    <a href="#" class="btn btn-login btn-lg">Wybierz</a>
+                    <%--<a href="#" class="btn btn-login btn-lg">Wybierz</a>--%>
+                    <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
+
                 </p>
 
 
             </div>
+            </form>
             <div class="lightbox text-left lightbox-top-margin">
                 Jakieś dane...
                 ${typeList.get(0).name}

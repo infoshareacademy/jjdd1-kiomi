@@ -29,20 +29,27 @@ public class ChoisingModel extends HttpServlet {
     BrandsCache brandsCache;
     @Inject
     SessionData sessionData;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("http://localhost:8080/caridentitymethod");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Brand> brands = brandsCache.getBrandsList();
         req.setCharacterEncoding("UTF-8");
         Car mycar = new Car();
 
-        List<Brand> selectedBrand=brands.stream().filter(b->b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
+        List<Brand> selectedBrand = brands.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
         mycar.setBrand(selectedBrand.get(0));
 
         String url = "http://infoshareacademycom.2find.ru" + selectedBrand.get(0).getLink() + "?lang=polish";
         List<Model> modelsList = carsDataLoader2.getModelsListBylink(url);
 
         req.setAttribute("brandList", brands);
+        req.setAttribute("action", "choisingcartype");
         if (modelsList.size() == 0) {
             String errorMessage = ("Nie znaleziono listy modeli samochodu. Wybierz z listy.");
             req.setAttribute("errorMessage", errorMessage);
