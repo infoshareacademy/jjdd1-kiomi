@@ -52,7 +52,7 @@
                     <li class="header-progress-item done">Typ silnika</li>
                 </ol>
             </div>
-            <form method="post" action="#">
+            <form method="post" action="${action}">
             <div class="lightbox text-center">
                 <p class="title">Wybierz typ silnika samochodu</p>
                 <p class="btn-margin">
@@ -78,6 +78,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${typeList.get(0).name}</div>
+                <input type="hidden" name="type" value="${typeList.get(0).id}">
                 </c:otherwise>
                 </c:choose>
                 </p>

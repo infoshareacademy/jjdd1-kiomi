@@ -1,9 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Brand;
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.BrandsCache;
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Car;
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Model;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 import com.infoshareacademy.jjdd1.kiomi.app.services.SessionData;
 
@@ -21,14 +18,15 @@ import java.util.stream.Collectors;
 /**
  * Created by arek50 on 2017-05-05.
  */
-@WebServlet(urlPatterns = "/choisingmodel")
-public class ChoisingModel extends HttpServlet {
+@WebServlet(urlPatterns = "/choisingcartype")
+public class ChoisingCarType extends HttpServlet {
     @Inject
     CarsDataLoader2 carsDataLoader2;
     @Inject
     BrandsCache brandsCache;
     @Inject
     SessionData sessionData;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,33 +39,41 @@ public class ChoisingModel extends HttpServlet {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
             resp.sendRedirect("http://localhost:8080/googlelogin");
         }
-        List<Brand> brands = brandsCache.getBrandsList();
+        try {
+            Brand selectedBrand = sessionData.getCar().getBrand();
+        } catch (NullPointerException e) {
+            resp.sendRedirect("http://localhost:8080/choisingbrand");
+        }
+
         req.setCharacterEncoding("UTF-8");
         Car car = new Car();
 
-        List<Brand> selectedBrand = brands.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
-        car.setBrand(selectedBrand.get(0));
-
-        String url = "http://infoshareacademycom.2find.ru" + selectedBrand.get(0).getLink() + "?lang=polish";
+        Brand selectedBrand = sessionData.getCar().getBrand();
+        String url = "http://infoshareacademycom.2find.ru" + selectedBrand.getLink() + "?lang=polish";
         List<Model> modelsList = carsDataLoader2.getModelsListBylink(url);
+        List<Model> selectedModel = modelsList.stream().filter(b -> b.getId().equals(req.getParameter("model"))).collect(Collectors.toList());
+        car.setBrand(sessionData.getCar().getBrand());
+        car.setModel(selectedModel.get(0));
+        url = "http://infoshareacademycom.2find.ru" + car.getModel().getLink() + "?lang=polish";
+        List<Type> typesList = carsDataLoader2.getTypesListByLink(url);
 
-        req.setAttribute("brandList", brands);
-        req.setAttribute("action", "choisingcartype");
-        if (modelsList.size() == 0) {
-            String errorMessage = ("Nie znaleziono listy modeli samochodu. Wybierz z listy.");
+        if (typesList.size() == 0) {
+            String errorMessage = ("Nie znaleziono listy z typami silnika dla samochodu. Wybierz z listy.");
             req.setAttribute("errorMessage", errorMessage);
         }
 
-
-        String brandName = car.getBrand().getName();
-        String brandId = car.getBrand().getId();
+        String brandName = sessionData.getCar().getBrand().getName();
+        String brandId = sessionData.getCar().getBrand().getId();
+        String modelName = car.getModel().getName();
 
         req.setAttribute("brand", brandName);
         req.setAttribute("brandId", brandId);
-        req.setAttribute("modelList", modelsList);
+        req.setAttribute("model", modelName);
+        req.setAttribute("typeList", typesList);
+        req.setAttribute("action", "choisingpartcategory");
 
         sessionData.setCar(car);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingModel.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");
         dispatcher.forward(req, resp);
 
     }
