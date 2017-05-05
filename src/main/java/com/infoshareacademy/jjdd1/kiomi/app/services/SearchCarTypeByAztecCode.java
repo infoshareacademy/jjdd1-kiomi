@@ -57,16 +57,19 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             carFromAztec = carIdentityFromAztec.FindingCarByAztecCode(aztecCodeFromFile);
         }
 
-         if (req.getParameter("model") != null) {
+        if (req.getParameter("model") != null) {
             String url = "http://infoshareacademycom.2find.ru" + carFromAztec.getBrand().getLink() + "?lang=polish";
             List<Model> modelsList = carsDataLoader2.getModelsListBylink(url);
             List<Model> selectedModel = modelsList.stream().filter(b -> b.getId().equals(req.getParameter("model"))).collect(Collectors.toList());
             carFromAztec.setModel(selectedModel.get(0));
+            carFromAztec.setBrand(sessionData.getCar().getBrand());
+            sessionData.setCar(carFromAztec);
         } else if (req.getParameter("brand") != null) {
-             List<Brand> brandsList = brandsCache.getBrandsList();
-             List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
-             carFromAztec.setBrand(selectedBrand.get(0));
-         }
+            List<Brand> brandsList = brandsCache.getBrandsList();
+            List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
+            carFromAztec.setBrand(selectedBrand.get(0));
+            sessionData.setCar(carFromAztec);
+        }
 
         if (carFromAztec.getBrand() == null) {
             String errorMessage = ("Nie znaleziono marki samochodu. Wybierz z listy.");
@@ -106,6 +109,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         } else {
             String modelLink = carFromAztec.getModel().getLink();
             String url = "http://infoshareacademycom.2find.ru" + modelLink + "?lang=polish";
+            req.setAttribute("action", "choisingpartcategory");
 
             List<Type> carTypeList = carIdentityFromAztec.findCarType(url, aztecCodeFromFile);
             if (carTypeList.size() > 1) {

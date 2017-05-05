@@ -19,6 +19,8 @@ public class CarIdentityFromAztec {
 
     @Inject
     BrandsCache brandsCache;
+    @Inject
+    SessionData sessionData;
 
     public CarIdentityFromAztec() {
     }
@@ -35,11 +37,14 @@ public class CarIdentityFromAztec {
             }
             List<Model> model = findModel(brand.getLink(), aztecCode.getModel(), aztecCode.getProductionYear());
             myCar.setBrand(brand);
+            sessionData.setCar(myCar);
             if (model == null) {
                 return myCar;
             }
             if (model.size() == 1) {
                 myCar.setModel(model.get(0));
+                myCar.setBrand(sessionData.getCar().getBrand());
+                sessionData.setCar(myCar);
             }
             return myCar;
         } catch (NumberFormatException e) {

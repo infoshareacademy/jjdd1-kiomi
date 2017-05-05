@@ -33,7 +33,7 @@ public class ChoisingBrand extends HttpServlet {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
             resp.sendRedirect("http://localhost:8080/googlelogin");
         }
-
+        sessionData.setCar(null);
         List<Brand> brands = brandsCache.getBrandsList();
         req.setCharacterEncoding("UTF-8");
 //        Car car = new Car();
