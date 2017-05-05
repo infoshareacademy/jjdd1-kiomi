@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by arek50 on 2017-04-27.
@@ -32,25 +33,40 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("http://localhost:8080/googlelogin");
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
-        if(sessionData.isLogged()==false) {
+        if (sessionData.isLogged() == false) {
             req.setAttribute("errorMessage", "Nie ma takiego użytkownika. Dostęp zabroniony.");
             resp.sendRedirect("http://localhost:8080/googlelogin");
         }
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
-        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(req.getParameter("aztec"));
+        String aztec = (req.getParameter("aztec") != null) ? aztec = req.getParameter("aztec") : "";
+
+        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
         carFromAztec.setModel(null);
         carFromAztec.setCarType(null);
+        req.setAttribute("action", "searchbyaztec");
 
         if (aztecCodeFromFile != null) {
             carFromAztec = carIdentityFromAztec.FindingCarByAztecCode(aztecCodeFromFile);
         }
+
+         if (req.getParameter("model") != null) {
+            String url = "http://infoshareacademycom.2find.ru" + carFromAztec.getBrand().getLink() + "?lang=polish";
+            List<Model> modelsList = carsDataLoader2.getModelsListBylink(url);
+            List<Model> selectedModel = modelsList.stream().filter(b -> b.getId().equals(req.getParameter("model"))).collect(Collectors.toList());
+            carFromAztec.setModel(selectedModel.get(0));
+        } else if (req.getParameter("brand") != null) {
+             List<Brand> brandsList = brandsCache.getBrandsList();
+             List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
+             carFromAztec.setBrand(selectedBrand.get(0));
+         }
 
         if (carFromAztec.getBrand() == null) {
             String errorMessage = ("Nie znaleziono marki samochodu. Wybierz z listy.");
@@ -61,18 +77,27 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingBrand.jsp");
             dispatcher.forward(req, resp);
         } else if (carFromAztec.getModel() == null) {
-            String errorMessage = ("Nie znaleziono modelu samochodu. Wybierz z listy.");
+
+            List<Model> modelFromList = carIdentityFromAztec.findModel(carFromAztec.getBrand().getLink(), aztecCodeFromFile.getModel(), aztecCodeFromFile.getProductionYear());
 
             String brandName = carFromAztec.getBrand().getName();
+            String brandId = carFromAztec.getBrand().getId();
             String brandLink = carFromAztec.getBrand().getLink();
 
             req.setAttribute("brand", brandName);
+            req.setAttribute("brandId", brandId);
 
+            String errorMessage = null;
+            if (modelFromList.size() > 1) {
+                errorMessage = ("Znaleziono więcej modeli pasujących do wyszukiwania. Wybierz z listy.");
+            } else {
+                errorMessage = ("Nie znaleziono modelu samochodu. Wybierz z listy.");
+                String url = "http://infoshareacademycom.2find.ru" + brandLink + "?lang=polish";
+                //logger:
 
-            String url = "http://infoshareacademycom.2find.ru" + brandLink + "?lang=polish";
-            //logger:
+                modelFromList = carsDataLoader2.getModelsListBylink(url);
+            }
 
-            List<Model> modelFromList = carsDataLoader2.getModelsListBylink(url);
             req.setAttribute("modelList", modelFromList);
             req.setAttribute("errorMessage", errorMessage);
 
@@ -83,32 +108,33 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             String url = "http://infoshareacademycom.2find.ru" + modelLink + "?lang=polish";
 
             List<Type> carTypeList = carIdentityFromAztec.findCarType(url, aztecCodeFromFile);
-            if (carTypeList.size() >1) {
+            if (carTypeList.size() > 1) {
                 String errorMessage = "Znaleziono kilka typów silnika dla tego modelu. Wybierz jeden.";
                 req.setAttribute("model", carFromAztec.getModel());
                 req.setAttribute("brand", carFromAztec.getBrand());
+                req.setAttribute("brandId", carFromAztec.getBrand().getId());
 
                 req.setAttribute("typeList", carTypeList);
                 req.setAttribute("errorMessage", errorMessage);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");
                 dispatcher.forward(req, resp);
-            }
-            else if (carTypeList.size() ==1) {
+            } else if (carTypeList.size() == 1) {
                 req.setAttribute("model", carFromAztec.getModel());
                 req.setAttribute("brand", carFromAztec.getBrand());
                 req.setAttribute("typeList", carTypeList);
+                req.setAttribute("brandId", carFromAztec.getBrand().getId());
 
                 carFromAztec.setCarType(carTypeList.get(0));
                 RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");
                 dispatcher.forward(req, resp);
-            }
-            else {
+            } else {
                 String errorMessage = "Nie znaleziono typu samochodu. Wybierz z listy.";
                 req.setAttribute("model", carFromAztec.getModel());
                 req.setAttribute("brand", carFromAztec.getBrand());
-                List<Type> test=carsDataLoader2.getTypesListByLink(url);
+                List<Type> carTypes = carsDataLoader2.getTypesListByLink(url);
+                req.setAttribute("brandId", carFromAztec.getBrand().getId());
 
-                req.setAttribute("typeList", test);
+                req.setAttribute("typeList", carTypes);
                 req.setAttribute("errorMessage", errorMessage);
 
                 RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");

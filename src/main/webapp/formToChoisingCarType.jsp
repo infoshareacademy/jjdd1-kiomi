@@ -81,7 +81,7 @@
                 </c:choose>
                 </p>
                 <p class="btn-margin">
-                    <a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>
+                    <a href="#" class="btn btn-login btn-lg">Wybierz</a>
                 </p>
 
 

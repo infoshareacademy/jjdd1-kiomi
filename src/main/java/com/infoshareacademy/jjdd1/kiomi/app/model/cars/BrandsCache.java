@@ -1,6 +1,5 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
-import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 
 import javax.annotation.PostConstruct;
@@ -27,7 +26,8 @@ public class BrandsCache {
     @Schedule(minute = "*", hour = "1")
     @PostConstruct
     public void starter() {
-
+//        StatisticDataBuilder statisticDataBuilder =new StatisticDataBuilder();
+//        statisticDataBuilder.buildEntryToDatabase();
         try {
             brandsList = jsonParser.getBrandsList();
             System.out.println(brandsList.size());

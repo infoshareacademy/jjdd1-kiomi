@@ -51,7 +51,7 @@
                 </form>
                 </p>
                 <p class="btn-margin">
-                    <a href="#" class="btn btn-login btn-lg">Wyszukiwanie w bazie</a>
+                    <a href="choisingbrand" class="btn btn-login btn-lg">Wyszukiwanie w bazie</a>
                 </p>
 
 

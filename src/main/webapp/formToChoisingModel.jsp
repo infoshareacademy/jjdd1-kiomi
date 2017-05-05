@@ -52,13 +52,16 @@
                     <li class="header-progress-item todo">Typ silnika</li>
                 </ol>
             </div>
+            <%--choisingcartype--%>
+            <form method="post" action="${action}">
             <div class="lightbox text-center">
                 <p class="title">Wybierz model samochodu</p>
                 <p class="btn-margin">
                 <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${brand}</div>
+                <input type="hidden" name="brand" value="${brandId}">
                 </p>
                 <p class="btn-margin">
-                <form>
+
                     <select name="model" class="form-control">
                         <c:forEach items="${modelList}" var="element">
                             <option value="${element.id}"
@@ -68,14 +71,13 @@
                             >${element.name} ${element.id}</option>
                         </c:forEach>
                     </select>
-                </form>
                 </p>
                 <p class="btn-margin">
-                    <a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>
+                    <%--<a href="formtochoisingcartype" class="btn btn-login btn-lg">Wybierz</a>--%>
+                        <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
                 </p>
-
-
             </div>
+            </form>
             <div class="lightbox text-left lightbox-top-margin">
                 Jakieś dane...
                 ${modelList.get(0).name}

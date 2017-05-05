@@ -45,32 +45,34 @@
             <div class="header-progress-container">
                 <ol class="header-progress-list">
                     <li class="header-progress-item done">Marka</li><!--
-       --><li class="header-progress-item todo">Model</li><!--
-       --><li class="header-progress-item todo">Typ silnika</li>
+       -->
+                    <li class="header-progress-item todo">Model</li><!--
+       -->
+                    <li class="header-progress-item todo">Typ silnika</li>
                 </ol>
             </div>
-            <div class="lightbox text-center">
-                <p class="title">Wybierz markę samochodu</p>
-                <p class="btn-margin">
-                <form>
-                    <select name="brand" class="form-control">
-                        <c:forEach items="${brandList}" var="element">
-                            <option value="${element.id}"
-                                    <c:if
-                                            test="${element.id == param.brand}"> selected
-                                    </c:if>
-                            >${element.name} ${element.id}</option>
-                        </c:forEach>
-                    </select>
-                </form>
-                </p>
-                <p class="btn-margin">
-                    <a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>
-                </p>
+            <form method="get" action="choisingmodel">
+                <div class="lightbox text-center">
+                    <p class="title">Wybierz markę samochodu</p>
+                    <p class="btn-margin">
 
+                        <select name="brand" class="form-control">
+                            <c:forEach items="${brandList}" var="element">
+                                <option value="${element.id}"
+                                        <c:if
+                                                test="${element.id == param.brand}"> selected
+                                        </c:if>
+                                >${element.name} ${element.id}</option>
+                            </c:forEach>
+                        </select>
 
-            </div>
-
+                    </p>
+                    <p class="btn-margin">
+                        <%--<a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>--%>
+                        <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
+                    </p>
+                </div>
+            </form>
 
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>
