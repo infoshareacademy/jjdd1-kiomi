@@ -44,7 +44,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         }
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
-        String aztec = (req.getParameter("aztec") != null) ? aztec = req.getParameter("aztec") : "";
+        String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
 
         CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
         Car carFromAztec = new Car();
