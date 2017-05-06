@@ -2,6 +2,7 @@ package com.infoshareacademy.jjdd1.kiomi.$1_servicesTests;
 
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
 
+
 public class PromotedBrandsLoaderTests {
 
     PromotedBrandsLoader classUT = new PromotedBrandsLoader();
@@ -34,5 +35,6 @@ public class PromotedBrandsLoaderTests {
 //        // then
 //        assertTrue("After sorting BrandsList, PromotedBrand is first on the list", promotedListUT.get(0).equals(listAfterSorting.get(0).getBrand_clear()));
 //    }
+
 
 }

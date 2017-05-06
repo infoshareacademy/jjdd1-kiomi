@@ -1,29 +1,16 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: arek50
+  Date: 2017-04-27
+  Time: 21:02
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="baseURL" value="${req.requestURL}"/>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<div>
-<p>
-    wybór brandu
-</p>
-</div>
-<div>
-    ${errorMessage}<br>
-    <br></div>
-<div class="formField">
-    <label>Marka</label>
-    <select name="brand">
-        <c:forEach items="${brandList}" var="element">
-            <option value="${element.id}" <c:if
-                    test="${element.id == param.brand}"> selected</c:if>>${element.name} ${element.id}</option>
-        </c:forEach>
-    </select>
-</div>
+
 </body>
 </html>

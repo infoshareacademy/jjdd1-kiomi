@@ -2,9 +2,10 @@ package com.infoshareacademy.jjdd1.kiomi;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.util.*;
@@ -19,20 +20,26 @@ public class TerminalMenu {
     private static List<PartCategory> partCategory = new ArrayList();
     private static List<Part> part = new ArrayList();
     private static List<?> referenceForTypeLists;
-    private static final Logger LOGGER = LoggerFactory.getLogger(TerminalMenu.class);
+    private static final Logger LOGGER = LogManager.getLogger(TerminalMenu.class);
 
     public static void main(String[] args) throws IOException {
+        StatisticDataBuilder.buildEntryToDatabase();
+
 
         try {
             startMenu();
         } catch (IOException e) {
-            LOGGER.error("Brak pliku na serwerze!");
+            LOGGER.error("Brak pliku na serwerze!", e);
         }
-
     }
 
     private static String[] titleForListByData = {"Lista marek:", "Lista modeli:", "Lista typów silnika:", "Lista kategorii:", "Lista części:"};
     private static String[] QuestionsToTheMenu = {"Podaj markę:", "Podaj model:", "Podaj typ silnika:", "Podaj kategorię:", "Oto lista części pasujących do wyszukiwania."};
+
+    public static List<String> getSearchResultsAsStrings() {
+        return searchResultsAsStrings;
+    }
+
     private static List<String> searchResults = new ArrayList();
     private static List<String> searchResultsAsStrings = new ArrayList();
     private static int lastSearchedNumberOnTheList;
@@ -43,6 +50,8 @@ public class TerminalMenu {
         System.out.println("Witaj w hurtownii części samochodowych");
         System.out.println("---------------------------------------");
         printListByData();
+
+
     }
 
     public static void printListByData() throws IOException {
@@ -73,6 +82,7 @@ public class TerminalMenu {
         printListByData();
 
         scanner.close();
+
     }
 
     public static int getLevelMenu() {
@@ -161,11 +171,13 @@ public class TerminalMenu {
         validateRequest(request);
 
         lastRequestFromUser = request;
+        LOGGER.debug("Dane wprowadzone przez użytkownika: "+request);
     }
 
     public static void validateRequest(String request) {
         if (!request.matches("[a-z0-9]*")) {
             System.out.println("Podałeś nieprawidłowe dane. Spróbój ponownie");
+            LOGGER.warn("Nieprawidłowy format danych wprowadzony przez użytkownika.");
             requestFromUser();
         }
     }
@@ -222,7 +234,7 @@ public class TerminalMenu {
             operationsOnRequestFromTheUser();
         } else if (request.equals("czesc")) {
             if (searchResults.size() == 0) {
-                System.out.println("Listę części możeszwyświetlić tylko mając wybraną markę");
+                System.out.println("Listę części możesz wyświetlić tylko mając wybraną markę.");
                 requestFromUser();
                 operationsOnRequestFromTheUser();
             }
@@ -280,9 +292,12 @@ public class TerminalMenu {
     }
 
     public static void getSearchResults() {
+        String searchResult = "";
         for (String name : searchResultsAsStrings) {
-            System.out.println("- " + name.toString());
+            searchResult +=name.toString();
         }
+        LOGGER.debug("Wynik wyszukiwania: "+searchResult);
+
     }
 
     public static void printPartsList() throws IOException {
@@ -295,7 +310,10 @@ public class TerminalMenu {
         } else {
             System.out.println("Lista części dla tej kategorii jest pusta");
         }
+
         referenceForTypeLists = part;
         setLevelMenu(4);
+
     }
+
 }

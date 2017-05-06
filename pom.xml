@@ -2,6 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>isacademy.jjdd1.kiomi</groupId>
@@ -25,6 +26,7 @@
         <hybernate.version>5.2.1.Final</hybernate.version>
         <mysql.version>6.0.6</mysql.version>
 
+
         <!--ACHTUNG ACHTUNG-->
 
         <!--uncomment for WEB version-->
@@ -34,6 +36,7 @@
         <!--<scope.settings>compile</scope.settings>-->
 
         <!--ACHTUNG ACHTUNG-->
+
 
         <!--mysql-->
         <jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>
@@ -140,6 +143,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+            <scope>${scope.settings}</scope>
         </dependency>
 
         <dependency>
@@ -152,10 +156,22 @@
             <artifactId>scribejava-apis</artifactId>
             <version>4.1.0</version>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>ROOT</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
@@ -169,4 +185,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

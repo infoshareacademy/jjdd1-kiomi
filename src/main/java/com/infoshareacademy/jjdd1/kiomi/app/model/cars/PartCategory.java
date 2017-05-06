@@ -1,8 +1,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * "id": "7sy",
@@ -15,7 +15,7 @@ public class PartCategory {
     private String name;
     private boolean has_children;
     private String link;
-    private static final Logger LOGGER = LoggerFactory.getLogger(PartCategory.class);
+    private static final Logger LOGGER = LogManager.getLogger(PartCategory.class);
 
     public PartCategory(String id) {
         this.id = id;
