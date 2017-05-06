@@ -23,7 +23,7 @@ public class GetJsonFromFile {
                 this.getClass().getResourceAsStream("/" + aztecJson)));
         JsonObject response = gson.fromJson(bufferedReader, JsonObject.class);
         JsonElement data = response.get(JSON_DATA_TAG);
-
+        System.out.println("QQQQQQ"+data);
         return gson.fromJson(data, new TypeToken<CarFromAztecJson>() {
         }.getType());
 

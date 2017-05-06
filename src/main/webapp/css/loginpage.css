@@ -1,0 +1,114 @@
+body {
+    background: #3b679e;
+    background: -moz-linear-gradient(-45deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
+    background: -webkit-linear-gradient(-45deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
+    background: linear-gradient(135deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3b679e', endColorstr='#7db9e8', GradientType=1);
+    height: 100vh;
+    width: 100vw;
+    color: #fff;
+}
+
+.lightbox {
+    background: rgba(118, 180, 229, 0.3);
+    border: 1px solid #76b4e5;
+    padding: 1em;
+}
+.errorbox {
+    background: rgba(255, 0, 0, 0.8);
+    border: 3px solid rgb(118, 180, 229);
+    padding: 0.625em;
+    margin: 1.875em 0em;
+    font-weight: 700;
+}
+
+/*logo start*/
+@import url(http://fonts.googleapis.com/css?family=Arvo:700);
+@import url(http://fonts.googleapis.com/css?family=Seaweed+Script);
+.plate {
+    max-width: 25.625em;
+    margin: 0em auto 2.5em;
+    margin-top:20%;
+}
+
+.shadow {
+    color: #fff;
+    font-family: Arvo;
+    font-weight: bold;
+    line-height: 0.8em;
+    letter-spacing: 0.1em;
+    transform: scaleY(0.7);
+    -webkit-transform: scaleY(0.7);
+    -moz-transform: scaleY(0.7);
+    margin: 0;
+    text-align: center;
+}
+
+.script {
+    font-family: "Seaweed Script";
+    color: #fff;
+    text-align: center;
+    font-size: 2.5em;
+    position: relative;
+    margin: 0 auto;
+}
+
+.script span {
+    background-color: #2582d2;
+    padding: 0 0.3em;
+}
+
+.script:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    width: 100%;
+    border-bottom: 3px solid #fff;
+}
+
+.text3 {
+    font-size: 3.7em;
+}
+.product-owner {
+    text-align: right;
+    line-height: 0;
+    font-style: italic;
+}
+/*logo end*/
+
+.avatar {
+    background: #fff url("/img/Skull-3-icon.png") top center no-repeat;
+    width: 10em;
+    height: 10em;
+    border-radius: 5em;
+    margin: 0 auto 1em;
+    border: 0.215em solid #76b4e5;
+overflow: hidden;
+}
+.avatar img{
+    width: 10em;
+}
+
+.btn-login {
+    text-align: center;
+    background: #76b4e5;
+    color: #fff;
+    width: 12.5em;
+    margin: 0 auto;
+    display: block;
+    font-weight: 700;
+}
+.status {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 1.25em 0;
+}
+.logout-link {
+    text-align: center;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    padding: 0.625em;
+}

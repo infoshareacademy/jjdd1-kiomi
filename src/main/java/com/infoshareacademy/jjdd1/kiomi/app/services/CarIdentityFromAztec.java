@@ -70,4 +70,41 @@ public class CarIdentityFromAztec {
 //Loger modelu brak
         return null;
     }
+
+
+    public List<Type> findCarType(String url, CarFromAztecJson dataFromAztec) throws IOException {
+
+        CarsDataLoader2 jsonParser = new CarsDataLoader2();
+        //logger:
+        List<Type> carTypesList = jsonParser.getTypesListByLink(url);
+        return searchCarTypeByFields(carTypesList, dataFromAztec.getCarCapacity(), dataFromAztec.getCarFuelType(), dataFromAztec.getCarPower());
+    }
+
+    public List<Type> searchCarTypeByFields(
+            List<Type> carTypesList, String carCapacity, String carFuelType, String carPower) {
+
+        int carCapacityAsInt = Integer.parseInt(carCapacity.substring(0, carCapacity.length() - 6));
+        int powerAsInt = Integer.parseInt(carPower.substring(0, carCapacity.length() - 8));
+
+        String fuelTypeAsText;
+        switch (carFuelType) {
+            case "P":
+                fuelTypeAsText = "benzyna";
+                break;
+            case "D":
+                fuelTypeAsText = "olej napędowy";
+                break;
+            default:
+                fuelTypeAsText = "brak";
+                break;
+        }
+
+        return carTypesList.stream()
+                .filter(t -> Math.abs(t.getCcm() - carCapacityAsInt) <= 350)
+                .filter(t -> Math.abs(t.getKw() - powerAsInt) <= 350)
+                .filter(t -> t.getFuel().equals(fuelTypeAsText))
+                .collect(Collectors.toList());
+
+    }
+
 }
