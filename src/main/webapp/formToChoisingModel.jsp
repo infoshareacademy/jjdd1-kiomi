@@ -54,33 +54,39 @@
             </div>
             <%--choisingcartype--%>
             <form method="post" action="${action}">
-            <div class="lightbox text-center">
-                <p class="title">Wybierz model samochodu</p>
-                <p class="btn-margin">
-                <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${brand}</div>
-                <input type="hidden" name="brand" value="${brandId}">
-                </p>
-                <p class="btn-margin">
-
-                    <select name="model" class="form-control">
-                        <c:forEach items="${modelList}" var="element">
-                            <option value="${element.id}"
-                                    <c:if
-                                            test="${element.id == param.model}"> selected
-                                    </c:if>
-                            >${element.name} ${element.id}</option>
-                        </c:forEach>
-                    </select>
-                </p>
-                <p class="btn-margin">
-                    <%--<a href="formtochoisingcartype" class="btn btn-login btn-lg">Wybierz</a>--%>
-                        <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
-                </p>
-            </div>
+                <div class="lightbox text-center">
+                    <p class="title">Wybierz model samochodu</p>
+                    <p class="btn-margin">
+                    <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${brand}</div>
+                    <input type="hidden" name="brand" value="${brandId}">
+                    </p>
+                    <c:choose>
+                        <c:when test="${modelList.size()>0}">
+                            <p class="btn-margin">
+                                <select name="model" class="form-control">
+                                    <c:forEach items="${modelList}" var="element">
+                                        <option value="${element.id}"
+                                                <c:if
+                                                        test="${element.id == param.model}"> selected
+                                                </c:if>
+                                        >${element.name} ${element.id}</option>
+                                    </c:forEach>
+                                </select>
+                            </p>
+                            <p class="btn-margin">
+                                    <%--<a href="formtochoisingcartype" class="btn btn-login btn-lg">Wybierz</a>--%>
+                                <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="choisingbrand" class="btn btn-login btn-lg">Wyszukaj ponownie</a>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </form>
             <div class="lightbox text-left lightbox-top-margin">
                 Jakieś dane...
-                ${modelList.get(0).name}
+                <%--${modelList.get(0).name}--%>
             </div>
 
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>

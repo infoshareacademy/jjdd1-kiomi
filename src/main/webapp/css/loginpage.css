@@ -8,7 +8,9 @@ body {
     width: 100%;
     color: #fff;
 }
-
+a {
+    color: #f0ad4e;
+}
 .lightbox {
     background: rgba(118, 180, 229, 0.3);
     border: 1px solid #76b4e5;
