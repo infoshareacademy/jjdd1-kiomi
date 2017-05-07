@@ -1,19 +1,12 @@
 package com.infoshareacademy.jjdd1.kiomi.app.statistics;
-import org.apache.logging.log4j.Logger;
+
+
 import org.apache.logging.log4j.LogManager;
-import javax.persistence.*;
-import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
 
-/**
- * Created by marcin on 22.04.17.
- */
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "SEARCH_HISTORY")

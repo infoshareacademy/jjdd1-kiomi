@@ -1,9 +1,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.statistics;
 
 
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,7 +16,7 @@ public class StatisticDataBuilder{
     public static void buildEntryToDatabase() {
         //experimentally
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("databaseForAutoparts");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("statistics");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Statistics statistics = new Statistics();
