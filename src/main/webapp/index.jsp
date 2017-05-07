@@ -110,7 +110,7 @@
             <%--<c:forEach items="${menuList}" var="element">--%>
                 <%--<c:if test="${element eq paramValues.cat}">--%>
                     <%--<li>>> <a--%>
-                            <%--href="${baseURL}?brand=${param.brand}&model=${param.model}&type=${param.model}">${element.name}nb</a>--%>
+                            <%--href="${baseURL}?BRAND=${param.BRAND}&model=${param.model}&type=${param.model}">${element.name}nb</a>--%>
                     <%--</li>--%>
                 <%--</c:if>--%>
             <%--</c:forEach>--%>

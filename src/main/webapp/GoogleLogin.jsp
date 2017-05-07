@@ -35,46 +35,36 @@
             <p class="product-owner"><span>and product owner</span></p>
         </div>
         <div class="col-xs-12">
-            <div class="boxfield">
-                <c:if test="${not empty errorMessage}">
-                    <div class="errorbox">
-                            ${errorMessage}
-                    </div>
+            <div class="avatar">
+                <c:if test="${not empty oauth.picture}">
+                    <img src="${oauth.picture}">
                 </c:if>
-            </div>
-            <div class="header-progress-container">
-                <ol class="header-progress-list">
-                    <li class="header-progress-item done">Marka</li><!--
-       -->
-                    <li class="header-progress-item todo">Model</li><!--
-       -->
-                    <li class="header-progress-item todo">Typ silnika</li>
-                </ol>
-            </div>
-            <form method="post" action="${action}">
-                <div class="lightbox text-center">
-                    <p class="title">Wybierz markę samochodu</p>
-                    <p class="btn-margin">
 
-                        <select name="brand" class="form-control">
-                            <c:forEach items="${brandList}" var="element">
-                                <option value="${element.id}"
-                                        <c:if
-                                                test="${element.id == param.brand}"> selected
-                                        </c:if>
-                                >${element.name} ${element.id}</option>
-                            </c:forEach>
-                        </select>
-
-                    </p>
-                    <p class="btn-margin">
-                        <%--<a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>--%>
-                        <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
-                    </p>
+            </div>
+            <p class="status">
+                <strong><c:if test="${not empty oauth.given_name}">
+                    Witaj ${oauth.given_name} ${oauth.family_name}
+                </c:if> &nbsp;
+                </strong><br>
+                <strong>Status:</strong>
+                <c:if test="${empty oauth.email}">nie</c:if>zalogowany</p>
+            <c:choose>
+                <c:when test="${empty oauth.email}">
+                    <form method="post">
+                        <input name="login" type="hidden" value="1">
+                        <input type="submit" value="ZALOGUJ SIĘ" class="btn btn-login btn-lg">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <a href="caridentitymethod" class="btn btn-login btn-lg">WEJDŹ</a>
+                    <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
+                </c:otherwise>
+            </c:choose>
+            <c:if test="${not empty error}">
+                <div class="errorbox">
+                        ${error}
                 </div>
-            </form>
-
-            <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
+            </c:if>
         </div>
     </div>
 </div>

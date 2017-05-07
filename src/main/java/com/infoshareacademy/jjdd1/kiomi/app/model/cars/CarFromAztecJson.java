@@ -1,8 +1,7 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.google.gson.annotations.SerializedName;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+
 /**
  * example data:
  * "dataname": "FORD",
@@ -18,11 +17,10 @@ import org.apache.logging.log4j.LogManager;
  * Created by arek50 on 2017-04-27.
  */
 public class CarFromAztecJson {
-    private static final Logger LOGGER = LogManager.getLogger(CarFromAztecJson.class);
     @SerializedName("D1")//@SerializedName(value = "fullName", alternate = "username")
     private String brand;
 
-    @SerializedName("D5")
+    @SerializedName("D5")//Configurator.getBrandSuymbol()
     private String model;
 
     @SerializedName("P.1")
@@ -99,7 +97,7 @@ public class CarFromAztecJson {
     @Override
     public String toString() {
         return "CarFromAztecJson{" +
-                "brand='" + brand + '\'' +
+                "BRAND='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", carCapacity='" + carCapacity + '\'' +
                 ", carPower='" + carPower + '\'' +

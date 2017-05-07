@@ -4,12 +4,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-        <groupId>isacademy.jjdd1.kiomi</groupId>
-        <artifactId>autoparts</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <packaging>war</packaging>
-        <name>autoparts</name>
-        <url>http://maven.apache.org</url>
+    <groupId>isacademy.jjdd1.kiomi</groupId>
+    <artifactId>autoparts</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>autoparts</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
 
@@ -25,15 +25,15 @@
         <hybernate.version>5.2.1.Final</hybernate.version>
         <mysql.version>6.0.6</mysql.version>
 
-                <!--ACHTUNG ACHTUNG-->
+        <!--ACHTUNG ACHTUNG-->
 
         <!--uncomment for WEB version-->
-        <!--<scope.settings>provided</scope.settings>-->
+        <scope.settings>provided</scope.settings>
 
         <!--uncomment for console version-->
-        <scope.settings>compile</scope.settings>
+        <!--<scope.settings>compile</scope.settings>-->
 
-                <!--ACHTUNG ACHTUNG-->
+        <!--ACHTUNG ACHTUNG-->
 
         <!--mysql-->
         <jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>
@@ -98,11 +98,11 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>mysql</groupId>-->
+            <!--<artifactId>mysql-connector-java</artifactId>-->
+            <!--<version>${mysql.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.assertj</groupId>
@@ -140,24 +140,22 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
-            <scope>${scope.settings}</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-apis</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>ROOT</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
@@ -171,5 +169,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
