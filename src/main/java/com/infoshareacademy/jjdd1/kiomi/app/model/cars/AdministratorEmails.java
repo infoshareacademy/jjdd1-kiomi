@@ -14,6 +14,7 @@ public class AdministratorEmails {
     private static List<String> emailsList = new ArrayList<String>() {
         {
             add("azielazny@gmail.com");
+            add("okraszewski.m@gmail.com");
         }
     };
 
