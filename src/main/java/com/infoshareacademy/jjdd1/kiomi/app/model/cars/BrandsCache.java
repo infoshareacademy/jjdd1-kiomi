@@ -1,9 +1,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
+import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 
 
 import javax.annotation.PostConstruct;
@@ -31,8 +30,8 @@ public class BrandsCache {
     @Schedule(minute = "*", hour = "1")
     @PostConstruct
     public void starter() {
-//        StatisticDataBuilder statisticDataBuilder =new StatisticDataBuilder();
-//        statisticDataBuilder.buildEntryToDatabase();
+        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
+        statisticDataBuilder.buildEntryToDatabase();
         try {
             brandsList = jsonParser.getBrandsList();
             LOGGER.info("Number of brandList elements: "+brandsList.size());
