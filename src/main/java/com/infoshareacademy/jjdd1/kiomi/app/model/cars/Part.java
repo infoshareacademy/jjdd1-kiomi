@@ -1,5 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
+import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,7 @@ public class Part {
     private String name;
     private String status;
     private String link;
-    private static final Logger LOGGER = LogManager.getLogger(Part.class);
+    private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(Part.class);
 
     public Part(String brand) {
         this.brand = brand;

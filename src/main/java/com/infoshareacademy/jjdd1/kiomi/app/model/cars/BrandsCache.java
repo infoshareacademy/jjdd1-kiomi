@@ -3,6 +3,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import javax.annotation.PostConstruct;

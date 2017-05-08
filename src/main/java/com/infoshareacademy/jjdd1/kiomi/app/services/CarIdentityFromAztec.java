@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by arek50 on 2017-04-22.
@@ -51,8 +52,8 @@ public class CarIdentityFromAztec {
             return myCar;
         } catch (NumberFormatException e) {
 
-        myCar.setBrand(brand);
-        myCar.setModel(model);
+        }
+
         return myCar;
     }
 
