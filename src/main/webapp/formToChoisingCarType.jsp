@@ -53,47 +53,51 @@
                 </ol>
             </div>
             <form method="post" action="${action}">
-            <div class="lightbox text-center">
-                <p class="title">Wybierz typ silnika samochodu</p>
-                <p class="btn-margin">
-                <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${brand}</div>
-                </p>
-                <p class="btn-margin">
-                <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${model}</div>
-                </p>
+                <div class="lightbox text-center">
+                    <p class="title">Wybierz typ silnika samochodu</p>
+                    <p class="btn-margin">
+                    <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${brand}</div>
+                    </p>
+                    <p class="btn-margin">
+                    <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${model}</div>
+                    </p>
 
-                <p class="btn-margin">
-                    <c:choose>
-                    <c:when test="${typeList.size()>1}">
-                    <select name="type" class="form-control">
-                        <c:forEach items="${typeList}" var="element">
-                            <option value="${element.id}"
-                                    <c:if
-                                            test="${element.id == param.type}"> selected
-                                    </c:if>
-                            >${element.name} ${element.id}</option>
-                        </c:forEach>
-                    </select>
+                    <p class="btn-margin">
+                        <c:choose>
+                        <c:when test="${typeList.size()>1}">
+                        <select name="type" class="form-control">
+                            <c:forEach items="${typeList}" var="element">
+                                <option value="${element.id}"
+                                        <c:if
+                                                test="${element.id == param.type}"> selected
+                                        </c:if>
+                                >${element.name} ${element.id}</option>
+                            </c:forEach>
+                        </select>
 
-                </c:when>
-                <c:otherwise>
-                    <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${typeList.get(0).name}</div>
-                <input type="hidden" name="type" value="${typeList.get(0).id}">
-                </c:otherwise>
-                </c:choose>
-                </p>
-                <p class="btn-margin">
-                    <%--<a href="#" class="btn btn-login btn-lg">Wybierz</a>--%>
-                    <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
+                        </c:when>
+                        <c:when test="${typeList.size()==1}">
+                    <div class="selectedData"><i class="fa fa-check" aria-hidden="true"></i> ${typeList.get(0).name}
+                    </div>
+                    <input type="hidden" name="type" value="${typeList.get(0).id}">
+                    </c:when>
+                    <c:otherwise>
+                        <a href="choisingbrand" class="btn btn-login btn-lg">Wyszukaj ponownie</a>
+                    </c:otherwise>
+                    </c:choose>
+                    </p>
+                    <p class="btn-margin">
+                        <%--<a href="#" class="btn btn-login btn-lg">Wybierz</a>--%>
+                        <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
 
-                </p>
+                    </p>
 
 
-            </div>
+                </div>
             </form>
             <div class="lightbox text-left lightbox-top-margin">
                 Jakieś dane...
-                ${typeList.get(0).name}
+                <%--${typeList.get(0).name}--%>
             </div>
 
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>

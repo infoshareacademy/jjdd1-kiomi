@@ -41,7 +41,7 @@ public class ChoisingBrand extends HttpServlet {
         req.setAttribute("brandList", brands);
         req.setAttribute("action", "choisingmodel");
         if (brands.size() == 0) {
-            String errorMessage = ("Nie znaleziono listy marek samochodu. Wybierz z listy.");
+            String errorMessage = ("Nie znaleziono listy marek samochodu. <a href='choisingbrand'>Wyszukaj ponownie</a>.");
 
             req.setAttribute("errorMessage", errorMessage);
         }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,7 @@ public class ChoisingModel extends HttpServlet {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
             resp.sendRedirect("http://localhost:8080/googlelogin");
         }
+        try{
         List<Brand> brands = brandsCache.getBrandsList();
         req.setCharacterEncoding("UTF-8");
         Car car = new Car();
@@ -54,7 +56,7 @@ public class ChoisingModel extends HttpServlet {
         req.setAttribute("brandList", brands);
         req.setAttribute("action", "choisingcartype");
         if (modelsList.size() == 0) {
-            String errorMessage = ("Nie znaleziono listy modeli samochodu. Wybierz z listy.");
+            String errorMessage = ("Nie znaleziono listy modeli samochodu. <a href='choisingbrand'>Wyszukaj ponownie</a>.");
             req.setAttribute("errorMessage", errorMessage);
         }
 
@@ -69,6 +71,11 @@ public class ChoisingModel extends HttpServlet {
         sessionData.setCar(car);
         RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingModel.jsp");
         dispatcher.forward(req, resp);
-
+        } catch (IOException e) {
+            System.out.println("Nie ma pliku na serwerze: " + e.getMessage());
+            PrintWriter writer = resp.getWriter();
+            writer.append("<b>Nie ma pliku na serwerze<br>" + e.getMessage() + "</b>");
+            writer.flush();
+        }
     }
 }

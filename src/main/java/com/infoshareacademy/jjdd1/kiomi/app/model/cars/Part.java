@@ -1,11 +1,10 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
-import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * "brand": "TRW",
+ * "BRAND": "TRW",
  * "brand_clear": "trw",
  * "number": "GCH666",
  * "number_clear": "gch666",

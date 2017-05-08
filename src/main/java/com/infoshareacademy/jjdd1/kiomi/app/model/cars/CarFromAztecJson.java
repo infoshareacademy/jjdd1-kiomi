@@ -2,8 +2,6 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.google.gson.annotations.SerializedName;
 
-import com.infoshareacademy.jjdd1.kiomi.app.services.AztecConfiguration;
-
 /**
  * example data:
  * "dataname": "FORD",
@@ -19,9 +17,8 @@ import com.infoshareacademy.jjdd1.kiomi.app.services.AztecConfiguration;
  * Created by arek50 on 2017-04-27.
  */
 public class CarFromAztecJson {
-
-    @SerializedName(AztecConfiguration.d1)//@SerializedName(value = "fullName", alternate = "username")
-
+  
+    @SerializedName("D1")//@SerializedName(value = "fullName", alternate = "username")
     private String brand;
 
     @SerializedName("D5")//Configurator.getBrandSuymbol()
@@ -101,7 +98,7 @@ public class CarFromAztecJson {
     @Override
     public String toString() {
         return "CarFromAztecJson{" +
-                "brand='" + brand + '\'' +
+                "BRAND='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", carCapacity='" + carCapacity + '\'' +
                 ", carPower='" + carPower + '\'' +

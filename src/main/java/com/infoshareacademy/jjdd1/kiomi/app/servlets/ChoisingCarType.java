@@ -58,7 +58,7 @@ public class ChoisingCarType extends HttpServlet {
         List<Type> typesList = carsDataLoader2.getTypesListByLink(url);
 
         if (typesList.size() == 0) {
-            String errorMessage = ("Nie znaleziono listy z typami silnika dla samochodu. Wybierz z listy.");
+            String errorMessage = ("Nie znaleziono listy z typami silnika dla samochodu. <a href='choisingbrand'>Wyszukaj ponownie</a>.");
             req.setAttribute("errorMessage", errorMessage);
         }
 

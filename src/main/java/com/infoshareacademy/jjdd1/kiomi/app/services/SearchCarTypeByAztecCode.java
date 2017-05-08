@@ -54,6 +54,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
 
         CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
+        System.out.println(aztecCodeFromFile);
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
         carFromAztec.setModel(null);
@@ -74,9 +75,9 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             carFromAztec.setModel(selectedModel.get(0));
             carFromAztec.setBrand(sessionData.getCar().getBrand());
             sessionData.setCar(carFromAztec);
-        } else if (req.getParameter("brand") != null) {
+        } else if (req.getParameter("BRAND") != null) {
             List<Brand> brandsList = brandsCache.getBrandsList();
-            List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
+            List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("BRAND"))).collect(Collectors.toList());
             carFromAztec.setBrand(selectedBrand.get(0));
             sessionData.setCar(carFromAztec);
         }
