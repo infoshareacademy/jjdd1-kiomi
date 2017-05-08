@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: arek50
-  Date: 2017-05-01
-  Time: 17:13
+  Date: 2017-05-05
+  Time: 22:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,9 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/searchbyaztec" method="POST">
-    <input type="hidden" name="aztec" value="AztecCodeResult.json">
-    <input type="submit" value="Sprawdź Kod Aztec">
-</form>
+${brand}
+${model}
+${carType}
 </body>
 </html>

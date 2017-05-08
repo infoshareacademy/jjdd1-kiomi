@@ -1,8 +1,9 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.google.gson.annotations.SerializedName;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+
+import com.infoshareacademy.jjdd1.kiomi.app.services.AztecConfiguration;
+
 /**
  * example data:
  * "dataname": "FORD",
@@ -18,11 +19,12 @@ import org.apache.logging.log4j.LogManager;
  * Created by arek50 on 2017-04-27.
  */
 public class CarFromAztecJson {
-    private static final Logger LOGGER = LogManager.getLogger(CarFromAztecJson.class);
-    @SerializedName("D1")//@SerializedName(value = "fullName", alternate = "username")
+
+    @SerializedName(AztecConfiguration.d1)//@SerializedName(value = "fullName", alternate = "username")
+
     private String brand;
 
-    @SerializedName("D5")
+    @SerializedName("D5")//Configurator.getBrandSuymbol()
     private String model;
 
     @SerializedName("P.1")

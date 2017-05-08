@@ -16,14 +16,16 @@ public class GetJsonFromFile {
     private static String aztecJson ="AztecCodeResult.json";
     private String JSON_DATA_TAG = "Dane";
 
-    public CarFromAztecJson getJsonFile() {
+    public CarFromAztecJson getJsonFile(String code) {
+        String aztecCode=(code.length()>5)?code:aztecJson;
+
         Gson gson = new Gson();
         //            Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(RESOURCES_DIR);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
                 this.getClass().getResourceAsStream("/" + aztecJson)));
         JsonObject response = gson.fromJson(bufferedReader, JsonObject.class);
         JsonElement data = response.get(JSON_DATA_TAG);
-        System.out.println("QQQQQQ"+data);
+
         return gson.fromJson(data, new TypeToken<CarFromAztecJson>() {
         }.getType());
 

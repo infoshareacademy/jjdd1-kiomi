@@ -21,11 +21,6 @@
 </head>
 <body>
 <div class="">
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" style="display: none">
-        Ukryte menu
-    </div>
-</div>
-<div class="">
 
     <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
         <div class="plate">
@@ -35,36 +30,14 @@
             <p class="product-owner"><span>and product owner</span></p>
         </div>
         <div class="col-xs-12">
-            <div class="avatar">
-                <c:if test="${not empty oauth.picture}">
-                    <img src="${oauth.picture}">
-                </c:if>
+            <div class="emptybox text-center">
+                <p class="title">Not found</p>
+                <h1 class="errorAlert">404</h1>
 
             </div>
-            <p class="status">
-                <strong><c:if test="${not empty oauth.given_name}">
-                    Witaj ${oauth.given_name} ${oauth.family_name}
-                </c:if> &nbsp;
-                </strong><br>
-                <strong>Status:</strong>
-                <c:if test="${empty oauth.email}">nie</c:if>zalogowany</p>
-            <c:choose>
-                <c:when test="${empty oauth.email}">
-                    <form method="post">
-                        <input name="login" type="hidden" value="1">
-                        <input type="submit" value="ZALOGUJ SIĘ" class="btn btn-login btn-lg">
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <a href="caridentitymethod" class="btn btn-login btn-lg">WEJDŹ</a>
-                    <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
-                </c:otherwise>
-            </c:choose>
-            <c:if test="${not empty error}">
-                <div class="errorbox">
-                        ${error}
-                </div>
-            </c:if>
+
+
+            <a href="googlelogin" class="logout-link">Wróć na stronę startową</a>
         </div>
     </div>
 </div>

@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,15 +20,36 @@ public class CarIdentityFromAztec {
 
     @Inject
     BrandsCache brandsCache;
+    @Inject
+    SessionData sessionData;
 
     public CarIdentityFromAztec() {
     }
 
     public Car FindingCarByAztecCode(CarFromAztecJson aztecCode) throws IOException {
         Car myCar = new Car();
-        Brand brand = findBrand(aztecCode.getBrand());
 
-        Model model = findModel(brand.getLink(), aztecCode.getModel(), aztecCode.getProductionYear());
+        try {
+            if (aztecCode.getBrand().equals("")) {
+                return myCar;
+            }
+            Brand brand = findBrand(aztecCode.getBrand());
+            if (brand == null) {
+                return myCar;
+            }
+            List<Model> model = findModel(brand.getLink(), aztecCode.getModel(), aztecCode.getProductionYear());
+            myCar.setBrand(brand);
+            sessionData.setCar(myCar);
+            if (model == null) {
+                return myCar;
+            }
+            if (model.size() == 1) {
+                myCar.setModel(model.get(0));
+                myCar.setBrand(sessionData.getCar().getBrand());
+                sessionData.setCar(myCar);
+            }
+            return myCar;
+        } catch (NumberFormatException e) {
 
         myCar.setBrand(brand);
         myCar.setModel(model);
@@ -48,7 +70,7 @@ public class CarIdentityFromAztec {
         return null;
     }
 
-    private Model findModel(String link, String modelFromAztec, String yearProduction) throws IOException {
+    public List<Model> findModel(String link, String modelFromAztec, String yearProduction) throws IOException {
         CarsDataLoader2 jsonParser = new CarsDataLoader2();
         //logger:
         String url = "http://infoshareacademycom.2find.ru" + link + "?lang=polish";
@@ -57,18 +79,23 @@ public class CarIdentityFromAztec {
         Integer startYear;
         Integer endYear;
         Integer productionYear = Integer.parseInt(yearProduction);
+        List<Model> mlist = new ArrayList<>();
         for (Model model : modelsList) {
             startYear = Integer.valueOf(model.getStart_year());
             endYear = (model.getEnd_year() == null) ?
                     LocalDateTime.now().getYear() : Integer.valueOf(model.getEnd_year());
 
-            if (model.getName().toUpperCase().contains(modelFromAztec.toUpperCase().toString()) && startYear <= productionYear && endYear >= productionYear) {
+            if (model.getName().toUpperCase().contains(modelFromAztec.toUpperCase().toString()) && (startYear <= productionYear && endYear >= productionYear)) {
                 //Loger mam model xxx
-                return model;
+//                return model;
+                mlist.add(model);
             }
+
         }
+
 //Loger modelu brak
-        return null;
+        return mlist;
+//        return null;
     }
 
 
@@ -100,8 +127,8 @@ public class CarIdentityFromAztec {
         }
 
         return carTypesList.stream()
-                .filter(t -> Math.abs(t.getCcm() - carCapacityAsInt) <= 350)
-                .filter(t -> Math.abs(t.getKw() - powerAsInt) <= 350)
+                .filter(t -> (t.getCcm() - carCapacityAsInt) == 0)
+                .filter(t -> (t.getKw() - powerAsInt) == 0)
                 .filter(t -> t.getFuel().equals(fuelTypeAsText))
                 .collect(Collectors.toList());
 
