@@ -17,6 +17,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by arek50 on 2017-04-27.
  */
 public class CarFromAztecJson {
+  
     @SerializedName("D1")//@SerializedName(value = "fullName", alternate = "username")
     private String brand;
 

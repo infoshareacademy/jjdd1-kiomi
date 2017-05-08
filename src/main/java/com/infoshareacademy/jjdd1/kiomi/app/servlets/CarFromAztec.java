@@ -3,7 +3,8 @@ package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 import com.infoshareacademy.jjdd1.kiomi.app.services.PromotedBrandsLoader;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ import java.util.Optional;
  */
 @WebServlet(urlPatterns = "/aztecform")
 public class CarFromAztec extends HttpServlet {
+    private final Logger LOGGER = LogManager.getLogger(CarFromAztec.class);
 
 
 
