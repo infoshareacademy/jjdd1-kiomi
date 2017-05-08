@@ -2,20 +2,21 @@ package com.infoshareacademy.jjdd1.kiomi.app.services;
 
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by arek50 on 2017-04-22.
  */
 @Stateless
 public class CarIdentityFromAztec {
+    private static final Logger LOGGER = LogManager.getLogger(CarIdentityFromAztec.class);
 
     @Inject
     BrandsCache brandsCache;
@@ -27,6 +28,7 @@ public class CarIdentityFromAztec {
 
     public Car FindingCarByAztecCode(CarFromAztecJson aztecCode) throws IOException {
         Car myCar = new Car();
+
         try {
             if (aztecCode.getBrand().equals("")) {
                 return myCar;
@@ -49,12 +51,14 @@ public class CarIdentityFromAztec {
             return myCar;
         } catch (NumberFormatException e) {
 
-        }
+        myCar.setBrand(brand);
+        myCar.setModel(model);
         return myCar;
     }
 
     private Brand findBrand(String brandFromAztec) {
 
+//brandsCache=new BrandsCache();
         List<Brand> brands = brandsCache.getBrandsList();
         //LOGGER:
         System.out.println(brandsCache.getBrandsList());
@@ -94,6 +98,7 @@ public class CarIdentityFromAztec {
 //        return null;
     }
 
+
     public List<Type> findCarType(String url, CarFromAztecJson dataFromAztec) throws IOException {
 
         CarsDataLoader2 jsonParser = new CarsDataLoader2();
@@ -128,4 +133,5 @@ public class CarIdentityFromAztec {
                 .collect(Collectors.toList());
 
     }
+
 }

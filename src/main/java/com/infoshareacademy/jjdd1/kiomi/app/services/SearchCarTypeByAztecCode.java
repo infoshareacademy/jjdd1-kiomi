@@ -1,7 +1,10 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-import org.slf4j.LoggerFactory;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.BrandsCache;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Car;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.CarFromAztecJson;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -11,21 +14,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 /**
  * Created by arek50 on 2017-04-27.
  */
-@WebServlet(urlPatterns = "/searchbyaztec")
+@WebServlet(urlPatterns = "/searchbyaztecs")
 public class SearchCarTypeByAztecCode extends HttpServlet {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
+    private static final Logger LOGGER = LogManager.getLogger(CarsDataLoader.class);
     @Inject
     CarsDataLoader2 carsDataLoader2;
     @Inject
     BrandsCache brandsCache;
     @Inject
     CarIdentityFromAztec carIdentityFromAztec;
+
     @Inject
     SessionData sessionData;
 
@@ -35,7 +41,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
         if (sessionData.isLogged() == false) {
@@ -44,6 +50,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         }
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
+
         String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
 
         CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
@@ -53,8 +60,11 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         carFromAztec.setCarType(null);
         req.setAttribute("action", "searchbyaztec");
 
-        if (aztecCodeFromFile != null) {
+        System.out.println(aztecCodeFromFile + "--" + aztecCodeFromFile.getBrand());
+        if (aztecCodeFromFile != null) {//obiekt z json
+
             carFromAztec = carIdentityFromAztec.FindingCarByAztecCode(aztecCodeFromFile);
+            System.out.println("-----" + carFromAztec);
         }
 
         if (req.getParameter("model") != null) {
@@ -145,11 +155,8 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
                 dispatcher.forward(req, resp);
 
             }
-
         }
     }
 }
-
-
 
 

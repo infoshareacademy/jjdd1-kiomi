@@ -2,7 +2,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Part;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +14,7 @@ import java.util.List;
 
 
 public class PromotedBrandsLoader {
-
+    private static final Logger LOGGER = LogManager.getLogger(PromotedBrandsLoader.class);
     private static List<String> promotedBrandsList = new ArrayList<>();
     private static String promotedBrandsPath = "promotedBrands.txt";
     static final String RESOURCES_DIR = "kiomi";
@@ -33,11 +34,13 @@ public class PromotedBrandsLoader {
             promotedBrandsList = Files.readAllLines((Path) bufferedReader);
         } catch (Exception e) {
 
+
         }
         return promotedBrandsList;
     }
 
     public List<Part> rewritedPartListSorter(List<Part> originalPartList) throws IOException {
+
 
         rewritedPartList.clear();
         promotedBrandsList = promotedBrandsReader();
@@ -60,5 +63,4 @@ public class PromotedBrandsLoader {
         }
         return originalPartList;
     }
-
 }
