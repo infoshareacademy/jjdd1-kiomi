@@ -1,10 +1,9 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.BrandsCache;
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Car;
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.CarFromAztecJson;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -14,24 +13,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 /**
  * Created by arek50 on 2017-04-27.
  */
-@WebServlet(urlPatterns = "/searchbyaztecs")
+@WebServlet(urlPatterns = "/searchbyaztec")
 public class SearchCarTypeByAztecCode extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(CarsDataLoader.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader.class);
     @Inject
     CarsDataLoader2 carsDataLoader2;
     @Inject
     BrandsCache brandsCache;
     @Inject
     CarIdentityFromAztec carIdentityFromAztec;
-
     @Inject
     SessionData sessionData;
 
@@ -41,7 +37,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
         if (sessionData.isLogged() == false) {
@@ -50,22 +46,17 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         }
 
         GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
-
         String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
 
         CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
-        System.out.println(aztecCodeFromFile);
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
         carFromAztec.setModel(null);
         carFromAztec.setCarType(null);
         req.setAttribute("action", "searchbyaztec");
 
-        System.out.println(aztecCodeFromFile + "--" + aztecCodeFromFile.getBrand());
-        if (aztecCodeFromFile != null) {//obiekt z json
-
+        if (aztecCodeFromFile != null) {
             carFromAztec = carIdentityFromAztec.FindingCarByAztecCode(aztecCodeFromFile);
-            System.out.println("-----" + carFromAztec);
         }
 
         if (req.getParameter("model") != null) {
@@ -75,9 +66,9 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             carFromAztec.setModel(selectedModel.get(0));
             carFromAztec.setBrand(sessionData.getCar().getBrand());
             sessionData.setCar(carFromAztec);
-        } else if (req.getParameter("BRAND") != null) {
+        } else if (req.getParameter("brand") != null) {
             List<Brand> brandsList = brandsCache.getBrandsList();
-            List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("BRAND"))).collect(Collectors.toList());
+            List<Brand> selectedBrand = brandsList.stream().filter(b -> b.getId().equals(req.getParameter("brand"))).collect(Collectors.toList());
             carFromAztec.setBrand(selectedBrand.get(0));
             sessionData.setCar(carFromAztec);
         }
@@ -156,8 +147,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
                 dispatcher.forward(req, resp);
 
             }
+
         }
     }
 }
-
-
