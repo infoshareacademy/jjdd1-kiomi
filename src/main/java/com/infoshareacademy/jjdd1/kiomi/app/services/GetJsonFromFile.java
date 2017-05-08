@@ -23,6 +23,7 @@ public class GetJsonFromFile {
         Gson gson = new Gson();
         //            Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(RESOURCES_DIR);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+
                 this.getClass().getResourceAsStream("/" + aztecCode)));
 
         AztecConfiguration aztecConfiguration=new AztecConfiguration();
@@ -35,5 +36,6 @@ public class GetJsonFromFile {
         return gson.fromJson(data, new TypeToken<CarFromAztecJson>() {
         }.getType());
 
+//        return null;
     }
 }

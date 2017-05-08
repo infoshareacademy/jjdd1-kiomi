@@ -20,7 +20,7 @@ public class Part {
     private String name;
     private String status;
     private String link;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Part.class);
+    private static final Logger LOGGER = LogManager.getLogger(Part.class);
 
     public Part(String brand) {
         this.brand = brand;

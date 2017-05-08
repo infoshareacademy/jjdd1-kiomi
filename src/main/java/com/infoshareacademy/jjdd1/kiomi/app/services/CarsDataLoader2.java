@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -24,6 +24,8 @@ import java.util.stream.Collectors;
 public class CarsDataLoader2 {
     final String DEFAULT_URL = "http://infoshareacademycom.2find.ru/api/v2?lang=polish";
     private static final int FIRST_ELEMENT = 0;
+    private static final Logger LOGGER = LogManager.getLogger(CarsDataLoader2.class);
+
     private static String JSON_DATA_TAG = "data";
 
     @Inject
@@ -34,7 +36,7 @@ public class CarsDataLoader2 {
     static List<Type> carType = new ArrayList();
     static List<PartCategory> partCategory = new ArrayList();
     static List<Part> part = new ArrayList();
-    private static final Logger LOGGER = LoggerFactory.getLogger(CarsDataLoader2.class);
+    private final
 
     static <T> T jsonLoader(T c, String file) throws IOException {
         Gson gson = new Gson();

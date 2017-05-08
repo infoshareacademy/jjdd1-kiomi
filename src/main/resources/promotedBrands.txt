@@ -1,2 +1,2 @@
-bosch
-ATE
+metelli
+delcoremy

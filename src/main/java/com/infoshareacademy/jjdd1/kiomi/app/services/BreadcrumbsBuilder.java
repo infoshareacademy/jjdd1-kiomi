@@ -1,8 +1,8 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
 import com.infoshareacademy.jjdd1.kiomi.TerminalMenu;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Created by arek50 on 2017-04-09.
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class BreadcrumbsBuilder {
     private String link;
     private String title;
-    private static final Logger LOGGER = LoggerFactory.getLogger(BreadcrumbsBuilder.class);
+    private static final Logger LOGGER = LogManager.getLogger(BreadcrumbsBuilder.class);
 
     public String getLink() {
         return link;

@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
 
@@ -26,6 +27,7 @@
         <hybernate.version>5.2.10.Final</hybernate.version>
         <mysql.version>6.0.6</mysql.version>
 
+
         <!--ACHTUNG ACHTUNG-->
 
         <!--uncomment for WEB version-->
@@ -35,6 +37,7 @@
         <!--<scope.settings>compile</scope.settings>-->
 
         <!--ACHTUNG ACHTUNG-->
+
 
         <!--mysql-->
         <!--<jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>-->
@@ -130,6 +133,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+            <scope>${scope.settings}</scope>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>com.google.api-client</groupId>-->
@@ -147,6 +151,17 @@
         <finalName>ROOT</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.1.0.Final</version>
@@ -159,4 +174,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

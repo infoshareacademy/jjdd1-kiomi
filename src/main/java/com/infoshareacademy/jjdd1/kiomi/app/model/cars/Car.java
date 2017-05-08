@@ -1,11 +1,13 @@
 package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Created by arek50 on 2017-04-22.
  */
 
 public class Car {
+    private static final Logger LOGGER = LogManager.getLogger(Car.class);
     private Brand brand;
     private Model model;
     private Type carType;
