@@ -32,8 +32,8 @@ public class BrandsCache {
     @Schedule(minute = "*", hour = "1")
     @PostConstruct
     public void starter() {
-        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
-        statisticDataBuilder.buildEntryToDatabase();
+//        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
+//        statisticDataBuilder.buildEntryToDatabase();
         try {
             brandsList = jsonParser.getBrandsList();
             LOGGER.info("Number of brandList elements: "+brandsList.size());
