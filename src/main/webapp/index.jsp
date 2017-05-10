@@ -19,12 +19,12 @@
         }
 
         .menu {
-            width: 200px;
-            border-right: 1px solid #ddd;
-            margin-right: 20px;
-            display: inline-block;
-            padding: 10px;
-            float: left;
+            width: 40%;
+            /*border-right: 1px solid #ddd;*/
+            /*margin-right: 20px;*/
+            /*display: inline-block;*/
+            /*padding: 10px;*/
+            /*float: left;*/
         }
 
         .partList {
@@ -42,6 +42,22 @@
             list-style: none;
         }
     </style>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/newWebBody.css"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+    <!-- jQuery js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -50,18 +66,26 @@
     <form method="get" action="/index">
         <div class="formField">
             <label>Marka</label>
-            <select name="brand">
+            <select name="brand" class="selectpicker" data-live-search="true">
                 <c:forEach items="${brandList}" var="element">
                     <option value="${element.id}" <c:if
-                            test="${element.id == param.brand}"> selected</c:if>>${element.name} ${element.id}</option>
+                            test="${element.id == param.brand}"> selected</c:if>>${element.name}</option>
                 </c:forEach>
             </select>
+
+
+            <%--<select name="brand">--%>
+                <%--<c:forEach items="${brandList}" var="element">--%>
+                    <%--<option value="${element.id}" <c:if--%>
+                            <%--test="${element.id == param.brand}"> selected</c:if>>${element.name} ${element.id}</option>--%>
+                <%--</c:forEach>--%>
+            <%--</select>--%>
         </div>
         <c:if test="${not empty modelList}">
             <div class="formField">
 
                 <label>Model</label>
-                <select name="model">
+                <select name="model" class="selectpicker" data-live-search="true">
                     <c:forEach items="${modelList}" var="element">
                         <option value="${element.id}" <c:if
                                 test="${element.id == param.model}"> selected</c:if>>${element.name} ${element.id}</option>
@@ -73,7 +97,7 @@
             <div class="formField">
 
                 <label>Typ silnika</label>
-                <select name="type">
+                <select name="type" class="selectpicker" data-live-search="true">
                     <c:forEach items="${typeList}" var="element">
                         <option value="${element.id}" <c:if
                                 test="${element.id == param.type}"> selected</c:if>>${element.name}</option>
@@ -88,7 +112,6 @@
     </form>
     <div class="breadcrumbs">
         <ul>
-
             <c:forEach items="${brandList}" var="element">
                 <c:if test="${element.id== param.brand}">
                     <li>>> <a href="${baseURL}?brand=${element.id}">${element.name}</a></li>
@@ -123,30 +146,40 @@
                 </c:if>
             </c:forEach>
             </c:forEach>
-
-
         </ul>
-
     </div>
 </header>
 <div class="main">
-    <div class="menu">
+    <div class="list-group">
         <c:choose>
             <c:when test="${not empty menuList}">
-                <ul>
+                    <a href="#" class="list-group-item active">Kategorie części Twojego pojazdu: </a>
                     <c:forEach items="${menuList}" var="element">
                         <c:choose>
                             <c:when test="${element.has_children==true}">
                                 <li><a href="${url}&cat=${element.id}">${element.name}</a></li>
                             </c:when>
                             <c:otherwise>
-                            <%--<li>${element.name}</li>--%>
+                                <%--<li>${element.name}</li>--%>
                                 <li><a href="${url}&cat=${element.id}&stock=1">${element.name}</a></li>
 
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                </ul>
+                <%--<ul> ////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+                    <%--<c:forEach items="${menuList}" var="element">--%>
+                        <%--<c:choose>--%>
+                            <%--<c:when test="${element.has_children==true}">--%>
+                                <%--<li><a href="${url}&cat=${element.id}">${element.name}</a></li>--%>
+                            <%--</c:when>--%>
+                            <%--<c:otherwise>--%>
+                            <%--&lt;%&ndash;<li>${element.name}</li>&ndash;%&gt;--%>
+                                <%--<li><a href="${url}&cat=${element.id}&stock=1">${element.name}</a></li>--%>
+
+                            <%--</c:otherwise>--%>
+                        <%--</c:choose>--%>
+                    <%--</c:forEach>--%>
+                <%--</ul> //////////////////////////////////////////////////////////////////////////--%>
             </c:when>
             <c:otherwise>
 
@@ -181,6 +214,18 @@
 
     </div>
 </div>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
+
 
 </body>
 </html>
