@@ -27,7 +27,9 @@ public class AztecConfiguration {
             return new HashMap<>();
         }
     }
-
+//try(BufferedReader br=new BufferedReader(new InputStreamReader(inputStream))) {
+//        br.lines().forEach(System.out::println);
+//    }
     public BufferedReader replaceFromMap(BufferedReader stream) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line;
