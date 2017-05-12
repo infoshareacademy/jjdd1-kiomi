@@ -14,7 +14,7 @@ body {
 {
     padding-top: 1px;
     padding-bottom: 1px;
-    background-image: url(/img/demo11.jpg);
+    background-image: url(/img/logobackground.jpg);
     background-size: auto;
     background-clip: border-box;
     height: auto;
@@ -37,4 +37,32 @@ body {
 .jumbotron p
 {
     font-size: 1.5em;
+}
+
+#mojeTresci
+{
+    display: inline;
+}
+
+#poczatekListy
+{
+
+}
+
+/*#listyKatCz*/
+/*{*/
+    /*margin-left: 0px;*/
+/*}*/
+
+/*#listaCzSzcz*/
+/*{*/
+    /*margin-right: 0px;*/
+/*}*/
+
+
+#myFooter
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-botom: 0px;
 }

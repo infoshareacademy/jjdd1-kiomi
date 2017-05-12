@@ -25,7 +25,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="icon" href="img/tabicon.png">
-
 </head>
 <body>
 <div class="container">
@@ -69,23 +68,42 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
     <ol class="breadcrumb">Twój aktualny wybór to:
         <li><a href="#" title="Marka pojazdu">$(marka pojazdu)</a></li>
         <li><a href="#" title="Model pojazdu">$(model pojazdu)</a></li>
         <li class="active" title="Typ silnika">$(typ silnika)</li>
     </ol>
 
-Tu wkleję dwie listy rozwijane
-
-    <br/><br/>
-    <footer>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                Panel content
-            </div>
-            <div class="panel-footer">Panel footer</div>
+    <div class="row">
+    <div class="col-lg-6"  id="listyKatCz">
+        <div class="list-group">
+            <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Kategorie części</a>
+            <a href="#" class="list-group-item">$(iterowana lista części)</a>
         </div>
-    </footer>
+    </div>
+
+    <div class="col-lg-6" id="listaCzSzcz">
+        <div class="list-group">
+            <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Części szczegółowe</a>
+            <a href="#" class="list-group-item">$(iterowana lista części)</a>
+        </div>
+    </div>
+    </div>
+
+    <nav class="navbar navbar-default" id="myFooter">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+                <ul class="nav navbar-nav navbar-left">
+                    <!--<li><a href="#">Logout</a></li>-->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila">Kontakt</a></li>
+                    <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?">Więcej o team KIOMI</a></li>
+                    <li><a href="#" title="Wersja aplikacji z której korzystasz">v.0.3</a></li>
+                </ul>
+        </div><!-- /.container-fluid -->
+    </nav>
 </div>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -97,7 +115,5 @@ Tu wkleję dwie listy rozwijane
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
-
-
 </body>
 </html>
