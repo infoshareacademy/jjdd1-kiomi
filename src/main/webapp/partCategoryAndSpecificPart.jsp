@@ -59,13 +59,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu: <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>
                     <li><a href="#" title="Wyszukiwanie pojazd od początku">Nowe wyszukiwanie</a></li>
                     <li><a href="#" title="Rozpocznij wyszukiwanie po kodzie Aztec">Wyszukiwanie Aztec</a></li>
                     <li><a href="#" title="Nasz raport najpopularniejszych części">Raoprt popularności części</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Logout</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Witaj: ${session.username}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu">Panel Administracyjny</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/GoogleLogin.jsp" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -73,16 +79,15 @@
     </nav>
 
     <ol class="breadcrumb">Twój aktualny wybór to:
-        <li class="active" title="Marka pojazdu">marka: ${brand}</li>
-        <li clsss="active" title="Model pojazdu">model: ${model}</li>
-        <li class="active" title="Typ silnika">typ silnika: ${carType}</li>
+        <li class="active" title="Marka pojazdu"> marka: ${brand}</li>
+        <li clsss="active" title="Model pojazdu"> model: ${model}</li>
+        <li class="active" title="Typ silnika"> typ silnika: ${carType}</li>
     </ol>
 
     <div class="row">
         <div class="col-lg-6"  id="listyKatCz">
             <div class="list-group">
                 <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Kategorie części</a>
-                <%--<a href="#" class="list-group-item">$(iterowana lista części)</a>--%>
                 <c:choose>
                     <c:when test="${not empty menuList}">
                         <c:forEach items="${menuList}" var="element">
@@ -98,9 +103,7 @@
                     </c:when>
                     <c:otherwise>
                         <c:if test="${not empty param.type}">
-                            <p>
-                                Nie ma kategorii.
-                            </p>
+                            <p align="center">Lista kategorii jest pusta.</p>
                         </c:if>
                     </c:otherwise>
                 </c:choose>
@@ -110,7 +113,6 @@
         <div class="col-lg-6" id="listaCzSzcz">
             <div class="list-group">
                 <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Części szczegółowe</a>
-                <%--<a href="#" class="list-group-item">$(iterowana lista części)</a>--%>
                 <c:choose>
                     <c:when test="${fn:length(partList) gt 1}">
                         <ul>
@@ -122,7 +124,7 @@
                         </ul>
                     </c:when>
                     <c:otherwise>
-                        <a class="list-group-item" href="#">Wybierz kategorię aby wyświetlić części</a>
+                        <a class="list-group-item" align="center" href="#">Wybierz kategorię aby wyświetlić części</a>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -133,16 +135,73 @@
         <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <ul class="nav navbar-nav navbar-left">
-                <!--<li><a href="#">Logout</a></li>-->
+                <!--<li><a href="#" title="Funkcjonalność będzie dostępna po 4-tym sprincie szkoleniowym.">Admin</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila">Kontakt</a></li>
-                <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?">Więcej o team KIOMI</a></li>
-                <li><a href="#" title="Wersja aplikacji z której korzystasz">v.0.3</a></li>
+                <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila" data-toggle="modal" data-target="#daneKONT">Kontakt</a></li>
+                <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?" data-toggle="modal" data-target="#infoKIOMI">Więcej o team KIOMI</a></li>
+                <li><a href="#" title="Wersja aplikacji z której korzystasz" data-toggle="modal" data-target="#wersjaAPP">Autoparts</a></li>
             </ul>
         </div><!-- /.container-fluid -->
     </nav>
 </div>
+
+<!-- Modale -->
+<div class="modal fade" id="daneKONT" role="dialog">
+    <div class="modal-dialog modal-med">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Dane kontaktowe</h4>
+            </div>
+            <div class="modal-body">
+                <p>team KIOMI: teamkiomi@gmail.com</p>
+                <p>infoShare Academy: biuro@infoshareacademy.com</p>
+                <p>Marketing info: wojtek@infoshareacademy.com</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="infoKIOMI" role="dialog">
+    <div class="modal-dialog modal-med">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Informacje o team KIOMI</h4>
+            </div>
+            <div class="modal-body">
+                <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju 2017.
+                    Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest aplikacja Autoparts.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="wersjaAPP" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Wersja aplikacji Autoparts</h4>
+            </div>
+            <div class="modal-body">
+                <p>Aktualna wersja: v0.3</p>
+                <p>Premiera: 15.05.2017r. 16:00, Gdańsk</p>
+                <p>Wersja rozwojowa: <a href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
+                <p>Pracują państwo na aplikacji po 3 sprincie szkoleniowym.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"

@@ -78,7 +78,7 @@ public class ChoisingPartCategory extends HttpServlet {
 //            }
 //        }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index1.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("partCategoryAndSpecificPart.jsp");
         dispatcher.forward(req, resp);
 
 

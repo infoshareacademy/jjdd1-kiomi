@@ -92,7 +92,7 @@ public class WebApp extends HttpServlet {
             req.setAttribute("partList", part);
             req.setAttribute("url", uri);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/index1.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/partCategoryAndSpecificPart.jsp");
             dispatcher.forward(req, resp);
         } catch (IOException e) {
             LOGGER.error("Brak pliku na serwerze: " + e.getMessage());
