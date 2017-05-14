@@ -60,17 +60,17 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#" title="Wyszukiwanie pojazd od początku">Nowe wyszukiwanie</a></li>
-                    <li><a href="#" title="Rozpocznij wyszukiwanie po kodzie Aztec">Wyszukiwanie Aztec</a></li>
-                    <li><a href="#" title="Nasz raport najpopularniejszych części">Raoprt popularności części</a></li>
+                    <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Nowe wyszukiwanie</a></li>
+                    <li><a href="/searchbyaztec" title="Rozpocznij wyszukiwanie po kodzie Aztec">Wyszukiwanie Aztec</a></li>
+                    <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części">Raport popularności części</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Witaj: ${session.username}<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Witaj ${sessionUserName}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu">Panel Administracyjny</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/GoogleLogin.jsp" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a></li>
+                            <li><a href="/googlelogin" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -79,31 +79,31 @@
     </nav>
 
     <ol class="breadcrumb">Twój aktualny wybór to:
-        <li class="active" title="Marka pojazdu"> marka: ${brand}</li>
-        <li clsss="active" title="Model pojazdu"> model: ${model}</li>
-        <li class="active" title="Typ silnika"> typ silnika: ${carType}</li>
+        <li title="Marka pojazdu"> marka: ${brand}</li>
+        <li title="Model pojazdu"> model: ${model}</li>
+        <li title="Typ silnika"> typ silnika: ${carType}</li>
     </ol>
 
     <div class="row">
-        <div class="col-lg-6"  id="listyKatCz">
+        <div class="col-lg-6" id="listyKatCz">
             <div class="list-group">
                 <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Kategorie części</a>
                 <c:choose>
-                    <c:when test="${not empty menuList}">
-                        <c:forEach items="${menuList}" var="element">
+                    <c:when test="${not empty partCategories}">
+                        <c:forEach items="${partCategories}" var="element">
                             <c:choose>
                                 <c:when test="${element.has_children==true}">
-                                    <li><a class="list-group-item" href="${url}&cat=${element.id}">${element.name}</a></li>
+                                    <a class="list-group-item" href="${element.id}" align="center" value="${element.id}">${element.name}</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a class="list-group-item" href="${url}&cat=${element.id}&stock=1">${element.name}</a></li>
+                                    <a class="list-group-item" href="${element.id}&stock=1" align="center" value="${element.id}">${element.name}</a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <c:if test="${not empty param.type}">
-                            <p align="center">Lista kategorii jest pusta.</p>
+                        <a class="list-group-item" align="center" href="#">Lista kategorii jest pusta.</a>
                         </c:if>
                     </c:otherwise>
                 </c:choose>
@@ -114,14 +114,12 @@
             <div class="list-group">
                 <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Części szczegółowe</a>
                 <c:choose>
-                    <c:when test="${fn:length(partList) gt 1}">
-                        <ul>
-                            <c:forEach items="${partList}" var="element">
-                                <li> <a class="list-group-item" href="https://allegro.pl/listing?string=${element.brand}%20${element.number}
+                    <c:when test="${fn:length(parts) gt 1}">
+                            <c:forEach items="${parts}" var="element">
+                                <a class="list-group-item" href="https://allegro.pl/listing?string=${element.brand}%20${element.number}
                                 &description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222" target="_blank">
-                                        ${element.number} ${element.name}</a></li>
+                                        ${element.number} ${element.name}</a>
                             </c:forEach>
-                        </ul>
                     </c:when>
                     <c:otherwise>
                         <a class="list-group-item" align="center" href="#">Wybierz kategorię aby wyświetlić części</a>
@@ -146,6 +144,7 @@
     </nav>
 </div>
 
+<div id="modale">
 <!-- Modale -->
 <div class="modal fade" id="daneKONT" role="dialog">
     <div class="modal-dialog modal-med">
@@ -200,6 +199,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Latest compiled and minified JavaScript -->

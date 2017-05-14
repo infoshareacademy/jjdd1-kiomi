@@ -5,60 +5,60 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
-<head>
-    <title>Wyszukiwarka części</title>
+<%--<head>--%>
+    <%--<title>Wyszukiwarka części</title>--%>
 
-    <style>
-        .topHeader {
-            width: 100%;
-            border-bottom: 1px solid #ddd;
-        }
+    <%--<style>--%>
+        <%--.topHeader {--%>
+            <%--width: 100%;--%>
+            <%--border-bottom: 1px solid #ddd;--%>
+        <%--}--%>
 
-        .formField {
-            display: inline-block;
-        }
+        <%--.formField {--%>
+            <%--display: inline-block;--%>
+        <%--}--%>
 
-        .menu {
-            width: 40%;
-            /*border-right: 1px solid #ddd;*/
-            /*margin-right: 20px;*/
-            /*display: inline-block;*/
-            /*padding: 10px;*/
-            /*float: left;*/
-        }
+        <%--.menu {--%>
+            <%--width: 40%;--%>
+            <%--/*border-right: 1px solid #ddd;*/--%>
+            <%--/*margin-right: 20px;*/--%>
+            <%--/*display: inline-block;*/--%>
+            <%--/*padding: 10px;*/--%>
+            <%--/*float: left;*/--%>
+        <%--}--%>
 
-        .partList {
-            display: inline-block;
-            width: calc(100% - 300px);
-            padding: 10px;
-            float: right;
-        }
+        <%--.partList {--%>
+            <%--display: inline-block;--%>
+            <%--width: calc(100% - 300px);--%>
+            <%--padding: 10px;--%>
+            <%--float: right;--%>
+        <%--}--%>
 
-        .breadcrumbs {
-            width: 100%;
-        }
-        .breadcrumbs li {
-            display: inline-block;
-            list-style: none;
-        }
-    </style>
+        <%--.breadcrumbs {--%>
+            <%--width: 100%;--%>
+        <%--}--%>
+        <%--.breadcrumbs li {--%>
+            <%--display: inline-block;--%>
+            <%--list-style: none;--%>
+        <%--}--%>
+    <%--</style>--%>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <%--<!-- Latest compiled and minified CSS -->--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
+          <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
+    <%--<!-- Optional theme -->--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
+          <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
 
-    <link rel="stylesheet" href="css/newWebBody.css"/>
+    <%--<link rel="stylesheet" href="css/newWebBody.css"/>--%>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <%--<!-- Latest compiled and minified CSS -->--%>
+    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">--%>
 
-    <!-- jQuery js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%--<!-- jQuery js -->--%>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
 
-</head>
+<%--</head>--%>
 <body>
 
 <header class="topHeader">
