@@ -51,7 +51,6 @@ public class ChoisingPartCategory extends HttpServlet {
         req.setAttribute("carType", carTypeName);
         req.setAttribute("model", modelName);
 
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("productList.jsp");
         dispatcher.forward(req, resp);
 
