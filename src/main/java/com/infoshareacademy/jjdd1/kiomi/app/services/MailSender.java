@@ -1,15 +1,22 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
-
 import javax.mail.*;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class MailSender {
+public class MailSender extends TimerTask {
     public static void main(String[] args) throws MessagingException {
 
+        Timer timer = new Timer();
+        timer.schedule(new MailSender(), 0, 10000);
+    }
+
+    @Override
+    public  void run() {
         System.out.println("-- Starting procedure of Sending mail ---");
 
         Properties properties=new Properties();
@@ -29,13 +36,20 @@ public class MailSender {
 
         Message message=new MimeMessage(session);
 
-        message.setSubject("Message From 'Kiomi Autoparts'");
-        message.setText("Info concerning statistics of autoparts");
-//        message.setFrom(new InternetAddress("123@wp.pl"));
+        try {
+            message.setSubject("Message From 'Kiomi Autoparts'");
+            message.setText("Info concerning statistics of autoparts");
+            message.setFrom(new InternetAddress("kiomi.info@gmail.com"));
+            message.setRecipient(Message.RecipientType.TO,new InternetAddress("kiomi.info@gmail.com"));
+            Transport.send(message);
+            System.out.println("Succces: Mail sent!");
 
-        message.setRecipient(Message.RecipientType.TO,new InternetAddress("kiomi.info@gmail.com"));
-        Transport.send(message);
-        System.out.println("Succces: Mail sent!");
-        System.out.println("==============================================");
+        } catch (MessagingException e) {
+            System.out.println("Email error: "+e);
+        }
+        finally {
+            System.out.println("==============================================");
+        }
+
     }
 }
