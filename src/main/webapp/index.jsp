@@ -167,7 +167,8 @@
             <c:when test="${fn:length(partList) gt 1}">
                 <ul>
                     <c:forEach items="${partList}" var="element">
-                        <li> <a href="https://allegro.pl/listing?string=${element.brand}%20${element.number}&description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222" target="_blank">${element.number} ${element.name}</a></li>
+                        <!--<li> <a href="https://allegro.pl/listing?string=${element.brand}%20${element.number}&description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222" target="_blank">${element.number} ${element.name}</a></li>-->
+                        <li> <a href="/redirect?partbrand=${element.brand}&number=${element.number}" target="_blank">${element.number} ${element.name}</a></li>
                     </c:forEach>
                 </ul>
             </c:when>

@@ -23,7 +23,7 @@ public class TerminalMenu {
     private static final Logger LOGGER = LogManager.getLogger(TerminalMenu.class);
 
     public static void main(String[] args) throws IOException {
-        StatisticDataBuilder.buildEntryToDatabase();
+
 
 
         try {
