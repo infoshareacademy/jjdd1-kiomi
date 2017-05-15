@@ -116,8 +116,7 @@
                 <c:choose>
                     <c:when test="${fn:length(parts) gt 1}">
                             <c:forEach items="${parts}" var="element">
-                                <a class="list-group-item" href="https://allegro.pl/listing?string=${element.brand}%20${element.number}
-                                &description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222" target="_blank">
+                                <a class="list-group-item" href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}" target="_blank">
                                         ${element.number} ${element.name}</a>
                             </c:forEach>
                     </c:when>

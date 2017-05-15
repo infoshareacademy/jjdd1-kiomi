@@ -83,7 +83,7 @@ public class ChoisingPartCategory extends HttpServlet {
             LOGGER.debug("PartCategory bez kat url samochodu to: {}", partCategoriesUrl  + url2);
 
         }
-//        sessionData.setPartCategory(category[0]);
+        sessionData.setPartCategory(category[0]);
 //
         PromotedBrandsLoader promotedBrandsLoader = new PromotedBrandsLoader();
         if (part.size() > 0) {
@@ -91,7 +91,7 @@ public class ChoisingPartCategory extends HttpServlet {
         }
 
 
-
+        req.setAttribute("categoryname", sessionData.getPartCategory());
         req.setAttribute("partCategories", partCategories);
         req.setAttribute("parts", part);
 
