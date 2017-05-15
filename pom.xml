@@ -53,6 +53,8 @@
             ${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false
         </wildfly.add-user>
 
+        <wildfly.startupTimeout>300</wildfly.startupTimeout>
+
     </properties>
 
 
