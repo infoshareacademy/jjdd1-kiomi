@@ -82,10 +82,10 @@ public class CarsDataLoader2 {
     public List<Type> getTypesListByLink(String link) throws IOException {
         carType = jsonLoader(carType, link);
 
-        LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: " + carType.size());
+//        LOGGER.debug("Ilość wyników wyszukiwania po typie samochodu: " + carType.size());
 //        LOGGER.debug(String.format("Pierwszy element z listy wyszukiwania po typie samochodu %s", carType.get(FIRST_ELEMENT)));
 
-        LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: " + carType.size());
+//        LOGGER.debug("Ilość wyników wyszukiwania po wyborze typu: " + carType.size());
 //        LOGGER.debug(String.format("Pierwszy element z listy wyszukanych typów %s", carType.get(FIRST_ELEMENT)));
         return carType;
 

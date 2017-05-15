@@ -56,6 +56,7 @@ public class ChoisingPartCategory extends HttpServlet {
         req.setAttribute("carType", carTypeName);
         req.setAttribute("sessionUserName", sessionData.getFirstname());
 
+
         String url = "http://infoshareacademycom.2find.ru/api/v2/find/";
         String url2 = "?lang=polish";
         String brandId = sessionData.getCar().getBrand().getId();
@@ -69,6 +70,7 @@ public class ChoisingPartCategory extends HttpServlet {
 
         List<Part> part = new ArrayList<>();
         if (!category[0].equals("")) {
+
 
             String parturl=url + brandId + "/" + modelId + "/" + carTypeId + "/" + category[0] + "/stock";
             part = carsDataLoader2.getPartListByLink(parturl + url2);
