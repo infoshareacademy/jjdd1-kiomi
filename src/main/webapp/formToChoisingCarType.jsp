@@ -71,7 +71,7 @@
                                         <c:if
                                                 test="${element.id == param.type}"> selected
                                         </c:if>
-                                >${element.name} ${element.id}</option>
+                                >${element.name} (${element.fuel}, ${element.ccm} ccm)</option>
                             </c:forEach>
                         </select>
 
@@ -95,10 +95,10 @@
 
                 </div>
             </form>
-            <div class="lightbox text-left lightbox-top-margin">
-                Jakieś dane...
-                <%--${typeList.get(0).name}--%>
-            </div>
+            <%--<div class="lightbox text-left lightbox-top-margin">--%>
+                <%--Jakieś dane...--%>
+                <%--&lt;%&ndash;${typeList.get(0).name}&ndash;%&gt;--%>
+            <%--</div>--%>
 
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>

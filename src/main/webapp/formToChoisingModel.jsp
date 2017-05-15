@@ -69,7 +69,7 @@
                                                 <c:if
                                                         test="${element.id == param.model}"> selected
                                                 </c:if>
-                                        >${element.name} ${element.id}</option>
+                                        >${element.name} (${element.start_year} - ${element.end_year})</option>
                                     </c:forEach>
                                 </select>
                             </p>
@@ -84,10 +84,10 @@
                     </c:choose>
                 </div>
             </form>
-            <div class="lightbox text-left lightbox-top-margin">
-                Jakieś dane...
-                <%--${modelList.get(0).name}--%>
-            </div>
+            <%--<div class="lightbox text-left lightbox-top-margin">--%>
+                <%--Jakieś dane...--%>
+                <%--&lt;%&ndash;${modelList.get(0).name}&ndash;%&gt;--%>
+            <%--</div>--%>
 
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>

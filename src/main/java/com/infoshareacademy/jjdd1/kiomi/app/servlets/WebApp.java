@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * Created by arek50 on 2017-04-15.
  */
-@WebServlet(urlPatterns = "/index")
+@WebServlet(urlPatterns = "/index2")
 public class WebApp extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(WebApp.class);
 

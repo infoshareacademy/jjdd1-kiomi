@@ -70,7 +70,7 @@ public class ChoisingCarType extends HttpServlet {
         req.setAttribute("brandId", brandId);
         req.setAttribute("model", modelName);
         req.setAttribute("typeList", typesList);
-        req.setAttribute("action", "choisingpartcategory");
+        req.setAttribute("action", "index");
 
         sessionData.setCar(car);
         RequestDispatcher dispatcher = req.getRequestDispatcher("formToChoisingCarType.jsp");
