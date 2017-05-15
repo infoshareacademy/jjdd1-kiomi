@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "/choisingpartcategory")
+@WebServlet(urlPatterns = "/index")
 public class ChoisingPartCategory extends HttpServlet {
 
     @Inject
@@ -124,6 +124,6 @@ public class ChoisingPartCategory extends HttpServlet {
         car.setModel(sessionData.getCar().getModel());
         sessionData.setCar(car);
 
-        resp.sendRedirect("http://localhost:8080/choisingpartcategory");
+        resp.sendRedirect("http://localhost:8080/index");
     }
 }

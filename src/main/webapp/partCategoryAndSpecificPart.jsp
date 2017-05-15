@@ -60,8 +60,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>
-                    <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Nowe wyszukiwanie</a></li>
-                    <li><a href="/searchbyaztec" title="Rozpocznij wyszukiwanie po kodzie Aztec">Wyszukiwanie Aztec</a></li>
+                    <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Zmień pojazd</a></li>
+
                     <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części">Raport popularności części</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -70,7 +70,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu">Panel Administracyjny</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/googlelogin" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a></li>
+                            <li><a href="/logout" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -93,7 +93,7 @@
                         <c:forEach items="${partCategories}" var="element">
                             <c:choose>
                                 <c:when test="${element.has_children==true}">
-                                    <a class="list-group-item" href="choisingpartcategory?cat=${element.id}" align="center" value="${element.id}">${element.name}</a>
+                                    <a class="list-group-item" href="index?cat=${element.id}" align="center" value="${element.id}">${element.name}</a>
                                 </c:when>
                                 <%--<c:otherwise>--%>
                                     <%--<a class="list-group-item" href="choisingpartcategory?cat=${element.id}&stock=1" align="center" value="${element.id}">${element.name}</a>--%>

@@ -111,7 +111,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         } else {
             String modelLink = carFromAztec.getModel().getLink();
             String url = "http://infoshareacademycom.2find.ru" + modelLink + "?lang=polish";
-            req.setAttribute("action", "choisingpartcategory");
+            req.setAttribute("action", "index");
 
             List<Type> carTypeList = carIdentityFromAztec.findCarType(url, aztecCodeFromFile);
             if (carTypeList.size() > 1) {
