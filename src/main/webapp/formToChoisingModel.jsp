@@ -63,7 +63,7 @@
                     <c:choose>
                         <c:when test="${modelList.size()>0}">
                             <p class="btn-margin">
-                                <select name="model" class="form-control">
+                                <select name="model" class="form-control" id="model">
                                     <c:forEach items="${modelList}" var="element">
                                         <option value="${element.id}"
                                                 <c:if
@@ -93,10 +93,53 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+
+<script>
+    $('#model').on('change', function () {
+        var selectedId = this.value;
+        var url = "http://infoshareacademycom.2find.ru/api/v2/find/";
+//        String url2="?lang=polish";
+
+        $.ajax({
+            url: "data.json",
+            //force to handle it as text
+            dataType: "text",
+            success: function (data) {
+                var json = $.parseJSON(data);
+                $(json).data.each(function (i, val) {
+                    $.each(val, function (k, v) {
+                        console.log(k + " : " + v);
+                    });
+                });
+
+            }
+        });
+    });
+
+//    var items = data.items.map(function (item) {
+//        return item.key + ': ' + item.value;
+//    });
+//    var json = $.parseJSON(j);
+//    $(json).each(function (i, val) {
+//        $.each(val, function (k, v) {
+//            console.log(k + " : " + v);
+//        });
+//    });
+//    $.getJSON('/functions.php', {get_param: 'value'}, function (data) {
+//        $.each(data, function (index, element) {
+//            $('body').append($('<div>', {
+//                text: element.name
+//            }));
+//        });
+//    });
+//    alert(this.value);
+
+</script>
 </body>
 </html>
