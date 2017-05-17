@@ -63,6 +63,7 @@
                     <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Zmień pojazd</a></li>
 
                     <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części">Raport popularności części</a></li>
+                    <li><a href="/statisticsReport" title="Statystyki">Statystyki</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

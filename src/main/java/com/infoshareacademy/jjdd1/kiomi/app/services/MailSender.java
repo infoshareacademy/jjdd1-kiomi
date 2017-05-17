@@ -1,19 +1,16 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
+import javax.ejb.Singleton;
 import javax.mail.*;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MailSender extends TimerTask {
-    public static void main(String[] args) throws MessagingException {
-
-        Timer timer = new Timer();
-        timer.schedule(new MailSender(), 0, 10000);
-    }
 
     @Override
     public  void run() {
@@ -42,7 +39,7 @@ public class MailSender extends TimerTask {
             message.setFrom(new InternetAddress("kiomi.info@gmail.com"));
             message.setRecipient(Message.RecipientType.TO,new InternetAddress("kiomi.info@gmail.com"));
             Transport.send(message);
-            System.out.println("Succces: Mail sent!");
+            System.out.println("Succces: Mail sent at: "+new Date());
 
         } catch (MessagingException e) {
             System.out.println("Email error: "+e);

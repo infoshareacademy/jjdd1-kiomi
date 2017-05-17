@@ -2,6 +2,7 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 
+import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,12 +30,13 @@ public class BrandsCache {
     @Inject
     CarsDataLoader2 jsonParser;
 
-
-
-
     @Schedule(minute = "*", hour = "1")
+    //@Schedule(minute = "36", hour = "13")
     @PostConstruct
     public void starter() {
+
+        MailSender mailSender =new MailSender();
+        mailSender.run();
 
 //        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
 //        statisticDataBuilder.buildEntryToDatabase();
