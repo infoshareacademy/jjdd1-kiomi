@@ -46,7 +46,7 @@
                 <p class="title">Wybierz metodę identyfikacji samochodu</p>
                 <p class="btn-margin">
                 <form action="/searchbyaztec" method="POST">
-                    <input type="hidden" name="aztec" value="AztecCodeResult.json">
+                    <input type="text" name="aztec" value="" placeholder="kod aztec" class="btn btn-login btn-lg">
                     <input type="submit"  class="btn btn-login btn-lg" value="Po kodzie aztec">
                 </form>
                 </p>

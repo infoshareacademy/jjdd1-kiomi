@@ -45,10 +45,11 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             resp.sendRedirect("http://localhost:8080/googlelogin");
         }
 
-        GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
+//        GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
+        GetJsonFromAtenaWeb getJsonFromAtenaWeb = new GetJsonFromAtenaWeb();
         String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
 
-        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
+        CarFromAztecJson aztecCodeFromFile = getJsonFromAtenaWeb.getJsonFile(aztec);
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
         carFromAztec.setModel(null);
