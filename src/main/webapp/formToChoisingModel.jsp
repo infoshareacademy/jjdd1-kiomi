@@ -19,6 +19,7 @@
       integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="css/loginpage.css">
+<link rel="icon" href="img/tabicon.png">
 </head>
 <body>
 <div class="">
@@ -88,7 +89,7 @@
                 <%--Jakieś dane...--%>
                 <%--&lt;%&ndash;${modelList.get(0).name}&ndash;%&gt;--%>
             <%--</div>--%>
-
+            </br></br>
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>
     </div>

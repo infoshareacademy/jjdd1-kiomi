@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>MySQL_Query</title>
+    <link rel="icon" href="img/tabicon.png">
 </head>
 <body>
 
