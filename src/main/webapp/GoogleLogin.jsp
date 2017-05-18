@@ -6,9 +6,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-</html>
 <meta charset="UTF-8">
-<title>Autoparts</title>
+<title>Autoparts - Zalogu się aby skorzystać z naszej aplikacji!</title>
 <link rel="icon" href="img/tabicon.png">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">

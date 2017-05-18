@@ -188,8 +188,7 @@ overflow: hidden;
     color: black;
 }
 
-#mojeTresci
-{
+#mojeTresci {
     display: inline;
 }
 
@@ -229,7 +228,7 @@ overflow: hidden;
 .header-progress-item {
     position: relative;
     display: inline-block;
-    width: 135px;
+    width: auto;
     text-align: center;
     line-height: 3em;
 }
@@ -299,8 +298,13 @@ h1.errorAlert {
 #myUL {
     /*!* Remove default list styling *!*/
     list-style-type: none;
+    width: 100%;
     margin: 0;
     display: block;
+}
+
+li a :hover {
+    color: black;
 }
 
 #myUL li a {
@@ -311,7 +315,7 @@ h1.errorAlert {
     /*text-decoration: none; !* Remove default text underline *!*/
     /*font-size: 18px; !* Increase the font-size *!*/
     /*color: black; !* Add a black text color *!*/
-    display: block; /* Make it into a block element to fill the whole list */
+    /*display: block; !* Make it into a block element to fill the whole list *!*/
 }
 
 /*#myUL li a.header {*/

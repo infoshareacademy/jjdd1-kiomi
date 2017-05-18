@@ -8,7 +8,8 @@
 <head>
 </html>
 <meta charset="UTF-8">
-<title>Autoparts</title>
+<title>Autoparts - Taki adres nie istnieje w naszej bazie!</title>
+<link rel="icon" href="img/tabicon.png">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,8 +18,6 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<link rel="stylesheet" href="css/loginpage.css">
-<link rel="icon" href="img/tabicon.png">
 </head>
 <body>
 <div class="">

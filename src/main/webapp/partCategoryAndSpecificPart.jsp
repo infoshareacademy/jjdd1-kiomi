@@ -24,7 +24,6 @@
 
     <!-- jQuery js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 </head>
 <body>
 
@@ -41,16 +40,17 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" style="color: #fff">Zapraszamy</a>
+                    <a class="navbar-brand" href="#" style="color: #fff">Wyszukaj części do swojego pojazdu, <small>lub:</small></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#" style="font-size: 1.2em; border-left-style: hidden;">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>
+                        <%--<li><a href="#" style="font-size: 1.2em; border-left-style: hidden;">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>--%>
                         <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku" style="color: #fff">Zmień pojazd</a></li>
 
-                        <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części" style="color: #fff">Raport popularności części</a></li>
+                        <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części" style="color: #fff">if:admin->Raport popularności części</a></li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -105,8 +105,7 @@
                             <c:choose>
                                 <c:when test="${fn:length(parts) gt 1}">
                                         <c:forEach items="${parts}" var="element">
-                                            <li><a class="list-group-item" id="contaCzSzcz" href="redirect?partcategory=${categoryname}
-                                            &partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} (${element.number})</a></li>
+                                            <li><a class="list-group-item" id="contaCzSzcz" href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} (${element.number})</a></li>
                                         </c:forEach>
                                 </c:when>
                                 <c:otherwise>
