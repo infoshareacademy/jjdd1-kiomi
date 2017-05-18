@@ -23,7 +23,7 @@ public class StatisticsUtility {
 
 
 //    in this case there is a need to use a native sql query
-    public Map< String,BigInteger> getBrandAndCountMap() {
+    public Map<String,BigInteger> getBrandAndCountMap() {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
         EntityManager entityManager = emf.createEntityManager();
@@ -40,7 +40,7 @@ public class StatisticsUtility {
         return brandAndCountMap;
     }
 
-    public Map< String,BigInteger> getModelAndCountMap() {
+    public Map<String,BigInteger> getModelAndCountMap() {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
         EntityManager entityManager = emf.createEntityManager();
@@ -57,7 +57,7 @@ public class StatisticsUtility {
         return modelAndCountMap;
     }
 
-    public Map< String,BigInteger> getTypeAndCountMap() {
+    public Map<String,BigInteger> getTypeAndCountMap() {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
         EntityManager entityManager = emf.createEntityManager();
