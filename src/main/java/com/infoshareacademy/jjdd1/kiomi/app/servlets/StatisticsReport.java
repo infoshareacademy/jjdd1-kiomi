@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.*;
 
 @WebServlet(urlPatterns = "/statisticsReport")
 public class StatisticsReport extends HttpServlet {
@@ -19,25 +19,32 @@ public class StatisticsReport extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        StatisticsUtility statisticsUtility=new StatisticsUtility();
-        List<Statistics> listOfAllStatistics=new ArrayList<>();
+        StatisticsUtility statisticsUtility = new StatisticsUtility();
 
-        listOfAllStatistics=statisticsUtility.getAllData();
+        List<Statistics> listOfAllStatistics = new ArrayList<>();
+        listOfAllStatistics = statisticsUtility.getAllData();
 
-//        for(Statistics value :listOfAllStatistics){
-//            System.out.println(value.getId()+" | "+ value.getCarBrand()+" | " + value.getCarModel() +" | "+ value.getCarType()+" | "+value.getPartCategory()+" | "+value.getCarBrand()+" | "+value.getPartName()+" | "+value.getPartSerial());
+        Map<String, BigInteger> brandAndCountMap = new LinkedHashMap<>();
+        brandAndCountMap = statisticsUtility.getBrandAndCountMap();
+
+        Map<String,BigInteger> modelAndCountMap = new LinkedHashMap<>();
+        modelAndCountMap=statisticsUtility.getModelAndCountMap();
+
+        Map<String,BigInteger> typeAndCountMap = new LinkedHashMap<>();
+        typeAndCountMap=statisticsUtility.getTypeAndCountMap();
+
+        request.setAttribute("listOfAllStatistics", listOfAllStatistics);
+        request.setAttribute("brandAndCountMap", brandAndCountMap);
+        request.setAttribute("modelAndCountMap", modelAndCountMap);
+        request.setAttribute("typeAndCountMap", typeAndCountMap);
+
+//        for (Map.Entry<String, BigInteger> entry : typeAndCountMap.entrySet()) {
+//            String key = entry.getKey();
+//            BigInteger value = entry.getValue();
+//            System.out.println("--> " + key + " " + value);
 //        }
 
-//        List<Statistics> list =new ArrayList<>();
-//        list=statisticsUtility.getCarBrandList();
-//
-//        for(Statistics value :list){
-//            System.out.println(value.getId()+" | "+ value.getCarBrand()+" | " + value.getCarModel() +" | "+ value.getCarType()+" | "+value.getPartCategory()+" | "+value.getCarBrand()+" | "+value.getPartName()+" | "+value.getPartSerial());
-//        }
-//
-        request.setAttribute("listOfAllStatistics",listOfAllStatistics);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/statisticsReport.jsp");
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/statisticsReport.jsp");
+            dispatcher.forward(request, response);
     }
 }

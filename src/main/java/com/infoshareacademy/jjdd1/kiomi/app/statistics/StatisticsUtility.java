@@ -1,40 +1,77 @@
 package com.infoshareacademy.jjdd1.kiomi.app.statistics;
 
 
+import org.hibernate.SQLQuery;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigInteger;
+import java.util.*;
 
 public class StatisticsUtility {
 
-    List<Statistics> listOfAllStatistics=new ArrayList<>();
+    List<Statistics> listOfAllStatistics = new ArrayList<>();
 
-   public List<Statistics>  getAllData(){
+    public List<Statistics> getAllData() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createQuery("SELECT e FROM Statistics e");
         return query.getResultList();
     }
 
-//    public List<Statistics>  getCarBrandList(){
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
-//        EntityManager entityManager = emf.createEntityManager();
-//        Query query = entityManager.createQuery("SELECT c ,COUNT (c.carBrand) FROM Statistics c GROUP BY c.carBrand", Statistics.class);
-//
-//        List<Object[]> rawResult = query.getResultList();
-//
-//        Map<String, String> processedResult = new HashMap<>();
-//        for (Object[] item : rawResult) {
-//            processedResult.put((String)item[0], (String)item[1]);
-//            System.out.println((String)item[0] + " " + (String)item[1]);
-//        }
-//
-//        return query.getResultList();
-//    }
+
+//    in this case there is a need to use a native sql query
+    public Map< String,BigInteger> getBrandAndCountMap() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery("  SELECT COUNT(car_brand), car_brand FROM statistics.search_history GROUP BY car_brand ORDER BY COUNT(car_brand) DESC;");
+
+        List<Object[]> resultList = query.getResultList();
+
+        Map<String,BigInteger> brandAndCountMap = new LinkedHashMap<>();
+
+        for (Object[] item : resultList) {
+            brandAndCountMap.put((String)item[1],(BigInteger) item[0] );
+//            System.out.println( (String)item[1]+" "+(BigInteger) item[0]);
+        }
+        return brandAndCountMap;
+    }
+
+    public Map< String,BigInteger> getModelAndCountMap() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery("  SELECT COUNT(car_model), car_model FROM statistics.search_history GROUP BY car_model ORDER BY COUNT(car_model) DESC;");
+
+        List<Object[]> resultList = query.getResultList();
+
+        Map<String,BigInteger> modelAndCountMap = new LinkedHashMap<>();
+
+        for (Object[] item : resultList) {
+            modelAndCountMap.put((String)item[1],(BigInteger) item[0] );
+//            System.out.println( (String)item[1]+" "+(BigInteger) item[0]);
+        }
+        return modelAndCountMap;
+    }
+
+    public Map< String,BigInteger> getTypeAndCountMap() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery("  SELECT COUNT(car_type), car_type FROM statistics.search_history GROUP BY car_type ORDER BY COUNT(car_type) DESC;");
+
+        List<Object[]> resultList = query.getResultList();
+
+        Map<String,BigInteger> typeAndCountMap = new LinkedHashMap<>();
+
+        for (Object[] item : resultList) {
+            typeAndCountMap.put((String)item[1],(BigInteger) item[0] );
+//            System.out.println( (String)item[1]+" "+(BigInteger) item[0]);
+        }
+        return typeAndCountMap;
+    }
 
 }

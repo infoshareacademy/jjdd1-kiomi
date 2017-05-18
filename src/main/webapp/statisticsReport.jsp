@@ -11,6 +11,51 @@
 </head>
 <body>
 
+
+        <table border="1">
+            <tr>
+                <th>Brand</th>
+                <th>Total count</th>
+            </tr>
+
+            <c:forEach var="value" items="${brandAndCountMap}">
+                <tr>
+                    <td><c:out value="${value.key}" /></td>
+                    <td><c:out value="${value.value}" /></td>
+                </tr>
+            </c:forEach>
+        </table>
+        <br>
+        <table border="1">
+            <tr>
+                <th>Model</th>
+                <th>Total count</th>
+            </tr>
+
+            <c:forEach var="value" items="${modelAndCountMap}">
+                <tr>
+                    <td><c:out value="${value.key}" /></td>
+                    <td><c:out value="${value.value}" /></td>
+                </tr>
+            </c:forEach>
+        </table>
+        <br>
+        <table border="1">
+            <tr>
+                <th>Type</th>
+                <th>Total count</th>
+            </tr>
+
+            <c:forEach var="value" items="${typeAndCountMap}">
+                <tr>
+                    <td><c:out value="${value.key}" /></td>
+                    <td><c:out value="${value.value}" /></td>
+                </tr>
+            </c:forEach>
+        </table>
+
+<br>
+
 List of all Statistics:</br></br>
 
 <table border="1">
@@ -36,11 +81,11 @@ List of all Statistics:</br></br>
             <td><c:out value="${value.partBrand}" /></td>
             <td><c:out value="${value.partName}" /></td>
             <td><c:out value="${value.partSerial}" /></td>
-            <%--<td> /></td>--%>
+                <%--<td> /></td>--%>
         </tr>
     </c:forEach>
-
 </table>
-</br></br>
+
+
 </body>
 </html>
