@@ -10,7 +10,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<b>Statistics Report:</b><br><br>
 
         <table border="1">
             <tr>
@@ -56,7 +56,7 @@
 
 <br>
 
-List of all Statistics:</br></br>
+<b>List of all Statistics:</b></br></br>
 
 <table border="1">
     <tr>

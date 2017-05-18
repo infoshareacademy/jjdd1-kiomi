@@ -3,15 +3,12 @@ package com.infoshareacademy.jjdd1.kiomi.app.services;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticsUtility;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StringBuilderTable;
-
-import javax.ejb.Singleton;
 import javax.mail.*;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.File;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -40,17 +37,9 @@ public class MailSender extends TimerTask {
 
         try {
 
-
             message.setSubject("Message From 'Kiomi Autoparts'");
-
-            message.setHeader("","");
-            message.setText("Info concerning statistics of autoparts");
-            message.setText("<p>wirtualna polska</p>");
             message.setFrom(new InternetAddress("kiomi.info@gmail.com"));
             message.setRecipient(Message.RecipientType.TO,new InternetAddress("kiomi.info@gmail.com"));
-
-
-//   =======================================================
 
             StatisticsUtility statisticsUtility = new StatisticsUtility();
 
@@ -82,20 +71,12 @@ public class MailSender extends TimerTask {
             stringBuilder.append(htmlBottom);
             String html = stringBuilder.toString();
 
-
             Multipart multipart = new MimeMultipart( "alternative" );
-
-            MimeBodyPart textPart = new MimeBodyPart();
-            textPart.setText( "--------------", "utf-8" );
-
             MimeBodyPart htmlPart = new MimeBodyPart();
             htmlPart.setContent( html, "text/html; charset=utf-8" );
-
-            multipart.addBodyPart( textPart );
             multipart.addBodyPart( htmlPart );
-            message.setContent( multipart );
 
-//================================================
+            message.setContent( multipart );
 
             Transport.send(message);
             System.out.println("Succces: Mail sent at: "+new Date());
@@ -103,9 +84,5 @@ public class MailSender extends TimerTask {
         } catch (MessagingException e) {
             System.out.println("Email error: "+e);
         }
-        finally {
-            System.out.println("==============================================");
-        }
-
     }
 }

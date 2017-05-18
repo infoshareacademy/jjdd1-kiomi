@@ -9,7 +9,8 @@ public class StringBuilderTable {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(
                 "<html>" +
-                "<body>"
+                "<body>"+
+                "This mail was sent by <b>'Kiomi Autoparts'</b>. Here is daily statistics report:<br><br>"
         );
         String htmlTop = stringBuilder.toString();
         return htmlTop;
@@ -29,7 +30,7 @@ public class StringBuilderTable {
         StringBuilder stringBuilder = new StringBuilder();
 
                 stringBuilder.append(
-                "</br><table border='1'>" +
+                "<table border='1'>" +
                 "<tr>" +
                 "<th>"+nameOfColumn1+"</th>" +
                 "<th>Total count</th>" +
@@ -46,8 +47,7 @@ public class StringBuilderTable {
                .append("</td></tr>");
         }
 
-        stringBuilder.append("</table></br></br>"+"</br>"
-              );
+        stringBuilder.append("</table><br>");
 
         String htmlContent = stringBuilder.toString();
 
