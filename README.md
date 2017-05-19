@@ -10,6 +10,3 @@
 
 #### Product owner:
 * Wojciech Makurat
-
-
-cos

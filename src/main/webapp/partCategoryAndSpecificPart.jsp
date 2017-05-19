@@ -143,7 +143,7 @@
                 <h4 class="modal-title">Dane kontaktowe</h4>
             </div>
             <div class="modal-body">
-                <p>team KIOMI: teamkiomi@gmail.com</p>
+                <p>team KIOMI: kiomi.info@gmail.com</p>
                 <p>infoShare Academy: biuro@infoshareacademy.com</p>
                 <p>Marketing info: wojtek@infoshareacademy.com</p>
             </div>

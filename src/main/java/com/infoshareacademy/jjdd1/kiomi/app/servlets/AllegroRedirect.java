@@ -68,10 +68,7 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
         LOGGER.debug("Success! New entry in the database: id: "+currentSearch.getId()+", "+currentSearch.getCarBrand()+", "
                 +currentSearch.getCarModel());
 
-        resp.sendRedirect("https://allegro.pl/listing?string="
-                +currentSearch.getCarBrand()+"%20"+currentSearch.getCarModel()+"%20"+currentSearch.getCarType()+
-                        "%20"+currentSearch.getPartName()+"%20"+currentSearch.getPartSerial()+
-                "&description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222\" target=\"_blank");
+        resp.sendRedirect("https://allegro.pl/listing?string="+currentSearch.getCarBrand()+"%20"+currentSearch.getCarModel()+"%20"+currentSearch.getCarType()+"%20"+currentSearch.getPartName()+"%20"+currentSearch.getPartSerial()+"&description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222\" target=\"_blank");
 
 
     }
