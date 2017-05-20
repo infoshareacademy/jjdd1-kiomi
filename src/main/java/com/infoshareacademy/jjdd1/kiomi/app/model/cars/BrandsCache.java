@@ -35,11 +35,10 @@ public class BrandsCache {
     @PostConstruct
     public void starter() {
 
+
         MailSender mailSender =new MailSender();
         mailSender.run();
 
-//        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
-//        statisticDataBuilder.buildEntryToDatabase();
 
         try {
             brandsList = jsonParser.getBrandsList();
