@@ -14,20 +14,16 @@ public class StatisticDataBuilder {
 
 
 
-
-
     public void addEntryToDatabase(Statistics statistics) {
 
-            EntityManagerFactory emf;
-            emf = Persistence.createEntityManagerFactory("database-autoparts");
-
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("database-autoparts");
             EntityManager entityManager = emf.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.persist(statistics);
             entityManager.getTransaction().commit();
             entityManager.close();
 
-        LOGGER.debug("Object successfully saved into the database. Id nr: "+statistics.getId());
+        LOGGER.debug("Object successfully saved in the database. Id: "+statistics.getId());
     }
 
 }

@@ -36,8 +36,8 @@ public class BrandsCache {
     public void starter() {
 
 
-        MailSender mailSender =new MailSender();
-        mailSender.run();
+//        MailSender mailSender =new MailSender();
+//        mailSender.run();
 
 
         try {

@@ -91,6 +91,11 @@ public class Statistics implements Serializable{
         return this;
     }
 
+    public Statistics setPromoted(boolean promoted) {
+        this.promoted = promoted;
+        return this;
+    }
+
     public Long getId() {
         return id;
     }

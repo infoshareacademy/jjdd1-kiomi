@@ -34,7 +34,7 @@ public class Google20Example {
                 .scope("profile")
                 .scope("email")
                 .state(secretState)
-                .callback("http://localhost:8080/GoogleLogin")
+                .callback("http://localhost:8710/GoogleLogin")
                 .build(GoogleApi20.instance());
         final Scanner in = new Scanner(System.in, "UTF-8");
 

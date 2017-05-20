@@ -1,16 +1,14 @@
 package com.infoshareacademy.jjdd1.kiomi.app.servlets;
-
-import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
 import com.infoshareacademy.jjdd1.kiomi.app.services.SessionData;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
-import javax.ejb.Stateful;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +31,10 @@ public class AllegroRedirect extends HttpServlet{
     StatisticDataBuilder statisticDataBuilder;
 
 
+    private boolean promoted;
+    private Query isPromoted;
+
+
 private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,13 +43,25 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
         String modelName = sessionData.getCar().getModel().getName();
         String carType = sessionData.getCar().getCarType().getName();
 
-//        String partCategory = "Engine";
+
         String partBrand = "Bosh";
-//        String partName = "Knock sensor";
-//        String partSerial = "02554486BBB";
+
         String partName = req.getParameter("partsame");
         String partSerial = req.getParameter("partserial");
         String partCategory = req.getParameter("partcategory");
+
+
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("database-autoparts");
+        EntityManager entityManager = emf.createEntityManager();
+
+
+        isPromoted = entityManager
+                .createQuery("SELECT brand FROM PromotedBrands p WHERE p.brand LIKE :partBrand")
+                .setParameter("partBrand", partBrand);
+        promoted = isPromoted.getResultList().iterator().hasNext();
+
+
 
         Statistics currentSearch = new Statistics();
         currentSearch.setEntryDate(new Date());
@@ -58,12 +72,12 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
         currentSearch.setPartBrand(partBrand);
         currentSearch.setPartName(partName);
         currentSearch.setPartSerial(partSerial);
+        currentSearch.setPromoted(promoted);
 
         LOGGER.debug("Creating new entity object: "+currentSearch.toString());
 
         statisticDataBuilder.addEntryToDatabase(currentSearch);
 
-//        String partBrand = req.getParameter("partsrand");
 
         LOGGER.debug("Success! New entry in the database: id: "+currentSearch.getId()+", "+currentSearch.getCarBrand()+", "
                 +currentSearch.getCarModel());
