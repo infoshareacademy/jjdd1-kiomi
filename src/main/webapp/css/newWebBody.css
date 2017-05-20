@@ -1,0 +1,68 @@
+body {
+    background: #3b679e;
+    background: -moz-linear-gradient(-45deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
+    background: -webkit-linear-gradient(-45deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
+    background: linear-gradient(135deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3b679e', endColorstr='#7db9e8', GradientType=1);
+    height: 100vh;
+    width: 100%;
+    color: #fff;
+    color: black;
+}
+
+.jumbotron
+{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    background-image: url("../img/logobackground.jpg");
+    background-size: auto;
+    background-clip: border-box;
+    height: auto;
+    /*color: black;*/
+    margin-bottom: 0px;
+}
+
+.jumbotron h1
+{
+    display: inline;
+    font-size: 4em;
+}
+
+.jumbotron h4
+{
+    display: inline;
+    font-size: 1em;
+}
+
+.jumbotron p
+{
+    font-size: 1.5em;
+}
+
+#mojeTresci
+{
+    display: inline;
+}
+
+#poczatekListy
+{
+
+}
+
+/*#listyKatCz*/
+/*{*/
+    /*margin-left: 0px;*/
+/*}*/
+
+/*#listaCzSzcz*/
+/*{*/
+    /*margin-right: 0px;*/
+/*}*/
+
+
+#myFooter
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-botom: 0px;
+}

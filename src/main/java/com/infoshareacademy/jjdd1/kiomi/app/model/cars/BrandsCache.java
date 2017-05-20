@@ -12,6 +12,7 @@ import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,12 @@ public class BrandsCache {
     CarsDataLoader2 jsonParser;
 
 
+
+
     @Schedule(minute = "*", hour = "1")
     @PostConstruct
     public void starter() {
-//        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
-//        statisticDataBuilder.buildEntryToDatabase();
+
         try {
             brandsList = jsonParser.getBrandsList();
             LOGGER.info("Number of brandList elements: "+brandsList.size());

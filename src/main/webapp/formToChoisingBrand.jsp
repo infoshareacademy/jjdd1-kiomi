@@ -71,7 +71,7 @@
                                         <c:if
                                                 test="${element.id == param.brand}"> selected
                                         </c:if>
-                                >${element.name} ${element.id}</option>
+                                >${element.name}</option>
                             </c:forEach>
                         </select>
 

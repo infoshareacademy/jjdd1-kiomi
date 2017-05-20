@@ -19,6 +19,7 @@ public class SessionData implements Serializable {
     private String email;
     private Car car;
     private boolean logged = false;
+    private String partCategory="";
 
 
     public Car getCar() {
@@ -64,6 +65,14 @@ public class SessionData implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPartCategory() {
+        return partCategory;
+    }
+
+    public void setPartCategory(String partCategory) {
+        this.partCategory = partCategory;
     }
 
     @Override

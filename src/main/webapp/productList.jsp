@@ -14,5 +14,7 @@
 ${brand}
 ${model}
 ${carType}
+<li> <a href="/redirect?partbrand=${brand}&number=${number}" target="_blank">xxxx ${element.name}</a></li>
+
 </body>
 </html>
