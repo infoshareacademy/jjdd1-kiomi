@@ -23,12 +23,18 @@ public class CarIdentityFromAztec {
     BrandsCache brandsCache;
     @Inject
     SessionData sessionData;
+    private static final String ERROR_SESSION_FROM_ATENA = "-4";
 
     public CarIdentityFromAztec() {
     }
 
     public Car FindingCarByAztecCode(CarFromAztecJson aztecCode) throws IOException {
         Car myCar = new Car();
+
+        if (aztecCode.getErrorText().equals(ERROR_SESSION_FROM_ATENA)) {
+            LOGGER.debug("We haven't session key");
+            return myCar;
+        }
 
         try {
             if (aztecCode.getBrand().equals("")) {
