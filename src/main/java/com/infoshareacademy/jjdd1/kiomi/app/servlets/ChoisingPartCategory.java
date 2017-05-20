@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "/index")
+@WebServlet({"/index",""})
 public class ChoisingPartCategory extends HttpServlet {
 
     @Inject
