@@ -31,7 +31,6 @@ public class BrandsCache {
     CarsDataLoader2 jsonParser;
 
     @Schedule(minute = "*", hour = "1")
-    //@Schedule(minute = "36", hour = "13")
     @PostConstruct
     public void starter() {
 
