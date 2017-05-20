@@ -7,6 +7,7 @@ import com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.ejb.Stateful;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class AllegroRedirect extends HttpServlet{
 
     @Inject
     SessionData sessionData;
+
+    @Inject
+    StatisticDataBuilder statisticDataBuilder;
+
 
 private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class);
     @Override
@@ -56,7 +61,7 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
 
         LOGGER.debug("Creating new entity object: "+currentSearch.toString());
 
-        StatisticDataBuilder.addEntryToDatabase(currentSearch);
+        statisticDataBuilder.addEntryToDatabase(currentSearch);
 
 //        String partBrand = req.getParameter("partsrand");
 

@@ -14,46 +14,13 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-
         <log4j.version>2.8.2</log4j.version>
         <hybernate.version>5.2.10.Final</hybernate.version>
         <mysql.version>6.0.6</mysql.version>
-
-
-        <!--ACHTUNG ACHTUNG-->
-
-        <!--uncomment for WEB version-->
-        <scope.settings>provided</scope.settings>
-
-        <!--uncomment for console version-->
-        <!--<scope.settings>compile</scope.settings>-->
-
-        <!--ACHTUNG ACHTUNG-->
-
-
-        <!--mysql-->
-        <!--<jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>-->
-        <!--<mysql.connection.url>-->
-        <!--jdbc:mysql://0.0.0.0:32768/statistics?useUnicode=yes&amp;characterEncoding=UTF-8-->
-        <!--</mysql.connection.url>-->
-        <!--<mysql.username>root</mysql.username>-->
-        <!--<mysql.password>pass</mysql.password>-->
-
-        <!--wildfly admin-->
-        <wildfly.adminUsername>admin</wildfly.adminUsername>
-        <wildfly.adminPassword>admin123</wildfly.adminPassword>
-        <wildfly.add-user>
-            ${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false
-        </wildfly.add-user>
-
-        <wildfly.startupTimeout>300</wildfly.startupTimeout>
 
     </properties>
 
@@ -64,82 +31,91 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.10.Final</version>
-            <scope>${scope.settings}</scope>
+            <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.2.10.Final</version>
-            <scope>${scope.settings}</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>java-hamcrest</artifactId>
             <version>2.0.0.0</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>2.1.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.5.2</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>pl.pragmatists</groupId>
             <artifactId>JUnitParams</artifactId>
             <version>1.0.5</version>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+
         <!--<dependency>-->
         <!--<groupId>com.google.api-client</groupId>-->
         <!--<artifactId>google-api-client</artifactId>-->
         <!--<version>1.22.0</version>-->
         <!--</dependency>-->
+
         <dependency>
             <groupId>com.github.scribejava</groupId>
             <artifactId>scribejava-apis</artifactId>
@@ -147,30 +123,14 @@
         </dependency>
 
     </dependencies>
+
     <build>
         <finalName>ROOT</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.1.0.Final</version>
-                <configuration>
-                    <!--<hostname>localhost</hostname>-->
-                    <!--<port>9865</port>-->
-                    <username>${wildfly.adminUsername}</username>
-                    <password>${wildfly.adminPassword}</password>
-                </configuration>
             </plugin>
         </plugins>
     </build>
