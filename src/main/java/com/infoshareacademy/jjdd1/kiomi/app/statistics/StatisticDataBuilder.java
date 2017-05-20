@@ -12,7 +12,6 @@ public class StatisticDataBuilder {
 
     public static void addEntryToDatabase(Statistics statistics) {
 
-
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
             EntityManager entityManager = emf.createEntityManager();
             entityManager.getTransaction().begin();
