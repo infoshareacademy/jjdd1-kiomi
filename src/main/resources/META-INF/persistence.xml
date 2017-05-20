@@ -11,9 +11,11 @@
         <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.PromotedBrands</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db:3306/statistics"/>
             <property name="javax.persistence.jdbc.user" value="mysql"/>
             <property name="javax.persistence.jdbc.password" value="mysql"/>
+
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.format_sql" value="true"/>

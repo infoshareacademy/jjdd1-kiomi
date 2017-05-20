@@ -15,10 +15,12 @@ public class StatisticDataBuilder {
 
 
 
+
     public void addEntryToDatabase(Statistics statistics) {
 
             EntityManagerFactory emf;
             emf = Persistence.createEntityManagerFactory("database-autoparts");
+
             EntityManager entityManager = emf.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.persist(statistics);
