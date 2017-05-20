@@ -13,11 +13,11 @@ import com.google.gson.annotations.SerializedName;
  * "start_month": "01",
  * "vehicle_group": "commercial",
  * "link": "\/api\/v2\/find\/ey\/7pz"
-/**
+ * /**
  * Created by arek50 on 2017-04-27.
  */
 public class CarFromAztecJson {
-  
+
     @SerializedName("D1")//@SerializedName(value = "fullName", alternate = "username")
     private String brand;
 
@@ -38,6 +38,16 @@ public class CarFromAztecJson {
 
     @SerializedName("ErrorText")//poprawnie rozkodowano dane.
     private String errorText;
+    @SerializedName("Error")
+    private String error;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 
     public String getModel() {
         return model;

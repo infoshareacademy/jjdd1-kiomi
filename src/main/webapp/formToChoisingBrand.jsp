@@ -78,7 +78,8 @@
                     </p>
                     <p class="btn-margin">
                         <%--<a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>--%>
-                        <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
+                        <input type="hidden" name="aztec" value="${param.aztec}">
+                    <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
                     </p>
                 </div>
             </form>

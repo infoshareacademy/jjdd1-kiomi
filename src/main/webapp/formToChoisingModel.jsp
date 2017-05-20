@@ -69,12 +69,14 @@
                                                 <c:if
                                                         test="${element.id == param.model}"> selected
                                                 </c:if>
-                                        >${element.name} (${element.start_year} - ${element.end_year})</option>
+                                        >${element.name} (${element.start_year} - ${element.end_year})
+                                        </option>
                                     </c:forEach>
                                 </select>
                             </p>
                             <p class="btn-margin">
                                     <%--<a href="formtochoisingcartype" class="btn btn-login btn-lg">Wybierz</a>--%>
+                                <input type="hidden" name="aztec" value="${param.aztec}">
                                 <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
                             </p>
                         </c:when>
@@ -85,8 +87,8 @@
                 </div>
             </form>
             <%--<div class="lightbox text-left lightbox-top-margin">--%>
-                <%--Jakieś dane...--%>
-                <%--&lt;%&ndash;${modelList.get(0).name}&ndash;%&gt;--%>
+            <%--Jakieś dane...--%>
+            <%--&lt;%&ndash;${modelList.get(0).name}&ndash;%&gt;--%>
             <%--</div>--%>
 
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
@@ -122,23 +124,23 @@
         });
     });
 
-//    var items = data.items.map(function (item) {
-//        return item.key + ': ' + item.value;
-//    });
-//    var json = $.parseJSON(j);
-//    $(json).each(function (i, val) {
-//        $.each(val, function (k, v) {
-//            console.log(k + " : " + v);
-//        });
-//    });
-//    $.getJSON('/functions.php', {get_param: 'value'}, function (data) {
-//        $.each(data, function (index, element) {
-//            $('body').append($('<div>', {
-//                text: element.name
-//            }));
-//        });
-//    });
-//    alert(this.value);
+    //    var items = data.items.map(function (item) {
+    //        return item.key + ': ' + item.value;
+    //    });
+    //    var json = $.parseJSON(j);
+    //    $(json).each(function (i, val) {
+    //        $.each(val, function (k, v) {
+    //            console.log(k + " : " + v);
+    //        });
+    //    });
+    //    $.getJSON('/functions.php', {get_param: 'value'}, function (data) {
+    //        $.each(data, function (index, element) {
+    //            $('body').append($('<div>', {
+    //                text: element.name
+    //            }));
+    //        });
+    //    });
+    //    alert(this.value);
 
 </script>
 </body>
