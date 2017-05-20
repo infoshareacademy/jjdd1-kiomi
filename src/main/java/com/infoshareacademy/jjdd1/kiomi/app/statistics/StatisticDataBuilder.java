@@ -3,23 +3,29 @@ package com.infoshareacademy.jjdd1.kiomi.app.statistics;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.ejb.Stateful;
 import javax.persistence.*;
 
-
+@Stateful
 public class StatisticDataBuilder {
     private static final Logger LOGGER = LogManager.getLogger(StatisticDataBuilder.class);
 
 
-    public static void addEntryToDatabase(Statistics statistics) {
 
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+
+    public void addEntryToDatabase(Statistics statistics) {
+
+            EntityManagerFactory emf;
+            emf = Persistence.createEntityManagerFactory("database-autoparts");
             EntityManager entityManager = emf.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.persist(statistics);
             entityManager.getTransaction().commit();
             entityManager.close();
 
-        LOGGER.debug("Object succefully saved to database. Id nr: "+statistics.getId());
+        LOGGER.debug("Object successfully saved into the database. Id nr: "+statistics.getId());
     }
+
 }
