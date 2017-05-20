@@ -10,8 +10,13 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 import com.google.gson.Gson;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.AdministratorEmails;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.GoogleUser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +31,13 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by arek50 on 2017-05-02.
  */
+
 @WebServlet(urlPatterns = "/googlelogin")
 public class GoogleLogin extends HttpServlet {
     @Inject
     SessionData sessionData;
+
+    private final Logger LOGGER = LogManager.getLogger(GoogleLogin.class);
 
     final String CLIENT_ID = "474401942226-bqn8a5k7hojtujm2l6v9ie3m2a6ob2qo.apps.googleusercontent.com";
     final String CLIENT_SECRET = "ShKL7hQ1gJCYI_Eq9Sj9rH-y";
@@ -84,9 +92,20 @@ public class GoogleLogin extends HttpServlet {
                 Gson gson = new Gson();
                 GoogleUser googleUser = gson.fromJson(googleJson, GoogleUser.class);
 
-                AdministratorEmails administratorEmails=new AdministratorEmails();
-                if(administratorEmails.isAdministrator(googleUser.getEmail())==1) {
-                    sessionData.logUser(googleUser.getGiven_name(), googleUser.getFamily_name(), googleUser.getPicture(), googleUser.getEmail());
+                AdministratorEmails administratorEmails = new AdministratorEmails();
+
+
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("database-autoparts");
+                EntityManager entityManager = emf.createEntityManager();
+                UsersList member = entityManager.createQuery("SELECT m FROM  UsersList m WHERE m.email = :email ORDER BY m.email", UsersList.class)
+                        .setParameter("email", googleUser.getEmail()).getSingleResult();
+
+                LOGGER.debug("Lista membersów: "+ member.getFirstname());
+
+//                if (administratorEmails.isAdministrator(googleUser.getEmail()) == 1) {
+                if (!member.getEmail().isEmpty()) {
+//                    sessionData.logUser(googleUser.getGiven_name(), googleUser.getFamily_name(), googleUser.getPicture(), googleUser.getEmail());
+                    sessionData.logUser(member.getFirstname(), member.getLastname(), googleUser.getPicture(), member.getEmail(), member.getRole());
                     resp.sendRedirect("http://localhost:8080/googlelogin");
                 } else {
                     req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
