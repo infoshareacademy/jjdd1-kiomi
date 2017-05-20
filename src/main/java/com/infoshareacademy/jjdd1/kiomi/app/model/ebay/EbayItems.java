@@ -1,4 +1,4 @@
-package com.infoshareacademy.jjdd1.kiomi.app.model;
+package com.infoshareacademy.jjdd1.kiomi.app.model.ebay;
 
 import java.util.Arrays;
 
@@ -12,8 +12,15 @@ public class EbayItems {
     private String[] paymentMethod;
     private String[] location;
     private String[] country;
-//    private String sellingStatus;
+    private SellingStatus[] sellingStatus;
 
+    public SellingStatus[] getSellingStatus() {
+        return sellingStatus;
+    }
+
+    public void setSellingStatus(SellingStatus[] sellingStatus) {
+        this.sellingStatus = sellingStatus;
+    }
 
     public String[] getItemId() {
         return itemId;

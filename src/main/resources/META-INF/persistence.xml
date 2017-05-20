@@ -7,10 +7,10 @@
 
     <persistence-unit name="com.infoshareacademy.jjdd1.kiomi" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:jboss/datasources/com.infoshareacademy.jjdd1.kiomi</jta-data-source>
+        <!--<jta-data-source>java:jboss/datasources/com.infoshareacademy.jjdd1.kiomi</jta-data-source>-->
 
-        <!--<class>com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics</class>-->
-        <!--<class>com.infoshareacademy.jjdd1.kiomi.app.statistics.PromotedBrands</class>-->
+        <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics</class>
+        <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.PromotedBrands</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/statistics?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
