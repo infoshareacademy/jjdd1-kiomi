@@ -30,7 +30,7 @@ public class CarIdentityMethod extends HttpServlet{
         }
         if(sessionData.isLogged()==false) {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
-            resp.sendRedirect("http://localhost:8080/googlelogin");
+            resp.sendRedirect("/googlelogin");
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/carIdentityMethod.jsp");
