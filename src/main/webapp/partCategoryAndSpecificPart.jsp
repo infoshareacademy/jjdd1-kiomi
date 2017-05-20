@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="baseURL" value="${req.requestURL}"/>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page session="true" %>
 
 <!DOCTYPE html>
 <html lang="en" xmlns:jsp="http://java.sun.com/jsf/facelets">
@@ -61,8 +62,9 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>
                     <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Zmień pojazd</a></li>
-
+                    <c:if test="${isadmin==true}">
                     <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części">Raport popularności części</a></li>
+                    </c:if>
                     <li><a href="/statisticsReport" title="Statystyki">Statystyki</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

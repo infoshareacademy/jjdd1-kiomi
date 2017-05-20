@@ -96,6 +96,9 @@ public class ChoisingPartCategory extends HttpServlet {
         req.setAttribute("categoryname", sessionData.getPartCategory());
         req.setAttribute("partCategories", partCategories);
         req.setAttribute("parts", part);
+        if(sessionData.isAdmin()==true) {
+            req.setAttribute("isadmin", sessionData.isAdmin());
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/partCategoryAndSpecificPart.jsp");
         dispatcher.forward(req, resp);
