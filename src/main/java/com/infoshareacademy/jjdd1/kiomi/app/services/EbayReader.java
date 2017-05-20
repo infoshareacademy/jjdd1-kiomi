@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.infoshareacademy.jjdd1.kiomi.app.model.EbayItems;
+import com.infoshareacademy.jjdd1.kiomi.app.model.ebay.EbayItems;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -93,12 +93,13 @@ public class EbayReader {
 //        JsonObject da1=da.getAsJsonObject();
 //        JsonElement data = da.getAsJsonObject().get("ack");
         JsonObject dataLevel1=findItemsByKeywordsResponse.get(0).getAsJsonObject();
-//        JsonElement data2 = data.get(JSON_DATA_TAG2);
         JsonArray searchResult=dataLevel1.get("searchResult").getAsJsonArray();
-        JsonElement data=searchResult.get(0).getAsJsonObject().get("item");
-        System.out.println(searchResult.get(0).getAsJsonObject().get("item").toString());
+        JsonElement dataItems=searchResult.get(0).getAsJsonObject().get("item");
 
-        return gson.fromJson(data, new TypeToken<List<EbayItems>>() {
+
+        System.out.println(dataItems.toString());
+
+        return gson.fromJson(dataItems, new TypeToken<List<EbayItems>>() {
         }.getType());
 
     }
