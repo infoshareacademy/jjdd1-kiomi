@@ -36,9 +36,6 @@ public class BrandsCache {
     @PostConstruct
     public void starter() {
 
-//        StatisticDataBuilder statisticDataBuilder = new StatisticDataBuilder();
-//        statisticDataBuilder.buildEntryToDatabase();
-
         try {
             brandsList = jsonParser.getBrandsList();
             LOGGER.info("Number of brandList elements: "+brandsList.size());
