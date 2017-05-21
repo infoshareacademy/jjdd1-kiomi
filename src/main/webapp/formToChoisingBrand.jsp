@@ -14,7 +14,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-</html>
+<title>Autoparts - Wybierz swój pojazd!</title>
+<link rel="icon" href="img/tabicon.png">
 <meta charset="UTF-8">
 <title>Autoparts</title>
 <!-- Latest compiled and minified CSS -->
@@ -36,7 +37,7 @@
 </div>
 <div class="">
 
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
         <div class="plate">
             <p class="script"><span>Polish</span></p>
             <p class="shadow text3">AUTOPARTS</p>
@@ -51,6 +52,7 @@
                     </div>
                 </c:if>
             </div>
+            <br/><br/>
             <div class="header-progress-container">
                 <ol class="header-progress-list">
                     <li class="header-progress-item done">Marka</li><!--
@@ -82,12 +84,11 @@
                     </p>
                 </div>
             </form>
-
+        </br></br>
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>
     </div>
 </div>
-
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"

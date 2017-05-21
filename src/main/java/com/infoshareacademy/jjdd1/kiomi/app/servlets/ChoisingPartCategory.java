@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "/index")
+@WebServlet(urlPatterns = "/partcategoryandspecificpart")
 public class ChoisingPartCategory extends HttpServlet {
 
     @Inject
@@ -86,7 +86,7 @@ public class ChoisingPartCategory extends HttpServlet {
 
         }
         sessionData.setPartCategory(category[0]);
-//
+
         PromotedBrandsLoader promotedBrandsLoader = new PromotedBrandsLoader();
         if (part.size() > 0) {
             part = Optional.ofNullable(promotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
@@ -126,6 +126,6 @@ public class ChoisingPartCategory extends HttpServlet {
         car.setModel(sessionData.getCar().getModel());
         sessionData.setCar(car);
 
-        resp.sendRedirect("http://localhost:8080/index");
+        resp.sendRedirect("http://localhost:8080/partcategoryandspecificpart");
     }
 }

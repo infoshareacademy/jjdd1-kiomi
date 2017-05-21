@@ -6,9 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-</html>
+<title>Autoparts - Wybierz swój pojazd!</title>
+<link rel="icon" href="img/tabicon.png">
 <meta charset="UTF-8">
-<title>Autoparts</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -57,7 +57,7 @@
 
             </div>
 
-
+            </br></br>
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>
     </div>

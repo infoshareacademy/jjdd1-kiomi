@@ -12,7 +12,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>MySQL_Query</title>
+    <title>Autoparts - Wybór promowanych marek</title>
+    <link rel="icon" href="img/tabicon.png">
+    <link rel="stylesheet" href="css/loginpage.css">
 </head>
 <body>
 
