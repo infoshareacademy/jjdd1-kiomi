@@ -23,6 +23,8 @@ import java.util.Date;
 
 @WebServlet(urlPatterns = "/redirect")
 public class AllegroRedirect extends HttpServlet{
+    private boolean promoted;
+    private Query isPromoted;
 
     @Inject
     SessionData sessionData;
@@ -31,8 +33,7 @@ public class AllegroRedirect extends HttpServlet{
     StatisticDataBuilder statisticDataBuilder;
 
 
-    private boolean promoted;
-    private Query isPromoted;
+
 
 
 private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class);
@@ -64,6 +65,7 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
 
 
         Statistics currentSearch = new Statistics();
+
         currentSearch.setEntryDate(new Date());
         currentSearch.setCarBrand(brandName);
         currentSearch.setCarModel(modelName);
