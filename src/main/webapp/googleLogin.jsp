@@ -6,9 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-</html>
 <meta charset="UTF-8">
-<title>Autoparts</title>
+<title>Autoparts - Zalogu się aby skorzystać z naszej aplikacji!</title>
+<link rel="icon" href="img/tabicon.png">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -57,6 +57,7 @@
                 </c:when>
                 <c:otherwise>
                     <a href="caridentitymethod" class="btn btn-login btn-lg">WEJDŹ</a>
+                    </br></br>
                     <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
                 </c:otherwise>
             </c:choose>

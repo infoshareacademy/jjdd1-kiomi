@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="img/tabicon.png">
+    <link rel="stylesheet" href="css/loginpage.css">
 </head>
 <body>
 ${brand}

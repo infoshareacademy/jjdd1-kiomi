@@ -119,7 +119,7 @@ public class GoogleLogin extends HttpServlet {
         sessionUser.put("email", sessionData.getEmail());
         req.setAttribute("oauth", sessionUser);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/GoogleLogin.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/googleLogin.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -132,7 +132,7 @@ public class GoogleLogin extends HttpServlet {
             additionalParams.put("prompt", "consent");
             resp.sendRedirect(service.getAuthorizationUrl(additionalParams));
             req.setAttribute("oauth", "wysyłam żądanie do google...");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/GoogleLogin.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/googleLogin.jsp");
             dispatcher.forward(req, resp);
         }
     }
