@@ -21,7 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "/partcategoryandspecificpart")
+@WebServlet({"/index",""})
+
 public class ChoisingPartCategory extends HttpServlet {
 
     @Inject
@@ -96,6 +97,9 @@ public class ChoisingPartCategory extends HttpServlet {
         req.setAttribute("categoryname", sessionData.getPartCategory());
         req.setAttribute("partCategories", partCategories);
         req.setAttribute("parts", part);
+        if(sessionData.isAdmin()==true) {
+            req.setAttribute("isadmin", sessionData.isAdmin());
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/partCategoryAndSpecificPart.jsp");
         dispatcher.forward(req, resp);
