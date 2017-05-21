@@ -14,8 +14,8 @@ import java.io.IOException;
 /**
  * Created by arek50 on 2017-05-04.
  */
-@WebServlet(urlPatterns = "/caridentitymethod")
-public class CarIdentityMethod extends HttpServlet{
+@WebServlet(urlPatterns = "/caridentitybyaztec")
+public class CarIdentityByAztec extends HttpServlet{
 
     @Inject
     SessionData sessionData;
@@ -33,7 +33,7 @@ public class CarIdentityMethod extends HttpServlet{
             resp.sendRedirect("/googlelogin");
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/carIdentityMethod.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/carIdentityByAztec.jsp");
         dispatcher.forward(req, resp);
 
     }

@@ -5,19 +5,20 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="com.infoshareacademy.jjdd1.kiomi" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="database-autoparts" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!--<jta-data-source>java:jboss/datasources/com.infoshareacademy.jjdd1.kiomi</jta-data-source>-->
-
         <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics</class>
         <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.PromotedBrands</class>
+        <class>com.infoshareacademy.jjdd1.kiomi.app.services.UsersList</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/statistics?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db:3306/statistics"/>
+            <property name="javax.persistence.jdbc.user" value="mysql"/>
+            <property name="javax.persistence.jdbc.password" value="mysql"/>
+
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>

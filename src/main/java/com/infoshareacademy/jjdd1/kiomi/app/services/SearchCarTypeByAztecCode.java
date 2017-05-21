@@ -48,7 +48,8 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
 //        GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
         GetJsonFromAtenaWeb getJsonFromAtenaWeb = new GetJsonFromAtenaWeb();
         String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
-
+LOGGER.info(aztec);
+//        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
         CarFromAztecJson aztecCodeFromFile = getJsonFromAtenaWeb.getJsonFile(aztec);
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
@@ -61,7 +62,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         }
 
         if (req.getParameter("model") != null) {
-            String url = "http://infoshareacademycom.2find.ru" + carFromAztec.getBrand().getLink() + "?lang=polish";
+            String url = "http://infoshareacademycom.2find.ru" + sessionData.getCar().getBrand().getLink() + "?lang=polish";
             List<Model> modelsList = carsDataLoader2.getModelsListBylink(url);
             List<Model> selectedModel = modelsList.stream().filter(b -> b.getId().equals(req.getParameter("model"))).collect(Collectors.toList());
             carFromAztec.setModel(selectedModel.get(0));

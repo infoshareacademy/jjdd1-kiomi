@@ -43,13 +43,16 @@
                 </c:if>
             </div>
             <div class="lightbox text-center">
-                <p class="title">Wybierz metodę identyfikacji samochodu</p>
+                <p class="title">Podaj kod z aplikacji Aztec</p>
+                <form action="/searchbyaztec" method="POST">
                 <p class="btn-margin">
-                    <a href="caridentitybyaztec" class="btn btn-login btn-lg">Po kodzie aztec</a>
+                    <input type="text" name="aztec" value="" placeholder="Twój kod..."  class="btn-login btn-lg" style="border-radius: 0px;border:0px">
+
                 </p>
                 <p class="btn-margin">
-                    <a href="choisingbrand" class="btn btn-login btn-lg">Wyszukiwanie w bazie</a>
+                    <input type="submit"  class="btn btn-login btn-lg" value="Szukaj w bazie">
                 </p>
+                </form>
 
 
             </div>
