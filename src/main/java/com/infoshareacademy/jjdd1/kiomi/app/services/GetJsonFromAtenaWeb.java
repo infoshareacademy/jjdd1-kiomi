@@ -34,10 +34,6 @@ public class GetJsonFromAtenaWeb {
         InputStream is = new URL("https://aztec.atena.pl/PWM2/rest/aztec/getbysession?sessionKey=" + aztecCode + "&userKey=" + USER_KEY).openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-
-                this.getClass().getResourceAsStream("/" + aztecCode)));
-
         AztecConfiguration aztecConfiguration = new AztecConfiguration();
         BufferedReader bReader = aztecConfiguration.replaceFromMap(bufferedReader);
 
