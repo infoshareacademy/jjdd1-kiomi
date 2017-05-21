@@ -1,21 +1,23 @@
 package com.infoshareacademy.jjdd1.kiomi.app.statistics;
 
 
-import org.hibernate.SQLQuery;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StatisticsUtility {
 
+    public static final String DATABASE_AUTOPARTS = "database-autoparts";
     List<Statistics> listOfAllStatistics = new ArrayList<>();
 
     public List<Statistics> getAllData() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createQuery("SELECT e FROM Statistics e");
         return query.getResultList();
@@ -25,7 +27,7 @@ public class StatisticsUtility {
 //    in this case there is a need to use a native sql query
     public Map<String,BigInteger> getBrandAndCountMap() {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createNativeQuery("  SELECT COUNT(car_brand), car_brand FROM statistics.search_history GROUP BY car_brand ORDER BY COUNT(car_brand) DESC;");
 
@@ -42,7 +44,7 @@ public class StatisticsUtility {
 
     public Map<String,BigInteger> getModelAndCountMap() {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createNativeQuery("  SELECT COUNT(car_model), car_model FROM statistics.search_history GROUP BY car_model ORDER BY COUNT(car_model) DESC;");
 
@@ -59,7 +61,7 @@ public class StatisticsUtility {
 
     public Map<String,BigInteger> getTypeAndCountMap() {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createNativeQuery("  SELECT COUNT(car_type), car_type FROM statistics.search_history GROUP BY car_type ORDER BY COUNT(car_type) DESC;");
 

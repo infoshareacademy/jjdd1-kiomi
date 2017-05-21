@@ -45,10 +45,7 @@
             <div class="lightbox text-center">
                 <p class="title">Wybierz metodę identyfikacji samochodu</p>
                 <p class="btn-margin">
-                <form action="/searchbyaztec" method="POST">
-                    <input type="hidden" name="aztec" value="AztecCodeResult.json">
-                    <input type="submit"  class="btn btn-login btn-lg" value="Po kodzie aztec">
-                </form>
+                    <a href="caridentitybyaztec" class="btn btn-login btn-lg">Po kodzie aztec</a>
                 </p>
                 <p class="btn-margin">
                     <a href="choisingbrand" class="btn btn-login btn-lg">Wyszukiwanie w bazie</a>

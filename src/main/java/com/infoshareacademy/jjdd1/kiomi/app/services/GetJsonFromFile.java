@@ -17,6 +17,7 @@ public class GetJsonFromFile {
     private static String aztecJson ="AztecCodeResult.json";
     private String JSON_DATA_TAG = "Dane";
 
+
     public CarFromAztecJson getJsonFile(String code) throws IOException {
         String aztecCode=(code.length()>5)?code:aztecJson;
 

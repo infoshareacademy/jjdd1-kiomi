@@ -1,12 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: arek50
-  Date: 2017-04-27
-  Time: 21:02
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="baseURL" value="${req.requestURL}"/>
@@ -14,8 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Autoparts - Wybierz swój pojazd!</title>
-<link rel="icon" href="img/tabicon.png">
+</html>
 <meta charset="UTF-8">
 <title>Autoparts</title>
 <!-- Latest compiled and minified CSS -->
@@ -29,7 +20,6 @@
 <link rel="stylesheet" href="css/loginpage.css">
 </head>
 <body>
-
 <div class="">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" style="display: none">
         Ukryte menu
@@ -37,7 +27,7 @@
 </div>
 <div class="">
 
-    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
         <div class="plate">
             <p class="script"><span>Polish</span></p>
             <p class="shadow text3">AUTOPARTS</p>
@@ -46,54 +36,36 @@
         </div>
         <div class="col-xs-12">
             <div class="boxfield">
-                <c:if test="${not empty errorMessage}">
+                <c:if test="${not empty error}">
                     <div class="errorbox">
-                            ${errorMessage}
+                            ${error}
                     </div>
                 </c:if>
             </div>
-            <br/><br/>
-            <div class="header-progress-container">
-                <ol class="header-progress-list">
-                    <li class="header-progress-item done">Marka</li><!--
-       -->
-                    <li class="header-progress-item todo">Model</li><!--
-       -->
-                    <li class="header-progress-item todo">Typ silnika</li>
-                </ol>
+            <div class="lightbox text-center">
+                <p class="title">Podaj kod z aplikacji Aztec</p>
+                <form action="/searchbyaztec" method="POST">
+                <p class="btn-margin">
+                    <input type="text" name="aztec" value="" placeholder="Twój kod..."  class="btn-login btn-lg" style="border-radius: 0px;border:0px">
+
+                </p>
+                <p class="btn-margin">
+                    <input type="submit"  class="btn btn-login btn-lg" value="Szukaj w bazie">
+                </p>
+                </form>
+
+
             </div>
-            <form method="post" action="${action}">
-                <div class="lightbox text-center">
-                    <p class="title">Wybierz markę samochodu</p>
-                    <p class="btn-margin">
 
-                        <select name="brand" class="form-control">
-                            <c:forEach items="${brandList}" var="element">
-                                <option value="${element.id}"
-                                        <c:if
-                                                test="${element.id == param.brand}"> selected
-                                        </c:if>
-                                >${element.name}</option>
-                            </c:forEach>
-                        </select>
 
-                    </p>
-                    <p class="btn-margin">
-                        <%--<a href="formtochoisingmodel" class="btn btn-login btn-lg">Wybierz</a>--%>
-                        <input type="hidden" name="aztec" value="${param.aztec}">
-                    <input type="submit" class="btn btn-login btn-lg" value="Wybierz">
-                    </p>
-                </div>
-            </form>
-        </br></br>
             <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>
     </div>
 </div>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-
 </body>
 </html>
