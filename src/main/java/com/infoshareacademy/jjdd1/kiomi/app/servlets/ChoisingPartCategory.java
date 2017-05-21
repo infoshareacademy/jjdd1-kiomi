@@ -130,6 +130,6 @@ public class ChoisingPartCategory extends HttpServlet {
         car.setModel(sessionData.getCar().getModel());
         sessionData.setCar(car);
 
-        resp.sendRedirect("http://localhost:8080/partcategoryandspecificpart");
+        resp.sendRedirect("http://localhost:8080/index");
     }
 }

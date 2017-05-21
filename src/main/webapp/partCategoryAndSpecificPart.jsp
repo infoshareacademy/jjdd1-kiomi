@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="baseURL" value="${req.requestURL}"/>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="true" %>
 
 <!DOCTYPE html>
 <html lang="en" xmlns:jsp="http://java.sun.com/jsf/facelets">
@@ -18,13 +17,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/loginpage.css"/>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
     <!-- jQuery js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/loginpage.css"/>
+
 </head>
 <body>
 
@@ -84,70 +84,36 @@
                                         <a class="list-group-item" id="contaKatCz" href="index?cat=${element.id}" align="center" value="${element.id}">${element.name}</a>
                                     </c:when>
                                     <%--<c:otherwise>--%>
-                                        <%--<a class="list-group-item" href="choisingpartcategory?cat=${element.id}&stock=1" align="center" value="${element.id}">${element.name}</a>--%>
+                                    <%--<a class="list-group-item" href="choisingpartcategory?cat=${element.id}&stock=1" align="center" value="${element.id}">${element.name}</a>--%>
                                     <%--</c:otherwise>--%>
                                 </c:choose>
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
                             <c:if test="${not empty param.type}">
-                            <a class="list-group-item" id="contbKatCz" align="center" href="#">Lista kategorii jest pusta.</a>
+                                <a class="list-group-item" id="contbKatCz" align="center" href="#">Lista kategorii jest pusta.</a>
                             </c:if>
                         </c:otherwise>
                     </c:choose>
                 </div>
             </div>
 
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>
-                    <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Zmień pojazd</a></li>
-                    <c:if test="${isadmin==true}">
-                    <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części">Raport popularności części</a></li>
-                    </c:if>
-                    <li><a href="/statisticsReport" title="Statystyki">Statystyki</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Witaj ${sessionUserName}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu">Panel Administracyjny</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/logout" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <ol class="breadcrumb">Twój aktualny wybór to:
-        <li title="Marka pojazdu"> marka: ${brand}</li>
-        <li title="Model pojazdu"> model: ${model}</li>
-        <li title="Typ silnika"> typ silnika: ${carType}</li>
-    </ol>
-
-    <div class="row">
-        <div class="col-lg-6" id="listyKatCz">
-            <div class="list-group">
-                <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Kategorie części</a>
-                <c:choose>
-                    <c:when test="${not empty partCategories}">
-                        <c:forEach items="${partCategories}" var="element">
-
-                            <c:choose>
-                                <c:when test="${fn:length(parts) gt 1}">
-                                        <c:forEach items="${parts}" var="element">
-                                            <li><a class="list-group-item" id="contaCzSzcz" href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} (${element.number})</a></li>
-                                        </c:forEach>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a class="list-group-item" id="contbCzSzcz" align="center" href="#">Wybierz kategorię aby wyświetlić części</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                            </ul>
+            <div class="col-lg-6" id="listaCzSzcz">
+                <div class="list-group">
+                    <a href="#" class="list-group-item" id="headCzSzcz" style="font-weight: bold; font-size: 1.3em; text-align: center">Części szczegółowe</a>
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Wpisz fragment nazwy części aby zawęzić wyniki..">
+                    <ul id="myUL">
+                        <c:choose>
+                            <c:when test="${fn:length(parts) gt 1}">
+                                <c:forEach items="${parts}" var="element">
+                                    <li><a class="list-group-item" id="contaCzSzcz" href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} (${element.number})</a></li>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="list-group-item" id="contbCzSzcz" align="center" href="#">Wybierz kategorię aby wyświetlić części</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -169,61 +135,61 @@
 </div>
 
 <div id="modale">
-<!-- Modale -->
-<div class="modal fade" id="daneKONT" role="dialog">
-    <div class="modal-dialog modal-med">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Dane kontaktowe</h4>
-            </div>
-            <div class="modal-body">
-                <p>team KIOMI: kiomi.info@gmail.com</p>
-                <p>infoShare Academy: biuro@infoshareacademy.com</p>
-                <p>Marketing info: wojtek@infoshareacademy.com</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="infoKIOMI" role="dialog">
-    <div class="modal-dialog modal-med">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Informacje o team KIOMI</h4>
-            </div>
-            <div class="modal-body">
-                <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju 2017.
-                    Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest aplikacja Autoparts.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <!-- Modale -->
+    <div class="modal fade" id="daneKONT" role="dialog">
+        <div class="modal-dialog modal-med">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Dane kontaktowe</h4>
+                </div>
+                <div class="modal-body">
+                    <p>team KIOMI: kiomi.info@gmail.com</p>
+                    <p>infoShare Academy: biuro@infoshareacademy.com</p>
+                    <p>Marketing info: wojtek@infoshareacademy.com</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="wersjaAPP" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Wersja aplikacji Autoparts</h4>
-            </div>
-            <div class="modal-body">
-                <p>Aktualna wersja: v0.4</p>
-                <p>Premiera: 29.05.2017r. 16:00, Gdańsk</p>
-                <p>Wersja rozwojowa: <a href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
-                <p>Pracują państwo na aplikacji po 4 sprincie szkoleniowym.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div class="modal fade" id="infoKIOMI" role="dialog">
+        <div class="modal-dialog modal-med">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Informacje o team KIOMI</h4>
+                </div>
+                <div class="modal-body">
+                    <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju 2017.
+                        Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest aplikacja Autoparts.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="modal fade" id="wersjaAPP" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Wersja aplikacji Autoparts</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Aktualna wersja: v0.4</p>
+                    <p>Premiera: 29.05.2017r. 16:00, Gdańsk</p>
+                    <p>Wersja rozwojowa: <a href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
+                    <p>Pracują państwo na aplikacji po 4 sprincie szkoleniowym.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -255,8 +221,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 </body>
 </html>
