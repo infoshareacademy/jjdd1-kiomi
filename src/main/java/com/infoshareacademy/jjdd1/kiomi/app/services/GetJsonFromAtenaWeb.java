@@ -28,7 +28,7 @@ public class GetJsonFromAtenaWeb {
     private final static String USER_KEY = "qY2?0Pw!";
 
     public CarFromAztecJson getJsonFile(String code) throws IOException {
-        String aztecCode = (code.length() > 5) ? code : "";
+        String aztecCode = (code.length() > 4) ? code : "";
 
         Gson gson = new Gson();
         InputStream is = new URL("https://aztec.atena.pl/PWM2/rest/aztec/getbysession?sessionKey=" + aztecCode + "&userKey=" + USER_KEY).openStream();
