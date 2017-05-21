@@ -6,10 +6,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-</html>
 <meta charset="UTF-8">
-<title>Autoparts</title>
-<!-- Latest compiled and minified CSS -->
+<title>Autoparts - Taki adres nie istnieje w naszej bazie!</title>
+<link rel="icon" href="img/tabicon.png">
+<link rel="stylesheet" href="css/loginpage.css">
+
+    <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -17,7 +19,6 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<link rel="stylesheet" href="css/loginpage.css">
 </head>
 <body>
 <div class="">
@@ -27,16 +28,16 @@
             <p class="script"><span>Polish</span></p>
             <p class="shadow text3">AUTOPARTS</p>
             <p class="script"><span>by kiomi</span></p>
-            <p class="product-owner"><span>and product owner</span></p>
+            <p class="product-owner" style="color: #fff"><span>and product owner</span></p>
         </div>
         <div class="col-xs-12">
             <div class="emptybox text-center">
-                <p class="title">Not found</p>
-                <h1 class="errorAlert">404</h1>
+                <p class="title" style="color: #fff">Not found</p>
+                <h1 class="errorAlert" style="color: #fff">404</h1>
 
             </div>
 
-
+            </br></br>
             <a href="googlelogin" class="logout-link">Wróć na stronę startową</a>
         </div>
     </div>

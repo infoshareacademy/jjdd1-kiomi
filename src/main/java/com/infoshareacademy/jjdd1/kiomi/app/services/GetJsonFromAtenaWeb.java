@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 
 /**
@@ -27,18 +28,12 @@ public class GetJsonFromAtenaWeb {
     private final static String USER_KEY = "qY2?0Pw!";
 
     public CarFromAztecJson getJsonFile(String code) throws IOException {
-        String aztecCode = (code.length() > 5) ? code : "";
+        String aztecCode = (code.length() > 4) ? code : "";
 
         Gson gson = new Gson();
-        InputStream is = new URL("https://aztec.atena.pl/PWM2/rest/aztec/getbysession?sessionKey=" + code + "&userKey=" + USER_KEY).openStream();
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-//
-//        JsonObject response = gson.fromJson(bufferedReader, JsonObject.class);
-//        JsonElement data = response.get(JSON_DATA_TAG);
+        InputStream is = new URL("https://aztec.atena.pl/PWM2/rest/aztec/getbysession?sessionKey=" + aztecCode + "&userKey=" + USER_KEY).openStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-
-                this.getClass().getResourceAsStream("/" + aztecCode)));
 
         AztecConfiguration aztecConfiguration = new AztecConfiguration();
         BufferedReader bReader = aztecConfiguration.replaceFromMap(bufferedReader);
@@ -46,10 +41,9 @@ public class GetJsonFromAtenaWeb {
         JsonObject response = gson.fromJson(bReader, JsonObject.class);
 
         JsonElement data = response.get(JSON_DATA_TAG);
-
+        System.out.println(data.toString());
         return gson.fromJson(data, new TypeToken<CarFromAztecJson>() {
         }.getType());
 
-//        return null;
     }
 }

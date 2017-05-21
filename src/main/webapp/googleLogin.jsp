@@ -6,9 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Autoparts - Wybierz swój pojazd!</title>
-<link rel="icon" href="img/tabicon.png">
 <meta charset="UTF-8">
+<title>Autoparts - Zalogu się aby skorzystać z naszej aplikacji!</title>
+<link rel="icon" href="img/tabicon.png">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -35,27 +35,37 @@
             <p class="product-owner"><span>and product owner</span></p>
         </div>
         <div class="col-xs-12">
-            <div class="boxfield">
-                <c:if test="${not empty error}">
-                    <div class="errorbox">
-                            ${error}
-                    </div>
+            <div class="avatar">
+                <c:if test="${not empty oauth.picture}">
+                    <img src="${oauth.picture}">
                 </c:if>
-            </div>
-            <div class="lightbox text-center">
-                <p class="title">Wybierz metodę identyfikacji samochodu</p>
-                <p class="btn-margin">
-                    <a href="caridentitybyaztec" class="btn btn-login btn-lg">Po kodzie aztec</a>
-                </p>
-                <p class="btn-margin">
-                    <a href="choisingbrand" class="btn btn-login btn-lg">Wyszukiwanie w bazie</a>
-                </p>
-
 
             </div>
-
-            </br></br>
-            <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
+            <p class="status">
+                <strong><c:if test="${not empty oauth.given_name}">
+                    Witaj ${oauth.given_name} ${oauth.family_name}
+                </c:if> &nbsp;
+                </strong><br>
+                <strong>Status:</strong>
+                <c:if test="${empty oauth.email}">nie</c:if>zalogowany</p>
+            <c:choose>
+                <c:when test="${empty oauth.email}">
+                    <form method="post">
+                        <input name="login" type="hidden" value="1">
+                        <input type="submit" value="ZALOGUJ SIĘ" class="btn btn-login btn-lg">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <a href="caridentitymethod" class="btn btn-login btn-lg">WEJDŹ</a>
+                    </br></br>
+                    <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
+                </c:otherwise>
+            </c:choose>
+            <c:if test="${not empty error}">
+                <div class="errorbox">
+                        ${error}
+                </div>
+            </c:if>
         </div>
     </div>
 </div>

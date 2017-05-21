@@ -35,36 +35,30 @@
             <p class="product-owner"><span>and product owner</span></p>
         </div>
         <div class="col-xs-12">
-            <div class="avatar">
-                <c:if test="${not empty oauth.picture}">
-                    <img src="${oauth.picture}">
+            <div class="boxfield">
+                <c:if test="${not empty error}">
+                    <div class="errorbox">
+                            ${error}
+                    </div>
                 </c:if>
+            </div>
+            <div class="lightbox text-center">
+                <p class="title">Podaj kod z aplikacji Aztec</p>
+                <form action="/searchbyaztec" method="POST">
+                <p class="btn-margin">
+                    <input type="text" name="aztec" value="" placeholder="Twój kod..."  class="btn-login btn-lg" style="border-radius: 0px;border:0px">
+
+                </p>
+                <p class="btn-margin">
+                    <input type="submit"  class="btn btn-login btn-lg" value="Szukaj w bazie">
+                </p>
+                </form>
+
 
             </div>
-            <p class="status">
-                <strong><c:if test="${not empty oauth.given_name}">
-                    Witaj ${oauth.given_name} ${oauth.family_name}
-                </c:if> &nbsp;
-                </strong><br>
-                <strong>Status:</strong>
-                <c:if test="${empty oauth.email}">nie</c:if>zalogowany</p>
-            <c:choose>
-                <c:when test="${empty oauth.email}">
-                    <form method="post">
-                        <input name="login" type="hidden" value="1">
-                        <input type="submit" value="ZALOGUJ SIĘ" class="btn btn-login btn-lg">
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <a href="caridentitymethod" class="btn btn-login btn-lg">WEJDŹ</a>
-                    <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
-                </c:otherwise>
-            </c:choose>
-            <c:if test="${not empty error}">
-                <div class="errorbox">
-                        ${error}
-                </div>
-            </c:if>
+
+
+            <a href="logout" class="logout-link">Zmień konto/wyloguj</a>
         </div>
     </div>
 </div>

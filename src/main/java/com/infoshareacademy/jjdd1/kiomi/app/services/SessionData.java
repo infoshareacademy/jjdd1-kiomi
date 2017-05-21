@@ -19,7 +19,8 @@ public class SessionData implements Serializable {
     private String email;
     private Car car;
     private boolean logged = false;
-    private String partCategory="";
+    private String partCategory = "";
+    private boolean admin = false;
 
 
     public Car getCar() {
@@ -30,16 +31,21 @@ public class SessionData implements Serializable {
         this.car = car;
     }
 
-    public void logUser(String firstname, String lastname, String picture, String email) {
+    public void logUser(String firstname, String lastname, String picture, String email, int role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.picture = picture;
         this.email = email;
+        this.admin=(role==1)?true:false;
         this.logged = true;
     }
 
     public boolean isLogged() {
         return logged;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
 

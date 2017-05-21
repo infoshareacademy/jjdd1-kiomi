@@ -9,6 +9,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics</class>
         <class>com.infoshareacademy.jjdd1.kiomi.app.statistics.PromotedBrands</class>
+        <class>com.infoshareacademy.jjdd1.kiomi.app.services.UsersList</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
