@@ -169,6 +169,7 @@ overflow: hidden;
     margin: 0 0 2px;
 }
 
+
 #headKatCz {
     margin-bottom: 10px;
 }
@@ -228,7 +229,7 @@ overflow: hidden;
 .header-progress-item {
     position: relative;
     display: inline-block;
-    width: 300px;
+    width: 135px;
     text-align: center;
     line-height: 3em;
 }

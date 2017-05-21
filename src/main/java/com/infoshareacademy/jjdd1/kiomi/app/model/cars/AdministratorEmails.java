@@ -15,6 +15,7 @@ public class AdministratorEmails {
         {
             add("azielazny@gmail.com");
             add("marcinpplonka@gmail.com");
+            add("okraszewski.m@gmail.com");
             add("kiomi.info@gmail.com");
         }
     };

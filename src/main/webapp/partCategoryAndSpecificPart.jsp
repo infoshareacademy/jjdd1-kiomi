@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-lg-6" id="listyKatCz">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" id="headKatCz" style="font-weight: bold; font-size: 1.2em; text-align: center">Kategorie części</a>
+                    <a href="#" class="list-group-item" id="headKatCz" style="font-weight: bold; font-size: 1.3em; text-align: center">Kategorie oraz podkategorie części</a>
                     <c:choose>
                         <c:when test="${not empty partCategories}">
                             <c:forEach items="${partCategories}" var="element">
@@ -99,7 +99,7 @@
 
             <div class="col-lg-6" id="listaCzSzcz">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" id="headCzSzcz" style="font-weight: bold; font-size: 1.2em; text-align: center">Części szczegółowe</a>
+                    <a href="#" class="list-group-item" id="headCzSzcz" style="font-weight: bold; font-size: 1.3em; text-align: center">Części szczegółowe</a>
                         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Wpisz fragment nazwy części aby zawęzić wyniki..">
                             <ul id="myUL">
                             <c:choose>
@@ -178,10 +178,10 @@
                 <h4 class="modal-title">Wersja aplikacji Autoparts</h4>
             </div>
             <div class="modal-body">
-                <p>Aktualna wersja: v0.3</p>
-                <p>Premiera: 15.05.2017r. 16:00, Gdańsk</p>
+                <p>Aktualna wersja: v0.4</p>
+                <p>Premiera: 29.05.2017r. 16:00, Gdańsk</p>
                 <p>Wersja rozwojowa: <a href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
-                <p>Pracują państwo na aplikacji po 3 sprincie szkoleniowym.</p>
+                <p>Pracują państwo na aplikacji po 4 sprincie szkoleniowym.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

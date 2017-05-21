@@ -1,6 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 
-import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
+//import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
 import com.infoshareacademy.jjdd1.kiomi.app.services.SessionData;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics;
