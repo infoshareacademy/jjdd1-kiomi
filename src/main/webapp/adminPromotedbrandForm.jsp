@@ -20,13 +20,17 @@
 
 <form action="/addbrand" method="post">
     Add promoted car brand: <input type="text" name="carBrandToAdd">
+
     <input type="submit" value="Submit"/>
 </form>
 
-<form action="/delbrand" method="post">
-    Delete promoted car brand:<input type="text" name="carBrandToDelete"/>
+<form action="/removebrand" method="post">
+    Delete promoted car brand:<input type="text" name="carBrandToRemove"/>
+
     <input type="submit" value="Submit"/>
 </form>
+
+<p>Here you will see your current promoted brands:</p>
 
 <div>
     <c:choose>

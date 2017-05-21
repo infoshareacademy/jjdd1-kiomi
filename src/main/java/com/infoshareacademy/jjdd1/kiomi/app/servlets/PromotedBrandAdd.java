@@ -1,5 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 
+import com.google.common.base.Strings;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.PromotedBrands;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,8 +23,8 @@ import java.util.List;
 
 
 @WebServlet(urlPatterns = "/addbrand")
-public class PromotedBrandUpdater extends HttpServlet{
-    Logger LOGGER = LogManager.getLogger(PromotedBrandUpdater.class);
+public class PromotedBrandAdd extends HttpServlet{
+    Logger LOGGER = LogManager.getLogger(PromotedBrandAdd.class);
 
 
 
@@ -37,11 +38,12 @@ public class PromotedBrandUpdater extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String carBrandToAdd = req.getParameter("carBrandToAdd");
+        if (!Strings.isNullOrEmpty(carBrandToAdd)) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
-        EntityManager entityManager = emf.createEntityManager();
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.infoshareacademy.jjdd1.kiomi");
+            EntityManager entityManager = emf.createEntityManager();
 
-        entityManager.getTransaction().begin();
+            entityManager.getTransaction().begin();
             PromotedBrands promotedBrands = new PromotedBrands();
             promotedBrands.setBrand(carBrandToAdd);
             promotedBrands.setEntryDate(new Date());
@@ -58,7 +60,8 @@ public class PromotedBrandUpdater extends HttpServlet{
 
             req.setAttribute("brandsList", brandsList);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/adminPromotedbrandForm.jsp");
-        dispatcher.forward(req,resp);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/adminPromotedbrandForm.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

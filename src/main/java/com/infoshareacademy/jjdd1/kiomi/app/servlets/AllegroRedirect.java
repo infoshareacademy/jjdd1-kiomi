@@ -1,11 +1,13 @@
 package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 
+import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
 import com.infoshareacademy.jjdd1.kiomi.app.services.SessionData;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.ejb.Stateful;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,15 +23,14 @@ import java.util.Date;
  * Created by marcinplonka on 09.05.17.
  */
 
-
 @WebServlet(urlPatterns = "/redirect")
 public class AllegroRedirect extends HttpServlet{
-
 
     @Inject
     SessionData sessionData;
 
-
+    @Inject
+    StatisticDataBuilder statisticDataBuilder;
 
 
 private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class);
@@ -40,11 +41,13 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
         String modelName = sessionData.getCar().getModel().getName();
         String carType = sessionData.getCar().getCarType().getName();
 
-        String partCategory = "Engine";
+//        String partCategory = "Engine";
         String partBrand = "Bosh";
-        String partName = "Knock sensor";
-        String partSerial = "02554486BBB";
-
+//        String partName = "Knock sensor";
+//        String partSerial = "02554486BBB";
+        String partName = req.getParameter("partsame");
+        String partSerial = req.getParameter("partserial");
+        String partCategory = req.getParameter("partcategory");
 
         Statistics currentSearch = new Statistics();
         currentSearch.setEntryDate(new Date());
@@ -58,18 +61,16 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
 
         LOGGER.debug("Creating new entity object: "+currentSearch.toString());
 
-        StatisticDataBuilder.addEntryToDatabase(currentSearch);
+        statisticDataBuilder.addEntryToDatabase(currentSearch);
 
-//        String partBrand = req.getParameter("partBrand");
-//        String partName = req.getParameter("partName");
-//        String partSerial = req.getParameter("partSerial");
-
+//        String partBrand = req.getParameter("partsrand");
 
         LOGGER.debug("Success! New entry in the database: id: "+currentSearch.getId()+", "+currentSearch.getCarBrand()+", "
                 +currentSearch.getCarModel());
 
-        resp.sendRedirect("https://allegro.pl/listing?string="+currentSearch.getCarBrand()+"%20"+currentSearch.getCarModel()+"%20"+currentSearch.getCarType()+"%20"+currentSearch.getPartName()+"%20"+currentSearch.getPartSerial()+"&description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222\" target=\"_blank");
-
-
+        resp.sendRedirect("https://allegro.pl/listing?string="
+                +currentSearch.getCarBrand()+"%20"+currentSearch.getCarModel()+"%20"+currentSearch.getCarType()+
+                        "%20"+currentSearch.getPartName()+"%20"+currentSearch.getPartSerial()+
+                "&description=1&order=m&bmatch=base-relevance-floki-5-nga-uni-1-2-0222\" target=\"_blank");
     }
 }
