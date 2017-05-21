@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="baseURL" value="${req.requestURL}"/>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="true" %>
 
 <!DOCTYPE html>
 <html lang="en" xmlns:jsp="http://java.sun.com/jsf/facelets">
@@ -18,14 +17,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/loginpage.css"/>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
     <!-- jQuery js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/loginpage.css"/>
+
 </head>
 <body>
 
@@ -42,34 +41,24 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" style="color: #fff">Wyszukaj części do swojego pojazdu,
-                        <small>lub:</small>
-                    </a>
+                    <a class="navbar-brand" href="#" style="color: #fff">Wyszukaj części do swojego pojazdu, <small>lub:</small></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1a">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <%--<li><a href="#" style="font-size: 1.2em; border-left-style: hidden;">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>--%>
-                        <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku" style="color: #fff">Zmień
-                            pojazd</a></li>
+                        <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku" style="color: #fff">Zmień pojazd</a></li>
 
-                        <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części"
-                               style="color: #fff">if:admin->Raport popularności części</a></li>
+                        <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części" style="color: #fff">if:admin->Raport popularności części</a></li>
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"
-                               style="color: #fff; font-size: 1.1em;">Witaj ${sessionUserName}<span
-                                    class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff; font-size: 1.1em;">Witaj ${sessionUserName}<span class="caret"></span></a>
                             <ul class="dropdown-menu" id="dropdownStyle">
-                                <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu"
-                                       style="color: #fff">Panel Administracyjny</a></li>
-                                <li><a href="/logout"
-                                       title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania"
-                                       style="color: #fff">Wyloguj</a></li>
+                                <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu"style="color: #fff">Panel Administracyjny</a></li>
+                                <li><a href="/logout" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania" style="color: #fff">Wyloguj</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -84,18 +73,15 @@
         </ol>
 
         <div class="row">
-            <div class="col-lg-6" id="listyKatCza">
+            <div class="col-lg-6" id="listyKatCz">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" id="headKatCz"
-                       style="font-weight: bold; font-size: 1.3em; text-align: center">Kategorie oraz podkategorie
-                        części</a>
+                    <a href="#" class="list-group-item" id="headKatCz" style="font-weight: bold; font-size: 1.3em; text-align: center">Kategorie oraz podkategorie części</a>
                     <c:choose>
                         <c:when test="${not empty partCategories}">
                             <c:forEach items="${partCategories}" var="element">
                                 <c:choose>
                                     <c:when test="${element.has_children==true}">
-                                        <a class="list-group-item" id="contaKatCz" href="index?cat=${element.id}"
-                                           align="center" value="${element.id}">${element.name}</a>
+                                        <a class="list-group-item" id="contaKatCz" href="index?cat=${element.id}" align="center" value="${element.id}">${element.name}</a>
                                     </c:when>
                                     <%--<c:otherwise>--%>
                                     <%--<a class="list-group-item" href="choisingpartcategory?cat=${element.id}&stock=1" align="center" value="${element.id}">${element.name}</a>--%>
@@ -105,77 +91,28 @@
                         </c:when>
                         <c:otherwise>
                             <c:if test="${not empty param.type}">
-                                <a class="list-group-item" id="contbKatCz" align="center" href="#">Lista kategorii jest
-                                    pusta.</a>
+                                <a class="list-group-item" id="contbKatCz" align="center" href="#">Lista kategorii jest pusta.</a>
                             </c:if>
                         </c:otherwise>
                     </c:choose>
                 </div>
             </div>
 
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Wyszukaj części do Twojego pojazdu<span
-                            class="sr-only">(current)</span></a></li>
-                    <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku">Zmień pojazd</a></li>
-                    <c:if test="${isadmin==true}">
-                        <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części">Raport
-                            popularności części</a></li>
-                    </c:if>
-                    <li><a href="/statisticsReport" title="Statystyki">Statystyki</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Witaj ${sessionUserName}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu">Panel
-                                Administracyjny</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/logout"
-                                   title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania">Wyloguj</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-        </nav>
-
-        <ol class="breadcrumb">Twój aktualny wybór to:
-            <li title="Marka pojazdu"> marka: ${brand}</li>
-            <li title="Model pojazdu"> model: ${model}</li>
-            <li title="Typ silnika"> typ silnika: ${carType}</li>
-        </ol>
-
-        <div class="row">
-            <div class="col-lg-6" id="listyKatCz">
+            <div class="col-lg-6" id="listaCzSzcz">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" style="font-weight: bold; font-size: 1.2em; text-align: center">Kategorie
-                        części</a>
-                    <c:choose>
-                        <c:when test="${not empty partCategories}">
-                            <c:forEach items="${partCategories}" var="element">
-
-                                <c:choose>
-                                    <c:when test="${fn:length(parts) gt 1}">
-                                        <c:forEach items="${parts}" var="element">
-                                            <li><a class="list-group-item" id="contaCzSzcz"
-                                                   href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}"
-                                                   target="_blank">${element.name} (${element.number})</a></li>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a class="list-group-item" id="contbCzSzcz" align="center" href="#">Wybierz
-                                            kategorię
-                                            aby wyświetlić części</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                        </c:when>
-                    </c:choose>
+                    <a href="#" class="list-group-item" id="headCzSzcz" style="font-weight: bold; font-size: 1.3em; text-align: center">Części szczegółowe</a>
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Wpisz fragment nazwy części aby zawęzić wyniki..">
+                    <ul id="myUL">
+                        <c:choose>
+                            <c:when test="${fn:length(parts) gt 1}">
+                                <c:forEach items="${parts}" var="element">
+                                    <li><a class="list-group-item" id="contaCzSzcz" href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} (${element.number})</a></li>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="list-group-item" id="contbCzSzcz" align="center" href="#">Wybierz kategorię aby wyświetlić części</a></li>
+                            </c:otherwise>
+                        </c:choose>
                     </ul>
                 </div>
             </div>
@@ -188,12 +125,9 @@
                     <!--<li><a href="#" title="Funkcjonalność będzie dostępna po 4-tym sprincie szkoleniowym.">Admin</a></li>-->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila" data-toggle="modal"
-                           data-target="#daneKONT" style="color: #fff">Kontakt</a></li>
-                    <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?" data-toggle="modal"
-                           data-target="#infoKIOMI" style="color: #fff">Więcej o team KIOMI</a></li>
-                    <li><a href="#" title="Wersja aplikacji z której korzystasz" data-toggle="modal"
-                           data-target="#wersjaAPP" style="color: #fff">Autoparts</a></li>
+                    <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila" data-toggle="modal" data-target="#daneKONT" style="color: #fff">Kontakt</a></li>
+                    <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?" data-toggle="modal" data-target="#infoKIOMI" style="color: #fff">Więcej o team KIOMI</a></li>
+                    <li><a href="#" title="Wersja aplikacji z której korzystasz" data-toggle="modal" data-target="#wersjaAPP" style="color: #fff">Autoparts</a></li>
                 </ul>
             </div><!-- /.container-fluid -->
         </nav>
@@ -228,10 +162,8 @@
                     <h4 class="modal-title">Informacje o team KIOMI</h4>
                 </div>
                 <div class="modal-body">
-                    <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju
-                        2017.
-                        Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest
-                        aplikacja Autoparts.</p>
+                    <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju 2017.
+                        Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest aplikacja Autoparts.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -249,8 +181,7 @@
                 <div class="modal-body">
                     <p>Aktualna wersja: v0.4</p>
                     <p>Premiera: 29.05.2017r. 16:00, Gdańsk</p>
-                    <p>Wersja rozwojowa: <a
-                            href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
+                    <p>Wersja rozwojowa: <a href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
                     <p>Pracują państwo na aplikacji po 4 sprincie szkoleniowym.</p>
                 </div>
                 <div class="modal-footer">
