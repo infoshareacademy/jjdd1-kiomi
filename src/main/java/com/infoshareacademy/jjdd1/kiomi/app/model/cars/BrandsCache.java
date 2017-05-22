@@ -37,7 +37,6 @@ public class BrandsCache {
     MembersDataBuilder membersDataBuilder;
 
     @Schedule(minute = "*", hour = "1")
-    //@Schedule(minute = "36", hour = "13")
     @PostConstruct
     public void starter() {
         UsersList member = new UsersList();
