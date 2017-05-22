@@ -24,8 +24,4 @@ services:
       - 8080:8080
       - 9990:9990
     links:
-      - "db:database"
-
-networks:
-  kiomi:
-    driver: bridge
+      - "db:webapp"
