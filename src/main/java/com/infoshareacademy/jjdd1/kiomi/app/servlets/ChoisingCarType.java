@@ -42,7 +42,7 @@ public class ChoisingCarType extends HttpServlet {
         try {
             Brand selectedBrand = sessionData.getCar().getBrand();
         } catch (NullPointerException e) {
-            resp.sendRedirect("http://localhost:8710/choisingbrand");
+            resp.sendRedirect("http://localhost:8080/choisingbrand");
         }
 
         req.setCharacterEncoding("UTF-8");
