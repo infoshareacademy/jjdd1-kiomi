@@ -8,8 +8,10 @@ services:
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=pass
+    volumes:
+      - ".dump.sql:/docker-entrypoint-initdb.d"
     ports:
-      - 3306:3306
+      - "3306:3306"
 
   webapp:
     container_name: "webapp"
@@ -21,7 +23,7 @@ services:
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=pass
     ports:
-      - 8080:8080
-      - 9990:9990
+      - "8080:8080"
+      - "9990:9990"
     links:
       - "db:webapp"
