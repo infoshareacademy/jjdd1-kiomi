@@ -15,7 +15,7 @@ services:
     container_name: "webapp"
     build: .
     environment:
-      - MYSQL_URI=db:8711
+      - MYSQL_URI=dbase:8711
       - MYSQL_DATABASE=statistics
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
