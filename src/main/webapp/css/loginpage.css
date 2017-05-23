@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     background: #3b679e;
     background: -moz-linear-gradient(-45deg, #3b679e 0%, #2b88d9 27%, #207cca 69%, #7db9e8 100%);
