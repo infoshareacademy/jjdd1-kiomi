@@ -13,7 +13,7 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db:8711/statistics"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://dbase:8711/statistics"/>
             <property name="javax.persistence.jdbc.user" value="mysql"/>
             <property name="javax.persistence.jdbc.password" value="mysql"/>
 
