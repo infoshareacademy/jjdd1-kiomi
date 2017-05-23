@@ -78,6 +78,7 @@ public class EbayReader {
         System.out.println(keyword);
         System.out.println(createUri(keyword));
         InputStream is = new URL(createUri(keyword)).openStream();
+
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 //
 //        JsonObject response = gson.fromJson(bufferedReader, JsonObject.class);
@@ -97,7 +98,7 @@ public class EbayReader {
         JsonElement dataItems=searchResult.get(0).getAsJsonObject().get("item");
 
 
-        System.out.println(dataItems.toString());
+//        System.out.println(dataItems.toString());
 
         return gson.fromJson(dataItems, new TypeToken<List<EbayItems>>() {
         }.getType());

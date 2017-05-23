@@ -8,11 +8,20 @@ import java.util.Arrays;
 public class EbayItems {
     private String[] itemId;
     private String[] title;
-    private String[] viewItemUrl;
+    private String[] viewItemURL;
     private String[] paymentMethod;
     private String[] location;
     private String[] country;
     private SellingStatus[] sellingStatus;
+    private String[] galleryURL;
+
+    public String[] getGalleryURL() {
+        return galleryURL;
+    }
+
+    public void setGalleryURL(String[] galleryURL) {
+        this.galleryURL = galleryURL;
+    }
 
     public SellingStatus[] getSellingStatus() {
         return sellingStatus;
@@ -38,12 +47,12 @@ public class EbayItems {
         this.title = title;
     }
 
-    public String[] getViewItemUrl() {
-        return viewItemUrl;
+    public String[] getViewItemURL() {
+        return viewItemURL;
     }
 
-    public void setViewItemUrl(String[] viewItemUrl) {
-        this.viewItemUrl = viewItemUrl;
+    public void setViewItemURL(String[] viewItemURL) {
+        this.viewItemURL = viewItemURL;
     }
 
     public String[] getPaymentMethod() {
@@ -75,7 +84,7 @@ public class EbayItems {
         return "EbayItems{" +
                 "itemId=" + Arrays.toString(itemId) +
                 ", title=" + Arrays.toString(title) +
-                ", viewItemUrl=" + Arrays.toString(viewItemUrl) +
+                ", viewItemUrl=" + Arrays.toString(viewItemURL) +
                 ", paymentMethod=" + Arrays.toString(paymentMethod) +
                 ", location=" + Arrays.toString(location) +
                 ", country=" + Arrays.toString(country) +
