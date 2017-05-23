@@ -3,19 +3,23 @@ package com.infoshareacademy.jjdd1.kiomi.app.model.cars;
 import com.infoshareacademy.jjdd1.kiomi.app.services.CarsDataLoader2;
 
 import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
-import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticDataBuilder;
+import com.infoshareacademy.jjdd1.kiomi.app.services.MembersDataBuilder;
+import com.infoshareacademy.jjdd1.kiomi.app.services.UsersList;
+
+
+//import com.infoshareacademy.jjdd1.kiomi.app.services.MailSender;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,20 +33,40 @@ public class BrandsCache {
 
     @Inject
     CarsDataLoader2 jsonParser;
+    @Inject
+    MembersDataBuilder membersDataBuilder;
 
     @Schedule(minute = "*", hour = "1")
-    //@Schedule(minute = "36", hour = "13")
     @PostConstruct
     public void starter() {
+        UsersList member = new UsersList();
+        member.setEntryDate(new Date());
+        member.setEmail("azielazny@gmail.com");
+        member.setFirstname("Arkadiusz");
+        member.setLastname("Zielazny");
+        member.setRole(1);
+        LOGGER.debug("Creating new entity object: " + member.toString());
+        membersDataBuilder.addEntryToDatabase(member);
+        UsersList member2 = new UsersList();
+        member2.setEntryDate(new Date());
+        member2.setEmail("kiomi.info@gmail.com");
+        member2.setFirstname("Kiomi");
+        member2.setLastname("Kiomi");
+        member2.setRole(0);
+        LOGGER.debug("Creating new entity object: " + member2.toString());
+        membersDataBuilder.addEntryToDatabase(member2);
 
 
-//        MailSender mailSender =new MailSender();
-//        mailSender.run();
+
+        MailSender mailSender = new MailSender();
+        mailSender.run();
+
+
 
 
         try {
             brandsList = jsonParser.getBrandsList();
-            LOGGER.info("Number of brandList elements: "+brandsList.size());
+            LOGGER.info("Number of brandList elements: " + brandsList.size());
 
         } catch (IOException e) {
             LOGGER.error("Error occurred while loading brandList.", e.getMessage());

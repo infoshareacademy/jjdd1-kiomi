@@ -45,10 +45,12 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
             resp.sendRedirect("http://localhost:8080/googlelogin");
         }
 
-        GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
+//        GetJsonFromFile getJsonFromFile = new GetJsonFromFile();
+        GetJsonFromAtenaWeb getJsonFromAtenaWeb = new GetJsonFromAtenaWeb();
         String aztec = (req.getParameter("aztec") != null) ? req.getParameter("aztec") : "";
-
-        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
+LOGGER.info(aztec);
+//        CarFromAztecJson aztecCodeFromFile = getJsonFromFile.getJsonFile(aztec);
+        CarFromAztecJson aztecCodeFromFile = getJsonFromAtenaWeb.getJsonFile(aztec);
         Car carFromAztec = new Car();
         carFromAztec.setBrand(null);
         carFromAztec.setModel(null);
@@ -60,7 +62,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         }
 
         if (req.getParameter("model") != null) {
-            String url = "http://infoshareacademycom.2find.ru" + carFromAztec.getBrand().getLink() + "?lang=polish";
+            String url = "http://infoshareacademycom.2find.ru" + sessionData.getCar().getBrand().getLink() + "?lang=polish";
             List<Model> modelsList = carsDataLoader2.getModelsListBylink(url);
             List<Model> selectedModel = modelsList.stream().filter(b -> b.getId().equals(req.getParameter("model"))).collect(Collectors.toList());
             carFromAztec.setModel(selectedModel.get(0));
@@ -111,7 +113,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         } else {
             String modelLink = carFromAztec.getModel().getLink();
             String url = "http://infoshareacademycom.2find.ru" + modelLink + "?lang=polish";
-            req.setAttribute("action", "index");
+            req.setAttribute("action", "partcategoryandspecificpart");
 
             List<Type> carTypeList = carIdentityFromAztec.findCarType(url, aztecCodeFromFile);
             if (carTypeList.size() > 1) {

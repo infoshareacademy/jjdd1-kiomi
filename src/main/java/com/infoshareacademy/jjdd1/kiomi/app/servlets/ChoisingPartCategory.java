@@ -21,7 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "/index")
+@WebServlet({"/index",""})
+
 public class ChoisingPartCategory extends HttpServlet {
 
     @Inject
@@ -86,7 +87,7 @@ public class ChoisingPartCategory extends HttpServlet {
 
         }
         sessionData.setPartCategory(category[0]);
-//
+
         PromotedBrandsLoader promotedBrandsLoader = new PromotedBrandsLoader();
         if (part.size() > 0) {
             part = Optional.ofNullable(promotedBrandsLoader.rewritedPartListSorter(part)).orElse(new ArrayList<>());
@@ -96,6 +97,9 @@ public class ChoisingPartCategory extends HttpServlet {
         req.setAttribute("categoryname", sessionData.getPartCategory());
         req.setAttribute("partCategories", partCategories);
         req.setAttribute("parts", part);
+        if(sessionData.isAdmin()==true) {
+            req.setAttribute("isadmin", sessionData.isAdmin());
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/partCategoryAndSpecificPart.jsp");
         dispatcher.forward(req, resp);

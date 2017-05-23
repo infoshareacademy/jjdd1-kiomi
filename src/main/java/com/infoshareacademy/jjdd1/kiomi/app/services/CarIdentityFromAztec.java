@@ -23,12 +23,18 @@ public class CarIdentityFromAztec {
     BrandsCache brandsCache;
     @Inject
     SessionData sessionData;
+    private static final String ERROR_SESSION_FROM_ATENA = "0";
 
     public CarIdentityFromAztec() {
     }
 
     public Car FindingCarByAztecCode(CarFromAztecJson aztecCode) throws IOException {
         Car myCar = new Car();
+
+        if (!(aztecCode.getError()).equals(ERROR_SESSION_FROM_ATENA)) {
+            LOGGER.debug("We haven't session key");
+            return myCar;
+        }
 
         try {
             if (aztecCode.getBrand().equals("")) {
@@ -77,6 +83,10 @@ public class CarIdentityFromAztec {
         String url = "http://infoshareacademycom.2find.ru" + link + "?lang=polish";
         List<Model> modelsList = jsonParser.getModelsListBylink(url);
 
+        if (yearProduction==null || modelFromAztec==null) {
+            LOGGER.debug("We haven't session key");
+            return modelsList;
+        }
         Integer startYear;
         Integer endYear;
         Integer productionYear = Integer.parseInt(yearProduction);
@@ -105,6 +115,11 @@ public class CarIdentityFromAztec {
         CarsDataLoader2 jsonParser = new CarsDataLoader2();
         //logger:
         List<Type> carTypesList = jsonParser.getTypesListByLink(url);
+        if (dataFromAztec.getCarCapacity()==null) {
+            LOGGER.debug("We haven't session key");
+            return carTypesList;
+        }
+
         return searchCarTypeByFields(carTypesList, dataFromAztec.getCarCapacity(), dataFromAztec.getCarFuelType(), dataFromAztec.getCarPower());
     }
 
