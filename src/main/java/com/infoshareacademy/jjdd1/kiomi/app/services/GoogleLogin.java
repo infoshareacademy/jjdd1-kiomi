@@ -48,7 +48,7 @@ public class GoogleLogin extends HttpServlet {
             .apiSecret(CLIENT_SECRET)
             .scope("profile")
             .scope("email")
-            .callback("http://localhost:8080/googlelogin")
+            .callback("http://localhost:8710/googlelogin")
             .build(GoogleApi20.instance());
 
     @Override
@@ -106,7 +106,7 @@ public class GoogleLogin extends HttpServlet {
                 if (!member.getEmail().isEmpty()) {
 //                    sessionData.logUser(googleUser.getGiven_name(), googleUser.getFamily_name(), googleUser.getPicture(), googleUser.getEmail());
                     sessionData.logUser(member.getFirstname(), member.getLastname(), googleUser.getPicture(), member.getEmail(), member.getRole());
-                    resp.sendRedirect("http://localhost:8080/googlelogin");
+                    resp.sendRedirect("http://localhost:8710/googlelogin");
                 } else {
                     req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
                 }

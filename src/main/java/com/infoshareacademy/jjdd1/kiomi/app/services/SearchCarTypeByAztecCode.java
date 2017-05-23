@@ -33,7 +33,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("http://localhost:8080/caridentitymethod");
+        resp.sendRedirect("http://localhost:8710/caridentitymethod");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SearchCarTypeByAztecCode extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         if (sessionData.isLogged() == false) {
             req.setAttribute("errorMessage", "Nie ma takiego użytkownika. Dostęp zabroniony.");
-            resp.sendRedirect("http://localhost:8080/googlelogin");
+            resp.sendRedirect("http://localhost:8710/googlelogin");
         }
 
 //        GetJsonFromFile getJsonFromFile = new GetJsonFromFile();

@@ -109,12 +109,12 @@ public class ChoisingPartCategory extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (sessionData.isLogged() == false) {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
-            resp.sendRedirect("http://localhost:8080/googlelogin");
+            resp.sendRedirect("http://localhost:8710/googlelogin");
         }
         try {
             Model selectedModel = sessionData.getCar().getModel();
         } catch (NullPointerException e) {
-            resp.sendRedirect("http://localhost:8080/choisingbrand");
+            resp.sendRedirect("http://localhost:8710/choisingbrand");
         }
 
         req.setCharacterEncoding("UTF-8");
@@ -130,6 +130,6 @@ public class ChoisingPartCategory extends HttpServlet {
         car.setModel(sessionData.getCar().getModel());
         sessionData.setCar(car);
 
-        resp.sendRedirect("http://localhost:8080/index");
+        resp.sendRedirect("http://localhost:8710/index");
     }
 }

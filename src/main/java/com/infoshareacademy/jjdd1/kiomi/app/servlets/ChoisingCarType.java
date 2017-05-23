@@ -30,7 +30,7 @@ public class ChoisingCarType extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("http://localhost:8080/caridentitymethod");
+        resp.sendRedirect("http://localhost:8710/caridentitymethod");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ChoisingCarType extends HttpServlet {
         try {
             Brand selectedBrand = sessionData.getCar().getBrand();
         } catch (NullPointerException e) {
-            resp.sendRedirect("http://localhost:8080/choisingbrand");
+            resp.sendRedirect("http://localhost:8710/choisingbrand");
         }
 
         req.setCharacterEncoding("UTF-8");
