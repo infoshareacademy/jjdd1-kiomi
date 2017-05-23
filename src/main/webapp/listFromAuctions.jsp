@@ -121,14 +121,14 @@
                          style="font-weight: bold; font-size: 1.3em; text-align: center">Znalezione na Allegro</div>
                     <ul class="list-unstyled auctionList col-xs-12">
                         <c:choose>
-                            <c:when test="${fn:length(ebayList) gt 1}">
-                                <c:forEach items="${ebayList}" var="element">
+                            <c:when test="${fn:length(allegroList) gt 1}">
+                                <c:forEach items="${allegroList}" var="element">
                                     <li>
-                                        <a href="${element.getViewItemURL()[0]}" target="_blank">
-                                            <div class="" style="width:80px"><img src="${element.getGalleryURL()[0]}"
+                                        <a href="<%--${element.getViewItemURL()[0]}--%>" target="_blank">
+                                            <div class="" style="width:80px"><img src="${element.getPhotosInfo().getItem().get(1).getPhotoUrl()}"
                                                                                   style="width:100px"></div>
-                                            <div>${element.getTitle()[0]} </div>
-                                            <div>${element.getSellingStatus()[0].getConvertedCurrentPrice()[0].getPriceValue()} ${element.getSellingStatus()[0].getConvertedCurrentPrice()[0].getCurrencyId()}</div>
+                                            <div>${element.getItemTitle()} </div>
+                                            <div>${element.getPriceInfo().getItem().get(1).getPriceValue()} PLN</div>
                                         </a>
                                     </li>
                                 </c:forEach>

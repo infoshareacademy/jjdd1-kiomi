@@ -1,5 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.app.servlets;
 
+import allegro.*;
 import com.infoshareacademy.jjdd1.kiomi.app.model.ebay.EbayItems;
 import com.infoshareacademy.jjdd1.kiomi.app.services.EbayReader;
 import com.infoshareacademy.jjdd1.kiomi.app.services.SessionData;
@@ -46,9 +47,40 @@ public class AuctionDataFinder extends HttpServlet {
         String partCategory = req.getParameter("partcategory");
 
         EbayReader ebayReader = new EbayReader();
-        String encodeParamToUrl = URLEncoder.encode(brandName + " " + modelName + " " + partName, "UTF-8");
+        String encodeParamToUrl = URLEncoder.encode(brandName + " " + modelName + " " + partSerial, "UTF-8");
         System.out.println(encodeParamToUrl);
         List<EbayItems> ebayList = ebayReader.ebayLoader(encodeParamToUrl);
+
+        //allegro start
+        ServiceService allegroWebApiService = new ServiceService();
+
+        ServicePort allegro = allegroWebApiService.getServicePort();
+
+        DoGetItemsListRequest itemsreq = new DoGetItemsListRequest();
+        itemsreq.setCountryId(1);
+        itemsreq.setWebapiKey("5c6ad4c4");
+        Integer scope = 0, size = 5, offset = 0;
+        itemsreq.setResultOffset(offset);
+        itemsreq.setResultSize(size);
+        itemsreq.setResultScope(scope);
+        ArrayOfFilteroptionstype filter = new ArrayOfFilteroptionstype();
+
+        FilterOptionsType allFinder = new FilterOptionsType();
+        allFinder.setFilterId("search");
+        ArrayOfString finder = new ArrayOfString();
+        finder.getItem().add(brandName + " " + modelName);
+        allFinder.setFilterValueId(finder);
+        filter.getItem().add(allFinder);
+
+        itemsreq.setFilterOptions(filter);
+
+        DoGetItemsListResponse doGetItemsList = allegro.doGetItemsList(itemsreq);
+//        for (int i = 0; i < doGetItemsList.getItemsList().getItem().size(); i++) {
+//            System.out.println(doGetItemsList.getItemsList().getItem().get(0).getItemTitle());
+//        }
+        List<ItemsListType> allegroList = doGetItemsList.getItemsList().getItem();
+        //allegro end
+
 
 //        System.out.println(ebayList.get(0).getSellingStatus()[0].getConvertedCurrentPrice()[0].getPriceValue());
         String allegroLink = "https://allegro.pl/listing?string="
@@ -61,7 +93,7 @@ public class AuctionDataFinder extends HttpServlet {
         req.setAttribute("partSerial", partSerial);
         req.setAttribute("partCategory", partCategory);
         req.setAttribute("ebayList", ebayList);
-        req.setAttribute("allegroList", ebayList);
+        req.setAttribute("allegroList", allegroList);
         req.setAttribute("allegroLink", allegroLink);
 
 
