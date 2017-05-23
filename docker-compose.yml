@@ -1,6 +1,6 @@
 version: '2'
 services:
-  db:
+  dbase:
     container_name: "dbase"
     image: mysql:latest
     environment:
