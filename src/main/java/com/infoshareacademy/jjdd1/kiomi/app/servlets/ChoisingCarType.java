@@ -30,19 +30,19 @@ public class ChoisingCarType extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("http://localhost:8080/caridentitymethod");
+        resp.sendRedirect("/caridentitymethod");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(sessionData.isLogged()==false) {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
-            resp.sendRedirect("http://localhost:8080/googlelogin");
+            resp.sendRedirect("/googlelogin");
         }
         try {
             Brand selectedBrand = sessionData.getCar().getBrand();
         } catch (NullPointerException e) {
-            resp.sendRedirect("http://localhost:8080/choisingbrand");
+            resp.sendRedirect("/choisingbrand");
         }
 
         req.setCharacterEncoding("UTF-8");

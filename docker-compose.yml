@@ -1,29 +1,29 @@
 version: '2'
 services:
-  db:
-    container_name: "db"
+  dbase:
+    container_name: "dbase"
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=statistics
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=pass
-    volumes:
-      - ".dump.sql:/docker-entrypoint-initdb.d"
     ports:
-      - "3306:3306"
+      - 8711:3306
 
-  webapp:
-    container_name: "webapp"
+
+  webapplication:
+    container_name: "webapplication"
     build: .
     environment:
-      - MYSQL_URI=db:3306
+      - MYSQL_URI=dbase:8711
       - MYSQL_DATABASE=statistics
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=pass
     ports:
-      - "8080:8080"
-      - "9990:9990"
+      - 8710:8080
+      - 8712:9990
+
     links:
-      - "db:webapp"
+      - "dbase:webapplication"
