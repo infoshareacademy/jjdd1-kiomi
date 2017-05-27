@@ -25,9 +25,6 @@ public class PromotedBrandManagerServlet extends HttpServlet{
     private boolean promotedBrandToAddIsempty;
     private boolean promotedBrandToRemoveIsempty;
 
-//    @Inject @Default
-//    PromotedBrandPersistence brandPersist;
-
 
 
     @Override
