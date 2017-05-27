@@ -30,7 +30,6 @@ public class PromotedBrandManagerServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/promotedBrandManager.jsp");
-        LOGGER.error("doGet");
         dispatcher.forward(req,resp);
     }
 

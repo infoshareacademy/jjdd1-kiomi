@@ -54,7 +54,6 @@ public class PromotedBrandPersistence implements IPromotedBrands {
     public List<PromotedBrands> getAllBrands() {
         TypedQuery<PromotedBrands> typedQuery = entityManager
                 .createQuery("SELECT c FROM PromotedBrands c", PromotedBrands.class);
-        LOGGER.error("query "+typedQuery);
         typedQuery
                 .getResultList()
                 .forEach(b -> LOGGER.debug("Current list of promoted brands: " +b.getBrand()));
