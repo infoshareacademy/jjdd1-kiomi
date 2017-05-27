@@ -57,8 +57,10 @@ public class BrandsCache {
         membersDataBuilder.addEntryToDatabase(member2);
 
 
+
         MailSender mailSender = new MailSender();
         mailSender.run();
+
 
 
 

@@ -60,12 +60,24 @@ public class MailSender extends TimerTask {
                 Map<String,BigInteger> typeAndCountMap = new LinkedHashMap<>();
                 typeAndCountMap=statisticsUtility.getTypeAndCountMap();
 
+                Map<String,BigInteger> partBrandAndCountMap = new LinkedHashMap<>();
+                partBrandAndCountMap=statisticsUtility.getPartBrandAndCountMap();
+
+                Map<String,BigInteger> partCategoryAndCountMap = new LinkedHashMap<>();
+                partCategoryAndCountMap=statisticsUtility.getPartCategoryAndCountMap();
+
+                Map<String,BigInteger> partNameAndCountMap = new LinkedHashMap<>();
+                partNameAndCountMap=statisticsUtility.getPartNameAndCountMap();
+
                 StringBuilderTable stringBuilderTabler=new StringBuilderTable();
 
                 String htmlTop=stringBuilderTabler.createHtmlTop();
                 String htmlTableContentBrand=stringBuilderTabler.createTableContent(brandAndCountMap,"Brand");
                 String htmlTableContentModel=stringBuilderTabler.createTableContent(modelAndCountMap,"Model");
                 String htmlTableContentType=stringBuilderTabler.createTableContent(typeAndCountMap,"Type");
+                String htmlTableContentPartBrand=stringBuilderTabler.createTableContent(partBrandAndCountMap,"Part Brand");
+                String htmlTableContentPartCategory=stringBuilderTabler.createTableContent(partCategoryAndCountMap,"Part Category");
+                String htmlTableContentPartName=stringBuilderTabler.createTableContent(partNameAndCountMap,"Part Name");
                 String htmlBottom=stringBuilderTabler.createHtmlBottom();
 
                 StringBuilder stringBuilder = new StringBuilder();
@@ -73,6 +85,9 @@ public class MailSender extends TimerTask {
                 stringBuilder.append(htmlTableContentBrand);
                 stringBuilder.append(htmlTableContentModel);
                 stringBuilder.append(htmlTableContentType);
+                stringBuilder.append(htmlTableContentPartBrand);
+                stringBuilder.append(htmlTableContentPartCategory);
+                stringBuilder.append(htmlTableContentPartName);
                 stringBuilder.append(htmlBottom);
                 String html = stringBuilder.toString();
 
