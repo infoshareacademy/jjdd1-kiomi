@@ -8,8 +8,6 @@ services:
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=pass
-    volumes:
-      - ".dump.sql:/docker-entrypoint-initdb.d"
     ports:
       - "3306:3306"
 
