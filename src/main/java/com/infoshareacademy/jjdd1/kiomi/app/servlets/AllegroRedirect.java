@@ -48,7 +48,10 @@ private static final Logger LOGGER = LogManager.getLogger(AllegroRedirect.class)
 
         String partBrand = "Bosh";
 
-        String partName = req.getParameter("partsame");
+//        String partName = req.getParameter("partsame");
+
+        String partName = req.getParameter("partname");
+
         String partSerial = req.getParameter("partserial");
         String partCategory = req.getParameter("partcategory");
 
