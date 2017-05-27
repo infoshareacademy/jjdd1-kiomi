@@ -33,10 +33,22 @@ public class StatisticsReport extends HttpServlet {
         Map<String,BigInteger> typeAndCountMap = new LinkedHashMap<>();
         typeAndCountMap=statisticsUtility.getTypeAndCountMap();
 
+        Map<String,BigInteger> partBrandAndCountMap = new LinkedHashMap<>();
+        partBrandAndCountMap=statisticsUtility.getPartBrandAndCountMap();
+
+        Map<String,BigInteger> partCategoryAndCountMap = new LinkedHashMap<>();
+        partCategoryAndCountMap=statisticsUtility.getPartCategoryAndCountMap();
+
+        Map<String,BigInteger> partNameAndCountMap = new LinkedHashMap<>();
+        partNameAndCountMap=statisticsUtility.getPartNameAndCountMap();
+
         request.setAttribute("listOfAllStatistics", listOfAllStatistics);
         request.setAttribute("brandAndCountMap", brandAndCountMap);
         request.setAttribute("modelAndCountMap", modelAndCountMap);
         request.setAttribute("typeAndCountMap", typeAndCountMap);
+        request.setAttribute("partBrandAndCountMap", partBrandAndCountMap);
+        request.setAttribute("partCategoryAndCountMap", partCategoryAndCountMap);
+        request.setAttribute("partNameAndCountMap", partNameAndCountMap);
 
 //        for (Map.Entry<String, BigInteger> entry : typeAndCountMap.entrySet()) {
 //            String key = entry.getKey();

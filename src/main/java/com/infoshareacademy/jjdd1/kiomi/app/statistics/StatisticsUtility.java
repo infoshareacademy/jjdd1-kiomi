@@ -76,4 +76,53 @@ public class StatisticsUtility {
         return typeAndCountMap;
     }
 
+    public Map<String,BigInteger> getPartBrandAndCountMap() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery("  SELECT COUNT(part_brand), part_brand FROM statistics.search_history GROUP BY part_brand ORDER BY COUNT(part_brand) DESC;");
+
+        List<Object[]> resultList = query.getResultList();
+
+        Map<String,BigInteger> partBrandAndCountMap = new LinkedHashMap<>();
+
+        for (Object[] item : resultList) {
+            partBrandAndCountMap.put((String)item[1],(BigInteger) item[0] );
+//            System.out.println( (String)item[1]+" "+(BigInteger) item[0]);
+        }
+        return partBrandAndCountMap;
+    }
+    public Map<String,BigInteger> getPartCategoryAndCountMap() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery("  SELECT COUNT(part_category), part_category FROM statistics.search_history GROUP BY part_category ORDER BY COUNT(part_category) DESC;");
+
+        List<Object[]> resultList = query.getResultList();
+
+        Map<String,BigInteger> partCategoryAndCountMap = new LinkedHashMap<>();
+
+        for (Object[] item : resultList) {
+            partCategoryAndCountMap.put((String)item[1],(BigInteger) item[0] );
+//            System.out.println( (String)item[1]+" "+(BigInteger) item[0]);
+        }
+        return partCategoryAndCountMap;
+    }
+    public Map<String,BigInteger> getPartNameAndCountMap() {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DATABASE_AUTOPARTS);
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery("  SELECT COUNT(part_name), part_name FROM statistics.search_history GROUP BY part_name ORDER BY COUNT(part_name) DESC;");
+
+        List<Object[]> resultList = query.getResultList();
+
+        Map<String,BigInteger> partNameAndCountMap = new LinkedHashMap<>();
+
+        for (Object[] item : resultList) {
+            partNameAndCountMap.put((String)item[1],(BigInteger) item[0] );
+//            System.out.println( (String)item[1]+" "+(BigInteger) item[0]);
+        }
+        return partNameAndCountMap;
+    }
+
 }

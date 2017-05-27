@@ -39,7 +39,7 @@ public class Statistics implements Serializable{
     @Column(name = "part_brand", length = 50)
     private String partBrand;
 
-    @Column(name = "part_name", length = 50)
+    @Column(name = "part_name", length = 255)
     private String partName;
 
     @Column(name = "part_serial", length = 50)

@@ -8,54 +8,106 @@
 <html>
 <head>
     <title>Title</title>
+    <style type="text/css">
+        #clear{
+            clear:both;
+        }
+    </style>
 </head>
 <body>
 <b>Statistics Report:</b><br><br>
-
-        <table border="1">
-            <tr>
-                <th>Brand</th>
-                <th>Total count</th>
-            </tr>
-
-            <c:forEach var="value" items="${brandAndCountMap}">
+        <div style="display: inline-block;float:left;margin-right:5px;">
+            <table border="1">
                 <tr>
-                    <td><c:out value="${value.key}" /></td>
-                    <td><c:out value="${value.value}" /></td>
+                    <th>Brand</th>
+                    <th>Total count</th>
                 </tr>
-            </c:forEach>
-        </table>
-        <br>
-        <table border="1">
-            <tr>
-                <th>Model</th>
-                <th>Total count</th>
-            </tr>
 
-            <c:forEach var="value" items="${modelAndCountMap}">
+                <c:forEach var="value" items="${brandAndCountMap}">
+                    <tr>
+                        <td><c:out value="${value.key}" /></td>
+                        <td><c:out value="${value.value}" /></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div style="display: inline-block;float:left;margin-right:5px;">
+            <table border="1">
                 <tr>
-                    <td><c:out value="${value.key}" /></td>
-                    <td><c:out value="${value.value}" /></td>
+                    <th>Model</th>
+                    <th>Total count</th>
                 </tr>
-            </c:forEach>
-        </table>
-        <br>
-        <table border="1">
-            <tr>
-                <th>Type</th>
-                <th>Total count</th>
-            </tr>
 
-            <c:forEach var="value" items="${typeAndCountMap}">
+                <c:forEach var="value" items="${modelAndCountMap}">
+                    <tr>
+                        <td><c:out value="${value.key}" /></td>
+                        <td><c:out value="${value.value}" /></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div style="display: inline-block;float:left;margin-right:5px;">
+            <table border="1">
                 <tr>
-                    <td><c:out value="${value.key}" /></td>
-                    <td><c:out value="${value.value}" /></td>
+                    <th>Type</th>
+                    <th>Total count</th>
                 </tr>
-            </c:forEach>
-        </table>
 
-<br>
+                <c:forEach var="value" items="${typeAndCountMap}">
+                    <tr>
+                        <td><c:out value="${value.key}" /></td>
+                        <td><c:out value="${value.value}" /></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div style="display: inline-block;float:left;margin-right:5px;">
+            <table border="1">
+                <tr>
+                    <th>Part Brand</th>
+                    <th>Total count</th>
+                </tr>
 
+                <c:forEach var="value" items="${partBrandAndCountMap}">
+                    <tr>
+                        <td><c:out value="${value.key}"/></td>
+                        <td><c:out value="${value.value}"/></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div style="display: inline-block;float:left;margin-right:5px;">
+            <table border="1">
+                <tr>
+                    <th>Part Category</th>
+                    <th>Total count</th>
+                </tr>
+
+                <c:forEach var="value" items="${partCategoryAndCountMap}">
+                    <tr>
+                        <td><c:out value="${value.key}"/></td>
+                        <td><c:out value="${value.value}"/></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div style="display: inline-block;float:left;margin-right:5px;">
+            <table border="1">
+                <tr>
+                    <th>Part name</th>
+                    <th>Total count</th>
+                </tr>
+
+                <c:forEach var="value" items="${partNameAndCountMap}">
+                    <tr>
+                        <td><c:out value="${value.key}"/></td>
+                        <td><c:out value="${value.value}"/></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+<div id="clear"></div>
+<hr>
 <b>List of all Statistics:</b></br></br>
 
 <table border="1">
@@ -64,8 +116,8 @@
         <th>Car Brand</th>
         <th>Car Model</th>
         <th>Car Type</th>
-        <th>Part Category</th>
         <th>Part Brand</th>
+        <th>Part Category</th>
         <th>Part Name</th>
         <th>Part Serial</th>
         <%--<th>Total</th>--%>
@@ -77,8 +129,8 @@
             <td><c:out value="${value.carBrand}" /></td>
             <td><c:out value="${value.carModel}" /></td>
             <td><c:out value="${value.carType}" /></td>
-            <td><c:out value="${value.partCategory}" /></td>
             <td><c:out value="${value.partBrand}" /></td>
+            <td><c:out value="${value.partCategory}" /></td>
             <td><c:out value="${value.partName}" /></td>
             <td><c:out value="${value.partSerial}" /></td>
                 <%--<td> /></td>--%>

@@ -31,7 +31,7 @@ public class ChoisingBrand extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(sessionData.isLogged()==false) {
             req.setAttribute("error", "Nie ma takiego użytkownika. Dostęp zabroniony.");
-            resp.sendRedirect("http://localhost:8080/googlelogin");
+            resp.sendRedirect("/googlelogin");
         }
         sessionData.setCar(null);
         List<Brand> brands = brandsCache.getBrandsList();
