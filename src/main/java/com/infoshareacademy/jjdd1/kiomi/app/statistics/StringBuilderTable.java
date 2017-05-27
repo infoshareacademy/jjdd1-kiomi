@@ -8,6 +8,16 @@ public class StringBuilderTable {
     public String createHtmlTop(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(
+                "<head>\n" +
+                        "    <title>Title</title>\n" +
+                        "    <style type=\"text/css\">\n" +
+                        "        div {\n" +
+                        "            display: inline-block;\n" +
+                        "            float:left;\n" +
+                        "            margin-right:5px;\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>"+
                 "<html>" +
                 "<body>"+
                 "This mail was sent by <b>'Kiomi Autoparts'</b>. Here is daily statistics report:<br><br>"
@@ -30,6 +40,7 @@ public class StringBuilderTable {
         StringBuilder stringBuilder = new StringBuilder();
 
                 stringBuilder.append(
+                "<div>"+
                 "<table border='1'>" +
                 "<tr>" +
                 "<th>"+nameOfColumn1+"</th>" +
@@ -47,7 +58,7 @@ public class StringBuilderTable {
                .append("</td></tr>");
         }
 
-        stringBuilder.append("</table><br>");
+        stringBuilder.append("</table></div>");
 
         String htmlContent = stringBuilder.toString();
 
