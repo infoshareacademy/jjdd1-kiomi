@@ -324,6 +324,12 @@ li a :hover {
 
 #myUL li a {
     display: block; /* Make it into a block element to fill the whole list */
+    background: rgba(118, 180, 229, 0.3);
+    border: 1px solid #76b4e5;
+    padding: 0.2em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    display: table;
 }
 
 .auctionList {
@@ -405,4 +411,13 @@ li a :hover {
 }
 .adminpanel .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
     border: 1px solid #76b4e5;
+}
+
+#listyKatCz a {
+    background: rgba(118, 180, 229, 0.3);
+    border: 1px solid #76b4e5;
+    padding: 0.2em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    display: table;
 }

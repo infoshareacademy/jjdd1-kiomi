@@ -42,7 +42,7 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" style="color: #fff">Wyszukaj części do swojego pojazdu, <small>lub:</small></a>
+                    <a class="navbar-brand" href="/index" style="color: #fff">Wyszukaj części do swojego pojazdu, <small>lub:</small></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,14 +51,12 @@
                         <%--<li><a href="#" style="font-size: 1.2em; border-left-style: hidden;">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>--%>
                         <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku" style="color: #fff">Zmień pojazd</a></li>
 
-                        <li><a href="/popularityreport" title="Nasz raport najpopularniejszych części" style="color: #fff">if:admin->Raport popularności części</a></li>
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff; font-size: 1.1em;">Witaj ${sessionUserName}<span class="caret"></span></a>
                             <ul class="dropdown-menu" id="dropdownStyle">
-                                <li><a href="#" title="Funkcjonalność będzie dostępna na podsumowaniu 4-tego sprintu"style="color: #fff">Panel Administracyjny</a></li>
                                 <li><a href="/logout" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania" style="color: #fff">Wyloguj</a></li>
                             </ul>
                         </li>
@@ -66,7 +64,29 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        <c:if test="${isAdmin == true}">
 
+            <nav class="navbarStyle navbar navbar-default " id="navbarAdminMenu">
+                <div class="container-fluid">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/partstatistics" title="Raport popularności części" style="color: #fff">Raport
+                                popularności części</a></li>
+                            <li><a href="/carstatistics" title="Raport popularności Modeli" style="color: #fff">Raport
+                                popularności samochodów</a></li>
+                            <li><a href="/modules" title="Lista modułów" style="color: #fff">Lista modułów</a></li>
+                            <li><a href="/members" title="Lista użytkowników" style="color: #fff">Lista użytkowników</a>
+                            </li>
+                            <li><a href="/promotedbrand" title="Promownae marki" style="color: #fff">Promowane marki</a>
+                            </li>
+
+                        </ul>
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </c:if>
         <ol class="breadcrumb" id="breadcrumbsStyle">Twój aktualny wybór to:
             <li title="Marka pojazdu"> marka: ${brand}</li>
             <li title="Model pojazdu"> model: ${model}</li>
@@ -76,7 +96,7 @@
         <div class="row">
             <div class="col-lg-6" id="listyKatCz">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" id="headKatCz" style="font-weight: bold; font-size: 1.3em; text-align: center">Kategorie oraz podkategorie części</a>
+                    <div class="list-group-item" id="headKatCz" style="font-weight: bold; font-size: 1.3em; text-align: center">Kategorie oraz podkategorie części</div>
                     <c:choose>
                         <c:when test="${not empty partCategories}">
                             <c:forEach items="${partCategories}" var="element">

@@ -56,6 +56,7 @@ public class ChoisingPartCategory extends HttpServlet {
         req.setAttribute("model", modelName);
         req.setAttribute("carType", carTypeName);
         req.setAttribute("sessionUserName", sessionData.getFirstname());
+        req.setAttribute("isAdmin", sessionData.isAdmin());
 
 
         String url = "http://infoshareacademycom.2find.ru/api/v2/find/";
