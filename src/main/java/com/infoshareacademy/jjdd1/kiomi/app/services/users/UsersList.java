@@ -1,4 +1,4 @@
-package com.infoshareacademy.jjdd1.kiomi.app.services;
+package com.infoshareacademy.jjdd1.kiomi.app.services.users;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
