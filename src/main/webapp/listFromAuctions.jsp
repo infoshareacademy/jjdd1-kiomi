@@ -86,7 +86,7 @@
         <div class="row">
 
             <div class="col-xs-12 text-center">
-                <h3><a href="${allegroLink}" target="_blank">${partName}</a></h3>
+                <h3><a href="${allegroLink}" target="_blank">${partName}<br>${partBrand}</a></h3>
                 <p>
                     <a href="" onclick="goBack()">Wróć do katalogu</a>
                 </p>
