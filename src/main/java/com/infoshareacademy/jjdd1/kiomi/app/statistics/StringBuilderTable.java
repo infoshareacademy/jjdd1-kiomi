@@ -37,6 +37,7 @@ public class StringBuilderTable {
 
     public String createTableContent(Map<String, BigInteger> map,String nameOfColumn1 ){
 
+
         StringBuilder stringBuilder = new StringBuilder();
 
                 stringBuilder.append(
