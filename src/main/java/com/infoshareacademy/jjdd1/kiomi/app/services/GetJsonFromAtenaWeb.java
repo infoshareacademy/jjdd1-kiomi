@@ -41,7 +41,7 @@ public class GetJsonFromAtenaWeb {
         JsonObject response = gson.fromJson(bReader, JsonObject.class);
 
         JsonElement data = response.get(JSON_DATA_TAG);
-        System.out.println(data.toString());
+
         return gson.fromJson(data, new TypeToken<CarFromAztecJson>() {
         }.getType());
 
