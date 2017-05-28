@@ -107,7 +107,7 @@
                         <c:choose>
                             <c:when test="${fn:length(parts) gt 1}">
                                 <c:forEach items="${parts}" var="element">
-                                    <li><a class="list-group-item" id="contaCzSzcz" href="productdetails?partcategory=${categoryname}&partbrand=${element.brand}&partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} ${element.brand} (${element.number})</a></li>
+                                    <li><a class="list-group-item" id="contaCzSzcz" href="productdetails?partcategory=${categoryname}&partbrand=${element.brand}&partname=${element.name}&partserial=${element.number}" >${element.name} ${element.brand} (${element.number})</a></li>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
