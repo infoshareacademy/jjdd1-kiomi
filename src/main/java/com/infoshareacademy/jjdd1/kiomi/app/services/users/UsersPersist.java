@@ -1,6 +1,7 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services.users;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -16,22 +17,19 @@ public class UsersPersist implements IUsers {
 
 
     @Override
+    @Transactional
     public void addUser(UsersList userToAdd) {
-        try {
             entityManager.getTransaction().begin();
             entityManager.persist(userToAdd);
             entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-        } finally {
-            entityManager.close();
-        }
+
     }
 
 
     @Override
+    @Transactional
     public void removeUser(String emailOfUserToRemove) {
 
-        try {
 
             Query q = entityManager.
                     createQuery("DELETE FROM UsersList u WHERE u.email = :email").
@@ -40,15 +38,10 @@ public class UsersPersist implements IUsers {
             q.executeUpdate();
             entityManager.getTransaction().commit();
 
-        } catch (Exception ex) {
-
-        } finally {
-            entityManager.close();
-        }
-
     }
 
     @Override
+    @Transactional
     public List<UsersList> getAllUsers() {
 
         TypedQuery<UsersList> typedQuery = entityManager

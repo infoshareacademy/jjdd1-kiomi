@@ -38,7 +38,7 @@ public class ModulesManagerServlet extends HttpServlet {
         String moduleToUpdate = req.getParameter("moduleToUpdate");
         String moduleGetStatus = req.getParameter("moduleGetStatus");
         String moduleToDelete = req.getParameter("moduleToDelete");
-        String statusToUpdate =//TODO;
+        boolean statusToUpdate = true;//TODO;
 
 
         boolean moduleToAddIsempty;

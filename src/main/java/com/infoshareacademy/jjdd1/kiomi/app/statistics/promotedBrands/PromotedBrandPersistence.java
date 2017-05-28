@@ -24,7 +24,6 @@ public class PromotedBrandPersistence implements IPromotedBrands {
     @Transactional
     public void addBrand(String promotedBrandToAdd) {
 
-    try {
         PromotedBrands promotedBrand = new PromotedBrands();
 
         promotedBrand.setBrand(promotedBrandToAdd);
@@ -33,11 +32,6 @@ public class PromotedBrandPersistence implements IPromotedBrands {
         entityManager.persist(promotedBrand);
         entityManager.getTransaction().commit();
 
-    } catch (Exception ex) {
-
-    } finally {
-        entityManager.close();
-    }
 
     }
 
@@ -46,7 +40,6 @@ public class PromotedBrandPersistence implements IPromotedBrands {
     public void removeBrand(String promotedBrandToRemove) {
 
 
-        try {
 
         Query q = entityManager.
                 createQuery("DELETE FROM PromotedBrands p WHERE p.brand = :promotedBrandToRemove").
@@ -55,11 +48,7 @@ public class PromotedBrandPersistence implements IPromotedBrands {
         q.executeUpdate();
         entityManager.getTransaction().commit();
 
-    } catch (Exception ex) {
 
-    } finally {
-        entityManager.close();
-    }
 
 
     }
@@ -74,7 +63,6 @@ public class PromotedBrandPersistence implements IPromotedBrands {
             typedQuery
                     .getResultList()
                     .forEach(b -> LOGGER.debug("Current list of promoted brands: " + b.getBrand()));
-        entityManager.close();
 
         return typedQuery
                     .getResultList();

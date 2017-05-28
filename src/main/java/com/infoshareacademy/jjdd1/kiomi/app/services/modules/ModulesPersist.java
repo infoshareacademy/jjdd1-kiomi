@@ -1,5 +1,6 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services.modules;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -15,55 +16,43 @@ public class ModulesPersist implements IModules {
 
 
     @Override
+    @Transactional
     public void addModule(Modules moduleToAdd) {
 
-        try {
             entityManager.getTransaction().begin();
             entityManager.persist(moduleToAdd);
             entityManager.getTransaction().commit();
-        } catch (Exception ex) {
 
-        } finally {
-            entityManager.close();
-
-        }
     }
 
         @Override
-        public void updateModule (String name,boolean status){
-            try {
+        @Transactional
+        public void updateModule (String name,boolean status) {
 
-                Query q = entityManager.
-                        createQuery("UPDATE Modules m SET m.status = :status WHERE m.moduleName = :name")
-                        .setParameter("status", status).setParameter("name", name);
-                entityManager.getTransaction().begin();
-                q.executeUpdate();
-                entityManager.getTransaction().commit();
-
-            } catch (Exception ex) {
-
-            } finally {
-                entityManager.close();
-            }
-
+            Query q = entityManager.
+                    createQuery("UPDATE Modules m SET m.status = :status WHERE m.moduleName = :name")
+                    .setParameter("status", status).setParameter("name", name);
+            entityManager.getTransaction().begin();
+            q.executeUpdate();
         }
 
         @Override
+        @Transactional
         public boolean getStatusOfModule (String name){
 
             Query q = entityManager.createQuery("SELECT m.status from Modules m WHERE m.moduleName = :name").setParameter("name", name);
 
-            entityManager.close();
+
             return (boolean) q.getSingleResult();
 
 
         }
 
         @Override
+        @Transactional
         public void deleteModule (String name){
 
 
-            try {
 
                 Query q = entityManager.
                         createQuery("DELETE FROM Modules m WHERE m.moduleName = :name").
@@ -72,15 +61,12 @@ public class ModulesPersist implements IModules {
                 q.executeUpdate();
                 entityManager.getTransaction().commit();
 
-            } catch (Exception ex) {
 
-            } finally {
-                entityManager.close();
-            }
 
         }
 
         @Override
+        @Transactional
         public List<Modules> getAllModules () {
 
                 TypedQuery<Modules> typedQuery = entityManager
