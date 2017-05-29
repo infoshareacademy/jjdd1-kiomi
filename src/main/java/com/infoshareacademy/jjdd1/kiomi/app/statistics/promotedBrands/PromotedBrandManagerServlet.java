@@ -1,12 +1,9 @@
 package com.infoshareacademy.jjdd1.kiomi.app.statistics.promotedBrands;
+
 import com.google.common.base.Strings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.ejb.EJB;
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,8 +38,9 @@ public class PromotedBrandManagerServlet extends HttpServlet{
         boolean promotedBrandToAddIsempty;
         boolean promotedBrandToRemoveIsempty;
 
-        String promotedBrandToAdd = req.getParameter("promotedBrandToAdd");
-        String promotedBrandToRemove = req.getParameter("promotedBrandToRemove");
+        String formType = req.getParameter("type");
+        String promotedBrandToAdd = req.getParameter("brand");
+        String promotedBrandToRemove = req.getParameter("id");
         promotedBrandToAddIsempty = (Strings.isNullOrEmpty(promotedBrandToAdd));
         promotedBrandToRemoveIsempty = (Strings.isNullOrEmpty(promotedBrandToRemove));
 
@@ -50,20 +48,18 @@ public class PromotedBrandManagerServlet extends HttpServlet{
 
 
 
-        if (!promotedBrandToAddIsempty) {
-
-
+        if(formType.equals("add") && !promotedBrandToAddIsempty) {
             brandPersist.addBrand(promotedBrandToAdd);
 
         }
 
-        if (!promotedBrandToRemoveIsempty) {
-
-
-            brandPersist.removeBrand(promotedBrandToRemove);
-
-
-        }
+//        if (!promotedBrandToRemoveIsempty) {
+//
+//
+//            brandPersist.removeBrand(promotedBrandToRemove);
+//
+//
+//        }
 
         List<PromotedBrands> promotedBrandsList = brandPersist.getAllBrands();
         req.setAttribute("promotedBrandsList", promotedBrandsList);

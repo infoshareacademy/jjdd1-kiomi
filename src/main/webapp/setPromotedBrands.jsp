@@ -35,45 +35,34 @@
     <p class="script"><span>by kiomi</span></p>
     <p class="product-owner"><span>and product owner</span></p>
 </div>
-
 <div class="container">
     <div class="lightbox text-center">
         <nav class="navbar navbar-default" id="navbarStyle">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/index" style="color: #fff">Wyszukaj części do swojego pojazdu,
-                        <small>lub:</small>
-                    </a>
+                    <a class="navbar-brand" href="/index" style="color: #fff">Wyszukaj części do swojego pojazdu, <small>lub:</small></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-
-                        <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku" style="color: #fff">Zmień
-                            pojazd</a></li>
+                        <%--<li><a href="#" style="font-size: 1.2em; border-left-style: hidden;">Wyszukaj części do Twojego pojazdu<span class="sr-only">(current)</span></a></li>--%>
+                        <li><a href="/caridentitymethod" title="Wyszukiwanie pojazd od początku" style="color: #fff">Zmień pojazd</a></li>
 
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"
-                               style="color: #fff; font-size: 1.1em;">Witaj ${sessionUserName}<span
-                                    class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff; font-size: 1.1em;">Witaj ${sessionUserName}<span class="caret"></span></a>
                             <ul class="dropdown-menu" id="dropdownStyle">
-                                <li><a href="/logout"
-                                       title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania"
-                                       style="color: #fff">Wyloguj</a></li>
+                                <li><a href="/logout" title="Po wybraniu tej opcji nastąpi przekierowanie na stronę logowania" style="color: #fff">Wyloguj</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-
-
         <c:if test="${isAdmin == true}">
 
             <nav class="navbarStyle navbar navbar-default " id="navbarAdminMenu">
@@ -112,12 +101,17 @@
                 </p>
             </div>
             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
                 <form method="post" >
                     <input type="hidden" value="add" name="type">
-                    <input class="" name="brand" placeholder="Dodaj brand...">
+                    <p class="btn-margin">
+                    <input class="btn-login btn-lg" style="border-radius: 0px;border:0px" name="brand" placeholder="Dodaj brand...">
+                    </p>
+                    <p class="btn-margin">
                     <input type="submit" class="btn btn-login">
+                    </p>
                 </form>
-                <form method="post">
+
                 <table class="table table-striped table-bordered text-center" id="adminpanel">
                     <thead>
                     <tr>
@@ -127,26 +121,33 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:choose>
+                        <c:when test="${promotedBrandsList.size()>0}">
+
+                            <c:forEach items="${promotedBrandsList}" var="element">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>${element.brand}</td>
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" name="type" value="delete">
+                                        <input type="hidden" name="id" value="${element.brand}"><input type="submit" class="btn btn-login" value="X" style="width:40px">
+                                    </form>
+                                </td>
+                            </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>nazwa brandu</td>
-                        <td><input type="checkbox"></td>
+                        <td colspan="3">Nie znaleziono promowanych marek</td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>nazwa brandu</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>nazwa brandu</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
+                        </c:otherwise>
+                    </c:choose>
+
 
 
                     </tbody>
                 </table>
-                </form>
             </div>
         </div>
 
