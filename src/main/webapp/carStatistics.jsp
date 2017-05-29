@@ -84,9 +84,7 @@
                                 popularności części</a></li>
                             <li><a href="/carstatistics" title="Raport popularności Modeli" style="color: #fff">Raport
                                 popularności samochodów</a></li>
-                            <li><a href="/modules" title="Lista modułów" style="color: #fff">Lista modułów</a></li>
-                            <li><a href="/members" title="Lista użytkowników" style="color: #fff">Lista użytkowników</a>
-                            </li>
+
                             <li><a href="/promotedbrand" title="Promownae marki" style="color: #fff">Promowane marki</a>
                             </li>
 
