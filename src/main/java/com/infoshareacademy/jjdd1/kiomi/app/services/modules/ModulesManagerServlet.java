@@ -35,16 +35,19 @@ public class ModulesManagerServlet extends HttpServlet {
 
 
         String moduleToAdd = req.getParameter("moduleToAdd");
+        boolean statusOfModuleToAdd = Boolean.parseBoolean(req.getParameter("statusOfModuleToAdd"));
         String moduleToUpdate = req.getParameter("moduleToUpdate");
+        boolean statusToUpdate = Boolean.parseBoolean(req.getParameter("statusToUpdate"));
         String moduleGetStatus = req.getParameter("moduleGetStatus");
         String moduleToDelete = req.getParameter("moduleToDelete");
-        boolean statusToUpdate = true;//TODO;
+
 
 
         boolean moduleToAddIsempty;
         boolean moduleToUpdateIsempty;
         boolean moduleGetStatusIsempty;
         boolean moduleToDeleteIsempty;
+        boolean currentStatusOfModule;
 
 
         moduleToAddIsempty = (Strings.isNullOrEmpty(moduleToAdd));
@@ -55,7 +58,7 @@ public class ModulesManagerServlet extends HttpServlet {
         if (!moduleToAddIsempty) {
 
             module.setModuleName(moduleToAdd);
-            module.setStatus(true);
+            module.setStatus(statusOfModuleToAdd);
             modulesPersist.addModule(module);
         }
 
@@ -67,7 +70,8 @@ public class ModulesManagerServlet extends HttpServlet {
 
         if (!moduleGetStatusIsempty) {
 
-            modulesPersist.getStatusOfModule(moduleGetStatus);
+            currentStatusOfModule = modulesPersist.getStatusOfModule(moduleGetStatus);
+            req.setAttribute("currentStatusOfModule", currentStatusOfModule);
         }
 
         if (!moduleToDeleteIsempty) {
