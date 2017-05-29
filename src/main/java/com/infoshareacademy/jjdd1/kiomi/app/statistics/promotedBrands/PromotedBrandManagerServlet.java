@@ -22,13 +22,15 @@ import java.util.List;
 @WebServlet(urlPatterns = "/managebrand")
 public class PromotedBrandManagerServlet extends HttpServlet{
     private static final Logger LOGGER = LogManager.getLogger(PromotedBrandManagerServlet.class);
-    private boolean promotedBrandToAddIsempty;
-    private boolean promotedBrandToRemoveIsempty;
 
+
+    PromotedBrandPersistence brandPersist = new PromotedBrandPersistence();
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<PromotedBrands> promotedBrandsList = brandPersist.getAllBrands();
+        req.setAttribute("promotedBrandsList", promotedBrandsList);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/promotedBrandManager.jsp");
         dispatcher.forward(req,resp);
     }
@@ -36,13 +38,15 @@ public class PromotedBrandManagerServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        boolean promotedBrandToAddIsempty;
+        boolean promotedBrandToRemoveIsempty;
+
         String promotedBrandToAdd = req.getParameter("promotedBrandToAdd");
         String promotedBrandToRemove = req.getParameter("promotedBrandToRemove");
         promotedBrandToAddIsempty = (Strings.isNullOrEmpty(promotedBrandToAdd));
         promotedBrandToRemoveIsempty = (Strings.isNullOrEmpty(promotedBrandToRemove));
 
 
-        PromotedBrandPersistence brandPersist = new PromotedBrandPersistence();
 
 
 
@@ -60,6 +64,7 @@ public class PromotedBrandManagerServlet extends HttpServlet{
 
 
         }
+
         List<PromotedBrands> promotedBrandsList = brandPersist.getAllBrands();
         req.setAttribute("promotedBrandsList", promotedBrandsList);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/promotedBrandManager.jsp");

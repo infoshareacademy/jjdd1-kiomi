@@ -4,11 +4,12 @@ package com.infoshareacademy.jjdd1.kiomi.app.services;
 import com.infoshareacademy.jjdd1.kiomi.app.model.cars.Part;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import java.io.BufferedReader;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,26 +17,18 @@ import java.util.List;
 public class PromotedBrandsLoader {
     private static final Logger LOGGER = LogManager.getLogger(PromotedBrandsLoader.class);
     private static List<String> promotedBrandsList = new ArrayList<>();
-    private static String promotedBrandsPath = "promotedBrands.txt";
-    static final String RESOURCES_DIR = "kiomi";
+
 
     static List<Part> rewritedPartList = new ArrayList();
 
-    public static List<String> getPromotedBrandsList() {
-        return promotedBrandsList;
-    }
 
     public List<String> promotedBrandsReader() throws IOException {
-        try {
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("database-autoparts");
+        EntityManager entityManager = emf.createEntityManager();
+        Query q = entityManager.createQuery("SELECT c.brand FROM PromotedBrands c");
+        promotedBrandsList = q.getResultList();
 
-//            Path root = Paths.get(System.getProperty("java.io.tmpdir")).resolve(CarsDataLoader.RESOURCES_DIR);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/" + promotedBrandsPath)));
-            promotedBrandsList = Files.readAllLines((Path) bufferedReader);
-        } catch (Exception e) {
-
-
-        }
         return promotedBrandsList;
     }
 
