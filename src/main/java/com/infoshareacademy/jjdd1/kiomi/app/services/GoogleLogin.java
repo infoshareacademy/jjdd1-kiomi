@@ -44,17 +44,20 @@ public class GoogleLogin extends HttpServlet {
     final String CLIENT_SECRET = "ShKL7hQ1gJCYI_Eq9Sj9rH-y";
     private static final String PROTECTED_RESOURCE_URL = "https://www.googleapis.com/oauth2/v2/userinfo";
 
-    private OAuth20Service service = new ServiceBuilder()
-            .apiKey(CLIENT_ID)
-            .apiSecret(CLIENT_SECRET)
-            .scope("profile")
-            .scope("email")
-            .callback("/googlelogin")
-            .build(GoogleApi20.instance());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+
+        String host = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort();
+
+        OAuth20Service service = new ServiceBuilder()
+                .apiKey(CLIENT_ID)
+                .apiSecret(CLIENT_SECRET)
+                .scope("profile")
+                .scope("email")
+                .callback(host + "/googlelogin")
+                .build(GoogleApi20.instance());
 
         if (null != req.getParameter("error")) {
             req.setAttribute("error", req.getParameter("error"));
@@ -101,7 +104,7 @@ public class GoogleLogin extends HttpServlet {
                 UsersList member = entityManager.createQuery("SELECT m FROM  UsersList m WHERE m.email = :email ORDER BY m.email", UsersList.class)
                         .setParameter("email", googleUser.getEmail()).getSingleResult();
 
-                LOGGER.debug("Lista membersów: "+ member.getFirstname());
+                LOGGER.debug("Lista membersów: " + member.getFirstname());
 
 //                if (administratorEmails.isAdministrator(googleUser.getEmail()) == 1) {
                 if (!member.getEmail().isEmpty()) {
@@ -126,6 +129,16 @@ public class GoogleLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String host = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort();
+
+        OAuth20Service service = new ServiceBuilder()
+                .apiKey(CLIENT_ID)
+                .apiSecret(CLIENT_SECRET)
+                .scope("profile")
+                .scope("email")
+                .callback(host + "/googlelogin")
+                .build(GoogleApi20.instance());
 
         if (req.getParameter("login").equals("1")) {
             final Map<String, String> additionalParams = new HashMap<>();

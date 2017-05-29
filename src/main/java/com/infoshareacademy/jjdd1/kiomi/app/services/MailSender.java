@@ -1,13 +1,11 @@
 package com.infoshareacademy.jjdd1.kiomi.app.services;
 
-import com.infoshareacademy.jjdd1.kiomi.app.model.cars.BrandsCache;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.Statistics;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StatisticsUtility;
 import com.infoshareacademy.jjdd1.kiomi.app.statistics.StringBuilderTable;
 
 import javax.ejb.Singleton;
 import javax.mail.*;
-import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;

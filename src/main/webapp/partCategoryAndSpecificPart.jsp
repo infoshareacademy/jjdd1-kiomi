@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="baseURL" value="${req.requestURL}"/>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page session="true" %>
 
 <!DOCTYPE html>
 <html lang="en" xmlns:jsp="http://java.sun.com/jsf/facelets">
@@ -106,7 +107,7 @@
                         <c:choose>
                             <c:when test="${fn:length(parts) gt 1}">
                                 <c:forEach items="${parts}" var="element">
-                                    <li><a class="list-group-item" id="contaCzSzcz" href="redirect?partcategory=${categoryname}&partname=${element.name}&partserial=${element.number}" target="_blank">${element.name} (${element.number})</a></li>
+                                    <li><a class="list-group-item" id="contaCzSzcz" href="productdetails?partcategory=${categoryname}&partbrand=${element.brand}&partname=${element.name}&partserial=${element.number}" >${element.name} ${element.brand} (${element.number})</a></li>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
@@ -221,6 +222,8 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 </body>
 </html>
