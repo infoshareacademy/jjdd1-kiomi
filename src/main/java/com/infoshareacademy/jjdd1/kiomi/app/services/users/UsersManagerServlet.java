@@ -28,7 +28,7 @@ public class UsersManagerServlet extends HttpServlet {
 
         List<UsersList> usersLists = users.getAllUsers();
         req.setAttribute("usersLists", usersLists);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("//TODO");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("//TODO name of html/jsp file");
         dispatcher.forward(req,resp);
 
     }
@@ -73,7 +73,7 @@ public class UsersManagerServlet extends HttpServlet {
 
         List<UsersList> currentUsersLists = users.getAllUsers();
         req.setAttribute("usersLists", currentUsersLists);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("//TODO");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("//TODO name of html/jsp file");
         dispatcher.forward(req,resp);
 
     }
