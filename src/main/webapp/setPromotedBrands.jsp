@@ -3,10 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="baseURL" value="${req.requestURL}"/>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="true" %>
 
 <!DOCTYPE html>
-<html lang="en" xmlns:jsp="http://java.sun.com/jsf/facelets">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Autoparts - Części do Twojego pojazdu!</title>
@@ -20,7 +19,8 @@
 
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
     <!-- jQuery js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -35,7 +35,6 @@
     <p class="script"><span>by kiomi</span></p>
     <p class="product-owner"><span>and product owner</span></p>
 </div>
-
 <div class="container">
     <div class="lightbox text-center">
         <nav class="navbar navbar-default" id="navbarStyle">
@@ -92,48 +91,61 @@
         </ol>
 
         <div class="row">
-            <div class="col-lg-6" id="listyKatCz">
-                <div class="list-group">
-                    <div class="list-group-item" id="headKatCz" style="font-weight: bold; font-size: 1.3em; text-align: center">Kategorie oraz podkategorie części</div>
+
+            <div class="col-xs-12 text-center">
+                <h3>Lista promowanych marek</h3>
+                <p>
+                    Wybierz marki, które chcesz wypromować w systemie.
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+                <form method="post" >
+                    <input type="hidden" value="add" name="type">
+                    <p class="btn-margin">
+                    <input class="btn-login btn-lg" style="border-radius: 0px;border:0px" name="brand" placeholder="Dodaj brand...">
+                    </p>
+                    <p class="btn-margin">
+                    <input type="submit" class="btn btn-login">
+                    </p>
+                </form>
+
+                <table class="table table-striped table-bordered text-center" id="adminpanel">
+                    <thead>
+                    <tr>
+                        <th style="width: 20px;">#</th>
+                        <th>Nazwa</th>
+                        <th style="width: 50px;">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <c:choose>
-                        <c:when test="${not empty partCategories}">
-                            <c:forEach items="${partCategories}" var="element">
-                                <c:choose>
-                                    <c:when test="${element.has_children==true}">
-                                        <a class="list-group-item" id="contaKatCz" href="index?cat=${element.id}" align="center" value="${element.id}">${element.name}</a>
-                                    </c:when>
-                                    <%--<c:otherwise>--%>
-                                    <%--<a class="list-group-item" href="choisingpartcategory?cat=${element.id}&stock=1" align="center" value="${element.id}">${element.name}</a>--%>
-                                    <%--</c:otherwise>--%>
-                                </c:choose>
+                        <c:when test="${promotedBrandsList.size()>0}">
+
+                            <c:forEach items="${promotedBrandsList}" var="element">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>${element.brand}</td>
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" name="type" value="delete">
+                                        <input type="hidden" name="id" value="${element.brand}"><input type="submit" class="btn btn-login" value="X" style="width:40px">
+                                    </form>
+                                </td>
+                            </tr>
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
-                            <c:if test="${not empty param.type}">
-                                <a class="list-group-item" id="contbKatCz" align="center" href="#">Lista kategorii jest pusta.</a>
-                            </c:if>
+                    <tr>
+                        <td colspan="3">Nie znaleziono promowanych marek</td>
+                    </tr>
                         </c:otherwise>
                     </c:choose>
-                </div>
-            </div>
 
-            <div class="col-lg-6" id="listaCzSzcz">
-                <div class="list-group">
-                    <a href="#" class="list-group-item" id="headCzSzcz" style="font-weight: bold; font-size: 1.3em; text-align: center">Części szczegółowe</a>
-                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Wpisz fragment nazwy części aby zawęzić wyniki..">
-                    <ul id="myUL">
-                        <c:choose>
-                            <c:when test="${fn:length(parts) gt 1}">
-                                <c:forEach items="${parts}" var="element">
-                                    <li><a class="list-group-item" id="contaCzSzcz" href="productdetails?partcategory=${categoryname}&partbrand=${element.brand}&partname=${element.name}&partserial=${element.number}" >${element.name} ${element.brand} (${element.number})</a></li>
-                                </c:forEach>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a class="list-group-item" id="contbCzSzcz" align="center" href="#">Wybierz kategorię aby wyświetlić części</a></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
-                </div>
+
+
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -144,9 +156,12 @@
                     <!--<li><a href="#" title="Funkcjonalność będzie dostępna po 4-tym sprincie szkoleniowym.">Admin</a></li>-->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila" data-toggle="modal" data-target="#daneKONT" style="color: #fff">Kontakt</a></li>
-                    <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?" data-toggle="modal" data-target="#infoKIOMI" style="color: #fff">Więcej o team KIOMI</a></li>
-                    <li><a href="#" title="Wersja aplikacji z której korzystasz" data-toggle="modal" data-target="#wersjaAPP" style="color: #fff">Autoparts</a></li>
+                    <li><a href="#" title="Chcesz się z nami skontaktować? Napisz do nas maila" data-toggle="modal"
+                           data-target="#daneKONT" style="color: #fff">Kontakt</a></li>
+                    <li><a href="#" title="Chcesz dowiedzieć się więcej o team KIOMI?" data-toggle="modal"
+                           data-target="#infoKIOMI" style="color: #fff">Więcej o team KIOMI</a></li>
+                    <li><a href="#" title="Wersja aplikacji z której korzystasz" data-toggle="modal"
+                           data-target="#wersjaAPP" style="color: #fff">Autoparts</a></li>
                 </ul>
             </div><!-- /.container-fluid -->
         </nav>
@@ -181,8 +196,10 @@
                     <h4 class="modal-title">Informacje o team KIOMI</h4>
                 </div>
                 <div class="modal-body">
-                    <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju 2017.
-                        Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest aplikacja Autoparts.</p>
+                    <p align="center">Zespół powstał podczas kursy Junior Java Developer w infoShare Academy w maju
+                        2017.
+                        Efektem intensywnej nauki zagadnień technologicznych oraz ciężkiej pracy członków zespołu jest
+                        aplikacja Autoparts.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -200,7 +217,8 @@
                 <div class="modal-body">
                     <p>Aktualna wersja: v0.4</p>
                     <p>Premiera: 29.05.2017r. 16:00, Gdańsk</p>
-                    <p>Wersja rozwojowa: <a href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
+                    <p>Wersja rozwojowa: <a
+                            href="https://github.com/infoshareacademy/jjdd1-kiomi/tree/develop">GitHub</a></p>
                     <p>Pracują państwo na aplikacji po 4 sprincie szkoleniowym.</p>
                 </div>
                 <div class="modal-footer">
@@ -242,6 +260,10 @@
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>

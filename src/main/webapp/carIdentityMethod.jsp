@@ -26,7 +26,7 @@
     </div>
 </div>
 <div class="">
-
+ <!--ddd-->
     <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
         <div class="plate">
             <p class="script"><span>Polish</span></p>
