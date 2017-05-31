@@ -35,7 +35,7 @@ public class MailSender extends TimerTask {
             Authenticator authenticator=new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("kiomi.info@gmail.com","kiomi2017");
+                    return new PasswordAuthentication("isaloginjava@gmail.com","iSAforever");
                 }
             };
 
