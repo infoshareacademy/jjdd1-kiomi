@@ -55,6 +55,15 @@ public class BrandsCache {
         member2.setRole(0);
         LOGGER.debug("Creating new entity object: " + member2.toString());
         membersDataBuilder.addEntryToDatabase(member2);
+        UsersList member3 = new UsersList();
+        member3.setEntryDate(new Date());
+        member3.setEmail("isaloginjava@gmail.com");
+        member3.setFirstname("Infoshare");
+        member3.setLastname("Academy");
+        member3.setRole(1);
+        LOGGER.debug("Creating new entity object: " + member3.toString());
+        membersDataBuilder.addEntryToDatabase(member3);
+
 
 
 
